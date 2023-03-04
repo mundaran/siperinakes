@@ -47,9 +47,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                         </div>
                         <div class="mb-3">
-                          <label class="form-label" for="basic-icon-default-email">Nama Lengkap</label>
+                          <label class="form-label" for="basic-icon-default-email" >Nama Lengkap</label>
                           <div class="input-group">
-                            <input type="text" aria-label="First name" class="form-control" value="<?php echo $user['name'];?>" />
+                            <input type="text" aria-label="First name" class="form-control" value="<?php echo $user['name'];?>" disabled/>
                             <input type="text" aria-label="Last name" class="form-control" placeholder="Masukan Gelar" required />
                           </div>
                         </div>
@@ -69,6 +69,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               ><i class="bx bx-calendar"></i
                             ></span>
                             <input type="date" name="Tgl_Lahir" class="form-control" placeholder="Tempat Lahir" required />
+                          </div>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label" for="basic-icon-address">No.Hp/Telp</label>
+                          <div class="input-group input-group-merge">
+                            <span id="basic-icon-address" class="input-group-text"
+                              ><i class="bx bx-phone"></i
+                            ></span>
+                            <input type="text" name="no_hp" class="form-control" placeholder="No.Hp/Telp" required />
+                          </div>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label" for="basic-icon-address">Email</label>
+                          <div class="input-group input-group-merge">
+                            <span id="basic-icon-address" class="input-group-text">@</span>
+                            <input type="text" name="email" class="form-control" placeholder= " <?php echo $user['email'];?> " value="<?php echo $user['email'];?>" disabled />
                           </div>
                         </div>
                         
