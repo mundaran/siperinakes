@@ -52,7 +52,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <input type="text" aria-label="First name" class="form-control" value="<?php echo $user['name'];?>" />
                             <input type="text" aria-label="Last name" class="form-control" placeholder="Masukan Gelar" required />
                           </div>
-                          <div class="form-text">You can use letters, numbers & periods</div>
                         </div>
                         <div class="mb-3">
                           <label class="form-label" for="basic-icon-address">Tempat Lahir</label>
