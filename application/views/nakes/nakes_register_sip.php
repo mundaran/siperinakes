@@ -19,7 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="mb-3">  
                           <label class="form-label" for="basic-icon-default-fullname">Jenis SIP</label>
                           <div class="input-group">
-                            <label class="input-group-text" for="inputGroupSelect01">Options</label>`
+                            <label class="input-group-text" for="inputGroupSelect01">Options</label>
                             <select class="form-select" id="inputGroupSelect01" name="jenis_sip" required>
                               <option selected>Choose...</option>
 
@@ -82,6 +82,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
                         <div class="mb-3">
                           <label class="form-label" for="basic-icon-address">Email</label>
+                          <div class="input-group input-group-merge">
+                            <span id="basic-icon-address" class="input-group-text">@</span>
+                            <input type="text" name="email" class="form-control" placeholder= " <?php echo $user['email'];?> " value="<?php echo $user['email'];?>" disabled />
+                          </div>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label" for="basic-icon-address">Alamat Sesuai KTP</label>
                           <div class="input-group input-group-merge">
                             <span id="basic-icon-address" class="input-group-text">@</span>
                             <input type="text" name="email" class="form-control" placeholder= " <?php echo $user['email'];?> " value="<?php echo $user['email'];?>" disabled />

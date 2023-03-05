@@ -20,6 +20,17 @@ class Nakes extends CI_Controller {
 		$this->load->view('template_view/dashboard_footer');
 	}
 
+	public function my_profile()
+	{
+		$data['title'] ='profile';
+		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		
+		$this->load->view('template_view/dashboard_header');
+		$this->load->view('template_view/menubar',$data);
+		$this->load->view('nakes/my_profile',$data);
+		$this->load->view('template_view/dashboard_footer');
+	}
+
 	public function register_sip()
 	{
 		$data['title'] ='Register SIP';
@@ -30,5 +41,6 @@ class Nakes extends CI_Controller {
 		$this->load->view('nakes/nakes_register_sip',$data);
 		$this->load->view('template_view/dashboard_footer');
 	}
+
 	
 }
