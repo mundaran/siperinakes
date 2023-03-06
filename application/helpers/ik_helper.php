@@ -1,5 +1,5 @@
 <?php
-function cek_login()
+function cek_login_siperi()
 {
 	$ci = get_instance();
 	if(!$ci->session->userdata('username'))

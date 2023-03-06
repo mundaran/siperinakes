@@ -66,11 +66,11 @@ class Auth extends CI_Controller {
 						);
 						$this->session->set_userdata($data);
 						
-						if($user['role_id']==1){
+						if($user['role_id']==11){
 						redirect('administrator');
 						}
 						
-						elseif($user['role_id']==2){
+						elseif($user['role_id']==21){
 						redirect('nakes');
 						}
 					}
@@ -130,7 +130,7 @@ class Auth extends CI_Controller {
 							'username'=>$usernameemail,
 							'email' => $usernameemail,
 							'password'=>$password,
-							'role_id'=>2
+							'role_id'=>21
 						);
 
 						$query= $this->db->insert('user',$data);

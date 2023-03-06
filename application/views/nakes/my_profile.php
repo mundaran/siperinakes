@@ -82,22 +82,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                     <hr class="my-0" />
                     <div class="card-body">
-                      <form id="formAccountSettings" method="POST" onsubmit="return false">
+                      <form id="formAccountSettings" method="POST" action="aksi_edit_profile" >
                         <div class="row">
                           <div class="mb-3 col-md-6">
                             <label for="firstName" class="form-label">Nama Lengkap ( Sertakan Gelar )</label>
                             <input
                               class="form-control"
                               type="text"
-                              id="firstName"
-                              name="nama"
+                              id="nama_lengkap"
+                              name="nama_lengkap"
                               value="<?php echo $user['name'];?>"
                               autofocus
                             />
                           </div>
                           <div class="mb-3 col-md-6">
                             <label for="lastName" class="form-label">NIK</label>
-                            <input class="form-control" type="text" name="nik" id="lastName" value="<?php echo $user['nik'];?>" />
+                            <input class="form-control" type="text" name="nik" id="lastName" maxlength="16" minlength="16" value="<?php echo $user['nik'];?>" />
                           </div>
                           <div class="mb-3 col-md-6">
                             <label for="email" class="form-label">E-mail</label>
@@ -115,7 +115,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <input
                               type="text"
                               class="form-control"
-                              id="organization"
+                              id="no_hp"
                               name="no_hp"
                               value="<?php echo $user['no_hp'];?>"
                             />
@@ -125,7 +125,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <div class="input-group input-group-merge">
                               <input
                                 type="text"
-                                id="empat_lahir"
+                                id="tmpat_lahir"
                                 name="tempat_lahir"
                                 class="form-control"
                                 value="<?php echo $user['tempat_lahir'];?>"
@@ -137,24 +137,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="<?php echo $user['tanggal_lahir'];?>" />
                           </div>
                           <div class="mb-3 col-md-6">
-                            <label for="state" class="form-label">State</label>
-                            <input class="form-control" type="text" id="state" name="state" placeholder="California" />
+                            <label for="state" class="form-label">Alamat</label>
+                            <input class="form-control" type="text" id="alamat" name="alamat" value="<?php echo $user['alamat'];?>"/>
                           </div>
                           <div class="mb-3 col-md-6">
-                            <label for="zipCode" class="form-label">Zip Code</label>
+                            <label for="zipCode" class="form-label">Provinsi</label>
                             <input
                               type="text"
                               class="form-control"
-                              id="zipCode"
-                              name="zipCode"
-                              placeholder="231465"
-                              maxlength="6"
+                              id="provinsi"
+                              name="provinsi"
+                              value="<?php echo $user['provinsi'];?>"
                             />
                           </div>
                           <div class="mb-3 col-md-6">
-                            <label class="form-label" for="country">Country</label>
-                            <select id="country" class="select2 form-select">
-                              <option value="">Select</option>
+                            <label class="form-label" for="country">Kabupaten</label>
+                            <select id="country" name="kota_kabupaten" class="select2 form-select">
+                              <option value="<?php echo $user['kota_kabupaten'];?>"><?php echo $user['kota_kabupaten'];?></option>
                               <option value="Australia">Australia</option>
                               <option value="Bangladesh">Bangladesh</option>
                               <option value="Belarus">Belarus</option>
@@ -182,19 +181,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </select>
                           </div>
                           <div class="mb-3 col-md-6">
-                            <label for="language" class="form-label">Language</label>
-                            <select id="language" class="select2 form-select">
-                              <option value="">Select Language</option>
+                            <label for="language" class="form-label">Kecamatan</label>
+                            <select id="kecamatan" class="select2 form-select" name="kecamatan">
+                              <option value="<?php echo $user['provinsi'];?>"><?php echo $user['kecamatan'];?></option>
                               <option value="en">English</option>
                               <option value="fr">French</option>
                               <option value="de">German</option>
                               <option value="pt">Portuguese</option>
                             </select>
                           </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="timeZones" class="form-label">Timezone</label>
-                            <select id="timeZones" class="select2 form-select">
-                              <option value="">Select Timezone</option>
+                          <div class="mb-3 col-md-12">
+                            <label for="kelurahan" class="form-label">Keluarahan</label>
+                            <select id="kelurahan" name="kelurahan" class="select2 form-select">
+                              <option vvalue="<?php echo $user['kelurahan'];?>"><?php echo $user['kelurahan'];?></option>
                               <option value="-12">(GMT-12:00) International Date Line West</option>
                               <option value="-11">(GMT-11:00) Midway Island, Samoa</option>
                               <option value="-10">(GMT-10:00) Hawaii</option>
@@ -215,16 +214,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               <option value="-4">(GMT-04:00) Caracas, La Paz</option>
                             </select>
                           </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="currency" class="form-label">Currency</label>
-                            <select id="currency" class="select2 form-select">
-                              <option value="">Select Currency</option>
-                              <option value="usd">USD</option>
-                              <option value="euro">Euro</option>
-                              <option value="pound">Pound</option>
-                              <option value="bitcoin">Bitcoin</option>
-                            </select>
-                          </div>
                         </div>
                         <div class="mt-2">
                           <button type="submit" class="btn btn-primary me-2">Save changes</button>
@@ -235,7 +224,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <!-- /Account -->
                   </div>
                   <div class="card">
-                    <h5 class="card-header">Delete Account</h5>
+                    <h5 class="card-header">Setting Account</h5>
                     <div class="card-body">
                       <div class="mb-3 col-12 mb-0">
                         <div class="alert alert-warning">

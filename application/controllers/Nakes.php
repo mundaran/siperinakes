@@ -6,7 +6,7 @@ class Nakes extends CI_Controller {
 	public function __construct()
 	    {
 			parent::__construct();
-			cek_login();
+			cek_login_siperi();
 		}
 
 	public function index()
@@ -42,5 +42,19 @@ class Nakes extends CI_Controller {
 		$this->load->view('template_view/dashboard_footer');
 	}
 
+
+	public function aksi_edit_profile()
+	{
+		$id = $user['id'];
+		$nama = $this->input->post('nama');
+		$username = $this->input->post('username');
+		$email = $this->input->post('email');
+		$data = array(
+		'name' => $nama,
+		'username' => $username,
+		'email' => $email,
+		);
+		$this->model_operator->edit_profile($id, $data);
+	}
 	
 }
