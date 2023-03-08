@@ -135,34 +135,14 @@ class Auth extends CI_Controller {
 
 						$query= $this->db->insert('user',$data);
 
-					  $config=[
-					  	'protocol' =>'smtp',
-					  	'smtp_host'=>'ssl://smtp.googlemail.com',
-					  	'smtp_user'=>'gbuble11@gmail.com`',
-					  	'smtp_pass'=>'Jokam354',
-					  	'smtp_port'=> 465,
-					  	'mailtype' => 'html',
-					  	'starttls'  => true,
-					  	'charset'  => 'iso-8859-1',
-					  	'newline'   => "\r\n"
-						]; 
-				      $this->load->library('email', $config); 
-				      $this->email->initialize($config);
-				      $this->email->from('gbuble11@gmail.com', 'Pemkab Bojonegoro');  
-				      $this->email->to($usernameemail);   
-				      $this->email->subject('Silahkan Verifikasikan Email Anda'); 
-				      $url = base_url()."auth/confirm/".$usernameemail;  
-				      $message = "<html><head><head></head><body><p>Hi,".$name."</p><p>Terimakasih telah bergabung bersama kami</p><p>Silahkan klik tautan dibawah ini untuk aktivasi/verifikasi email anda</p>".$url."<br/><p>Sincerely,</p><p>Pemkab Bojonegoro</p></body></html>";  
-			     	  $this->email->message($message);
-			     	  $sendemail= $this->email->send();
-			     	  show_error($this->email->print_debugger());
-
-						if($sendemail){
-							echo 'berhasil';
-						}
+					$this->session->set_flashdata('message','<div class="alert alert-info" role="alert"><b>Pendaftaran Berhasil, Silahkan Login</b></div>');
+					redirect('auth');
+					 
 					}
+
 					else{
-						show_error($this->email->print_debugger());
+					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b>Konfirmasi Password Tidak Sesuai </b></div>');
+					redirect('auth/register_user');
 					}
 				}
 			}

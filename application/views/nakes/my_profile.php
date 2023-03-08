@@ -13,10 +13,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="col-md-12">
                   <ul class="nav nav-pills flex-column flex-md-row mb-3">
                     <li class="nav-item">
-                      <a class="nav-link active" href="javascript:void(0);"><i class="bx bx-user me-1"></i> Account</a>
+                      <a class="nav-link active" href="<?php echo base_url(); ?>nakes/my_profile"><i class="bx bx-user me-1"></i> Account</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="pages-account-settings-notifications.html"
+                      <a class="nav-link" href="<?php echo base_url(); ?>nakes/notification"
                         ><i class="bx bx-bell me-1"></i> Notifications</a
                       >
                     </li>
@@ -34,20 +34,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           height="100"
                           width="100"
                           id="uploadedAvatar"
-                        />';
-                      }
-                      else{
-                        echo'<img
-                          src="'.base_url().'template/assets/img/avatars/'.$user['pict'].'"
-                          alt="user-avatar"
-                          class="d-block rounded"
-                          height="100"
-                          width="100"
-                          id="uploadedAvatar"
-                        />';
-                      }
-                      ?>
-                        
+                        />
+
                         <div class="button-wrapper">
                           <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
                             <span class="d-none d-sm-block">Upload new photo</span>
@@ -60,10 +48,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               accept="image/png, image/jpeg"
                             />
                           </label>
+                          <p class="text-muted mb-0">Anda Belum Upload Foto Profile</p>
                           
-                          <?php if($user['pict']==0){
-                         echo '
-                          <p class="text-muted mb-0">Anda Belum Upload Foto Profile</p>';
+
+
+                        ';
                       }
                       else{
                         echo'<img
@@ -73,9 +62,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           height="100"
                           width="100"
                           id="uploadedAvatar"
-                        />';
+                          />
+                          <div class="button-wrapper">
+                          <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
+                            <span class="d-none d-sm-block">Update Foto</span>
+                            <i class="bx bx-upload d-block d-sm-none"></i>
+                            <input
+                              type="file"
+                              id="upload"
+                              class="account-file-input"
+                              hidden
+                              accept="image/png, image/jpeg"
+                            />
+                          </label>
+
+                        ';
                       }
                       ?>
+                        
+                      <?php echo $this->session->flashdata('message');?>
 
                         </div>
                       </div>
@@ -96,8 +101,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             />
                           </div>
                           <div class="mb-3 col-md-6">
-                            <label for="lastName" class="form-label">NIK</label>
-                            <input class="form-control" type="text" name="nik" id="lastName" maxlength="16" minlength="16" value="<?php echo $user['nik'];?>" />
+                            <label for="nik" class="form-label">NIK</label>
+                            <input class="form-control" type="text" name="nik" id="nik" maxlength="16" minlength="16" value="<?php echo $user['nik'];?>" />
                           </div>
                           <div class="mb-3 col-md-6">
                             <label for="email" class="form-label">E-mail</label>
@@ -216,35 +221,38 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                         </div>
                         <div class="mt-2">
-                          <button type="submit" class="btn btn-primary me-2">Save changes</button>
-                          <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                          <button type="submit" class="btn btn-primary me-2">Simpan</button>
+                          <a href=""  class="btn btn-outline-secondary">Kembali</a>
                         </div>
                       </form>
                     </div>
                     <!-- /Account -->
                   </div>
                   <div class="card">
-                    <h5 class="card-header">Setting Account</h5>
+                    <h5 class="card-header">Reset Password</h5>
                     <div class="card-body">
-                      <div class="mb-3 col-12 mb-0">
-                        <div class="alert alert-warning">
-                          <h6 class="alert-heading fw-bold mb-1">Are you sure you want to delete your account?</h6>
-                          <p class="mb-0">Once you delete your account, there is no going back. Please be certain.</p>
-                        </div>
-                      </div>
-                      <form id="formAccountDeactivation" onsubmit="return false">
-                        <div class="form-check mb-3">
-                          <input
-                            class="form-check-input"
-                            type="checkbox"
-                            name="accountActivation"
-                            id="accountActivation"
-                          />
-                          <label class="form-check-label" for="accountActivation"
-                            >I confirm my account deactivation</label
-                          >
-                        </div>
-                        <button type="submit" class="btn btn-danger deactivate-account">Deactivate Account</button>
+                    
+                      <form id="formAccountDeactivation" action="aksi_ubah_password">
+
+                         <div class="mb-3 col-md-12">
+                          <label class="form-label" for="ubahPassword">Masukan Password Lama Anda</label>
+                            <input
+                              type="text"
+                              id="ubahPassword"
+                              name="password_lama"
+                              class="form-control"
+                            />
+                         </div>
+                          <div class="mb-3 col-md-12">
+                          <label class="form-label" for="ubahPassword">Masukan Password Baru Anda</label>
+                            <input
+                              type="text"
+                              id="ubahPassword"
+                              name="password_baru"
+                              class="form-control"
+                            />
+                         </div>
+                        <button type="submit" class="btn btn-danger deactivate-account">Ubah Paassword</button>
                       </form>
                     </div>
                   </div>
