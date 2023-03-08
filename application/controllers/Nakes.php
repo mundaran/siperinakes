@@ -69,7 +69,7 @@ class Nakes extends CI_Controller {
 		$provinsi = $this->input->post('provinsi');
 		$kota_kabupaten = $this->input->post('kota_kabupaten');
 		$kecamatan = $this->input->post('kecamatan');
-		$kelurahan = $this->input->post('keluarahan');
+		$kelurahan = $this->input->post('kelurahan');
 
 		$data = array(
 		'name' => $nama,

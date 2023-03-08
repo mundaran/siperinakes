@@ -147,76 +147,59 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                           <div class="mb-3 col-md-6">
                             <label for="zipCode" class="form-label">Provinsi</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="provinsi"
-                              name="provinsi"
-                              value="<?php echo $user['provinsi'];?>"
-                            />
+                            <select id="country" name="provinsi" class="select2 form-select">
+                              <option value="<?php echo $user['provinsi'];?>"><?php echo $user['provinsi'];?></option>
+
+                              <?php //untuk menampilkan no
+                              $provinsi = $this->db->get_where('master_provinsi', array('id'))->result_array();
+                              foreach( $provinsi as $prov ):
+                              ?>
+                              <option value="<?php echo $prov['provinsi'];?>"><?php echo $prov['provinsi'];?></option>
+
+                              <?php  endforeach;?>
+
+                            </select>
                           </div>
                           <div class="mb-3 col-md-6">
                             <label class="form-label" for="country">Kabupaten</label>
                             <select id="country" name="kota_kabupaten" class="select2 form-select">
                               <option value="<?php echo $user['kota_kabupaten'];?>"><?php echo $user['kota_kabupaten'];?></option>
-                              <option value="Australia">Australia</option>
-                              <option value="Bangladesh">Bangladesh</option>
-                              <option value="Belarus">Belarus</option>
-                              <option value="Brazil">Brazil</option>
-                              <option value="Canada">Canada</option>
-                              <option value="China">China</option>
-                              <option value="France">France</option>
-                              <option value="Germany">Germany</option>
-                              <option value="India">India</option>
-                              <option value="Indonesia">Indonesia</option>
-                              <option value="Israel">Israel</option>
-                              <option value="Italy">Italy</option>
-                              <option value="Japan">Japan</option>
-                              <option value="Korea">Korea, Republic of</option>
-                              <option value="Mexico">Mexico</option>
-                              <option value="Philippines">Philippines</option>
-                              <option value="Russia">Russian Federation</option>
-                              <option value="South Africa">South Africa</option>
-                              <option value="Thailand">Thailand</option>
-                              <option value="Turkey">Turkey</option>
-                              <option value="Ukraine">Ukraine</option>
-                              <option value="United Arab Emirates">United Arab Emirates</option>
-                              <option value="United Kingdom">United Kingdom</option>
-                              <option value="United States">United States</option>
+                              
+
+                              <?php //untuk menampilkan no
+                              $kota = $this->db->get_where('master_kabupaten', array('id'))->result_array();
+                              foreach( $kota as $kab ):
+                              ?>
+                              <option value="<?php echo $kab['kabupaten'];?>"><?php echo $kab['kabupaten'];?></option>
+
+                              <?php  endforeach;?>
+
                             </select>
                           </div>
                           <div class="mb-3 col-md-6">
                             <label for="language" class="form-label">Kecamatan</label>
                             <select id="kecamatan" class="select2 form-select" name="kecamatan">
-                              <option value="<?php echo $user['provinsi'];?>"><?php echo $user['kecamatan'];?></option>
-                              <option value="en">English</option>
-                              <option value="fr">French</option>
-                              <option value="de">German</option>
-                              <option value="pt">Portuguese</option>
+                              <option value="<?php echo $user['kecamatan'];?>"><?php echo $user['kecamatan'];?></option>
+                              <?php //untuk menampilkan no
+                              $kecamatan = $this->db->get_where('master_kecamatan', array('id'))->result_array();
+                              foreach( $kecamatan as $kec ):
+                              ?>
+                              <option value="<?php echo $kec['kecamatan'];?>"><?php echo $kec['kecamatan'];?></option>
+
+                              <?php  endforeach;?>
                             </select>
                           </div>
                           <div class="mb-3 col-md-12">
                             <label for="kelurahan" class="form-label">Keluarahan</label>
                             <select id="kelurahan" name="kelurahan" class="select2 form-select">
-                              <option vvalue="<?php echo $user['kelurahan'];?>"><?php echo $user['kelurahan'];?></option>
-                              <option value="-12">(GMT-12:00) International Date Line West</option>
-                              <option value="-11">(GMT-11:00) Midway Island, Samoa</option>
-                              <option value="-10">(GMT-10:00) Hawaii</option>
-                              <option value="-9">(GMT-09:00) Alaska</option>
-                              <option value="-8">(GMT-08:00) Pacific Time (US & Canada)</option>
-                              <option value="-8">(GMT-08:00) Tijuana, Baja California</option>
-                              <option value="-7">(GMT-07:00) Arizona</option>
-                              <option value="-7">(GMT-07:00) Chihuahua, La Paz, Mazatlan</option>
-                              <option value="-7">(GMT-07:00) Mountain Time (US & Canada)</option>
-                              <option value="-6">(GMT-06:00) Central America</option>
-                              <option value="-6">(GMT-06:00) Central Time (US & Canada)</option>
-                              <option value="-6">(GMT-06:00) Guadalajara, Mexico City, Monterrey</option>
-                              <option value="-6">(GMT-06:00) Saskatchewan</option>
-                              <option value="-5">(GMT-05:00) Bogota, Lima, Quito, Rio Branco</option>
-                              <option value="-5">(GMT-05:00) Eastern Time (US & Canada)</option>
-                              <option value="-5">(GMT-05:00) Indiana (East)</option>
-                              <option value="-4">(GMT-04:00) Atlantic Time (Canada)</option>
-                              <option value="-4">(GMT-04:00) Caracas, La Paz</option>
+                              <option value="<?php echo $user['kelurahan'];?>"><?php echo $user['kelurahan'];?></option>
+                              <?php //untuk menampilkan no
+                              $kelurahan = $this->db->get_where('master_kelurahan', array('id'))->result_array();
+                              foreach( $kelurahan as $kel ):
+                              ?>
+                              <option value="<?php echo $kel['kelurahan'];?>"><?php echo $kel['kelurahan'];?></option>
+
+                              <?php  endforeach;?>
                             </select>
                           </div>
                         </div>

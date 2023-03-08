@@ -13,6 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center">
                       <h5 class="mb-0">Registrasi SIP BARU</h5>
+                      <span class="alert alert-danger" role="alert"> Pastikan Persyaratan Sudah Siap</span>
                     </div>
                     <div class="card-body">
                       <form>
@@ -32,75 +33,89 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                         </div>
                         <div class="mb-3">
-                          <label class="form-label" for="basic-icon-default-company">Nik</label>
+                          <label class="form-label" for="basic-icon-default-company">Nomor STR</label>
                           <div class="input-group input-group-merge">
                             <span id="basic-icon-default-company2" class="input-group-text"
-                              ><i class="bx bx-buildings"></i
+                              ><i class="bx bx-barcode"></i
                             ></span>
                             <input
-                              type="text"
-                              id="basic-icon-default-company"
-                              class="form-control"
-                              placeholder="NIK"
+                              type="text" id="basic-icon-default-company" class="form-control" name="no_str" placeholder=""
                               aria-describedby="basic-icon-default-company2" required
                             />
                           </div>
                         </div>
                         <div class="mb-3">
-                          <label class="form-label" for="basic-icon-default-email" >Nama Lengkap</label>
+                          <label class="form-label" for="basic-icon-default-email" >Masa Berlaku STR</label>
                           <div class="input-group">
-                            <input type="text" aria-label="First name" class="form-control" value="<?php echo $user['name'];?>" disabled/>
-                            <input type="text" aria-label="Last name" class="form-control" placeholder="Masukan Gelar" required />
+                            <input type="date" aria-label="First" name="masa_berlaku" class="form-control"/>
                           </div>
                         </div>
                         <div class="mb-3">
-                          <label class="form-label" for="basic-icon-address">Tempat Lahir</label>
+                          <label class="form-label" for="basic-icon-address">Tempat Praktek</label>
+                          <div class="input-group input-group-merge">
+                            <span id="basic-icon-address" class="input-group-text">
+                              <i class="bx bx-buildings"></i>
+                            </span>
+                            <input type="text" aria-label="Last name" class="form-control" name="tempat_paraktek" placeholder="Klinik" required />
+                          </div>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label" for="basic-icon-address">Alamat Praktek</label>
+                          <div class="input-group input-group-merge">
+                            <span id="basic-icon-address" class="input-group-text">
+                              <i class="bx bxs-building-house" type="solid"></i>
+                            </span>
+                            <input type="text" name="alamat_praktek" class="form-control" placeholder="" required />
+                          </div>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label" for="basic-icon-address">Jenis Praktek</label>
                           <div class="input-group input-group-merge">
                             <span id="basic-icon-address" class="input-group-text"
-                              ><i class="bx bx-home"></i
+                              ><i class="bx bx-user-pin"></i
                             ></span>
-                            <input type="text" aria-label="Last name" class="form-control" placeholder="Tempat Lahir" required />
+                            <input type="text" name="jenis_praktek" class="form-control" placeholder="Dokter/Apoteker/Other" required />
                           </div>
                         </div>
                         <div class="mb-3">
-                          <label class="form-label" for="basic-icon-address">Tanggal Lahir</label>
+                          <label class="form-label" for="basic-icon-address">Hari Praktek</label>
                           <div class="input-group input-group-merge">
-                            <span id="basic-icon-address" class="input-group-text"
-                              ><i class="bx bx-calendar"></i
-                            ></span>
-                            <input type="date" name="Tgl_Lahir" class="form-control" placeholder="Tempat Lahir" required />
+                            <input type="date" name="email" class="form-control"  />
+                            <span id="basic-icon-address" class="input-group-text">s/d</span>
+                            <input type="date" name="email" class="form-control"  />
                           </div>
                         </div>
                         <div class="mb-3">
-                          <label class="form-label" for="basic-icon-address">No.Hp/Telp</label>
+                          <label class="form-label" for="basic-icon-address">Jam Praktek</label>
                           <div class="input-group input-group-merge">
-                            <span id="basic-icon-address" class="input-group-text"
-                              ><i class="bx bx-phone"></i
-                            ></span>
-                            <input type="text" name="no_hp" class="form-control" placeholder="No.Hp/Telp" required />
-                          </div>
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label" for="basic-icon-address">Email</label>
-                          <div class="input-group input-group-merge">
-                            <span id="basic-icon-address" class="input-group-text">@</span>
-                            <input type="text" name="email" class="form-control" placeholder= " <?php echo $user['email'];?> " value="<?php echo $user['email'];?>" disabled />
-                          </div>
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label" for="basic-icon-address">Alamat Sesuai KTP</label>
-                          <div class="input-group input-group-merge">
-                            <span id="basic-icon-address" class="input-group-text">@</span>
-                            <input type="text" name="email" class="form-control" placeholder= " <?php echo $user['email'];?> " value="<?php echo $user['email'];?>" disabled />
+                            <input type="time" name="email" class="form-control"  />
+                            <span id="basic-icon-address" class="input-group-text">s/d</span>
+                            <input type="time" name="email" class="form-control"  />
                           </div>
                         </div>
                         
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary"> Simpan dan Lanjutkan </button>
                       </form>
                     </div>
                   </div>
                 </div>
 
             </div>
+
+            <div class="row">
+
+            <div class="col-xl">
+              <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                  <h5 class="mb-0">Daftar Pengajuan Tertunda</h5>
+                </div>
+                <div class="card-body">
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
         </div>
     </div>
