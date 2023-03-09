@@ -55,6 +55,44 @@ class Nakes extends CI_Controller {
 		$this->load->view('template_view/dashboard_footer');
 	}
 
+	public function upload_berkas()
+	{
+		$data['title'] ='Register SIP';
+		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id_user = $user ['id'];
+
+		$file_name = str_replace('.','',time().$user['name']);
+		$config['upload_path']          = './document/pas_foto';
+		$config['allowed_types']        = 'gif|jpg|png|pdf';
+		$config['max_size']             = 1000;
+		$config['max_width']            = 1024;
+		$config['max_height']           = 768;
+		$this->load->library('upload', $config);
+ 
+		if ( !$this->upload->do_upload('pasfoto')){
+			$error = array('error' => $this->upload->display_errors());
+			$this->session->set_flashdata('message',.$error);
+		}
+		else{
+			$file_name = str_replace('.','',time().$user['name']);
+			$config['upload_path']          = './document/ktp';
+			$config['allowed_types']        = 'gif|jpg|png|pdf';
+			$config['max_size']             = 1000;
+			$config['max_width']            = 1024;
+			$config['max_height']           = 768;
+			if ( !$this->upload->do_upload('ktp')){
+			$error = array('error' => $this->upload->display_errors());
+			$this->load->view('templates/error_page', $error);
+		}
+		else{
+
+		}
+            	
+
+		}
+		
+	}
+
 
 	//batas-tampilan dan aksi//
 
@@ -74,6 +112,7 @@ class Nakes extends CI_Controller {
 		$kota_kabupaten = $this->input->post('kota_kabupaten');
 		$kecamatan = $this->input->post('kecamatan');
 		$kelurahan = $this->input->post('kelurahan');
+
 
 		$data = array(
 		'name' => $nama,
@@ -106,6 +145,7 @@ class Nakes extends CI_Controller {
 		$jam_buka = $this->input->post('jam_buka');
 		$jam_tutup = $this->input->post('jam_tutup');
 		$status = '1' ;
+		$tanggal_daftar = $this->input->post('tanggal_daftar');
 
 		$data = array(
 		'id_user' => $id,
@@ -120,6 +160,7 @@ class Nakes extends CI_Controller {
 		'jam_buka' => $jam_buka,
 		'jam_tutup' => $jam_tutup,
 		'status' => $status,
+		'tanggal_daftar'=>$tanggal_daftar,
 		);
 		$this->model_nakes->registrasi_sip($data);
 	}

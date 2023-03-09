@@ -2,22 +2,26 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!DOCTYPE html>
 
-<!-- Content wrapper -->
-          <div class="content-wrapper">
+
+        <div class="content-wrapper">
+        <!-- Content wrapper -->
+        <div class="content-wrapper">
             <!-- Content -->
                
             <div class="container-xxl flex-grow-1 container-p-y">
               <div class="row">
 
-                <div class="col-xl">
+                <div class="col-lg-6">
                   <div class="card mb-4">
+                    <?php echo $this->session->flashdata('message');?>
                     <div class="card-header d-flex justify-content-between align-items-center">
                       <h5 class="mb-0">Registrasi SIP BARU</h5>
                       <span class="alert alert-danger" role="alert"> Pastikan Persyaratan Sudah Siap</span>
-                      <?php echo $this->session->flashdata('message');?>
+                      
                     </div>
                     <div class="card-body">
                       <form method="POST" action="<?php echo base_url();?>nakes/aksi_register_sip" >
+                        <input type="hidden" name="tanggal_daftar" value="<?php echo date("d-m-Y"); ?>">
                         <div class="mb-3">  
                           <label class="form-label" for="basic-icon-default-fullname">Jenis SIP</label>
                           <div class="input-group">
@@ -79,17 +83,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="mb-3">
                           <label class="form-label" for="basic-icon-address">Hari Praktek</label>
                           <div class="input-group input-group-merge">
-                            <input type="date" name="hari_awal" class="form-control"  />
+                            <select id="kecamatan" class="select2 form-select" name="hari_awal">
+                              <option value="Senin" selected>Senin</option>
+                              <option value="Selasa">Selasa</option>
+                              <option value="Rabu">Rabu</option>
+                              <option value="Kamis">Kamis</option>
+                              <option value="Jumat">Jumat</option>
+                              <option value="Sabtu">Sabtu</option>
+                              <option value="Minggu">Minggu</option>
+                            </select>
                             <span id="basic-icon-address" class="input-group-text">s/d</span>
-                            <input type="date" name="hari_akhir" class="form-control"  />
+                            <select id="kecamatan" class="select2 form-select" name="hari_akhir">
+                              <option value="Senin" selected>Senin</option>
+                              <option value="Selasa">Selasa</option>
+                              <option value="Rabu">Rabu</option>
+                              <option value="Kamis">Kamis</option>
+                              <option value="Jumat">Jumat</option>
+                              <option value="Sabtu">Sabtu</option>
+                              <option value="Minggu">Minggu</option>
+                            </select>
                           </div>
                         </div>
                         <div class="mb-3">
                           <label class="form-label" for="basic-icon-address">Jam Praktek</label>
                           <div class="input-group input-group-merge">
-                            <input type="time" name="jam_buka" class="form-control"  />
+                            <input type="time" name="jam_buka" class="form-control"  required />
                             <span id="basic-icon-address" class="input-group-text">s/d</span>
-                            <input type="time" name="jam_tutup" class="form-control"  />
+                            <input type="time" name="jam_tutup" class="form-control" required />
                           </div>
                         </div>
                         
@@ -99,14 +119,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   </div>
                 </div>
 
-            </div>
-
-            <div class="row">
-
-            <div class="col-xl">
+                <div class="col-lg-6  ">
               <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                  <h5 class="mb-0">Daftar Pengajuan Tertunda</h5>
+                  <h5 class="mb-0">Status Pengajuan SIP</h5>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive text-nowrap">
@@ -143,9 +159,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
               </div>
             </div>
+
+            </div>
+
+          <div class="row">
           </div>
 
-
-
         </div>
-    </div>
+      </div>
+       
+      </div>

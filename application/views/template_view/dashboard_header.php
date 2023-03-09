@@ -57,6 +57,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </head>
 
   <body>
-    <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar ">
-      <div class="layout-container">
+    

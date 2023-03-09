@@ -1,14 +1,12 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
-
-  
-  
-
+        <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar layout-without-menu">
+      <div class="layout-container">
         <!-- Layout container -->
         <div class="layout-page">
+
           <!-- Navbar -->
 
+         
           <nav
             class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
             id="layout-navbar"
@@ -81,10 +79,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <!-- / Navbar -->
 
           <!-- Content wrapper -->
+
           <div class="content-wrapper">
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
+              <!-- Layout Demo -->
+  
               <div class="row">
                 <div class="col-lg-8 mb-4 order-0">
                   <div class="card">
@@ -173,15 +174,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           <span class="visually-hidden">Next</span>
                         </a>
                       </div>
-
                   </div>
                 </div>
              </div>
             </div>
           </div>
 
-
-                <div class="col-lg-4 col-md-4 order-1">
+          <div class="col-lg-4 col-md-4 order-1">
                   <div class="row">
                     <div class="col-lg-6 col-md-12 col-6 mb-4">
                       <div class="card">
@@ -225,6 +224,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   </div>
 
                   <div class="row">
+
                     <div class="col-lg-6 col-md-12 col-6 mb-4">
                       <div class="card">
                         <div class="card-body">
@@ -261,14 +261,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
                       </div>
                     </div>
+
+
                   </div>
 
-                </div>
+              </div>
 
 
+        </div>
+
+              <!--/ Layout Demo -->
 
 
-    </div>
-  </div>
-</div>
+            </div>
+
+
             <!-- / Content -->

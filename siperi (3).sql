@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 09, 2023 at 07:16 AM
+-- Generation Time: Mar 09, 2023 at 06:40 PM
 -- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.11
+-- PHP Version: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,6 +41,7 @@ CREATE TABLE `data_sip` (
   `jam_buka` time(6) NOT NULL,
   `jam_tutup` time(6) NOT NULL,
   `status` varchar(100) NOT NULL,
+  `tanggal_daftar` varchar(50) NOT NULL,
   `pas_foto` varchar(100) NOT NULL,
   `foto_ktp` varchar(100) NOT NULL,
   `foto_str` varchar(100) NOT NULL,
@@ -55,9 +56,11 @@ CREATE TABLE `data_sip` (
 -- Dumping data for table `data_sip`
 --
 
-INSERT INTO `data_sip` (`id`, `id_user`, `jenis_sip`, `alamat_praktek`, `tempat_praktek`, `no_str`, `masa_berlaku_str`, `jenis_praktek`, `hari_awal_praktek`, `hari_akhir_praktek`, `jam_buka`, `jam_tutup`, `status`, `pas_foto`, `foto_ktp`, `foto_str`, `rekomendasi_org_p`, `rekomendasi_tmpt_p`, `ijazah`, `surat_sehat`, `pernyataan`) VALUES
-(1, 44, 'Dokter Umum', 'Trucuk rt 4 rw 5', 'As Zahra', '12341234324', '2023-03-17', 'Dokter Gigi', '2023-03-18', '2023-03-08', '11:53:00.000000', '16:48:00.000000', '1', '', '', '', '', '', '', '', ''),
-(2, 44, 'Dokter Spesialis', 'bojoneoro ', 'As Zahra', '124684328', '2023-03-16', 'pasang behel', '2023-03-23', '2023-03-07', '07:09:00.000000', '16:13:00.000000', '2', '', '', '', '', '', '', '', '');
+INSERT INTO `data_sip` (`id`, `id_user`, `jenis_sip`, `alamat_praktek`, `tempat_praktek`, `no_str`, `masa_berlaku_str`, `jenis_praktek`, `hari_awal_praktek`, `hari_akhir_praktek`, `jam_buka`, `jam_tutup`, `status`, `tanggal_daftar`, `pas_foto`, `foto_ktp`, `foto_str`, `rekomendasi_org_p`, `rekomendasi_tmpt_p`, `ijazah`, `surat_sehat`, `pernyataan`) VALUES
+(1, 44, 'Dokter Umum', 'Trucuk rt 4 rw 5', 'As Zahra', '12341234324', '2023-03-17', 'Dokter Gigi', '2023-03-18', '2023-03-08', '11:53:00.000000', '16:48:00.000000', '1', '', '', '', '', '', '', '', '', ''),
+(2, 44, 'Dokter Spesialis', 'bojoneoro ', 'As Zahra', '124684328', '2023-03-16', 'pasang behel', '2023-03-23', '2023-03-07', '07:09:00.000000', '16:13:00.000000', '2', '', '', '', '', '', '', '', '', ''),
+(3, 2, 'TTK(Tenaga Kerja Kefarmasian)', 'Ancol', 'Amir', '42432434', '2023-03-09', 'Apoteker', '0000-00-00', '0000-00-00', '06:30:00.000000', '04:47:00.000000', '3', '09-03-2023', '', '', '', '', '', '', '', ''),
+(4, 2, 'Apoteker', 'Ancol', 'Amir', '1211111111', '2023-03-17', 'Apoteker', '0000-00-00', '0000-00-00', '07:52:00.000000', '16:33:00.000000', '2', '09-03-2023', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -7666,8 +7669,7 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `name`, `username`, `email`, `no_hp`, `password`, `role_id`, `aktifasi`, `pict`, `nik`, `gelar`, `tempat_lahir`, `tanggal_lahir`, `alamat`, `provinsi`, `kota_kabupaten`, `kecamatan`, `kelurahan`) VALUES
 (1, 'Bagus', 'bagusmundaran@gmail.com', 'bagusmundaran@gmail.com', '0', 'bagus', 11, 1, '', '0', '', '', '0000-00-00', '', '', '', '', ''),
 (2, 'Dr. Arafiki Indra Saputra', 'arafiki@gmail.com', 'arafiki@gmail.com', '08997665672', '81dc9bdb52d04dc20036dbd8313ed055', 21, 1, '', '330322010002', 'Sp.A', 'Bojonegoro', '1996-12-12', 'Trucuk rt4, rw5', 'Jawa Timur', 'Kabupaten Bojonegoro', 'Trucuk', 'Trucuk'),
-(43, 'Mundaran', 'baguzmundaran@gmail.com', 'baguzmundaran@gmail.com', '0', 'c4ca4238a0b923820dcc509a6f75849b', 21, 0, '', '330322010002', '', '', '0000-00-00', '', '', '', '', ''),
-(44, 'Andik Budi', 'andik@gmail.com', 'andik@gmailcom', '', '81dc9bdb52d04dc20036dbd8313ed055', 21, 1, '', '', '', '', '0000-00-00', '', '', '', '', '');
+(43, 'Mundaran', 'baguzmundaran@gmail.com', 'baguzmundaran@gmail.com', '0', 'c4ca4238a0b923820dcc509a6f75849b', 21, 0, '', '330322010002', '', '', '0000-00-00', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -7841,7 +7843,7 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT for table `data_sip`
 --
 ALTER TABLE `data_sip`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `master_sip`
@@ -7853,7 +7855,7 @@ ALTER TABLE `master_sip`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

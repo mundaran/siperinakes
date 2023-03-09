@@ -1,7 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!DOCTYPE html>
-
+ <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
 <!-- Menu -->
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
@@ -119,9 +121,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
              }
              ?>
-           
-
-            
 
            
 
@@ -148,6 +147,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
              
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
+
                 <!-- Place this tag where you want the button to render. -->
                 <li class="nav-item lh-1 me-3">
                  <?php echo $user['name']?>

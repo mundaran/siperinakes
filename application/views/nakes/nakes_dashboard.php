@@ -2,8 +2,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!DOCTYPE html>
 
+<!-- Layout container -->
+<div class="content-wrapper">
+
 <!-- Content wrapper -->
-          <div class="content-wrapper">
             <!-- Content -->
             <div class="content-wrapper">
             <!-- Content -->
