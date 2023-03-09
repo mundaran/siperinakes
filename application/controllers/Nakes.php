@@ -36,6 +36,7 @@ class Nakes extends CI_Controller {
 	{
 		$data['title'] ='Register SIP';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$data ['sip']= $this->model_nakes->load_data_sip();
 		
 		$this->load->view('template_view/dashboard_header');
 		$this->load->view('template_view/menubar',$data);
@@ -53,6 +54,9 @@ class Nakes extends CI_Controller {
 		$this->load->view('nakes/nakes_notification',$data);
 		$this->load->view('template_view/dashboard_footer');
 	}
+
+
+	//batas-tampilan dan aksi//
 
 
 	public function aksi_edit_profile()
@@ -86,5 +90,39 @@ class Nakes extends CI_Controller {
 		);
 		$this->model_nakes->edit_profile($id, $data);
 	}
+
+	public function aksi_register_sip()
+	{
+		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id = $user['id'];
+		$jenis_sip = $this->input->post('jenis_sip');
+		$no_str = $this->input->post('no_str');
+		$masa_berlaku_str = $this->input->post('masa_berlaku_str');
+		$tempat_praktek = $this->input->post('tempat_praktek');
+		$alamat_praktek = $this->input->post('alamat_praktek');
+		$jenis_praktek = $this->input->post('jenis_praktek');
+		$hari_awal = $this->input->post('hari_awal');
+		$hari_akhir = $this->input->post('hari_akhir');
+		$jam_buka = $this->input->post('jam_buka');
+		$jam_tutup = $this->input->post('jam_tutup');
+		$status = '1' ;
+
+		$data = array(
+		'id_user' => $id,
+		'jenis_sip' => $jenis_sip,
+		'no_str' => $no_str,
+		'masa_berlaku_str' => $masa_berlaku_str,
+		'tempat_praktek' => $tempat_praktek,
+		'alamat_praktek' => $alamat_praktek,
+		'jenis_praktek' => $jenis_praktek,
+		'hari_awal_praktek' => $hari_awal,
+		'hari_akhir_praktek' => $hari_akhir,
+		'jam_buka' => $jam_buka,
+		'jam_tutup' => $jam_tutup,
+		'status' => $status,
+		);
+		$this->model_nakes->registrasi_sip($data);
+	}
+
 	
 }
