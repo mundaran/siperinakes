@@ -2,12 +2,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!DOCTYPE html>
 
-<!-- Layout container -->
-<div class="content-wrapper">
-
-<!-- Content wrapper -->
-            <!-- Content -->
-            <div class="content-wrapper">
+ <div class="content-wrapper">
+        <!-- Content wrapper -->
+        <div class="content-wrapper">
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
@@ -42,9 +39,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </div>
 
               <div class="row">
-                <div class="col-lg-4 col-md-4 order-1">
-                  <div class="row">
-                    <div class="col-lg-6 col-md-12 col-6 mb-4">
+                    <div class="col-lg-3 col-md-12 col-6 mb-4">
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -57,15 +52,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </div>
                           </div>
                           <span class="fw-semibold d-block mb-1">Register</span>
-                          <h3 class="card-title mb-2">
                             <?php 
-                            $user = $this->db->get_where('user', array('role_id' => 2 ))->result_array();
-                            echo $this->db->count_all_results();?></h3>
-                          <small class="text-success fw-semibold"> User </small>
+                            $role = 2;
+                            $this->db->like('role_id', $role);
+                            $this->db->from('user');
+                            ?>
+                          <h3 class="card-title mb-2"><?php echo $this->db->count_all_results();?></h3>
+                          <small class="text-success fw-semibold"> Nakes Telah Bergabung </small>
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-6 col-md-12 col-6 mb-4">
+                    <div class="col-lg-3 col-md-12 col-6 mb-4">
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -78,15 +75,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </div>
                           </div>
                           <span class="fw-semibold d-block mb-1">SIP Terdaftar </span>
-                          <h3 class="card-title text-nowrap mb-1">6</h3>
-                          <small class="text-success fw-semibold"><i class=""></i> SIP </small>
+                            <?php 
+                            $this->db->like('role_id');
+                            $this->db->from('user');
+                            ?>
+                          <h3 class="card-title text-nowrap mb-1"><?php echo $this->db->count_all_results();?></h3>
+                          <small class="text-success fw-semibold"><i class=""></i> SIP Telah Terdaftar </small>
                         </div>
                       </div>
                     </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-6 col-md-12 col-6 mb-4">
+                 
+                    <div class="col-lg-3 col-md-12 col-6 mb-4">
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -99,12 +98,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </div>
                           </div>
                           <span class="fw-semibold d-block mb-1">SIPA Terdafatar</span>
-                          <h3 class="card-title mb-2">4</h3>
+                          <h3 class="card-title mb-2">0</h3>
                           <small class="text-success fw-semibold"> SIPA </small>
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-6 col-md-12 col-6 mb-4">
+                    <div class="col-lg-3 col-md-12 col-6 mb-4">
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -117,15 +116,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </div>
                           </div>
                           <span class="fw-semibold d-block mb-1">SIP Kedaluarsa </span>
-                          <h3 class="card-title text-nowrap mb-1">2</h3>
+                          <h3 class="card-title text-nowrap mb-1">0</h3>
                           <small class="text-success fw-semibold"><i class=""></i> SIP </small>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <div class="col-12 col-lg-8 col-md-12 order-1 ">
+              <div class="row">
+                <div class="col-12 col-lg-12 col-md-12 order-1 ">
                 <div class="card">
                 <h5 class="card-header">Tutorial</h5>
                 <div class="card-body mb-5">
@@ -158,12 +157,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           <div class="col-md-8 col-12">
                             <div class="tab-content p-0">
                               <div class="tab-pane fade show active" id="list-home">
-                                Donut sugar plum sweet roll biscuit. Cake oat cake gummi bears. Tart wafer wafer halvah
-                                gummi bears cheesecake. Topping croissant cake sweet roll. Dessert fruitcake gingerbread
-                                halvah marshmallow pudding bear claw cheesecake. Bonbon dragée cookie gummies. Pudding
-                                marzipan liquorice. Sugar plum dragée cupcake cupcake cake dessert chocolate bar. Pastry
-                                lollipop lemon drops lollipop halvah croissant. Pastry sweet gingerbread lemon drops
-                                topping ice cream.
+                               
+                                <p>Pas Foto 4x6 </p>
+                                <p>Foto KTP Asli</p>
+                                <p>Foto STR</p>
+                                <p>Foto Surat Sehat</p>
+                                <p>Foto Surat Pernyataan</p>
+                                <p>Foto Rekomendasi Organisasi Profesi</p>
+                                <p>Foto Rekomendasi Tempat Praktek</p>
+                                 
+
                               </div>
                               <div class="tab-pane fade" id="list-profile">
                                 Muffin lemon drops chocolate chupa chups jelly beans dessert jelly-o. Soufflé gummies
@@ -200,15 +203,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
               </div>
               </div>
+          </div>
 
-    </div>
+
+
+
+  </div>
   </div>
 </div>
-            <div class="container-xxl flex-grow-1 container-p-y">
-              <div class="row">
-                <div class="col-lg-8 mb-4 order-0">
-                </div>
-            </div>
-        </div>
-    </div>
     

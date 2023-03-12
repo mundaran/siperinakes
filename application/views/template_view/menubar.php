@@ -178,19 +178,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
                               <?php 
-                        if($user['pict']==0){
-                           echo'<img src="'.base_url().'template/assets/img/avatars/user1.png" alt class="w-px-40 h-auto rounded-circle" />';
-                        }
-                        else{
-                          echo'<img src="'.base_url().'template/assets/img/avatars/'.$user['pict'].'" alt class="w-px-40 h-auto rounded-circle" />';
-                        }
+                                if($user['pict']==0){
+                                   echo'<img src="'.base_url().'template/assets/img/avatars/user1.png" alt class="w-px-40 h-auto rounded-circle" />';
+                                }
+                                else{
+                                  echo'<img src="'.base_url().'template/assets/img/avatars/'.$user['pict'].'" alt class="w-px-40 h-auto rounded-circle" />';
+                                }
 
-                      ?>
+                              ?>
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-semibold d-block">John Doe</span>
-                            <small class="text-muted">Admin</small>
+                            <span class="fw-semibold d-block"><?php echo $user['name'];?></span>
+
+                            <?php
+                            if($user['role_id']==1){
+                              echo'<small class="text-muted">Administrator</small>';
+                            }
+                            else{
+                              echo'<small class="text-muted">Nakes</small>';
+                            }
+
+                            ?>
+                            
                           </div>
                         </div>
                       </a>
@@ -202,12 +212,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       <a class="dropdown-item" href="<?php echo base_url()?>nakes/my_profile">
                         <i class="bx bx-user me-2"></i>
                         <span class="align-middle">My Profile</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <i class="bx bx-cog me-2"></i>
-                        <span class="align-middle">Settings</span>
                       </a>
                     </li>
                     <li>

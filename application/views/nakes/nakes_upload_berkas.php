@@ -19,7 +19,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       <p></p>
                       <span class="badge bg-label-danger">Pastiakan Persyaratan Anda Lengkap</span>
 
-                      <form method="POST" action="<?php echo base_url();?>nakes/aksi_upload_berkas" >
+                      <form method="POST" enctype="multipart/form-data" action="<?php echo base_url();?>nakes/aksi_upload_berkas" >
+                        <input type="hidden" name="id_sip" value="<?php echo $this->uri->segment(3); ?>">
                         <div class="mb-3">
                           <span id="basic-icon-address">
                               <i class="bx bxs-user-pin"></i>
@@ -67,7 +68,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               <i class="bx bxs-receipt"></i>
                           </span>
                           <label for="formFile" class="form-label">Surat Sehat Dari Faskes Pemerintah</label>
-                          <input class="form-control" type="file" id="formFile" name="suratsehat" />
+                          <input class="form-control" type="file" id="formFile" name="surat_sehat" />
                         </div>
                         <div class="mb-3">
                           <span id="basic-icon-address">

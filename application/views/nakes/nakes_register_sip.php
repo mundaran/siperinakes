@@ -21,6 +21,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                     <div class="card-body">
                       <form method="POST" action="<?php echo base_url();?>nakes/aksi_register_sip" >
+                        <?php 
+                          $queryId = $this->db->query("SELECT max(id) as idTerbesar FROM data_sip")->row_array();
+                          $idSipTerakhir = $queryId['idTerbesar'];
+                          $urutanid = $idSipTerakhir+1;
+                        ?>
+                        <input type="hidden" name="id_sip_new" value="<?php echo $urutanid; ?>">
                         <input type="hidden" name="tanggal_daftar" value="<?php echo date("d-m-Y"); ?>">
                         <div class="mb-3">  
                           <label class="form-label" for="basic-icon-default-fullname">Jenis SIP</label>
@@ -119,7 +125,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   </div>
                 </div>
 
-                <div class="col-lg-6  ">
+              <div class="col-lg-6  ">
+                <div class="row">
               <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
                   <h5 class="mb-0">Status Pengajuan SIP</h5>
@@ -138,17 +145,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       <?php foreach($sip as $dataSip ):?>
                       <tr>
                         <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong><?php echo $dataSip['jenis_sip'];?></strong></td>
-                        <td>Albert Cook</td>
+                        <td><?php echo $dataSip['tanggal_daftar'];?></td>
                         <td>
-                          <?php if($dataSip['status']==1){
-                            echo'<span class="badge bg-label-info me-1"> <a href="" > Upload Berkas </a> </span>';
+                          <?php 
+                          if($dataSip['status']==1){
+                            echo'<span class="badge bg-label-info me-1"> <a href="'.base_url().'nakes/upload_berkas/'.$dataSip['id'].'" > Upload Berkas </a> </span>';
+                          }
+                          else{  if($dataSip['status']==2){
+                                echo '<span class="badge bg-label-success me-1"> <a > Ditinjau </a> </span>';
+                              }
+
+                              else{ if($dataSip['status']==3){
+                                echo '<span class="badge bg-label-info me-1"> <a href="'.base_url().'nakes/upload_berkas/'.$dataSip['id'].'" > Approved (Lihat) </a> </span>';
+                                }
+
+                                else{ if($dataSip['status']==4){
+                                echo '<span class="badge bg-label-info me-1"> <a href="'.base_url().'nakes/upload_berkas/'.$dataSip['id'].'" > Revisi Data (Lihat) </a> </span>';
+                                }
+
+                                else{
+
+                                }
+
+                               }
+                            }
+  
                           }
 
-                          else{
-                            echo '<span class="badge bg-label-success me-1"> <a > Ditinjau </a> </span>';
-                          }
-
-                          ?>
+                       ?>
 
                         </td>
                       </tr>
@@ -158,6 +182,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
                 </div>
               </div>
+              </div>
+               <div class="row">
+                  <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                  <h5 class="mb-0">PERSYARATAN</h5>
+                </div>
+                <div class="card-body">
+                  Persyaratan SIP
+                </div>
+                    
+                  </div>
+            </div>
             </div>
 
             </div>
