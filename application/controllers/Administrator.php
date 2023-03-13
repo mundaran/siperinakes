@@ -14,11 +14,20 @@ class Administrator extends CI_Controller {
 		$data['title'] ='Dashboard Admin';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		
-		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
-		
 		$this->load->view('template_view/dashboard_header');
 		$this->load->view('template_view/menubar',$data);
 		$this->load->view('admin/admin_dashboard',$data);
+		$this->load->view('template_view/dashboard_footer');
+	}
+
+	public function validasi_sip()
+	{
+		$data['title'] ='Dashboard Admin';
+		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+
+		$this->load->view('template_view/dashboard_header');
+		$this->load->view('template_view/menubar',$data);
+		$this->load->view('admin/admin_validasi',$data);
 		$this->load->view('template_view/dashboard_footer');
 	}
 

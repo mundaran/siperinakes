@@ -192,7 +192,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <span class="fw-semibold d-block"><?php echo $user['name'];?></span>
 
                             <?php
-                            if($user['role_id']==1){
+                            if($user['role_id']==11){
                               echo'<small class="text-muted">Administrator</small>';
                             }
                             else{
