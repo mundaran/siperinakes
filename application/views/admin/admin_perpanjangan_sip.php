@@ -14,9 +14,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="d-flex align-items-end row">
                       <div class="col-sm-7">
                         <div class="card-body">
-                          <h5 class="card-title text-primary">PENGAJUAN SIP BARU🎉</h5>
+                          <h5 class="card-title text-primary"><?php echo $title;?>🎉</h5>
                           <p class="mb-4">
-                           Siapkan Kopimu Dan Mulai Validasi.
+                           Pastikan Data Pemohon Lengkap dan Valid.
                           </p>
                         </div>
                       </div>
@@ -42,8 +42,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               <tr>
                                 <th>Nama Pemohon</th>
                                 <th>Jenis Sip</th>
-                                <th>Validasi</th>
-                                <th>Tanggal</th>
+                                <th>Tindakan</th>
+                                <th>Berakhir</th>
                               </tr>
                               
                             </thead>
@@ -62,9 +62,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$dataSip['jenis_sip'].'</strong></td>
 
-                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong><a href="'.base_url().'administrator/form_validasi_sip/'.$dataSip['id'].'" class="btn btn-sm btn-primary"><span class="tf-icons bx bx-note"></span>&nbsp; Validasi</a></strong></td>
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong><a href="'.base_url().'administrator/form_validasi_sip/'.$dataSip['id'].'" class="btn btn-sm btn-warning"><span class="tf-icons bx bx-time"></span>&nbsp; Perpanjang </a></strong></td>
 
-                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$dataSip['tanggal_daftar'].'</strong></td>
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$dataSip['masa_berlaku_str'].'</strong></td>
                                   </tr>
 
 

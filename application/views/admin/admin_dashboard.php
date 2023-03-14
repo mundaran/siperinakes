@@ -38,7 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
               <div class="row">
                     <div class="col-lg-3 col-md-12 col-6 mb-4">
-                      <a href="" class="card">
+                      <a href="<?php echo base_url();?>administrator/validasi_sip" class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
@@ -51,17 +51,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                           <span class="fw-semibold d-block mb-1">Pengajuan Baru</span>
                             <?php 
-                            $role = 2;
-                            $this->db->like('role_id', $role);
-                            $this->db->from('user');
+                            $status = 1;
+                            $this->db->like('status', $status);
+                            $this->db->from('data_sip');
                             ?>
                           <h3 class="card-title mb-2"><?php echo $this->db->count_all_results();?></h3>
-                          <small class="text-secondary fw-semibold"> Nakes Telah Bergabung </small>
+                          <small class="text-secondary fw-semibold"> Perlu Di Tinjau </small>
                         </div>
                       </a>
                     </div>
                     <div class="col-lg-3 col-md-12 col-6 mb-4">
-                      <a href="" class="card">
+                      <a href="<?php echo base_url();?>administrator/perpanjangan_sip" class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
@@ -78,7 +78,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             $this->db->from('user');
                             ?>
                           <h3 class="card-title text-nowrap mb-1"><?php echo $this->db->count_all_results();?></h3>
-                          <small class="text-secondary fw-semibold"><i class=""></i> SIP Telah Terdaftar </small>
+                          <small class="text-secondary fw-semibold"><i class=""></i> Perlu Konfirmasi </small>
                         </div>
                       </a>
                     </div>
@@ -97,7 +97,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                           <span class="fw-semibold d-block mb-1">Pencabutan</span>
                           <h3 class="card-title mb-2">0</h3>
-                          <small class="text-secondary fw-semibold"> SIPA </small>
+                          <small class="text-secondary fw-semibold"> Perlu Tindakan </small>
                         </div>
                       </a>
                     </div>
@@ -116,7 +116,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                           <span class="fw-semibold d-block mb-1">SIP Kedaluarsa </span>
                           <h3 class="card-title text-nowrap mb-1">0</h3>
-                          <small class="text-secondary fw-semibold"><i class=""></i> SIP </small>
+                          <small class="text-secondary fw-semibold"><i class=""></i> Perlu Reminder </small>
                         </div>
                       </a>
                     </div>
@@ -126,13 +126,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <div class="row">
                 <div class="col-12 col-lg-12 col-md-12 order-1 ">
                 <div class="card">
-                <h5 class="card-header">Tutorial</h5>
+                <h5 class="card-header">Riwayat User</h5>
                 <div class="card-body mb-5">
                   <div class="row">
                     <!-- Custom content with heading -->
                     <div class="col-lg-12 mb-5 mb-xl-0">
-                      <small class="text-light fw-semibold">Cari Tahu Caranya Yuk !!</small>
-                      
+                      <small class="text-light fw-semibold">Andik Mengajukan Sip Baru</small>
+                      <p>
+                      <small class="text-light fw-semibold">Andik Mengupload berkas Sip Baru</small>
+                      </p>                      
                     </div>
                    
                     <!--/ Custom content with heading -->

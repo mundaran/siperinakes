@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!DOCTYPE html>
 
 
+
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="<?php echo base_url();?>template/assets/vendor/libs/jquery/jquery.js"></script>
@@ -12,7 +13,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <script src="<?php echo base_url();?>template/assets/vendor/js/menu.js"></script>
     <!-- endbuild -->
-
+   
+  
     <!-- Vendors JS -->
 
     <!-- Main JS -->

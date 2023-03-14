@@ -41,12 +41,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link rel="stylesheet" href="<?php echo base_url();?>template/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="<?php echo base_url();?>template/assets/css/demo.css" />
 
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css">
+
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="<?php echo base_url();?>template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
     <link rel="stylesheet" href="<?php echo base_url();?>template/assets/vendor/libs/apex-charts/apex-charts.css" />
 
     <!-- Page CSS -->
+
+
+    
 
     <!-- Helpers -->
     <script src="<?php echo base_url();?>template/assets/vendor/js/helpers.js"></script>
