@@ -57,4 +57,18 @@ class Administrator extends CI_Controller {
 		$this->load->view('template_view/dashboard_footer');
 	}
 
+
+
+//batas view dan aksi
+
+
+
+	public function aksi_validasi_sip()
+	{
+		$data['title'] ='Validasi SIP';
+		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$data ['sip'] = $this->model_administrator->load_data_sip();
+
+	}
+
 }

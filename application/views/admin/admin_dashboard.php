@@ -51,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                           <span class="fw-semibold d-block mb-1">Pengajuan Baru</span>
                             <?php 
-                            $status = 1;
+                            $status = 2;
                             $this->db->like('status', $status);
                             $this->db->from('data_sip');
                             ?>

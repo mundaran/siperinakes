@@ -111,7 +111,7 @@ class Nakes extends CI_Controller {
 
 		$file_name_pas_foto = 'pas-foto-'.$id_user.'-'.$id_sip;
 		$config['upload_path']          = './document/pas_foto';
-		$config['allowed_types']        = 'gif|jpg|png|pdf';
+		$config['allowed_types']        = 'pdf';
 		$config['file_name']            = $file_name_pas_foto;
 		$config['overwrite'] = true;
 		$config['max_size']             = 1000;
@@ -125,7 +125,7 @@ class Nakes extends CI_Controller {
 		} else {
 			$file_name_ktp = 'ktp-'.$id_user.'-'.$id_sip;
 			$config['upload_path']          = './document/foto_ktp';
-			$config['allowed_types']        = 'gif|jpg|png|pdf';
+			$config['allowed_types']        = 'pdf';
 			$config['file_name']            = $file_name_ktp;
 			$config['overwrite'] = true;
 			$config['max_size']             = 1000;
@@ -140,7 +140,7 @@ class Nakes extends CI_Controller {
 			} else {
 				$file_name_str= 'str-'.$id_user.'-'.$id_sip;
 				$config['upload_path']          = './document/str';
-				$config['allowed_types']        = 'gif|jpg|png|pdf';
+				$config['allowed_types']        = 'pdf';
 				$config['file_name']            = $file_name_str;
 				$config['overwrite'] = true;
 				$config['max_size']             = 1000;
@@ -155,7 +155,7 @@ class Nakes extends CI_Controller {
 				} else {
 					$file_name_rop = 'rop-'.$id_user.'-'.$id_sip;
 					$config['upload_path']          = './document/rop';
-					$config['allowed_types']        = 'gif|jpg|png|pdf';
+					$config['allowed_types']        = 'pdf';
 					$config['file_name']            = $file_name_rop;
 					$config['overwrite'] = true;
 					$config['max_size']             = 1000;
@@ -170,7 +170,7 @@ class Nakes extends CI_Controller {
 					} else {
 						$file_name_rtp = 'rtp-'.$id_user.'-'.$id_sip;
 						$config['upload_path']          = './document/rtp';
-						$config['allowed_types']        = 'gif|jpg|png|pdf';
+						$config['allowed_types']        = 'pdf';
 						$config['file_name']            = $file_name_rtp;
 						$config['overwrite'] = true;
 						$config['max_size']             = 1000;
@@ -185,7 +185,7 @@ class Nakes extends CI_Controller {
 						} else {
 							$file_name_ijazah = 'ijazah-'.$id_user.'-'.$id_sip;
 							$config['upload_path']          = './document/ijazah';
-							$config['allowed_types']        = 'gif|jpg|png|pdf';
+							$config['allowed_types']        = 'pdf';
 							$config['file_name']            = $file_name_ijazah;
 							$config['overwrite'] = true;
 							$config['max_size']             = 1000;
@@ -200,7 +200,7 @@ class Nakes extends CI_Controller {
 							} else {
 								$file_name_surat_sehat = 'surat-sehat-'.$id_user.'-'.$id_sip;
 								$config['upload_path']          = './document/surat_sehat';
-								$config['allowed_types']        = 'gif|jpg|png|pdf';
+								$config['allowed_types']        = 'pdf';
 								$config['file_name']            = $file_name_surat_sehat;
 								$config['overwrite'] = true;
 								$config['max_size']             = 1000;
@@ -215,7 +215,7 @@ class Nakes extends CI_Controller {
 								} else {
 									$file_name_surat_pernyataan = 'surat-pernyataan-'.$id_user.'-'.$id_sip;
 									$config['upload_path']          = './document/surat_pernyataan';
-									$config['allowed_types']        = 'gif|jpg|png|pdf';
+									$config['allowed_types']        = 'pdf';
 									$config['file_name']            = $file_name_surat_pernyataan;
 									$config['overwrite'] = true;
 									$config['max_size']             = 1000;
