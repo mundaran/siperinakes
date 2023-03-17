@@ -66,8 +66,20 @@ class Administrator extends CI_Controller {
 	public function aksi_validasi_sip()
 	{
 		$data['title'] ='Validasi SIP';
-		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
-		$data ['sip'] = $this->model_administrator->load_data_sip();
+		$admin = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id_admin = $admin['id'];
+		$id_sip = $this->uri->segment(3);
+		$id_nakes = $this->uri->segment(4);
+		$status_validasi = $this->input->post('status_validasi');
+		$keterangan = $this->input->post('keterangan');
+		$data = array(
+			'id_admin'=>$id_admin,
+			'id_nakes'=>$id_nakes,
+			'id_sip'=>$id_sip,
+			'status_validasi' => $status_validasi,
+			'keterangan'=>$keterangan
+		);
+		$this->model_administrator->validasi_sip($data,$id_sip);
 
 	}
 

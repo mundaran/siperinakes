@@ -127,43 +127,102 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <input type="text" name="jam_tutup" class="form-control" value="&nbsp;&nbsp;<?php echo $datasip['jam_tutup']?>" disabled />
                           </div>
                         </div>
+                        <button
+                          type="button"
+                          class="btn btn-lg btn-primary"
+                          data-bs-toggle="modal"
+                          data-bs-target="#modalApprove"
+                        >
+                        Approve
+                        </button>
 
-                        <div class="mb-3">
-                        <label class="form-label" for="basic-icon-address">Data Pemohon</label>
-                        <form method="POST" action="<?php echo base_url();?>nakes/aksi_register_sip" >
-                          <div class="input-group">
-                            <div class="input-group-text">
-                              <input
-                                name="default-radio-1"
-                                class="form-check-input mt-0"
-                                type="radio"
-                                value=""
-                                aria-label="Radio button for following text input"
-                                id="defaultRadio1"
-                                required
-                              />
-                            </div>
-                            <input type="text" name="" class="form-control"  placeholder="Sesuai" aria-label="Text input with radio button" />
+                        <button
+                          type="button"
+                          class="btn btn-lg btn-danger"
+                          data-bs-toggle="modal"
+                          data-bs-target="#modalRevisi"
+                        >Revisi
+                        </button>
+
+
+
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="modalApprove" tabindex="-1" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content ">
+                              <div class="modal-header">
+                                <h5 class="modal-title " id="modalCenterTitle" >Konfirmasi Approval</h5>
+                                <button
+                                  type="button"
+                                  class="btn-close"
+                                  data-bs-dismiss="modal"
+                                  aria-label="Close"
+                                ></button>
+                              </div>
+                              <div class="modal-body"> 
+                                <div class="row">
+                                  <div class="col mb-3 align-center">
+                                    <div class="card-body text-center">
+                                    <p class="card-text" ><font size="5">Anda yakin untuk approval ?</font></p>
+                                    <p>Pastikan data sudah sesuai yaa...</p>
+                                    <br>
+                                    <br>
+                                    <form method="POST" action="<?php echo base_url();?>administrator/aksi_validasi/<?php echo $this->uri->segment(3);?>/<?php echo $datasip['id_user'];?>">
+                                      <input type="hidden" value="1" name="status_validasi">
+                                      <input type="hidden" value="valid" name="keterangan">
+                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                      Close
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">Approve</button>
+                                    </form>
+                                  </div>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                           </div>
-                          <div class="mb-3">
-                          <div class="input-group">
-                            <div class="input-group-text">
-                              <input
-                                name="default-radio-1"
-                                class="form-check-input"
-                                type="radio"
-                                value=""
-                                id="defaultRadio2"
-                                required
-                              />
-                            </div>
-                            <input type="text" class="form-control" placeholder="Tidak Sesuai(masukan alasan)" aria-label="Text input with radio button" />
+                        </div>
+
+                        <!-- Modal Revisi -->
+                        <div class="modal fade" id="modalRevisi" tabindex="-1" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content ">
+                              <div class="modal-header">
+                                <h5 class="modal-title " id="modalCenterTitle" >Konfirmasi Revisi</h5>
+                                <button
+                                  type="button"
+                                  class="btn-close"
+                                  data-bs-dismiss="modal"
+                                  aria-label="Close"
+                                ></button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="row">
+                                  <div class="col mb-3">
+                                    <label for="nameWithTitle" class="form-label">Keterangan</label>
+                                    <input
+                                      type="text"
+                                      id="nameWithTitle"
+                                      class="form-control"
+                                      placeholder="Maukan Keterangan Revisi"
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                  Close
+                                </button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                              </div>
                             </div>
                           </div>
-                          
-                          <button type="submit" class="btn btn-primary"> Validasi </button>
-                        </form>
+                        </div>
+
+                        
+
+
                         </div>
                       </div>
 
@@ -196,7 +255,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                   }
 
                                   else{
-                                    echo '<embed src="'.base_url().'document/pas_foto/'.$datasip['pas_foto'].'.pdf" width="550" height="700"> </embed>';
+                                    echo '<embed src="'.base_url().'document/pas_foto/'.$datasip['pas_foto'].'.pdf" width="550" height="500"> </embed>';
                                   }
 
                                   ?>
@@ -230,7 +289,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                   }
 
                                   else{
-                                    echo '<embed src="'.base_url().'document/foto_ktp/'.$datasip['foto_ktp'].'.pdf" width="550" height="700"> </embed>';
+                                    echo '<embed src="'.base_url().'document/foto_ktp/'.$datasip['foto_ktp'].'.pdf" width="550" height="500"> </embed>';
                                   }
 
                                   ?>
@@ -263,7 +322,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                   }
 
                                   else{
-                                    echo '<embed src="'.base_url().'document/str/'.$datasip['foto_str'].'.pdf" width="550" height="700"> </embed>';
+                                    echo '<embed src="'.base_url().'document/str/'.$datasip['foto_str'].'.pdf" width="550" height="500"> </embed>';
                                   }
 
                                   ?>
@@ -296,7 +355,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                   }
 
                                   else{
-                                    echo '<embed src="'.base_url().'document/rop/'.$datasip['rekomendasi_org_p'].'.pdf" width="550" height="700"> </embed>';
+                                    echo '<embed src="'.base_url().'document/rop/'.$datasip['rekomendasi_org_p'].'.pdf" width="550" height="500"> </embed>';
                                   }
 
                                   ?>
@@ -329,7 +388,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                   }
 
                                   else{
-                                    echo '<embed src="'.base_url().'document/rtp/'.$datasip['rekomendasi_tmpt_p'].'.pdf" width="550" height="700"> </embed>';
+                                    echo '<embed src="'.base_url().'document/rtp/'.$datasip['rekomendasi_tmpt_p'].'.pdf" width="550" height="500"> </embed>';
                                   }
 
                                   ?>
@@ -362,7 +421,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                   }
 
                                   else{
-                                    echo '<embed src="'.base_url().'document/ijazah/'.$datasip['ijazah'].'.pdf" width="550" height="700"> </embed>';
+                                    echo '<embed src="'.base_url().'document/ijazah/'.$datasip['ijazah'].'.pdf" width="550" height="500"> </embed>';
                                   }
 
                                   ?>
@@ -395,7 +454,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                   }
 
                                   else{
-                                    echo '<embed src="'.base_url().'document/surat_sehat/'.$datasip['surat_sehat'].'.pdf" width="550" height="700"> </embed>';
+                                    echo '<embed src="'.base_url().'document/surat_sehat/'.$datasip['surat_sehat'].'.pdf" width="550" height="500"> </embed>';
                                   }
 
                                   ?>
@@ -428,7 +487,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                   }
 
                                   else{
-                                    echo '<embed src="'.base_url().'document/surat_pernyataan/'.$datasip['pernyataan'].'.pdf" width="550" height="700"> </embed>';
+                                    echo '<embed src="'.base_url().'document/surat_pernyataan/'.$datasip['pernyataan'].'.pdf" width="550" height="500"> </embed>';
                                   }
 
                                   ?>
@@ -439,6 +498,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
 
                       
+                      </div>
+                      </div>
+
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                      <div class="card-body">
+                        
                       </div>
                       </div>
 
