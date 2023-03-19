@@ -42,29 +42,55 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               <tr>
                                 <th>Nama Pemohon</th>
                                 <th>Jenis Sip</th>
-                                <th>Tindakan</th>
-                                <th>Berakhir</th>
+                                <th>Tanggal Approve</th>
+                                <th>Tanggal Berakhir</th>
+                                <th>Action</th>
                               </tr>
                               
                             </thead>
                             <tbody class="">
 
-                                <?php foreach ($sip as $dataSip) {
+                                <?php foreach ($validasi as $valid) {
 
-                                  $id_user = $dataSip['id_user'];
-                                  $datapemohon = $this->db->query("SELECT * FROM user WHERE id = $id_user ");
-                                  $datauser= $datapemohon->row_array();
+                                  $id_sip= $valid['id_sip'];
+                                  $dataSip = $this->db->query("SELECT * FROM data_sip WHERE id = $id_sip ");
+                                  $data= $dataSip->row_array();
+
+                                  $id_user= $data['id_user'];
+                                  $dataUser = $this->db->query("SELECT * FROM user WHERE id = $id_user ");
+                                  $user= $dataUser->row_array();
+
 
                                   echo '
 
                                     <tr>
-                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$datauser['name'].'</strong></td>
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$user['name'].'</strong></td>
 
-                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$dataSip['jenis_sip'].'</strong></td>
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$data['jenis_sip'].'</strong></td>
 
-                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong><a href="'.base_url().'administrator/form_validasi_sip/'.$dataSip['id'].'" class="btn btn-sm btn-info"><span class="tf-icons bx bx-time"></span>&nbsp; Validasi Perpanjangan </a></strong></td>
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$valid['tanggal_validasi'].'</strong></td>
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$data['masa_berlaku_str'].'</strong></td>
 
-                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$dataSip['masa_berlaku_str'].'</strong></td>
+                                    <td>
+                                      <div class="btn-group">
+                                        <button
+                                          type="button"
+                                          class="btn btn-primary btn-icon rounded-pill dropdown-toggle hide-arrow"
+                                          data-bs-toggle="dropdown"
+                                          aria-expanded="false"
+                                        >
+                                          <i class="bx bx-dots-vertical-rounded"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                          <li><a class="dropdown-item" href="javascript:void(0);">Detail SIP</a></li>
+                                          <li><a class="dropdown-item" href="javascript:void(0);">Perpanjang</a></li>
+                                          <li><a class="dropdown-item" href="javascript:void(0);">Cabut SIP</a></li>
+                                        </ul>
+                                      </div>
+
+                                      </td>
+
+                                    
                                   </tr>
 
 

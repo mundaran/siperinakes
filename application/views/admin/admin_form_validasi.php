@@ -15,6 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="d-flex align-items-end row">
                       <div class="col-sm-7">
                         <div class="card-body">
+                          <?php echo $this->session->flashdata('message');?>
                           <?php 
                            $id = $this->uri->segment(3);
                             $datavalidasi = $this->db->query("SELECT * FROM data_sip WHERE id =$id ");
@@ -168,9 +169,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <p>Pastikan data sudah sesuai yaa...</p>
                                     <br>
                                     <br>
-                                    <form method="POST" action="<?php echo base_url();?>administrator/aksi_validasi/<?php echo $this->uri->segment(3);?>/<?php echo $datasip['id_user'];?>">
+                                    <form method="POST" action="<?php echo base_url();?>administrator/aksi_validasi_sip/<?php echo $this->uri->segment(3);?>/<?php echo $datasip['id_user'];?>">
                                       <input type="hidden" value="1" name="status_validasi">
                                       <input type="hidden" value="valid" name="keterangan">
+                                      <input type="hidden" name="status_sip" value="3">
+                                    <input type="hidden" name="title_validasi" value='<div class="alert alert-success" role="alert"><b> Data Telah Di Approve </b></div>'>
                                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                                       Close
                                     </button>
@@ -198,14 +201,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 ></button>
                               </div>
                               <div class="modal-body">
+                                <form method="POST" action="<?php echo base_url();?>administrator/aksi_validasi_sip/<?php echo $this->uri->segment(3);?>/<?php echo $datasip['id_user'];?>">
                                 <div class="row">
                                   <div class="col mb-3">
                                     <label for="nameWithTitle" class="form-label">Keterangan</label>
+                                    <input type="hidden" value="2" name="status_validasi">
+                                    <input type="hidden" name="status_sip" value="4">
+                                    <input type="hidden" name="title_validasi" value='<div class="alert alert-info" role="alert"><b> Permohonan Revisi Selesai </b></div>'>
                                     <input
                                       type="text"
                                       id="nameWithTitle"
                                       class="form-control"
                                       placeholder="Maukan Keterangan Revisi"
+                                      name="keterangan"
                                     />
                                   </div>
                                 </div>
@@ -214,7 +222,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                                   Close
                                 </button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                              </form>
                               </div>
                             </div>
                           </div>

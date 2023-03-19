@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="card-body">
                           <h5 class="card-title text-primary">Selamat Datang <?php echo $user['name']?> 🎉</h5>
                           <p class="mb-4">
-                            Ayo Cek Pengaajaun SIP Terbaru Hari Ini
+                            Ayo Cek Pengajuan SIP Terbaru Hari Ini
                           </p>
                         </div>
                       </div>
@@ -74,8 +74,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                           <span class="fw-semibold d-block mb-1">Perpanjangan Baru </span>
                             <?php 
-                            $this->db->like('role_id');
-                            $this->db->from('user');
+                            $status = 5;
+                            $this->db->like('status', $status);
+                            $this->db->from('data_sip');
                             ?>
                           <h3 class="card-title text-nowrap mb-1"><?php echo $this->db->count_all_results();?></h3>
                           <small class="text-secondary fw-semibold"><i class=""></i> Perlu Konfirmasi </small>

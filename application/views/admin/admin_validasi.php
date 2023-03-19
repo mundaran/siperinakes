@@ -35,7 +35,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="d-flex align-items-end row">
                       <div class="col-sm-12">
                         <div class="card-body">
-
+                          <?php echo $this->session->flashdata('message');?>
                          <div class="table-responsive text-nowrap">
                           <table id="myTable" class="dispaly table table-borderless">
                             <thead>
