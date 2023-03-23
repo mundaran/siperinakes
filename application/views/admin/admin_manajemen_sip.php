@@ -82,7 +82,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                           <i class="bx bx-dots-vertical-rounded"></i>
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end">
-                                          <li><a class="dropdown-item" href="javascript:void(0);">Detail SIP</a></li>
+                                          <li><a class="dropdown-item" href="'.base_url().'administrator/detail_sip/'.$data['id'].'">Detail SIP</a></li>
                                           <li><a class="dropdown-item" href="javascript:void(0);">Perpanjang</a></li>
                                           <li><a class="dropdown-item" href="javascript:void(0);">Cabut SIP</a></li>
                                         </ul>

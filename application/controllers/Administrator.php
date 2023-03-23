@@ -64,12 +64,39 @@ class Administrator extends CI_Controller {
 		$data['title'] ='Manajemen SIP';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$data ['validasi'] = $this->model_administrator->load_manajemen_sip();
-
 		$this->load->view('template_view/dashboard_header');
 		$this->load->view('template_view/menubar',$data);
 		$this->load->view('admin/admin_manajemen_sip',$data);
 		$this->load->view('template_view/dashboard_footer');
 	}
+
+	public function detail_sip()
+	{
+		$data['title'] ='Manajemen SIP';
+		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$data['detail_sip']= $this->db->get_where('data_sip', array('id'=>$this->uri->segment(3)))->row_array();
+		$this->load->view('template_view/dashboard_header');
+		$this->load->view('template_view/menubar',$data);
+		$this->load->view('admin/admin_detail_sip',$data);
+		$this->load->view('template_view/dashboard_footer');
+	}
+
+	public function print_sip()
+	{
+		$data['title'] ='Detail SIP';
+		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$data['detail_sip']= $this->db->get_where('data_sip', array('id'=>$this->uri->segment(3)))->row_array();
+		$this->load->library('pdf');
+		$customPaper = array(0,0,793,1240);
+	    $this->pdf->setPaper($customPaper);
+	    $this->pdf->filename = "data_sip.pdf";
+	    $this->pdf->load_view('admin/view_sip_pdf', $data);
+	}
+
+
+
+
+
 
 
 //batas view dan aksi
