@@ -66,25 +66,25 @@ class Nakes extends CI_Controller {
 		$this->load->view('template_view/dashboard_footer');
 	}
 
-	public function perpanjangan()
+	public function manajemen_sip()
 	{
-		$data['title'] ='Perpanjangan';
+		$data['title'] ='Manajemen SIP';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		
 		$this->load->view('template_view/dashboard_header');
 		$this->load->view('template_view/menubar',$data);
-		$this->load->view('nakes/nakes_perpanjangan',$data);
+		$this->load->view('nakes/nakes_manajemen',$data);
 		$this->load->view('template_view/dashboard_footer');
 	}
 	
-	public function perubahan()
+	public function riwayat()
 	{
-		$data['title'] ='Perubahan';
+		$data['title'] ='Riwayat';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		
 		$this->load->view('template_view/dashboard_header');
 		$this->load->view('template_view/menubar',$data);
-		$this->load->view('nakes/nakes_perubahan',$data);
+		$this->load->view('nakes/nakes_riwayat',$data);
 		$this->load->view('template_view/dashboard_footer');
 	}
 
@@ -257,7 +257,34 @@ class Nakes extends CI_Controller {
        
 	}
 
+	public function upload_foto(){
+		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id_user= $user['id'];
+		$file_name_pas_foto = 'pas-foto-'.$id_user.'';
+		$config['upload_path']          = './document/foto_user';
+		$config['allowed_types']        = 'jpg|jpeg';
+		$config['file_name']            = $file_name_pas_foto;
+		$config['overwrite'] = true;
+		$config['max_size']             = 3000;
+		$config['max_width']            = 2000;
+		$config['max_height']           = 2000;
+		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
+		if ( !$this->upload->do_upload('foto_user')){
+			 $this->session->set_flashdata('message', 'Upload-gagal' );
+			 $error = array('error' => $this->upload->display_errors());
+    		 $this->session->set_flashdata('message',$error['error']);
+			 redirect('nakes/my_profile');
+		} else {
+				$foto_profile = $this->upload->data();
 
+				$update_data =  [
+					'pict' => $file_name_pas_foto,
+				];
+
+				$this->model_nakes->upload_foto($id_user,$update_data);
+			}
+	}
 
 	public function aksi_edit_profile()
 	{

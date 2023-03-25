@@ -17,7 +17,7 @@
               <div class="navbar-nav align-items-center">
                 <div class="nav-item d-flex align-items-center">
                   <img src="template/assets/img/favicon/icon_bjn.png" alt class="w-px-30 h-auto" />
-                  <span class="app-brand-text demo menu-text fw-bolder ms-2">Siperi Nasehat</span>
+                  <span class="app-brand-text demo menu-text fw-bolder ms-2">Siperi</span>
                 </div>
               </div>
               <!-- /Search -->
@@ -181,8 +181,8 @@
           </div>
 
           <div class="col-lg-4 col-md-4 order-1">
-                  <div class="row">
-                    <div class="col-lg-6 col-md-12 col-6 mb-4">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-6 mb-4">
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -216,7 +216,11 @@
                             </div>
                           </div>
                           <span class="fw-semibold d-block mb-1">SIP Terdaftar </span>
-                          <h3 class="card-title text-nowrap mb-1">6</h3>
+                          <h3 class="card-title text-nowrap mb-1">
+                            <?php 
+                            $sip = $this->db->get_where('data_sip', array('status' => 4 ))->result_array();
+                            echo $this->db->count_all_results();?>
+                          </h3>
                           <small class="text-success fw-semibold"><i class=""></i> SIP </small>
                         </div>
                       </div>
@@ -270,10 +274,38 @@
 
         </div>
 
-              <!--/ Layout Demo -->
+        <!--/ Layout Demo -->
+
+        <div class="row">
+          <div class="col-md">
+                  <div class="card mb-3">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img class="card-img card-img-left" src="<?php echo base_url();?>document/foto_artikel/judul-artikel.jpg" alt="Card image" />
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">Tips Memperkluat Layanan Kesehatan</h5>
+                          <p class="card-text">
+                            1. Berkomunikasi secara efektif
+                            Perawat, dokter, bagian administrasi, dan staf layanan kesehatan lainnya menghabiskan banyak waktu berbicara dengan pasien â€” tetapi apakah mereka benar-benar berkomunikasi? Mereka mungkin mendiagnosis kondisi dan meresepkan obat, tetapi komunikasi nyata melibatkan isyarat verbal dan nonverbal untuk membuat pasien merasa dihargai dan aman dalam situasi apa pun. Hal ini dimulai di rumah sakit tempat para profesional kesehatan dapat melakukan kontak mata, menjelaskan apa yang terjadi, menjawab pertanyaan, dan meyakinkan pasien mereka.
+
+                            Administrator dan pemasar juga dapat mengambil langkah-langkah untuk memastikan perawatan yang berkualitas. Misalnya, mereka dapat mengirimkan survei email dan pesan promosi kepada pasien mereka untuk meminta umpan balik dan menawarkan diskon. Mereka juga dapat membuat blog yang mengkomunikasikan informasi tentang penyakit umum atau pertanyaan umum lainnya. Jenis komunikasi di atas dan di luar ini adalah apa yang membuat fasilitas Anda menonjol dibanding pesaing.
+                            </p>
+                            <p>
+                            2. Tanggapi Keluhan dan Kekhawatiran dengan Serius
+                            Memang benar bahwa beberapa pasien sulit untuk menyenangkan, terutama orang tua. Namun, itu tidak berarti Anda harus mengabaikan umpan balik mereka. Jika seorang pasien terus-menerus mengeluh tentang sesuatu, Anda harus menganggapnya serius. Mungkin ternyata Anda sudah melakukan yang terbaik yang Anda bisa, tetapi pasien lebih dapat merasa tenang karena Anda mau melihat ke dalam masalah mereka.
+                          </p>
+                          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+        </div>
 
 
-            </div>
-
+  </div>
+</div>
 
             <!-- / Content -->

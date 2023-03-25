@@ -55,12 +55,7 @@ class Auth extends CI_Controller {
 		if($user){
 			if($password == $user['password']){
 				if($user['aktifasi'] == '0'){
-					$this->session->set_flashdata('message','<div class="alert bg-orange"><b> Akun Belum Melakukan Aktifasi! </b></div>');
-						redirect('auth');
-				}
-
-				else{
-						$data = array(
+					$data = array(
 							'username'=>$user['username'],
 							'role_id'=>$user['role_id']
 						);
@@ -73,6 +68,12 @@ class Auth extends CI_Controller {
 						elseif($user['role_id']==21){
 						redirect('nakes');
 						}
+					
+				}
+
+				else{
+						$this->session->set_flashdata('message','<div class="alert bg-orange"><b> Akun Belum Melakukan Aktifasi! </b></div>');
+						redirect('auth');
 					}
 
 			}

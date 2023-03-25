@@ -68,6 +68,23 @@ Class Model_nakes extends CI_Model{
 			$this->session->set_flashdata('message','<div class="alert alert-danger"><b> GAGAL !!! </b></div>');
 			redirect('nakes/register_sip');
 		}
+			
+	}
+
+	public function upload_foto($id_user,$update_data)
+	{
+		
+		$this->db->where('id',$id_user);
+		$berhasil = $this->db->update('user', $update_data);
+		if($berhasil){
+			$this->session->set_flashdata('message','<div class="alert alert-success"><b> Foto Berhasil Di Upload</b></div>');
+			redirect('nakes/my_profile');
+		}
+		else{
+
+			$this->session->set_flashdata('message','<div class="alert alert-danger"><b> GAGAL !!! </b></div>');
+			redirect('nakes/my_profile');
+		}
 
 			
 	}

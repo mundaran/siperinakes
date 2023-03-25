@@ -76,8 +76,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                           <span class="fw-semibold d-block mb-1">SIP Terdaftar </span>
                             <?php 
-                            $this->db->like('role_id');
-                            $this->db->from('user');
+                            $this->db->like('status',4);
+                            $this->db->from('data_sip');
                             ?>
                           <h3 class="card-title text-nowrap mb-1"><?php echo $this->db->count_all_results();?></h3>
                           <small class="text-success fw-semibold"><i class=""></i> SIP Telah Terdaftar </small>
@@ -169,12 +169,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                               </div>
                               <div class="tab-pane fade" id="list-profile">
-                                Muffin lemon drops chocolate chupa chups jelly beans dessert jelly-o. Soufflé gummies
-                                gummies. Ice cream powder marshmallow cotton candy oat cake wafer. Marshmallow
-                                gingerbread tootsie roll. Chocolate cake bonbon jelly beans lollipop jelly beans halvah
-                                marzipan danish pie. Oat cake chocolate cake pudding bear claw liquorice gingerbread
-                                icing sugar plum brownie. Toffee cookie apple pie cheesecake bear claw sugar plum wafer
-                                gummi bears fruitcake.
+                                <p>Foto STR</p>
+                                <p>Foto Rekomendasi Organisasi Profesi</p>
+                                <p>Foto Rekomendasi Tempat Praktek</p>
                               </div>
                               <div class="tab-pane fade" id="list-messages">
                                 Ice cream dessert candy sugar plum croissant cupcake tart pie apple pie. Pastry

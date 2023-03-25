@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!DOCTYPE html>
 
+<div class="content-wrapper">
 <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->
@@ -26,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <!-- Account -->
                     <div class="card-body">
                       <div class="d-flex align-items-start align-items-sm-center gap-4">
-                        <?php if($user['pict']==0){
+                        <?php if(empty($user['pict'])){
                          echo '<img
                           src="'.base_url().'template/assets/img/avatars/user1.png"
                           alt="user-avatar"
@@ -37,17 +38,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         />
 
                         <div class="button-wrapper">
-                          <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
-                            <span class="d-none d-sm-block">Upload new photo</span>
-                            <i class="bx bx-upload d-block d-sm-none"></i>
-                            <input
-                              type="file"
-                              id="upload"
-                              class="account-file-input"
-                              hidden
-                              accept="image/png, image/jpeg"
-                            />
-                          </label>
+                            <button
+                            type="button"
+                            class="btn btn-lg btn-primary"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalUploadfoto"
+                          >Upload Foto
+                          </button>
+                          <br>
+                          <br>
                           <p class="text-muted mb-0">Anda Belum Upload Foto Profile</p>
                           
 
@@ -56,7 +55,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       }
                       else{
                         echo'<img
-                          src="'.base_url().'template/assets/img/avatars/'.$user['pict'].'"
+                          src="'.base_url().'document/foto_user/'.$user['pict'].'.jpg"
                           alt="user-avatar"
                           class="d-block rounded"
                           height="100"
@@ -64,16 +63,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           id="uploadedAvatar"
                           />
                           <div class="button-wrapper">
-                          <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
-                            <span class="d-none d-sm-block">Update Foto</span>
-                            <i class="bx bx-upload d-block d-sm-none"></i>
-                            <input
-                              type="file"
-                              id="upload"
-                              class="account-file-input"
-                              hidden
-                              accept="image/png, image/jpeg"
-                            />
+                          <button
+                          type="button"
+                          class="btn btn-lg btn-primary"
+                          data-bs-toggle="modal"
+                          data-bs-target="#modalUploadfoto"
+                        >
+                        Upload Foto
+                        </button>
                           </label>
 
                         ';
@@ -81,6 +78,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       ?>
                         
                       <?php echo $this->session->flashdata('message');?>
+
+                      
 
                         </div>
                       </div>
@@ -243,3 +242,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </div>
             </div>
     </div>
+
+    <!-- Modal Upload Foto -->
+      <div class="modal fade" id="modalUploadfoto" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content ">
+            <div class="modal-header">
+              <h5 class="modal-title " id="modalCenterTitle" >Upload Foto</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form method="POST" enctype="multipart/form-data" action="<?php echo base_url();?>nakes/upload_foto">
+              <div class="row">
+                <div class="col mb-3">
+                  <label for="nameWithTitle" class="form-label"></label>
+                  <input type="file" name="foto_user" id="formFile" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                Close
+              </button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
