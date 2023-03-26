@@ -14,9 +14,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="d-flex align-items-end row">
                       <div class="col-sm-7">
                         <div class="card-body">
-                          <h5 class="card-title text-info"><?php echo $title;?>🎉</h5>
+                          <h5 class="card-title text-danger"><?php echo $title;?>🎉</h5>
                           <p class="mb-4">
-                           Daftar SIP Approved
+                           Daftar Pengguna SIPERI
                           </p>
                         </div>
                       </div>
@@ -40,51 +40,49 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           <table id="myTable" class="dispaly table table-borderless">
                             <thead>
                               <tr>
-                                <th>Nama Pemohon</th>
-                                <th>Jenis Sip</th>
-                                <th>Tanggal Approve</th>
-                                <th>Tanggal Berakhir</th>
+                                <th>Nama User</th>
+                                <th>Email</th>
+                                <th>No Telp</th>
+                                <th>NIK</th>
+                                <th>Status</th>
                                 <th>Action</th>
                               </tr>
                               
                             </thead>
                             <tbody class="">
 
-                                <?php foreach ($validasi as $valid) {
-
-                                  $id_sip= $valid['id_sip'];
-                                  $dataSip = $this->db->query("SELECT * FROM data_sip WHERE id = $id_sip ");
-                                  $data= $dataSip->row_array();
-
-                                  $id_user= $data['id_user'];
-                                  $dataUser = $this->db->query("SELECT * FROM user WHERE id = $id_user ");
-                                  $user= $dataUser->row_array();
-
+                                <?php foreach ($data_user as $nakes) {
+                                  if ($nakes['role_id']==11) {
+                                    $status='Admin';
+                                  } else {
+                                    $status='Pemohon';
+                                  }
 
                                   echo '
 
                                     <tr>
-                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$user['name'].'</strong></td>
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$nakes['name'].'</strong></td>
 
-                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$data['jenis_sip'].'</strong></td>
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$nakes['email'].'</strong></td>
 
-                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$valid['tanggal_validasi'].'</strong></td>
-                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$data['masa_berlaku_str'].'</strong></td>
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$nakes['no_hp'].'</strong></td>
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$nakes['nik'].'</strong></td>
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$status.'</strong></td>
 
                                     <td>
                                       <div class="btn-group">
                                         <button
                                           type="button"
-                                          class="btn btn-info btn-icon rounded-pill dropdown-toggle hide-arrow"
+                                          class="btn btn-warning btn-icon rounded-pill dropdown-toggle hide-arrow"
                                           data-bs-toggle="dropdown"
                                           aria-expanded="false"
                                         >
                                           <i class="bx bx-dots-vertical-rounded"></i>
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end">
-                                          <li><a class="dropdown-item" href="'.base_url().'administrator/detail_sip/'.$data['id'].'" >Detail SIP</a></li>
-                                          <li><a class="dropdown-item" href="javascript:void(0);">Perpanjang</a></li>
-                                          <li><a class="dropdown-item" href="javascript:void(0);">Cabut SIP</a></li>
+                                          <li><a class="dropdown-item" href="'.base_url().'administrator/detail_sip/'.$nakes['id'].'" >Nonaktifkan</a></li>
+                                          <li><a class="dropdown-item" href="javascript:void(0);">Reset Password</a></li>
+                                          <li><a class="dropdown-item" href="javascript:void(0);">Hapus Akun</a></li>
                                         </ul>
                                       </div>
 

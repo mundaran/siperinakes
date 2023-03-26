@@ -54,6 +54,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                         </div>
                         <div class="mb-3">
+                          <label class="form-label" for="basic-icon-default-company">Nomor Rekomendasi OP</label>
+                          <div class="input-group input-group-merge">
+                            <span id="basic-icon-default-company2" class="input-group-text"
+                              ><i class="bx bx-barcode"></i
+                            ></span>
+                            <input type="text" id="basic-icon-default-company" class="form-control" name="no_rekomendasi_op" placeholder=""
+                              aria-describedby="basic-icon-default-company2" required />
+                          </div>
+                        </div>
+                        <div class="mb-3">
                           <label class="form-label" for="basic-icon-default-email" >Masa Berlaku STR</label>
                           <div class="input-group">
                             <input type="date" aria-label="First" name="masa_berlaku_str" class="form-control"/>
@@ -83,7 +93,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <span id="basic-icon-address" class="input-group-text"
                               ><i class="bx bx-user-pin"></i
                             ></span>
-                            <input type="text" name="jenis_praktek" class="form-control" placeholder="Dokter/Apoteker/Other" required />
+                            <input type="text" name="jenis_praktek" class="form-control" placeholder="Dokter Gigi/Apoteker/Other" required />
                           </div>
                         </div>
                         <div class="mb-3">

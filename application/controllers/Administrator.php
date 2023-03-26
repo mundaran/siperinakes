@@ -93,6 +93,18 @@ class Administrator extends CI_Controller {
 	    $this->pdf->load_view('admin/view_sip_pdf', $data);
 	}
 
+	public function manajemen_user()
+	{
+		$data['title'] ='Manajemen User';
+		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$data ['data_user']=$this->model_administrator->load_manajemen_user();
+		$this->load->view('template_view/dashboard_header');
+		$this->load->view('template_view/menubar',$data);
+		$this->load->view('admin/admin_manajemen_user',$data);
+		$this->load->view('template_view/dashboard_footer');
+	
+	}
+
 
 
 

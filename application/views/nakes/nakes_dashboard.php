@@ -51,14 +51,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               />
                             </div>
                           </div>
-                          <span class="fw-semibold d-block mb-1">Register</span>
-                            <?php 
-                            $role = 2;
-                            $this->db->like('role_id', $role);
-                            $this->db->from('user');
+                          <span class="fw-semibold d-block mb-1">Daftar SIP Baru</span>
+                            <?php
+                            $id_user=$user['id'];
+                            $status = 2;
+                            $this->db->like('id_user',$id_user); 
+                            $this->db->like('status', $status);
+                            $this->db->from('data_sip');
                             ?>
                           <h3 class="card-title mb-2"><?php echo $this->db->count_all_results();?></h3>
-                          <small class="text-success fw-semibold"> Nakes Telah Bergabung </small>
+                          <small class="text-success fw-semibold"> SIP Baru Sedang Ditinjau </small>
                         </div>
                       </div>
                     </div>
@@ -76,6 +78,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                           <span class="fw-semibold d-block mb-1">SIP Terdaftar </span>
                             <?php 
+                            $id_user=$user['id'];
+                            $this->db->like('id_user',$id_user);
                             $this->db->like('status',4);
                             $this->db->from('data_sip');
                             ?>
@@ -97,9 +101,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               />
                             </div>
                           </div>
-                          <span class="fw-semibold d-block mb-1">SIPA Terdafatar</span>
+                          <span class="fw-semibold d-block mb-1">Daftar Perpanjangan SIP</span>
                           <h3 class="card-title mb-2">0</h3>
-                          <small class="text-success fw-semibold"> SIPA </small>
+                          <small class="text-success fw-semibold"> Perpanjangan Sedang Ditinjau </small>
                         </div>
                       </div>
                     </div>
@@ -115,7 +119,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               />
                             </div>
                           </div>
-                          <span class="fw-semibold d-block mb-1">SIP Kedaluarsa </span>
+                          <span class="fw-semibold d-block mb-1">SIP Dicabut </span>
                           <h3 class="card-title text-nowrap mb-1">0</h3>
                           <small class="text-success fw-semibold"><i class=""></i> SIP </small>
                         </div>

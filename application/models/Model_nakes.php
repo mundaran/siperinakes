@@ -37,6 +37,14 @@ Class Model_nakes extends CI_Model{
 	    }
 	}
 
+	public function load_manajemen()
+	{
+		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$user_id = $user['id'];
+		$sql = $this->db->query("SELECT * FROM data_sip WHERE id_user = $user_id AND status=3");
+		return $sql->result_array();
+	}
+
 	public function registrasi_sip($data,$id_new_sip)
 	{
 		$query= $this->db->insert('data_sip', $data);

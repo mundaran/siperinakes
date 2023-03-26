@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </li>
                   </ul>
                   <div class="card mb-4">
-                    <h5 class="card-header">Profile Details</h5>
+                    <h5 class="card-header">Profile Details<span><?php echo $this->session->flashdata('message');?></span></h5>
                     <!-- Account -->
                     <div class="card-body">
                       <div class="d-flex align-items-start align-items-sm-center gap-4">
@@ -77,7 +77,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       }
                       ?>
                         
-                      <?php echo $this->session->flashdata('message');?>
+                      
 
                       
 
@@ -211,7 +211,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <!-- /Account -->
                   </div>
                   <div class="card">
-                    <h5 class="card-header">Reset Password</h5>
+                    <h5 class="card-header">Ubah Password</h5>
                     <div class="card-body">
                     
                       <form id="formAccountDeactivation" action="aksi_ubah_password">
@@ -248,7 +248,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content ">
             <div class="modal-header">
-              <h5 class="modal-title " id="modalCenterTitle" >Upload Foto</h5>
+              <h5 class="modal-title " id="modalCenterTitle" >Upload Foto (Gunakan Foot 4x6)</h5>
               <button
                 type="button"
                 class="btn-close"

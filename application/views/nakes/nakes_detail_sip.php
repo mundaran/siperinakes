@@ -103,14 +103,6 @@
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong><?php echo $detail_sip['hari_awal_praktek']?> s/d <?php echo $detail_sip['hari_akhir_praktek'];?> , <?php echo $detail_sip['jam_buka']?> s/d <?php echo $detail_sip['jam_tutup'];?></strong></td>
                                     </tr>
 
-                                    <tr>
-                                      <td>&nbsp;&nbsp;
-                                        <a href="<?php echo base_url();?>administrator/print_sip/<?php echo $this->uri->segment(3);?>" type="button" target="_blank" class="btn rounded-pill btn-primary">
-                                          <span class="tf-icons bx bx-printer"></span>&nbsp; Print SIP
-                                        </a>
-                                    </td>
-                                    </tr>
-
                             </tbody>
                           </table>
 
@@ -142,12 +134,12 @@
                                 data-bs-parent="#accordionExample"
                               >
                                 <div class="accordion-body text-center">
-                                  <?php if(empty($detail_sip['pas_foto'])){
-                                    echo "data belum disi";
+                                  <?php if(empty($datauser['pict'])){
+                                    echo "data tidak ditemukan di database kemungkinan terjadi kesalahan saat upload";
                                   }
 
                                   else{
-                                    echo '<embed src="'.base_url().'document/pas_foto/'.$detail_sip['pas_foto'].'.pdf" width="1000" height="700"> </embed>';
+                                    echo '<img src="'.base_url().'document/foto_user/'.$datauser['pict'].'.jpg" width="144" height="211">';
                                   }
 
                                   ?>
@@ -342,7 +334,7 @@
                               >
                                 <div class="accordion-body text-center">
                                   <?php if(empty($detail_sip['surat_sehat'])){
-                                    echo "data belum disi";
+                                    echo "data tidak ditemukan di database kemungkinan terjadi kesalahan saat upload";
                                   }
 
                                   else{

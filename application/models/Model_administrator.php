@@ -22,6 +22,12 @@ Class Model_administrator extends CI_Model{
 		return $sql->result_array();
 	}
 
+	public function load_manajemen_user()
+	{
+		$sql = $this->db->query("SELECT * FROM user WHERE id");
+		return $sql->result_array();
+	}
+
 	public function validasi_sip($data,$id_sip,$status_sip,$title_validasi)
 	{
 		$query= $this->db->insert('validasi_sip', $data);

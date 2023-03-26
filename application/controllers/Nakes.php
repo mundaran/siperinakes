@@ -70,10 +70,33 @@ class Nakes extends CI_Controller {
 	{
 		$data['title'] ='Manajemen SIP';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
-		
+		$data ['data_sip'] = $this->model_nakes->load_manajemen();
 		$this->load->view('template_view/dashboard_header');
 		$this->load->view('template_view/menubar',$data);
 		$this->load->view('nakes/nakes_manajemen',$data);
+		$this->load->view('template_view/dashboard_footer');
+	}
+
+	public function detail_sip()
+	{
+		$data['title'] ='Manajemen SIP';
+		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$data['detail_sip']= $this->db->get_where('data_sip', array('id'=>$this->uri->segment(3)))->row_array();
+		$this->load->view('template_view/dashboard_header');
+		$this->load->view('template_view/menubar',$data);
+		$this->load->view('nakes/nakes_detail_sip',$data);
+		$this->load->view('template_view/dashboard_footer');
+	}
+
+	public function form_perpanjangan_sip()
+	{
+		$data['title'] ='Manajemen SIP';
+		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$data ['sip']= $this->model_nakes->load_data_sip();
+		
+		$this->load->view('template_view/dashboard_header');
+		$this->load->view('template_view/menubar',$data);
+		$this->load->view('nakes/nakes_form_perpanjangan',$data);
 		$this->load->view('template_view/dashboard_footer');
 	}
 	
@@ -113,7 +136,7 @@ class Nakes extends CI_Controller {
 		$config['upload_path']          = './document/pas_foto';
 		$config['allowed_types']        = 'pdf';
 		$config['file_name']            = $file_name_pas_foto;
-		$config['overwrite'] = true;
+		$config['overwrite'] = false;
 		$config['max_size']             = 1000;
 		$config['max_width']            = 1024;
 		$config['max_height']           = 768;
@@ -127,7 +150,7 @@ class Nakes extends CI_Controller {
 			$config['upload_path']          = './document/foto_ktp';
 			$config['allowed_types']        = 'pdf';
 			$config['file_name']            = $file_name_ktp;
-			$config['overwrite'] = true;
+			$config['overwrite'] = false;
 			$config['max_size']             = 1000;
 			$config['max_width']            = 1024;
 			$config['max_height']           = 768;
@@ -142,7 +165,7 @@ class Nakes extends CI_Controller {
 				$config['upload_path']          = './document/str';
 				$config['allowed_types']        = 'pdf';
 				$config['file_name']            = $file_name_str;
-				$config['overwrite'] = true;
+				$config['overwrite'] = false;
 				$config['max_size']             = 1000;
 				$config['max_width']            = 1024;
 				$config['max_height']           = 768;
@@ -157,7 +180,7 @@ class Nakes extends CI_Controller {
 					$config['upload_path']          = './document/rop';
 					$config['allowed_types']        = 'pdf';
 					$config['file_name']            = $file_name_rop;
-					$config['overwrite'] = true;
+					$config['overwrite'] = false;
 					$config['max_size']             = 1000;
 					$config['max_width']            = 1024;
 					$config['max_height']           = 768;
@@ -172,7 +195,7 @@ class Nakes extends CI_Controller {
 						$config['upload_path']          = './document/rtp';
 						$config['allowed_types']        = 'pdf';
 						$config['file_name']            = $file_name_rtp;
-						$config['overwrite'] = true;
+						$config['overwrite'] = false;
 						$config['max_size']             = 1000;
 						$config['max_width']            = 1024;
 						$config['max_height']           = 768;
@@ -187,7 +210,7 @@ class Nakes extends CI_Controller {
 							$config['upload_path']          = './document/ijazah';
 							$config['allowed_types']        = 'pdf';
 							$config['file_name']            = $file_name_ijazah;
-							$config['overwrite'] = true;
+							$config['overwrite'] = false;
 							$config['max_size']             = 1000;
 							$config['max_width']            = 1024;
 							$config['max_height']           = 768;
@@ -202,7 +225,7 @@ class Nakes extends CI_Controller {
 								$config['upload_path']          = './document/surat_sehat';
 								$config['allowed_types']        = 'pdf';
 								$config['file_name']            = $file_name_surat_sehat;
-								$config['overwrite'] = true;
+								$config['overwrite'] = false;
 								$config['max_size']             = 1000;
 								$config['max_width']            = 1024;
 								$config['max_height']           = 768;
@@ -217,7 +240,7 @@ class Nakes extends CI_Controller {
 									$config['upload_path']          = './document/surat_pernyataan';
 									$config['allowed_types']        = 'pdf';
 									$config['file_name']            = $file_name_surat_pernyataan;
-									$config['overwrite'] = true;
+									$config['overwrite'] = false;
 									$config['max_size']             = 1000;
 									$config['max_width']            = 1024;
 									$config['max_height']           = 768;
@@ -326,6 +349,7 @@ class Nakes extends CI_Controller {
 		$id_new_sip = $this->input->post('id_sip_new');
 		$jenis_sip = $this->input->post('jenis_sip');
 		$no_str = $this->input->post('no_str');
+		$no_rekomendasi_op = $this->input->post('no_rekomendasi_op');
 		$masa_berlaku_str = $this->input->post('masa_berlaku_str');
 		$tempat_praktek = $this->input->post('tempat_praktek');
 		$alamat_praktek = $this->input->post('alamat_praktek');
@@ -342,6 +366,7 @@ class Nakes extends CI_Controller {
 		'id_user' => $id,
 		'jenis_sip' => $jenis_sip,
 		'no_str' => $no_str,
+		'no_rekomendasi_op'=> $no_rekomendasi_op,
 		'masa_berlaku_str' => $masa_berlaku_str,
 		'tempat_praktek' => $tempat_praktek,
 		'alamat_praktek' => $alamat_praktek,

@@ -3,84 +3,118 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!DOCTYPE html>
 
 
-        <div class="content-wrapper">
+ <div class="content-wrapper">
         <!-- Content wrapper -->
         <div class="content-wrapper">
             <!-- Content -->
-               
+
             <div class="container-xxl flex-grow-1 container-p-y">
               <div class="row">
-                <div class="col-lg-12 col-md-12">
+                <div class="col-lg-12 mb-4 order-0">
                   <div class="card">
-
                     <div class="d-flex align-items-end row">
                       <div class="col-sm-7">
                         <div class="card-body">
-                          <div class="table-responsive text-nowrap">
-                            <table class="table table-sm">
-                              <thead>
-                                <tr>
-                                  <th>Jenis SIP</th>
-                                  <th>Tgl Daftar</th>
-                                  <th>Status</th>
-                                </tr>
-                              </thead>
-
-                              <tbody class="table-border-bottom-0">
-                                <?php 
-                                 $id_user = $user['id']; 
-                                 $sip = $this->db->get_where('data_sip',array('id_user' => $id_user , ))->result_array();
-                                 foreach($sip as $dataSip ):?>
-                                <tr>
-                                  <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong><?php echo $dataSip['jenis_sip'];?></strong></td>
-                                  <td><?php echo $dataSip['tanggal_daftar'];?></td>
-                                  <td>
-                                    <?php 
-                                    if($dataSip['status']==1){
-                                      echo'<span class="badge bg-label-info me-1"> <a href="'.base_url().'nakes/upload_berkas/'.$dataSip['id'].'" > Upload Berkas </a> </span>';
-                                    }
-                                    else{  if($dataSip['status']==2){
-                                          echo '<span class="badge bg-label-success me-1"> <a > Ditinjau </a> </span>';
-                                        }
-
-                                        else{ if($dataSip['status']==3){
-                                          echo '<span class="badge bg-label-info me-1"> <a href="'.base_url().'nakes/upload_berkas/'.$dataSip['id'].'" > Approved (Lihat) </a> </span>';
-                                          }
-
-                                          else{ if($dataSip['status']==4){
-                                          echo '<span class="badge bg-label-info me-1"> <a href="'.base_url().'nakes/upload_berkas/'.$dataSip['id'].'" > Revisi Data (Lihat) </a> </span>';
-                                          }
-
-                                          else{
-
-                                          }
-
-                                         }
-                                      }
-            
-                                    }
-
-                                 ?>
-
-                                  </td>
-                                </tr>
-                                <?php endforeach;?>
-                              </tbody>
-                            </table>
-                          </div>
-
-
+                          <h5 class="card-title text-primary"><?php echo $title;?>🎉</h5>
+                          <p class="mb-4">
+                           SIP yang telah di Approve Dinas Kesehatan
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-sm-5 text-center text-sm-left">
+                        <div class="card-body pb-0 px-0 px-md-4">
+                          <img
+                            src="<?php echo base_url()?>template/assets/img/illustrations/ai2.png"
+                            height="150"
+                            alt="View Badge User"
+                            data-app-dark-img="illustrations/man-with-laptop-dark.png"
+                            data-app-light-img="illustrations/man-with-laptop-light.png"
+                          />
                         </div>
                       </div>
                     </div>
+                    <div class="d-flex align-items-end row">
+                      <div class="col-sm-12">
+                        <div class="card-body">
+
+                         <div class="table-responsive text-nowrap">
+                          <table id="myTable" class="dispaly table table-borderless">
+                            <thead>
+                              <tr>
+                                <th>Jenis Sip</th>
+                                <th>Tanggal daftar</th>
+                                <th>Tanggal Berakhir</th>
+                                <th>Action</th>
+                              </tr>
+                              
+                            </thead>
+                            <tbody class="">
+
+                                <?php foreach ($data_sip as $sip) {
+
+                                  $id_user= $sip['id_user'];
+                                  $dataUser = $this->db->query("SELECT * FROM user WHERE id = $id_user ");
+                                  $user= $dataUser->row_array();
+
+
+                                  echo '
+
+                                    <tr>
+
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$sip['jenis_sip'].'</strong></td>
+
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$sip['tanggal_daftar'].'</strong></td>
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$sip['masa_berlaku_str'].'</strong></td>
+
+                                    <td>
+                                      <div class="btn-group">
+                                        <button
+                                          type="button"
+                                          class="btn btn-primary btn-icon rounded-pill dropdown-toggle hide-arrow"
+                                          data-bs-toggle="dropdown"
+                                          aria-expanded="false"
+                                        >
+                                          <i class="bx bx-dots-vertical-rounded"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                          <li><a class="dropdown-item" href="'.base_url().'nakes/detail_sip/'.$sip['id'].'">Detail SIP</a></li>
+                                          <li><a class="dropdown-item" href="'.base_url().'nakes/form_perpanjangan_sip/'.$sip['id'].'">Perpanjangan</a></li>
+                                          <li><a class="dropdown-item" href="'.base_url().'nakes/nakes_perubahan/'.$sip['id'].'">Perubahan</a></li>
+                                          <li><a class="dropdown-item" href="'.base_url().'nakes/nakes_pencabutan/'.$sip['id'].'">Cabut SIP</a></li>
+                                        </ul>
+                                      </div>
+
+                                      </td>
+
+                                    
+                                  </tr>
+
+
+
+                                  ';
+                                 
+                                  
+                                } ?>
+                                 
+                                  
+                                
+                                
+                            </tbody>
+                          </table>
+                        </div>
+
+
+                      </div>
+                    </div>
+
                   </div>
                 </div>
               </div>
 
-          <div class="row">
-          </div>
+      </div>
+  </div>
 
-        </div>
-      </div>
-       
-      </div>
+</div>
+
+
+

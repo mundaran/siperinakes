@@ -56,7 +56,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <p>
           <text style="font-size:28px;">PEMERINTAH KABUPATEN BOJONEGORO</text>
           <h1>DINAS KESEHATAN</h1>
-          <text style="font-size: 20px;">Jl.Panglima Sudirman No.30 Telp (0353) 881350</text>
+          <text style="font-size: 20px;">Area Perkantoran Pemerintah Kabupaten Bojonegoro - Jl.Dr.Cipto q</text>
           </p>
         </td>
       </tr>
@@ -65,7 +65,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <tr>
         <td align="center">
           <p>
-            <h3><b>SURAT IZIN PRAKTIK (SIP) DOKTER</b></h3>
+            <h3><b>SURAT IZIN PRAKTIK (SIP) <?php echo strtoupper($detail_sip['jenis_sip']);?></b></h3>
             <text style="font-size: 15px;">No :...../.../DINKES/drg/XII/2022</text>
           </p>
         </td>
@@ -132,7 +132,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <tr>
         <td align="left">Nomor STR</td>
         <td >:</td>
-        <td ><?php echo $detail_sip ['no_str'];?></td>
+        <td ><?php echo $detail_sip ['no_str'];?> Berlaku s/d <?php echo $detail_sip['masa_berlaku_str'];?></td>
       </tr>
       <tr>
         <td>&nbsp;</td>
@@ -170,7 +170,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <br>
 
   <?php
-  $path3 = 'document/pas_foto/'.$datauser['pict'].'.jpg';
+  $path3 = 'document/foto_user/'.$datauser['pict'].'.jpg';
   $type = pathinfo($path3, PATHINFO_EXTENSION);
   $data = file_get_contents($path3);
   $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
