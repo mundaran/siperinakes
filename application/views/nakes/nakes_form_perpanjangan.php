@@ -22,14 +22,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="d-flex align-items-end row">
                       <div class="col-sm-12">
                         <div class="card-body">
-                          <form> 
+                          <form action="<?php echo base_url();?>nakes/aksi_perpanjangan/<?php echo $this->uri->segment(3)?>" method="POST" enctype="multipart/form-data"> 
                             <div class="mb-3">
                               <label class="form-label" for="basic-icon-default-company">Nomor STR Baru</label>
                               <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-company2" class="input-group-text"
                                   ><i class="bx bx-barcode"></i
                                 ></span>
-                                <input type="text" id="basic-icon-default-company" class="form-control" name="no_str" placeholder=""
+                                <input type="text " id="basic-icon-default-company" class="form-control" name="no_str_baru" placeholder=""
                                   aria-describedby="basic-icon-default-company2" required />
                               </div>
                             </div>
@@ -39,7 +39,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <span id="basic-icon-default-company2" class="input-group-text"
                                   ><i class="bx bx-barcode"></i
                                 ></span>
-                                <input type="text" id="basic-icon-default-company" class="form-control" name="no_str" placeholder=""
+                                <input type="date" id="basic-icon-default-company" class="form-control" name="masa_berlaku_str" placeholder=""
                                   aria-describedby="basic-icon-default-company2" required />
                               </div>
                             </div>
@@ -49,7 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <span id="basic-icon-default-company2" class="input-group-text"
                                   ><i class="bx bx-barcode"></i
                                 ></span>
-                                <input type="file" id="basic-icon-default-company" class="form-control" name="no_str" placeholder=""
+                                <input type="file" id="basic-icon-default-company" class="form-control" name="foto_str_baru" placeholder=""
                                   aria-describedby="basic-icon-default-company2" required />
                               </div>
                             </div>
@@ -59,7 +59,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <span id="basic-icon-default-company2" class="input-group-text"
                                   ><i class="bx bx-barcode"></i
                                 ></span>
-                                <input type="file" id="basic-icon-default-company" class="form-control" name="no_str" placeholder=""
+                                <input type="file" id="basic-icon-default-company" class="form-control" name="foto_sip_lama" placeholder=""
                                   aria-describedby="basic-icon-default-company2" required />
                               </div>
                             </div>

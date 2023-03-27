@@ -1,6 +1,7 @@
-  <?php
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!DOCTYPE html>
+
 
  <div class="content-wrapper">
         <!-- Content wrapper -->
@@ -14,9 +15,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="d-flex align-items-end row">
                       <div class="col-sm-7">
                         <div class="card-body">
-                          <h5 class="card-title text-primary"><?php echo $title;?>🎉</h5>
+                          <h5 class="card-title text-success"><?php echo $title;?>🎉</h5>
                           <p class="mb-4">
-                           Pastikan Data Pemohon Lengkap dan Valid.
+                           Permohonan Perpanjang SIP
                           </p>
                         </div>
                       </div>
@@ -40,31 +41,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           <table id="myTable" class="dispaly table table-borderless">
                             <thead>
                               <tr>
-                                <th>Nama Pemohon</th>
                                 <th>Jenis Sip</th>
-                                <th>Tindakan</th>
-                                <th>Berakhir</th>
+                                <th>Tanggal Request</th>
+                                <th>Status</th>
                               </tr>
                               
                             </thead>
                             <tbody class="">
+                              <?php foreach ($perpanjang_sip as $sip) {
 
-                                <?php foreach ($sip as $dataSip) {
+                                  $id_list= $sip['id'];
+                                  $data_list = $this->db->query("SELECT * FROM riwayat_perpanjangan WHERE id_sip = $id_list ");
+                                  $list= $data_list->row_array();
 
-                                  $id_user = $dataSip['id_user'];
-                                  $datapemohon = $this->db->query("SELECT * FROM user WHERE id = $id_user ");
-                                  $datauser= $datapemohon->row_array();
 
                                   echo '
 
                                     <tr>
-                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$datauser['name'].'</strong></td>
 
-                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$dataSip['jenis_sip'].'</strong></td>
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$sip['jenis_sip'].'</strong></td>
 
-                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong><a href="'.base_url().'administrator/form_validasi_perpanjangan/'.$dataSip['id'].'" class="btn btn-sm btn-info"><span class="tf-icons bx bx-time"></span>&nbsp; Validasi Perpanjangan </a></strong></td>
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$list['tanggal'].'</strong></td>
 
-                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$dataSip['masa_berlaku_str'].'</strong></td>
+                                    <td>
+                                      Sedang Ditinjau
+
+                                    </td>
+
+                                    
                                   </tr>
 
 
@@ -73,16 +77,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                  
                                   
                                 } ?>
-                                 
-                                  
-                                
-                                
                             </tbody>
                           </table>
                         </div>
 
-                      
-                        </div>
+
                       </div>
                     </div>
 
@@ -90,11 +89,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
               </div>
 
-
-
-
-
+      </div>
   </div>
-  </div>
+
 </div>
-    
+
+
+

@@ -96,5 +96,29 @@ Class Model_nakes extends CI_Model{
 
 			
 	}
+
+	public function update_sip_diperpanjang($update_data,$id_sip)
+	{
+		$this->db->where('id',$id_sip);
+		$berhasil = $this->db->update('data_sip', $update_data);
+		if($berhasil){
+			$this->session->set_flashdata('message','<div class="alert alert-success"><b> Permohonan Perpanjangan Berhasil Data Anda Sedang Ditinjau</b></div>');
+			redirect('nakes/list_perpanjangan');
+		}
+		else{
+
+			$this->session->set_flashdata('message','<div class="alert alert-danger"><b> permohonan GAGAL !!! </b></div>');
+			redirect('nakes/nakes_manajement');
+		}
+
+			
+	}
 	
+	public function load_list_perpanjangan()
+	{
+		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$user_id = $user['id'];
+		$sql = $this->db->query("SELECT * FROM data_sip WHERE id_user = $user_id AND status=5");
+		return $sql->result_array();
+	}
 }

@@ -93,6 +93,18 @@ class Administrator extends CI_Controller {
 	    $this->pdf->load_view('admin/view_sip_pdf', $data);
 	}
 
+	public function form_validasi_perpanjangan()
+	{
+		$data['title'] ='Permohonan Perpanjangan SIP';
+		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$data ['sip'] = $this->model_administrator->load_data_sip();
+
+		$this->load->view('template_view/dashboard_header');
+		$this->load->view('template_view/menubar',$data);
+		$this->load->view('admin/admin_form_validasi_perpanjangan',$data);
+		$this->load->view('template_view/dashboard_footer');
+	}
+
 	public function manajemen_user()
 	{
 		$data['title'] ='Manajemen User';
@@ -136,6 +148,32 @@ class Administrator extends CI_Controller {
 			'tanggal_validasi'=>$tanggal_validasi,
 		);
 		$this->model_administrator->validasi_sip($data,$id_sip,$status_sip,$title_validasi);
+
+
+	}
+
+
+	public function aksi_validasi_perpanjangan()
+	{
+		$data['title'] ='Validasi SIP';
+		$admin = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id_admin = $admin['id'];
+		$validator = $this->input->post('validator');
+		$id_sip = $this->uri->segment(3);
+		$id_nakes = $this->uri->segment(4);
+		$status_validasi = $this->input->post('status_validasi');
+		$keterangan = $this->input->post('keterangan');
+		$tanggal_validasi= date("d-m-Y");
+		$status_sip = $this->input->post('status_sip');
+		$title_validasi = $this->input->post('title_validasi');
+		$data = array(
+			'id_admin'=>$id_admin,
+			'id_sip'=>$id_sip,
+			'status_validasi' => $status_validasi,
+			'keterangan'=>$keterangan,
+			'tanggal_validasi'=>$tanggal_validasi,
+		);
+		$this->model_administrator->validasi_perpanjangan($data,$id_sip,$status_sip,$validator,$title_validasi);
 
 
 	}

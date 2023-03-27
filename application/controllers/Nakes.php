@@ -381,5 +381,92 @@ class Nakes extends CI_Controller {
 		$this->model_nakes->registrasi_sip($data,$id_new_sip);
 	}
 
-	
+	public function aksi_perpanjangan(){
+		$user    = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id_user = $user['id'];
+		$id_sip  = $this->uri->segment(3);
+		$date    = date('d-m-y');
+		$no_str_baru = $this->input->post('no_str_baru');
+		$masa_berlaku_str = $this->input->post('masa_berlaku_str');
+
+		$file_name_sip_lama = 'sip-lama'.$id_sip.'-'.$id_user.'-'.$date;
+		$config['upload_path']          = './document/foto_sip_lama';
+		$config['allowed_types']        = 'pdf';
+		$config['file_name']            = $file_name_sip_lama;
+		$config['overwrite'] = false;
+		$config['max_size']             = 3000;
+		$config['max_width']            = 2000;
+		$config['max_height']           = 2000;
+		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
+		if ( !$this->upload->do_upload('foto_sip_lama')){
+			 $this->session->set_flashdata('message', 'Upload-gagal' );
+			 $error = array('error' => $this->upload->display_errors());
+    		 $this->session->set_flashdata('message',$error['error']);
+			 redirect('nakes/form_perpanjangan_sip/'.$id_user);
+		} else {
+			$file_name_str_baru = 'str-'.$id_user.'-'.$id_sip;
+			$config['upload_path']          = './document/str';
+			$config['allowed_types']        = 'pdf';
+			$config['file_name']            = $file_name_str_baru;
+			$config['overwrite'] = true;
+			$config['max_size']             = 1000;
+			$config['max_width']            = 1024;
+			$config['max_height']           = 768;
+			$foto_sip_lama = $this->upload->data();
+			$this->load->library('upload', $config);
+	 		$this->upload->initialize($config);
+			if ( !$this->upload->do_upload('foto_str_baru')){
+			 	 $this->session->set_flashdata('message', 'Upload-gagal' );
+			 	 $error = array('error' => $this->upload->display_errors());
+				 $this->session->set_flashdata('message',$error['error']);
+				 redirect('nakes/form_perpanjangan_sip/'.$id_user);
+			} else {
+				$str_up = $this->upload->data();
+				$status = 'undone';
+
+				$insert_data =  [
+
+					'id_sip'   => $id_sip,
+					'id_user'  => $id_user,
+					'sip_lama' => $file_name_sip_lama, 
+					'str_baru' => $file_name_str_baru,
+					'status'   => $status,
+					'tanggal'  => $date,
+				];
+
+				$insert = $query= $this->db->insert('riwayat_perpanjangan', $insert_data);
+
+				if ($insert) {
+					$update_data =[
+						'no_str' => $no_str_baru,
+						'masa_berlaku_str' => $masa_berlaku_str,
+						'foto_str' => $file_name_str_baru,
+						'status' => 5,
+
+					];
+					$this->model_nakes->update_sip_diperpanjang($update_data,$id_sip);
+				} else{
+					$this->session->set_flashdata('message', 'Gagal Perpanjangan');
+					redirect('nakes/form_perpanjangan_sip/'.$id_user);
+				}
+			}
+		}
+	}
+
+	public function list_perpanjangan()
+	{
+		$data['title'] ='List Perpanjangan';
+		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$data ['perpanjang_sip']= $this->model_nakes->load_list_perpanjangan();
+		
+		$this->load->view('template_view/dashboard_header');
+		$this->load->view('template_view/menubar',$data);
+		$this->load->view('nakes/nakes_list_perpanjangan',$data);
+		$this->load->view('template_view/dashboard_footer');
+	}
+
+
+
+
 }
