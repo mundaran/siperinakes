@@ -12,16 +12,14 @@ Class Model_administrator extends CI_Model{
 
 	public function load_data_perpanjangan_sip()
 	{
-		$sql = $this->db->query("SELECT * FROM riwayat_perpanjangan WHERE status='undone'");
-		$riwayat = $sql->row_array();
-		$id_sip = $riwayat['id_sip'];
-		$datasip = $this->db->query("SELECT * FROM data_sip WHERE id=$id_sip");
+		
+		$datasip = $this->db->query("SELECT * FROM data_sip WHERE status=5 ");
 		return $datasip->result_array();
 	}
 
 	public function load_manajemen_sip()
 	{
-		$sql = $this->db->query("SELECT * FROM validasi_sip WHERE status_validasi=1");
+		$sql = $this->db->query("SELECT * FROM data_sip WHERE status=3");
 		return $sql->result_array();
 	}
 
@@ -51,23 +49,38 @@ Class Model_administrator extends CI_Model{
 	    }
 	}
 
-	public function validasi_perpanjangan($data,$id_sip,$status_sip,$validator,$title_validasi)
+	public function validasi_perpanjangan($data,$id_sip,$status_sip,$validator_sebelumnya,$title_validasi,$nama_admin)
 	{
 		$this->db->where('id_sip',$id_sip);
-		$query= $this->db->update('validasi_sip', $data);
-	    if($query)
-	    {	
+		$update_validasi= $this->db->update('validasi_sip', $data);
 
+	    if($update_validasi){	
 	    	$status = $status_sip ;
 	    	$update_status = array( 'status'=>$status );
 			$this->db->where('id',$id_sip);
-			$berhasil = $this->db->update('data_sip', $update_status);
-			if ($berhasil) {
+			$up_data_sip = $this->db->update('data_sip', $update_status);
 
-				$berhasil = $this->db->update('data_sip', $update_status);
+			if ($up_data_sip) {
+				$up_status = 'done';
+				$data_riwayat=array(
+					'status' => $up_status,
+					'approver_sebelumnya'=>$validator_sebelumnya,
+					'approver_perpanjangan'=>$nama_admin
+				);
+
+				$status_per = 'undone';
+				$where =array(
+					'id_sip' => $id_sip,
+					'status'=>$status_per
+				);
+				$this->db->where($where);
+				$up_riwayat = $this->db->update('riwayat_perpanjangan', $data_riwayat);
+				$this->session->set_flashdata('message',$title_validasi);
+				redirect('administrator/perpanjangan_sip');
+			} else{
+				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b> Gagal Validasi  </b></div>');
+				redirect('administrator/perpanjangan_sip');
 			}
-			$this->session->set_flashdata('message',$title_validasi);
-			redirect('administrator/perpanjangan_sip');
 	    }
 	    else
 	    {

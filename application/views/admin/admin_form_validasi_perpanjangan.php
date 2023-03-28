@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="card-body">
                           <?php echo $this->session->flashdata('message');?>
                           <?php 
-                           $id = $this->uri->segment(3);
+                            $id = $this->uri->segment(3);
                             $datavalidasi = $this->db->query("SELECT * FROM data_sip WHERE id =$id ");
                             $datasip = $datavalidasi->row_array();
                           ?>
@@ -174,12 +174,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         $id = $datasip['id'];
                                         $validatorData = $this->db->query("SELECT * FROM validasi_sip WHERE id_sip= $id ");
                                         $validator = $validatorData->row_array();
+
                                         $id_validator = $validator['id_admin'];
                                         $data_admin = $this->db->query("SELECT * FROM user WHERE id =$id_validator");
                                         $admin = $data_admin->row_array();
-
+                                        
                                       ?>
-                                      <input type="hidden" name="validator" value="<?php echo $admin['name']?>">
+                                      <input type="text" name="validator_sebelumnya" value="<?php echo $admin['name']?>">
                                       <input type="hidden" value="1" name="status_validasi">
                                       <input type="hidden" value="valid" name="keterangan">
                                       <input type="hidden" name="status_sip" value="3">

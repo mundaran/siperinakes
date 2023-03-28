@@ -108,7 +108,7 @@
                                         <a href="<?php echo base_url();?>administrator/print_sip/<?php echo $this->uri->segment(3);?>" type="button" target="_blank" class="btn rounded-pill btn-primary">
                                           <span class="tf-icons bx bx-printer"></span>&nbsp; Print SIP
                                         </a>
-                                    </td>
+                                      </td>
                                     </tr>
 
                             </tbody>

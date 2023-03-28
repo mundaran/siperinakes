@@ -39,7 +39,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </div>
 
               <div class="row">
+
                     <div class="col-lg-3 col-md-12 col-6 mb-4">
+                      <a href="">
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -59,12 +61,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             $this->db->like('status', $status);
                             $this->db->from('data_sip');
                             ?>
-                          <h3 class="card-title mb-2"><?php echo $this->db->count_all_results();?></h3>
+                          <h3 class="card-title mb-1"><?php echo $this->db->count_all_results();?></h3>
                           <small class="text-success fw-semibold"> SIP Baru Sedang Ditinjau </small>
                         </div>
                       </div>
+                      </a>
+
                     </div>
+
                     <div class="col-lg-3 col-md-12 col-6 mb-4">
+                      <a href="">
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -80,16 +86,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <?php 
                             $id_user=$user['id'];
                             $this->db->like('id_user',$id_user);
-                            $this->db->like('status',4);
+                            $this->db->like('status',3);
                             $this->db->from('data_sip');
                             ?>
                           <h3 class="card-title text-nowrap mb-1"><?php echo $this->db->count_all_results();?></h3>
                           <small class="text-success fw-semibold"><i class=""></i> SIP Telah Terdaftar </small>
                         </div>
                       </div>
+                      </a>
                     </div>
                  
                     <div class="col-lg-3 col-md-12 col-6 mb-4">
+
+                      <a href="">
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -102,12 +111,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </div>
                           </div>
                           <span class="fw-semibold d-block mb-1">Daftar Perpanjangan SIP</span>
-                          <h3 class="card-title mb-2">0</h3>
+                          <h3 class="card-title mb-1">0</h3>
                           <small class="text-success fw-semibold"> Perpanjangan Sedang Ditinjau </small>
                         </div>
                       </div>
+                      </a>
+
                     </div>
+
                     <div class="col-lg-3 col-md-12 col-6 mb-4">
+                      <a href="">
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -119,11 +132,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               />
                             </div>
                           </div>
-                          <span class="fw-semibold d-block mb-1">SIP Dicabut </span>
-                          <h3 class="card-title text-nowrap mb-1">0</h3>
+                          <span class="fw-semibold d-block mb-1">SIP Revisi </span>
+                          <?php 
+                            $id_user=$user['id'];
+                            $this->db->like('id_user',$id_user);
+                            $this->db->like('status',4);
+                            $this->db->from('data_sip');
+                            ?>
+                          <h3 class="card-title text-nowrap mb-1"><?php echo $this->db->count_all_results();?></h3>
                           <small class="text-success fw-semibold"><i class=""></i> SIP </small>
                         </div>
                       </div>
+                      </a>
                     </div>
                   </div>
 

@@ -50,16 +50,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </thead>
                             <tbody class="">
 
-                                <?php foreach ($validasi as $valid) {
-
-                                  $id_sip= $valid['id_sip'];
-                                  $dataSip = $this->db->query("SELECT * FROM data_sip WHERE id = $id_sip ");
-                                  $data= $dataSip->row_array();
+                                <?php foreach ($data_sip as $data) {
 
                                   $id_user= $data['id_user'];
                                   $dataUser = $this->db->query("SELECT * FROM user WHERE id = $id_user ");
                                   $user= $dataUser->row_array();
 
+                                  $id_sip= $data['id'];
+                                  $dataValidasi = $this->db->query("SELECT * FROM validasi_sip WHERE id_sip = $id_sip ");
+                                  $validasi= $dataValidasi->row_array();
 
                                   echo '
 
@@ -68,7 +67,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$data['jenis_sip'].'</strong></td>
 
-                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$valid['tanggal_validasi'].'</strong></td>
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$validasi['tanggal_validasi'].'</strong></td>
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$data['masa_berlaku_str'].'</strong></td>
 
                                     <td>

@@ -36,8 +36,7 @@ class Nakes extends CI_Controller {
 	{
 		$data['title'] ='Register SIP';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
-		$data ['sip']= $this->model_nakes->load_data_sip();
-		
+		$data ['sip']= $this->model_nakes->load_data_ditinjau();
 		$this->load->view('template_view/dashboard_header');
 		$this->load->view('template_view/menubar',$data);
 		$this->load->view('nakes/nakes_register_sip',$data);
@@ -92,22 +91,20 @@ class Nakes extends CI_Controller {
 	{
 		$data['title'] ='Manajemen SIP';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
-		$data ['sip']= $this->model_nakes->load_data_sip();
-		
 		$this->load->view('template_view/dashboard_header');
 		$this->load->view('template_view/menubar',$data);
 		$this->load->view('nakes/nakes_form_perpanjangan',$data);
 		$this->load->view('template_view/dashboard_footer');
 	}
 	
-	public function riwayat()
+	public function revisi()
 	{
-		$data['title'] ='Riwayat';
+		$data['title'] ='Revisi';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
-		
+		$data ['sip_revisi']  = $this->model_nakes->load_data_revisi();
 		$this->load->view('template_view/dashboard_header');
 		$this->load->view('template_view/menubar',$data);
-		$this->load->view('nakes/nakes_riwayat',$data);
+		$this->load->view('nakes/nakes_revisi',$data);
 		$this->load->view('template_view/dashboard_footer');
 	}
 
