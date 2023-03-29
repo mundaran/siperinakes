@@ -90,11 +90,11 @@ class Administrator extends CI_Controller {
 	    $this->pdf->setPaper($customPaper);
 	    $this->pdf->filename = "data_sip.pdf";
 	    $sip = $this->db->get_where('data_sip', array('id'=>$this->uri->segment(3)))->row_array();
-	    if($sip['jenis_sip']='Dokter'){
+	    if($sip['jenis_sip']=='Dokter'){
 	    $this->pdf->load_view('admin/view_sip_pdf', $data);
-	    }elseif ($sip['jenis_sip']='Dokter') {
+	    }elseif ($sip['jenis_sip']=='Apoteker') {
 	    	$this->pdf->load_view('admin/view_sip_apoteker_pdf', $data);
-	    }elseif ($sip['jenis_sip']='TTK') {
+	    }elseif ($sip['jenis_sip']=='TTK') {
 	    	$this->pdf->load_view('admin/view_sip_ttk_pdf', $data);
 	    }
 	}
