@@ -65,7 +65,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$validasi['tanggal_validasi'].'</strong></td>
 
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$validasi['keterangan'].'</strong></td>
-                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong><a href="'.base_url().'nakes/revisi_sip/'.$sip['id'].'" class="btn btn-sm btn-danger"><span class="tf-icons bx bx-note"></span>&nbsp; Revisi</a></strong></td>
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong><a href="'.base_url().'nakes/form_revisi_sip/'.$sip['id'].'" class="btn btn-sm btn-danger"><span class="tf-icons bx bx-note"></span>&nbsp; Revisi</a></strong></td>
 
                                     
                                   </tr>

@@ -199,7 +199,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   <h5 class="mb-0">PERSYARATAN</h5>
                 </div>
                 <div class="card-body">
-                  Persyaratan SIP
+                  <p>Pas Foto 4x6 </p>
+                  <p>Foto KTP Asli</p>
+                  <p>Foto STR</p>
+                  <p>Foto Surat Sehat</p>
+                  <p>Foto Surat Pernyataan</p>
+                  <p>Foto Rekomendasi Organisasi Profesi</p>
+                  <p>Foto Rekomendasi Tempat Praktek</p>
                 </div>
                     
                   </div>

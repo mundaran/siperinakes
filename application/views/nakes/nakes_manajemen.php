@@ -42,6 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <thead>
                               <tr>
                                 <th>Jenis Sip</th>
+                                <th>Status</th>
                                 <th>Tanggal daftar</th>
                                 <th>Tanggal Berakhir</th>
                                 <th>Action</th>
@@ -56,13 +57,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                   $dataUser = $this->db->query("SELECT * FROM user WHERE id = $id_user ");
                                   $user= $dataUser->row_array();
 
+                                  if($sip['status']==3){
+                                    $status ='Approve';
+                                  }
 
                                   echo '
 
                                     <tr>
 
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$sip['jenis_sip'].'</strong></td>
-
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$status.'</strong></td>
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$sip['tanggal_daftar'].'</strong></td>
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$sip['masa_berlaku_str'].'</strong></td>
 

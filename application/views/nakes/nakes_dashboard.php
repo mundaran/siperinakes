@@ -41,7 +41,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <div class="row">
 
                     <div class="col-lg-3 col-md-12 col-6 mb-4">
-                      <a href="">
+                      <a href="<?php echo base_url();?>nakes/register_sip">
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -70,7 +70,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
 
                     <div class="col-lg-3 col-md-12 col-6 mb-4">
-                      <a href="">
+                      <a href="<?php echo base_url();?>nakes/manajemen_sip">
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
@@ -98,7 +98,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                  
                     <div class="col-lg-3 col-md-12 col-6 mb-4">
 
-                      <a href="">
+                      <a href="<?php echo base_url();?>nakes/list_perpanjangan">
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
