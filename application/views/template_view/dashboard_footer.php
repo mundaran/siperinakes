@@ -52,6 +52,11 @@
           $('#myTable').DataTable();
       });
     </script>
+    <script type="text/javascript">
+      $(document).ready( function () {
+        $('#TabelRevisiPerpanjangan').DataTable();
+    } );
+    </script>
 
     <script src="<?php echo base_url();?>template/assets/vendor/js/menu.js"></script>
     <!-- endbuild -->

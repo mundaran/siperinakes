@@ -147,7 +147,7 @@
                                   }
 
                                   else{
-                                    echo '<embed src="'.base_url().'document/pas_foto/'.$detail_sip['pas_foto'].'.pdf" width="1000" height="700"> </embed>';
+                                    echo '<img src="'.base_url().'document/foto_user/'.$datauser['pict'].'.jpg" width="550" height="600">';
                                   }
 
                                   ?>

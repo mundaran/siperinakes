@@ -16,7 +16,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                     <div class="card-header d-flex justify-content-between align-items-center">
                       <h3 class="mb-0">Revisi SIP Baru</h3>
-                      <span class="alert alert-danger" role="alert"> Cek kembali berkas Anda</span>
+                      <?php
+                        $id_sip = $this->uri->segment(3);
+                        $note_sip = $this->db->query("SELECT * FROM validasi_sip WHERE id_sip=$id_sip");
+                        $note = $note_sip->row_array();
+
+                      ?>
+                      <div class="alert alert-danger" role="alert"> Note : <?php echo $note['keterangan']; ?></div>
                     </div>
                     <?php
                       $id_sip = $this->uri->segment(3);
@@ -112,15 +118,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       <div class="col-sm-12">
                         <div class="card-body">
                           <h5>Upload Berkas Sesuai Note Revisi </h5>
+                          <?php
+                            $id_sip = $this->uri->segment(3);
+                            $note_sip = $this->db->query("SELECT * FROM validasi_sip WHERE id_sip=$id_sip");
+                            $note = $note_sip->row_array();
+                          ?>
+                          <div class="alert alert-danger" role="alert"> Note Revisi : <?php echo $note['keterangan']; ?><P>Jika Sudah Revisi Klik Tombol Selesai Revisi Dibawah</P></div>
 
                           <div class="mb-3">
-                            <form>
+                            <form method="POST" enctype="multipart/form-data" action="<?php echo base_url();?>nakes/update_foto_ktp/<?php echo $this->uri->segment(3);?>">
                             <label class="form-label" for="basic-icon-default-company">foto KTP </label>
                             <div class="input-group input-group-merge">
                               <span id="basic-icon-default-company2" class="input-group-text"
                                 ><i class="bx bx-barcode"></i
                               ></span>
-                              <input type="file" id="basic-icon-default-company" class="form-control" name="foto_str_baru" placeholder=""
+                              <input type="file" id="basic-icon-default-company" class="form-control" name="foto_ktp_baru" placeholder=""
                                 aria-describedby="basic-icon-default-company2" required />
                                 <button type="submit" class="btn btn-primary">Update Berkas</button>
                             </div>
@@ -128,7 +140,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
 
                           <div class="mb-3">
-                            <form>
+                            <form method="POST" enctype="multipart/form-data" action="<?php echo base_url();?>nakes/update_foto_str/<?php echo $this->uri->segment(3);?>">
                             <label class="form-label" for="basic-icon-default-company">foto STR </label>
                             <div class="input-group input-group-merge">
                               <span id="basic-icon-default-company2" class="input-group-text"
@@ -142,13 +154,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
 
                           <div class="mb-3">
-                            <form>
+                            <form method="POST" enctype="multipart/form-data" action="<?php echo base_url();?>nakes/update_foto_rop/<?php echo $this->uri->segment(3);?>">
                             <label class="form-label" for="basic-icon-default-company">foto Rekomendasi OP </label>
                             <div class="input-group input-group-merge">
                               <span id="basic-icon-default-company2" class="input-group-text"
                                 ><i class="bx bx-barcode"></i
                               ></span>
-                              <input type="file" id="basic-icon-default-company" class="form-control" name="foto_str_baru" placeholder=""
+                              <input type="file" id="basic-icon-default-company" class="form-control" name="foto_rop_baru" placeholder=""
                                 aria-describedby="basic-icon-default-company2" required />
                                 <button type="submit" class="btn btn-primary">Update Berkas</button>
                             </div>
@@ -156,13 +168,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
 
                           <div class="mb-3">
-                            <form>
-                            <label class="form-label" for="basic-icon-default-company">foto Rekomendasi Tempat Praktek </label>
+                            <form method="POST" enctype="multipart/form-data" action="<?php echo base_url();?>nakes/update_foto_rtp/<?php echo $this->uri->segment(3);?>">
+                            <label class="form-label" for="basic-icon-default-company">Foto Rekomendasi Tempat Praktek </label>
                             <div class="input-group input-group-merge">
                               <span id="basic-icon-default-company2" class="input-group-text"
                                 ><i class="bx bx-barcode"></i
                               ></span>
-                              <input type="file" id="basic-icon-default-company" class="form-control" name="foto_str_baru" placeholder=""
+                              <input type="file" id="basic-icon-default-company" class="form-control" name="foto_rtp_baru" placeholder=""
                                 aria-describedby="basic-icon-default-company2" required />
                                 <button type="submit" class="btn btn-primary">Update Berkas</button>
                             </div>
@@ -170,13 +182,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
 
                           <div class="mb-3">
-                            <form>
-                            <label class="form-label" for="basic-icon-default-company">foto Ijazah </label>
+                            <form method="POST" enctype="multipart/form-data" action="<?php echo base_url();?>nakes/update_foto_ijazah/<?php echo $this->uri->segment(3);?>">
+                            <label class="form-label" for="basic-icon-default-company">foto Ijazah</label>
                             <div class="input-group input-group-merge">
                               <span id="basic-icon-default-company2" class="input-group-text"
                                 ><i class="bx bx-barcode"></i
                               ></span>
-                              <input type="file" id="basic-icon-default-company" class="form-control" name="foto_str_baru" placeholder=""
+                              <input type="file" id="basic-icon-default-company" class="form-control" name="foto_ijazah_baru" placeholder=""
                                 aria-describedby="basic-icon-default-company2" required />
                                 <button type="submit" class="btn btn-primary">Update Berkas</button>
                             </div>
@@ -184,13 +196,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
 
                           <div class="mb-3">
-                            <form>
+                            <form method="POST" enctype="multipart/form-data" action="<?php echo base_url();?>nakes/update_foto_surat_sehat/<?php echo $this->uri->segment(3);?>">
                             <label class="form-label" for="basic-icon-default-company">foto Surat Sehat </label>
                             <div class="input-group input-group-merge">
                               <span id="basic-icon-default-company2" class="input-group-text"
                                 ><i class="bx bx-barcode"></i
                               ></span>
-                              <input type="file" id="basic-icon-default-company" class="form-control" name="foto_str_baru" placeholder=""
+                              <input type="file" id="basic-icon-default-company" class="form-control" name="foto_surat_sehat_baru" placeholder=""
                                 aria-describedby="basic-icon-default-company2" required />
                                 <button type="submit" class="btn btn-primary">Update Berkas</button>
                             </div>
@@ -198,13 +210,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
 
                           <div class="mb-3">
-                            <form>
+                            <form method="POST" enctype="multipart/form-data" action="<?php echo base_url();?>nakes/update_foto_surat_pernyataan/<?php echo $this->uri->segment(3);?>">
                             <label class="form-label" for="basic-icon-default-company">foto Surat Pernyataan </label>
                             <div class="input-group input-group-merge">
                               <span id="basic-icon-default-company2" class="input-group-text"
                                 ><i class="bx bx-barcode"></i
                               ></span>
-                              <input type="file" id="basic-icon-default-company" class="form-control" name="foto_str_baru" placeholder=""
+                              <input type="file" id="basic-icon-default-company" class="form-control" name="foto_surat_pernyataan_baru" placeholder=""
                                 aria-describedby="basic-icon-default-company2" required />
                                 <button type="submit" class="btn btn-primary">Update Berkas</button>
                             </div>
@@ -212,13 +224,42 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                           <BR>
                           <div class="mb-3" align="center">
-                            <button type="submit" class="btn btn-danger col-lg-4" >SELESAI REVISI</button>&nbsp;
-                            <button  onclick="goBack()" class="btn btn-secondary col-lg-4" >KEMBALI</button>
-                            <script>
-                                function goBack() {
-                                    window.history.back();
-                                }
-                            </script>
+                            <button type="button" class="btn btn-danger col-lg-3" data-bs-toggle="modal" data-bs-target="#modalRevisiSelesai">Selesai Revisi</button>
+                            
+                            <a href="<?php echo base_url();?>nakes/revisi" class="btn btn-secondary col-lg-3" >Kembali</a>
+
+
+                            <!-- Modal Selesai Revisi-->
+                            <div class="modal fade" id="modalRevisiSelesai" tabindex="-1" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content ">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title " id="modalCenterTitle" >Konfirmasi Revisi</h5>
+                                    <button
+                                      type="button"
+                                      class="btn-close"
+                                      data-bs-dismiss="modal"
+                                      aria-label="Close"
+                                    ></button>
+                                  </div>
+                                  <div class="modal-body"> 
+                                    <div class="row">
+                                      <div class="col mb-3 align-center">
+                                        <div class="card-body text-center">
+                                        <p class="card-text" ><font size="5">Anda Yakin Revisi Sudah Selesai ?</font></p>
+                                        <p>Pastikan data sudah sesuai yaa...</p>
+                                        <br>
+                                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                                        <a href="<?php echo base_url();?>nakes/revisi_selesai/<?php echo $this->uri->segment(3);?>" class="btn btn-primary">OK</a>
+                                      </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                          
                           </div>
 
                         </div>

@@ -105,6 +105,151 @@ Class Model_nakes extends CI_Model{
 			
 	}
 
+	public function update_foto_ktp($id_sip,$update_data)
+	{
+		
+		$this->db->where('id',$id_sip);
+		$berhasil = $this->db->update('data_sip', $update_data);
+		if($berhasil){
+			$this->session->set_flashdata('message','<div class="alert alert-success"><b> Document KTP Berhasil Di Upload</b></div>');
+			redirect('nakes/form_revisi_sip/'.$id_sip);
+		}
+		else{
+
+			$this->session->set_flashdata('message','<div class="alert alert-danger"><b> GAGAL !!! </b></div>');
+			redirect('nakes/form_revisi_sip/'.$id_sip);
+		}
+
+			
+	}
+
+	public function update_foto_str($id_sip,$update_data)
+	{
+		
+		$this->db->where('id',$id_sip);
+		$berhasil = $this->db->update('data_sip', $update_data);
+		if($berhasil){
+			$this->session->set_flashdata('message','<div class="alert alert-success"><b> Document STR Berhasil Di Upload</b></div>');
+			redirect('nakes/form_revisi_sip/'.$id_sip);
+		}
+		else{
+
+			$this->session->set_flashdata('message','<div class="alert alert-danger"><b> GAGAL !!! </b></div>');
+			redirect('nakes/form_revisi_sip/'.$id_sip);
+		}
+
+			
+	}
+
+
+	public function update_foto_rop($id_sip,$update_data)
+	{
+		
+		$this->db->where('id',$id_sip);
+		$berhasil = $this->db->update('data_sip', $update_data);
+		if($berhasil){
+			$this->session->set_flashdata('message','<div class="alert alert-success"><b> Document ROP Berhasil Di Upload</b></div>');
+			redirect('nakes/form_revisi_sip/'.$id_sip);
+		}
+		else{
+
+			$this->session->set_flashdata('message','<div class="alert alert-danger"><b> GAGAL !!! </b></div>');
+			redirect('nakes/form_revisi_sip/'.$id_sip);
+		}
+
+			
+	}
+
+	public function update_foto_rtp($id_sip,$update_data)
+	{
+		
+		$this->db->where('id',$id_sip);
+		$berhasil = $this->db->update('data_sip', $update_data);
+		if($berhasil){
+			$this->session->set_flashdata('message','<div class="alert alert-success"><b> Document RTP Berhasil Di Upload</b></div>');
+			redirect('nakes/form_revisi_sip/'.$id_sip);
+		}
+		else{
+
+			$this->session->set_flashdata('message','<div class="alert alert-danger"><b> GAGAL !!! </b></div>');
+			redirect('nakes/form_revisi_sip/'.$id_sip);
+		}
+
+			
+	}
+
+	public function update_foto_ijazah($id_sip,$update_data)
+	{
+		
+		$this->db->where('id',$id_sip);
+		$berhasil = $this->db->update('data_sip', $update_data);
+		if($berhasil){
+			$this->session->set_flashdata('message','<div class="alert alert-success"><b> Document IJAZAH Berhasil Di Upload</b></div>');
+			redirect('nakes/form_revisi_sip/'.$id_sip);
+		}
+		else{
+
+			$this->session->set_flashdata('message','<div class="alert alert-danger"><b> GAGAL !!! </b></div>');
+			redirect('nakes/form_revisi_sip/'.$id_sip);
+		}
+
+			
+	}
+
+	public function update_foto_surat_sehat($id_sip,$update_data)
+	{
+		
+		$this->db->where('id',$id_sip);
+		$berhasil = $this->db->update('data_sip', $update_data);
+		if($berhasil){
+			$this->session->set_flashdata('message','<div class="alert alert-success"><b> Document SURAT SEHAT Berhasil Di Upload</b></div>');
+			redirect('nakes/form_revisi_sip/'.$id_sip);
+		}
+		else{
+
+			$this->session->set_flashdata('message','<div class="alert alert-danger"><b> GAGAL !!! </b></div>');
+			redirect('nakes/form_revisi_sip/'.$id_sip);
+		}
+
+			
+	}
+
+	public function update_foto_surat_pernyataan($id_sip,$update_data)
+	{
+		
+		$this->db->where('id',$id_sip);
+		$berhasil = $this->db->update('data_sip', $update_data);
+		if($berhasil){
+			$this->session->set_flashdata('message','<div class="alert alert-success"><b> Document SURAT PERNYATAAN Berhasil Di Upload</b></div>');
+			redirect('nakes/form_revisi_sip/'.$id_sip);
+		}
+		else{
+
+			$this->session->set_flashdata('message','<div class="alert alert-danger"><b> GAGAL !!! </b></div>');
+			redirect('nakes/form_revisi_sip/'.$id_sip);
+		}
+
+			
+	}
+
+
+	public function revisi_selesai($id_sip,$update_status)
+	{
+		$this->db->where('id',$id_sip);
+		$berhasil = $this->db->update('data_sip', $update_status);
+		if($berhasil){
+			$this->session->set_flashdata('message','<div class="alert alert-success"><b> Revisi Selesai Data Anda Sedang Ditinjau</b></div>');
+			redirect('nakes/revisi');
+		}
+		else{
+
+			$this->session->set_flashdata('message','<div class="alert alert-danger"><b> permohonan GAGAL !!! </b></div>');
+			redirect('nakes/revisi');
+		}
+
+			
+	}
+
 	public function update_sip_diperpanjang($update_data,$id_sip)
 	{
 		$this->db->where('id',$id_sip);
@@ -129,4 +274,6 @@ Class Model_nakes extends CI_Model{
 		$sql = $this->db->query("SELECT * FROM data_sip WHERE id_user = $user_id AND status=5");
 		return $sql->result_array();
 	}
+
+
 }

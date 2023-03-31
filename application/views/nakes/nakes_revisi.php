@@ -14,6 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   <div class="card">
                     <div class="d-flex align-items-end row">
                       <div class="col-sm-7">
+                        <?php echo $this->session->flashdata('message');?>
                         <div class="card-body">
                           <h5 class="card-title text-success"><?php echo $title;?>🎉</h5>
                           <p class="mb-4">

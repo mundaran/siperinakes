@@ -195,10 +195,11 @@
                             </div>
                           </div>
                           <span class="fw-semibold d-block mb-1">Register</span>
-                          <h3 class="card-title mb-2">
-                            <?php 
-                            $user = $this->db->get_where('user', array('role_id' => 2 ))->result_array();
-                            echo $this->db->count_all_results();?></h3>
+                           <?php 
+                            $this->db->like('role_id',21);
+                            $this->db->from('user');
+                            ?>
+                          <h3 class="card-title mb-1"><?php echo $this->db->count_all_results();?></h3>
                           <small class="text-success fw-semibold"> User </small>
                         </div>
                       </div>
@@ -216,11 +217,11 @@
                             </div>
                           </div>
                           <span class="fw-semibold d-block mb-1">SIP Terdaftar </span>
-                          <h3 class="card-title text-nowrap mb-1">
                             <?php 
-                            $sip = $this->db->get_where('data_sip', array('status' => 4 ))->result_array();
-                            echo $this->db->count_all_results();?>
-                          </h3>
+                            $this->db->like('status',3);
+                            $this->db->from('data_sip');
+                            ?>
+                          <h3 class="card-title text-nowrap mb-1"><?php echo $this->db->count_all_results();?></h3>
                           <small class="text-success fw-semibold"><i class=""></i> SIP </small>
                         </div>
                       </div>
@@ -242,7 +243,12 @@
                             </div>
                           </div>
                           <span class="fw-semibold d-block mb-1">SIPA Terdafatar</span>
-                          <h3 class="card-title mb-2">4</h3>
+                          <?php 
+                            $jenis ='Apoteker';
+                            $this->db->like('jenis_sip',$jenis);
+                            $this->db->from('data_sip');
+                            ?>
+                          <h3 class="card-title mb-1"><?php echo $this->db->count_all_results();?></h3>
                           <small class="text-success fw-semibold"> SIPA </small>
                         </div>
                       </div>
@@ -260,7 +266,7 @@
                             </div>
                           </div>
                           <span class="fw-semibold d-block mb-1">SIP Kedaluarsa </span>
-                          <h3 class="card-title text-nowrap mb-1">2</h3>
+                          <h3 class="card-title text-nowrap mb-1">0</h3>
                           <small class="text-success fw-semibold"><i class=""></i> SIP </small>
                         </div>
                       </div>

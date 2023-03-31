@@ -66,7 +66,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <td align="center">
           <p>
             <h3><b>SURAT IZIN PRAKTIK <?php echo strtoupper($detail_sip['jenis_sip']);?> (SIPA) </b></h3>
-            <text style="font-size: 15px;">No :...../.../DINKES/Apt/IX/2022</text>
+            <text style="font-size: 15px;">No :<?php echo $detail_sip['nomor_sip'];?></text>
           </p>
         </td>
       </tr>
@@ -162,7 +162,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <p style="font-size: 16px; line-height:1;">1. Penyelenggaraan pekerjaan/praktik kefarmasian disarana kefarmasian harus selalau mengikuti paradigma pelayanan kefarmasian dan perkembangan ilmu pengetahuan dan teknologi serta peraturan perundang-undangan yang berlaku.</p>
         <p style="font-size: 16px; line-height:1;">2. Surat Izin ini batal demi hukum apabila bertentangan dengan ayat 1 diatas dan pekerjaan kefarmasian dilakukan tidak sesuai dengan yang tercantum dalam surat izin.</p>
         <p style="font-size: 16px; line-height:1;">Catatan :</p>
-        <p></p>
+        <p><?php echo $detail_sip['catatan'];?></p>
       </td>
     </tr>
   </table>

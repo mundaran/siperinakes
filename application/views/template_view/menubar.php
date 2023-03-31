@@ -158,11 +158,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
                       <?php 
-                        if($user['pict']==0){
+                        if(empty($user['pict'])){
                            echo'<img src="'.base_url().'template/assets/img/avatars/user1.png" alt class="w-px-40 h-auto rounded-circle" />';
                         }
                         else{
-                          echo'<img src="'.base_url().'template/assets/img/avatars/'.$user['pict'].'" alt class="w-px-40 h-auto rounded-circle" />';
+                          echo'<img src="'.base_url().'document/foto_user/'.$user['pict'].'.jpg" alt class="w-px-30 h-5 rounded-circle" />';
                         }
 
                       ?>
@@ -178,11 +178,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
                               <?php 
-                                if($user['pict']==0){
+                                if(empty($user['pict'])){
                                    echo'<img src="'.base_url().'template/assets/img/avatars/user1.png" alt class="w-px-40 h-auto rounded-circle" />';
                                 }
                                 else{
-                                  echo'<img src="'.base_url().'template/assets/img/avatars/'.$user['pict'].'" alt class="w-px-40 h-auto rounded-circle" />';
+                                  echo'<img src="'.base_url().'document/foto_user/'.$user['pict'].'.jpg" alt class="w-px-30 h-5 rounded-circle" />';
                                 }
 
                               ?>

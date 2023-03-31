@@ -21,7 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             $datavalidasi = $this->db->query("SELECT * FROM data_sip WHERE id =$id ");
                             $datasip = $datavalidasi->row_array();
                           ?>
-                          <h5 class="card-title text-primary">Form Validasi SIP🎉</h5>
+                          <h5 class="card-title text-primary">Form Validas Revisi SIP Baru🎉</h5>
                           <p class="mb-4">
                             SIP : <?php echo $datasip['jenis_sip'];?>
                           </p>
@@ -33,6 +33,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           <p class="mb-4">
                             PEMOHON : <?php echo $datauser['name'];?>
                           </p>
+                           <?php
+                            $id_sip = $datasip['id'];
+                            $note_revisi = $this->db->query("SELECT * FROM validasi_sip WHERE id_sip = $id_sip ");
+                            $note = $note_revisi->row_array();
+                           ?>
+                           <div class="alert alert-danger" role="alert"> Note : <?php echo $note['keterangan']; ?> ( Mohon di Cek Kembali Sebelum Approval )</div>
 
                         </div>
                       </div>
@@ -110,7 +116,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                         </div>
                         <div class="mb-3">
-                          <label class="form-label" for="basic-icon-address">Hari Praktek</label>
+                          <label class="form-label" for="basic-icon-address">Hari Praktek Dan Jam Praktek</label>
                           <div class="input-group input-group-merge">
                              <span id="basic-icon-address" class="input-group-text"
                               ><i class="bx bx-calendar"></i
@@ -165,7 +171,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <p>Pastikan data sudah sesuai yaa...</p>
                                     <br>
                                     <br>
-                                    <form method="POST" action="<?php echo base_url();?>administrator/aksi_approval_validasi_sip/<?php echo $this->uri->segment(3);?>/<?php echo $datasip['id_user'];?>">
+                                    <form method="POST" action="<?php echo base_url();?>administrator/aksi_approval_revisi_sip_baru/<?php echo $this->uri->segment(3);?>/<?php echo $datasip['id_user'];?>">
                                       <input type="hidden" value="1" name="status_validasi">
                                       <input type="hidden" value="valid" name="keterangan">
                                       <input type="hidden" name="status_sip" value="3">
@@ -201,7 +207,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 ></button>
                               </div>
                               <div class="modal-body">
-                                <form method="POST" action="<?php echo base_url();?>administrator/aksi_revisi_validasi_sip/<?php echo $this->uri->segment(3);?>/<?php echo $datasip['id_user'];?>">
+                                <form method="POST" action="<?php echo base_url();?>administrator/aksi_revisi_revisi_sip_baru/<?php echo $this->uri->segment(3);?>/<?php echo $datasip['id_user'];?>">
                                 <div class="row">
                                   <div class="col mb-3">
                                     <label for="nameWithTitle" class="form-label">Keterangan</label>

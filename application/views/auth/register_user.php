@@ -20,7 +20,7 @@
               <form id="daftar" class="mb-3" action="<?php echo base_url();?>auth/aksi_register_user" method="POST">
               <?php echo $this->session->flashdata('message');?>
                 <div class="mb-3">
-                  <label for="name" class="form-label" type="">Nama</label>
+                  <label for="name" class="form-label" type="">Nama Lengkap Dengan Gelar</label>
                   <input
                     required
                     type="text"

@@ -121,7 +121,28 @@ class Administrator extends CI_Controller {
 	
 	}
 
+	public function list_revisi_sip()
+	{
+		$data ['title'] ='List Revisi';
+		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$data ['data_revisi']=$this->model_administrator->load_list_revisi_sip();
+		$data ['data_revisi_perpanjangan']=$this->model_administrator->load_list_revisi_sip_perpanjangan();
+		$this->load->view('template_view/dashboard_header');
+		$this->load->view('template_view/menubar',$data);
+		$this->load->view('admin/admin_list_revisi',$data);
+		$this->load->view('template_view/dashboard_footer');
+	
+	}
 
+	public function form_validasi_revisi()
+	{
+		$data['title'] ='List Revisi';
+		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$this->load->view('template_view/dashboard_header');
+		$this->load->view('template_view/menubar',$data);
+		$this->load->view('admin/admin_form_validasi_revisi',$data);
+		$this->load->view('template_view/dashboard_footer');
+	}
 
 
 
@@ -131,7 +152,34 @@ class Administrator extends CI_Controller {
 
 
 
-	public function aksi_validasi_sip()
+	public function aksi_approval_validasi_sip()
+	{
+		$data['title'] ='Validasi SIP';
+		$admin = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id_admin = $admin['id'];
+		$id_sip = $this->uri->segment(3);
+		$id_nakes = $this->uri->segment(4);
+		$status_validasi = $this->input->post('status_validasi');
+		$keterangan = $this->input->post('keterangan');
+		$nomor_sip = $this->input->post('nomor_sip');
+		$catatan = $this->input->post('catatan');
+		$tanggal_validasi= date("d-m-Y");
+		$status_sip = $this->input->post('status_sip');
+		$title_validasi = $this->input->post('title_validasi');
+		$data = array(
+			'id_admin'=>$id_admin,
+			'id_nakes'=>$id_nakes,
+			'id_sip'=>$id_sip,
+			'status_validasi' => $status_validasi,
+			'keterangan'=>$keterangan,
+			'tanggal_validasi'=>$tanggal_validasi,
+		);
+		$this->model_administrator->approval_validasi_sip($data,$id_sip,$status_sip,$nomor_sip,$catatan,$title_validasi);
+
+
+	}
+
+	public function aksi_revisi_validasi_sip()
 	{
 		$data['title'] ='Validasi SIP';
 		$admin = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
@@ -151,7 +199,61 @@ class Administrator extends CI_Controller {
 			'keterangan'=>$keterangan,
 			'tanggal_validasi'=>$tanggal_validasi,
 		);
-		$this->model_administrator->validasi_sip($data,$id_sip,$status_sip,$title_validasi);
+		$this->model_administrator->revisi_validasi_sip($data,$id_sip,$status_sip,$title_validasi);
+
+
+	}
+
+
+	public function aksi_approval_revisi_sip_baru()
+	{
+		$data['title'] ='List Revisi';
+		$admin = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id_admin = $admin['id'];
+		$id_sip = $this->uri->segment(3);
+		$id_nakes = $this->uri->segment(4);
+		$status_validasi = $this->input->post('status_validasi');
+		$keterangan = $this->input->post('keterangan');
+		$nomor_sip = $this->input->post('nomor_sip');
+		$catatan = $this->input->post('catatan');
+		$tanggal_validasi= date("d-m-Y");
+		$status_sip = $this->input->post('status_sip');
+		$title_validasi = $this->input->post('title_validasi');
+		$data = array(
+			'id_admin'=>$id_admin,
+			'id_nakes'=>$id_nakes,
+			'id_sip'=>$id_sip,
+			'status_validasi' => $status_validasi,
+			'keterangan'=>$keterangan,
+			'tanggal_validasi'=>$tanggal_validasi,
+		);
+		$this->model_administrator->approval_revisi_sip_baru($data,$id_sip,$status_sip,$nomor_sip,$catatan,$title_validasi);
+
+
+	}
+
+
+	public function aksi_revisi_revisi_sip_baru()
+	{
+		$data['title'] ='List Revisi';
+		$admin = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id_admin = $admin['id'];
+		$id_sip = $this->uri->segment(3);
+		$id_nakes = $this->uri->segment(4);
+		$status_validasi = $this->input->post('status_validasi');
+		$keterangan = $this->input->post('keterangan');
+		$tanggal_validasi= date("d-m-Y");
+		$status_sip = $this->input->post('status_sip');
+		$title_validasi = $this->input->post('title_validasi');
+		$data = array(
+			'id_admin'=>$id_admin,
+			'id_nakes'=>$id_nakes,
+			'id_sip'=>$id_sip,
+			'status_validasi' => $status_validasi,
+			'keterangan'=>$keterangan,
+			'tanggal_validasi'=>$tanggal_validasi,
+		);
+		$this->model_administrator->revisi_revisi_sip_baru($data,$id_sip,$status_sip,$title_validasi);
 
 
 	}

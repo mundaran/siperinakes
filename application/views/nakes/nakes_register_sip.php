@@ -97,35 +97,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                         </div>
                         <div class="mb-3">
-                          <label class="form-label" for="basic-icon-address">Hari Praktek</label>
+                          <label class="form-label" for="basic-icon-address">Hari (Jam Praktek) Format 24 Jam</label>
                           <div class="input-group input-group-merge">
-                            <select id="kecamatan" class="select2 form-select" name="hari_awal">
-                              <option value="Senin" selected>Senin</option>
-                              <option value="Selasa">Selasa</option>
-                              <option value="Rabu">Rabu</option>
-                              <option value="Kamis">Kamis</option>
-                              <option value="Jumat">Jumat</option>
-                              <option value="Sabtu">Sabtu</option>
-                              <option value="Minggu">Minggu</option>
-                            </select>
-                            <span id="basic-icon-address" class="input-group-text">s/d</span>
-                            <select id="kecamatan" class="select2 form-select" name="hari_akhir">
-                              <option value="Senin" selected>Senin</option>
-                              <option value="Selasa">Selasa</option>
-                              <option value="Rabu">Rabu</option>
-                              <option value="Kamis">Kamis</option>
-                              <option value="Jumat">Jumat</option>
-                              <option value="Sabtu">Sabtu</option>
-                              <option value="Minggu">Minggu</option>
-                            </select>
+                            <input type="text" name="hari_jam_praktek" class="form-control" placeholder="Senin(09:30 - 13:30),Selasa(14:30 - 16:00)" required />
                           </div>
                         </div>
                         <div class="mb-3">
-                          <label class="form-label" for="basic-icon-address">Jam Praktek</label>
+                          <label class="form-label" for="basic-icon-address">Catatan </label>
                           <div class="input-group input-group-merge">
-                            <input type="time" name="jam_buka" class="form-control"  required />
-                            <span id="basic-icon-address" class="input-group-text">s/d</span>
-                            <input type="time" name="jam_tutup" class="form-control" required />
+                            <input type="text" name="catatan" class="form-control" placeholder="Khusus Apoteker/TKK Jika Ada" />
                           </div>
                         </div>
                         
@@ -166,11 +146,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               }
 
                               else{ if($dataSip['status']==3){
-                                echo '<span class="badge bg-label-info me-1"> <a href="'.base_url().'nakes/upload_berkas/'.$dataSip['id'].'" > Approved (Lihat) </a> </span>';
+                                echo '<span class="badge bg-label-info me-1"> <a href="'.base_url().'nakes/manajemen_sip" > Approved (Lihat) </a> </span>';
                                 }
 
                                 else{ if($dataSip['status']==4){
-                                echo '<span class="badge bg-label-info me-1"> <a href="'.base_url().'nakes/upload_berkas/'.$dataSip['id'].'" > Revisi Data (Lihat) </a> </span>';
+                                echo '<span class="badge bg-label-info me-1"> <a href="'.base_url().'nakes/revisi/" > Revisi Data (Lihat) </a> </span>';
                                 }
 
                                 else{

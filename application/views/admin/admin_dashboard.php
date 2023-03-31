@@ -104,7 +104,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
 
                     <div class="col-lg-3 col-md-12 col-6 mb-4">
-                      <a href="" class="card">
+                      <a href="<?php echo base_url();?>administrator/list_revisi_sip" class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
@@ -115,9 +115,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               />
                             </div>
                           </div>
-                          <span class="fw-semibold d-block mb-1">SIP Kedaluarsa </span>
-                          <h3 class="card-title text-nowrap mb-1">0</h3>
-                          <small class="text-secondary fw-semibold"><i class=""></i> Perlu Reminder </small>
+                          <span class="fw-semibold d-block mb-1">SIP Revisi </span>
+                          <?php 
+                            $status = 4;
+                            $this->db->like('status', $status);
+                            $this->db->from('data_sip');
+                            ?>
+                          <h3 class="card-title text-nowrap mb-1"><?php echo $this->db->count_all_results();?></h3>
+                          <small class="text-secondary fw-semibold"><i class=""></i> Sedang Di Revisi </small>
                         </div>
                       </a>
                     </div>
@@ -127,7 +132,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <div class="row">
                 <div class="col-12 col-lg-12 col-md-12 order-1 ">
                 <div class="card">
-                <h5 class="card-header">Riwayat User</h5>
+                <h5 class="card-header"></h5>
                 <div class="card-body mb-5">
                   <div class="row">
                     <!-- Custom content with heading -->

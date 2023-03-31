@@ -65,8 +65,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <tr>
         <td align="center">
           <p>
-            <h3><b>SURAT IZIN PRAKTIK (SIP) <?php echo strtoupper($detail_sip['jenis_sip']);?></b></h3>
-            <text style="font-size: 15px;">No :...../.../DINKES/drg/XII/2022</text>
+            <h3><b>SURAT IZIN PRAKTIK <?php echo strtoupper($detail_sip['jenis_sip']);?> (SIPA) </b></h3>
+            <text style="font-size: 15px;">No :<?php echo $detal_sip['nomor_sip'];?></text>
           </p>
         </td>
       </tr>
@@ -76,7 +76,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <tr>
         <td align="justify">
           <p>
-            <text style="font-size: 16px; line-height:1.5; ">Berdasarkan Peraturan Menteri Kesehatan Republik Indonesia Nomor : 2052/Menkes/Per/X2011 tentang Izin Praktek dan Pelaksanaan Praktek Kedokteran, yang bertanda tangan di bawah ini, Kepala Dinas Kesehatan Kabupaten Bojonegoro memberikan izin Praktek Kepada :</text>
+            <text style="font-size: 16px; line-height:1.5; ">Berdasarkan Peraturan Pemerintah No.31 Tahun 2016 Tentang, Pekerjaan Kefarmasian dan Peraturan Mentri Kesehatan Republik Indonesia : 889/MENKES/PER/V/2011 tentan Registrasi, Izin Praktek dan Izin Kerja Tenaga Kefarmasian, yang bertanda tangan di bawah ini, Kepala Dinas Kesehatan Kabupaten Bojonegoro memberikan izin Praktek Kepada :</text>
           </p>
         </td>
       </tr>
@@ -97,7 +97,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </td>
       </tr>
   </table>
-  <br>
   <table border="0" cellspacing="0" cellpadding="0" width="90%" height="100%">
       <tr>
         <td align="left">Tempat/Tgl.Lahir</td>
@@ -120,6 +119,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <td>&nbsp;</td>
       </tr>
       <tr>
+        <td align="left">Nomor STRA</td>
+        <td >:</td>
+        <td ><?php echo $detail_sip ['no_str'];?> Berlaku s/d <?php echo $detail_sip['masa_berlaku_str'];?></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr|>
+      <tr>
+        <td align="left">Untuk Praktek Sebagai</td>
+        <td >:</td>
+        <td ><?php echo $detail_sip ['jenis_praktek'];?></td>
+      </tr>
+       <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
         <td align="left">Alamat Tempat Praktik</td>
         <td >:</td>
         <td ><?php echo $detail_sip ['tempat_praktek'];?></td>
@@ -130,44 +149,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <td>&nbsp;</td>
       </tr>
       <tr>
-        <td align="left">Nomor STR</td>
-        <td >:</td>
-        <td ><?php echo $detail_sip ['no_str'];?> Berlaku s/d <?php echo $detail_sip['masa_berlaku_str'];?></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-      </tr|>
-      <tr>
-        <td align="left">Nomor Rekomendasi OP</td>
-        <td >:</td>
-        <td ><?php echo $detail_sip ['no_rekomendasi_op'];?></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-      </tr|>
-      <tr>
-        <td align="left">Jenis Praktek</td>
-        <td >:</td>
-        <td ><?php echo $detail_sip ['jenis_praktek'];?></td>
-      </tr>
-       <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-      </tr|>
-      <tr>
         <td align="left">Hari/Jam</td>
         <td >:</td>
         <td ><?php echo $detail_sip ['hari_awal_praktek'];?>-<?php echo $detail_sip ['hari_akhir_praktek'];?>&nbsp;/&nbsp;<?php echo $detail_sip ['jam_buka'];?>-<?php echo $detail_sip ['jam_tutup'];?></td>
       </tr>
   </table>
-  <br>
-  <br>
-  <br>
+
+  <table border="0" cellspacing="0" cellpadding="0" width="90%" height="60%">
+    <tr>
+      <td align="justify">
+        <p>Dengan Ketentuan Sebagai Berikut :</p>
+        <p style="font-size: 16px; line-height:1;">1. Penyelenggaraan pekerjaan/praktik kefarmasian disarana kefarmasian harus selalau mengikuti paradigma pelayanan kefarmasian dan perkembangan ilmu pengetahuan dan teknologi serta peraturan perundang-undangan yang berlaku.</p>
+        <p style="font-size: 16px; line-height:1;">2. Surat Izin ini batal demi hukum apabila bertentangan dengan ayat 1 diatas dan pekerjaan kefarmasian dilakukan tidak sesuai dengan yang tercantum dalam surat izin.</p>
+        <p style="font-size: 16px; line-height:1;">Catatan :</p>
+        <p><?php echo $detal_sip['catatan'];?></p>
+      </td>
+    </tr>
+  </table>
 
   <?php
   $path3 = 'document/foto_user/'.$datauser['pict'].'.jpg';
@@ -178,13 +176,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
   <table border="0" cellspacing="0" cellpadding="0" width="90%" height="100%">
       <tr>
-        <td width="144" height="211">&nbsp;</td>
-        <td width="144" height="211">&nbsp;</td>
+        <td width="150" height="211" colspan="2" align="left" valign ="bottom" >&nbsp;
+          <p style="font-size: 14px; line-height:1;">&nbsp;Tembusan disampaikan kepada Yth:</p>
+          <p style="font-size: 14px; line-height:1;">&nbsp;1.Direktur Jendral Bina Kefarmasian dan Alat Kesehatan</p>
+          <p style="font-size: 14px; line-height:1;">&nbsp;2.Ketua Komite Farmasi Nasional</p>
+          <p style="font-size: 14px; line-height:1;">&nbsp;3.Kepala Dinas Kesehatan Provinsi Jawa Timur</p>
+        </td>
+        <td width="100" height="211">&nbsp;</td>
         <td align="right" valign ="top"><img src="<?php echo $base64?>" width="144" height="211"></td>
         <td align="left" valign ="top" >
           <p>&nbsp;Ditetapkan di : Bojonegoro</p>
           <p>&nbsp;Pada Tanggal : <?php echo date('d-m-Y');?></p>
-          <br>
           <p>&nbsp;KEPALA DINAS KESEHATAN</p>
           <p>&nbsp;KABUPATEN BOJONEGORO</p>
           <br>
@@ -198,11 +200,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <table border="0" cellspacing="0" cellpadding="0" width="90%" height="100%">
       <tr>
         <td align="left" valign ="top" >
-          <p>&nbsp;Tembusan :</p>
-          <p>&nbsp;1.Menteri Kesehatan</p>
-          <p>&nbsp;2.Ketua Konsil Kedokteran Indonesia</p>
-          <p>&nbsp;3.Kepala Dinas Kesehatan Provinsi Jawa Timur</p>
-          <p>&nbsp;4.Organisasi Profesi</p>
+          
         <td>
       </tr>
   </table>

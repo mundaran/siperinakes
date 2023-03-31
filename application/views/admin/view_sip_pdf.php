@@ -66,7 +66,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <td align="center">
           <p>
             <h3><b>SURAT IZIN PRAKTIK (SIP) <?php echo strtoupper($detail_sip['jenis_sip']);?></b></h3>
-            <text style="font-size: 15px;">No :...../.../DINKES/drg/XII/2022</text>
+            <text style="font-size: 15px;">No :<?php echo $detail_sip['nomor_sip'];?></text>
           </p>
         </td>
       </tr>
