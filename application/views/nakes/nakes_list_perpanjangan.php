@@ -42,6 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <thead>
                               <tr>
                                 <th>Jenis Sip</th>
+                                <th>Nomor SIP</th>
                                 <th>Tanggal Request</th>
                                 <th>Status</th>
                               </tr>
@@ -53,7 +54,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                   $id_list= $sip['id'];
                                   $data_list = $this->db->query("SELECT * FROM riwayat_perpanjangan WHERE id_sip = $id_list ");
                                   $list= $data_list->row_array();
-
+                                  if($sip['status']==8){
+                                    $status_perp ='Sedang Ditinjau';
+                                  } elseif($sip['status']==7){
+                                    $status_perp ='<a href="'.base_url().'nakes/form_revisi_perpanjangan/'.$sip['id'].'" class="btn btn-sm btn-danger">REVISI PERPANJANGAN</a>';
+                                  }
 
                                   echo '
 
@@ -61,12 +66,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$sip['jenis_sip'].'</strong></td>
 
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$sip['nomor_sip'].'</strong></td>
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$list['tanggal'].'</strong></td>
 
-                                    <td>
-                                      Sedang Ditinjau
-
-                                    </td>
+                                    <td>'.$status_perp.'</td>
 
                                     
                                   </tr>

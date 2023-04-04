@@ -116,16 +116,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               ><i class="bx bx-calendar"></i
                             ></span>
                             <input type="text" name="jenis_praktek" class="form-control" placeholder="" value="&nbsp;&nbsp;<?php echo $datasip['hari_awal_praktek']?>" disabled />
-                            <span id="basic-icon-address" class="input-group-text">s/d</span>
-                            <input type="text" name="jenis_praktek" class="form-control" placeholder="" value="&nbsp;&nbsp;<?php echo $datasip['hari_akhir_praktek']?>" disabled />
-                          </div>
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label" for="basic-icon-address">Jam Praktek</label>
-                          <div class="input-group input-group-merge">
-                            <input type="text" name="jam_buka" class="form-control"  value="&nbsp;&nbsp;<?php echo $datasip['jam_buka']?>" disabled />
-                            <span id="basic-icon-address" class="input-group-text">s/d</span>
-                            <input type="text" name="jam_tutup" class="form-control" value="&nbsp;&nbsp;<?php echo $datasip['jam_tutup']?>" disabled />
                           </div>
                         </div>
                         <button
@@ -144,6 +134,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           data-bs-target="#modalRevisi"
                         >Revisi
                         </button>
+                        <button  onclick="goBack()" class="btn btn-lg btn-secondary" >Kembali</button>
+                        <script>
+                            function goBack() {
+                                window.history.back();
+                            }
+                        </script>
 
 
 
@@ -178,13 +174,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         $id_validator = $validator['id_admin'];
                                         $data_admin = $this->db->query("SELECT * FROM user WHERE id =$id_validator");
                                         $admin = $data_admin->row_array();
-                                        
                                       ?>
-                                      <input type="text" name="validator_sebelumnya" value="<?php echo $admin['name']?>">
+                                      <input type="hidden" name="validator_sebelumnya" value="<?php echo $admin['name']?>">
                                       <input type="hidden" value="1" name="status_validasi">
                                       <input type="hidden" value="valid" name="keterangan">
                                       <input type="hidden" name="status_sip" value="3">
+                                      <input type="text" class="form-control" name="nomor_sip" placeholder="Masukan Nomor SIP Baru">
+                                      <br>
+                                      <input type="text" class="form-control" name="catatan" placeholder="Masukan Catatan Jika Ada">
                                     <input type="hidden" name="title_validasi" value='<div class="alert alert-success" role="alert"><b> Data Telah Di Approve </b></div>'>
+                                    <br>
                                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                                       Close
                                     </button>
@@ -212,12 +211,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 ></button>
                               </div>
                               <div class="modal-body">
-                                <form method="POST" action="<?php echo base_url();?>administrator/aksi_validasi_sip/<?php echo $this->uri->segment(3);?>/<?php echo $datasip['id_user'];?>">
+                                <form method="POST" action="<?php echo base_url();?>administrator/aksi_revisi_perpanjangan/<?php echo $this->uri->segment(3);?>/<?php echo $datasip['id_user'];?>">
+                                  <?php 
+                                    $id = $datasip['id'];
+                                    $validatorData = $this->db->query("SELECT * FROM validasi_sip WHERE id_sip= $id ");
+                                    $validator = $validatorData->row_array();
+
+                                    $id_validator = $validator['id_admin'];
+                                    $data_admin = $this->db->query("SELECT * FROM user WHERE id =$id_validator");
+                                    $admin = $data_admin->row_array();
+                                  ?>
                                 <div class="row">
                                   <div class="col mb-3">
                                     <label for="nameWithTitle" class="form-label">Keterangan</label>
+                                    <input type="hidden" name="validator_sebelumnya" value="<?php echo $admin['name']?>">
                                     <input type="hidden" value="2" name="status_validasi">
-                                    <input type="hidden" name="status_sip" value="4">
+                                    <input type="hidden" name="status_sip" value="7">
                                     <input type="hidden" name="title_validasi" value='<div class="alert alert-info" role="alert"><b> Permohonan Revisi Selesai </b></div>'>
                                     <input
                                       type="text"
@@ -270,12 +279,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 data-bs-parent="#accordionExample"
                               >
                                 <div class="accordion-body">
-                                  <?php if(empty($datasip['pas_foto'])){
-                                    echo "data belum disi";
+                                  <?php if(empty($datauser['pict'])){
+                                    echo "foto belum disi";
                                   }
 
                                   else{
-                                    echo '<embed src="'.base_url().'document/pas_foto/'.$datasip['pas_foto'].'.pdf" width="550" height="500"> </embed>';
+                                    echo '<img src="'.base_url().'document/foto_user/'.$datauser['pict'].'.jpg" width="550" height="500">';
                                   }
 
                                   ?>

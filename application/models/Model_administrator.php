@@ -137,19 +137,65 @@ Class Model_administrator extends CI_Model{
 	}
 
 
-	public function validasi_perpanjangan($data,$id_sip,$status_sip,$validator_sebelumnya,$title_validasi,$nama_admin)
+	public function validasi_perpanjangan($data,$id_sip,$status_sip,$nomor_sip,$catatan,$validator_sebelumnya,$title_validasi,$nama_admin)
 	{
 		$this->db->where('id_sip',$id_sip);
 		$update_validasi= $this->db->update('validasi_sip', $data);
 
 	    if($update_validasi){	
 	    	$status = $status_sip ;
-	    	$update_status = array( 'status'=>$status );
+	    	$update_status = array( 
+	    		'status'=>$status,
+	    		'nomor_sip'=>$nomor_sip,
+	    		'catatan'=>$catatan
+	    	 );
 			$this->db->where('id',$id_sip);
 			$up_data_sip = $this->db->update('data_sip', $update_status);
 
 			if ($up_data_sip) {
 				$up_status = 'done';
+				$data_riwayat=array(
+					'status' => $up_status,
+					'approver_sebelumnya'=>$validator_sebelumnya,
+					'approver_perpanjangan'=>$nama_admin
+				);
+
+				$status_per = 'undone';
+				$where =array(
+					'id_sip' => $id_sip,
+					'status'=>$status_per
+				);
+				$this->db->where($where);
+				$up_riwayat = $this->db->update('riwayat_perpanjangan', $data_riwayat);
+				$this->session->set_flashdata('message',$title_validasi);
+				redirect('administrator/perpanjangan_sip');
+			} else{
+				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b> Gagal Validasi  </b></div>');
+				redirect('administrator/perpanjangan_sip');
+			}
+	    }
+	    else
+	    {
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b> Gagal Validasi  </b></div>');
+			redirect('adminsitrator/form_validasi_sip/'.$id_sip);
+	    }
+	}
+
+	public function revisi_perpanjangan($data,$id_sip,$status_sip,$validator_sebelumnya,$title_validasi,$nama_admin)
+	{
+		$this->db->where('id_sip',$id_sip);
+		$update_validasi= $this->db->update('validasi_sip', $data);
+
+	    if($update_validasi){	
+	    	$status = $status_sip ;
+	    	$update_status = array( 
+	    		'status'=>$status,
+	    	 );
+			$this->db->where('id',$id_sip);
+			$up_data_sip = $this->db->update('data_sip', $update_status);
+
+			if ($up_data_sip) {
+				$up_status = 'undone';
 				$data_riwayat=array(
 					'status' => $up_status,
 					'approver_sebelumnya'=>$validator_sebelumnya,

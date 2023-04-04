@@ -14,10 +14,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   <div class="card">
                     <?php echo $this->session->flashdata('message');?>
                     <div class="card-header d-flex justify-content-between align-items-center">
-                      <h5 class="mb-0">Perpanjang SIP</h5>
-                      <span class="alert alert-danger" role="alert"> Pastikan Persyaratan Sudah Siap</span>
-                      
+                      <h5 class="mb-0">Form Revisi Permohonan Perpanjang SIP</h5>
+                      <?php
+                        $id_sip = $this->uri->segment(3);
+                        $note_sip = $this->db->query("SELECT * FROM validasi_sip WHERE id_sip=$id_sip");
+                        $note = $note_sip->row_array();
+
+                      ?>
+                      <div class="alert alert-danger" role="alert"> Note : <?php echo $note['keterangan']; ?>
+                        <p>Revisi Sesuai Note Saja, Jika Sudah Klik Selesai </p>
+                      </div>
                     </div>
+                    <?php
+                      $id_sip = $this->uri->segment(3);
+                      $rev_sip = $this->db->query("SELECT * FROM data_sip WHERE id=$id_sip");
+                      $datasip = $rev_sip->row_array();
+
+                    ?>
 
                     <div class="d-flex align-items-end row">
                       <div class="col-sm-12">

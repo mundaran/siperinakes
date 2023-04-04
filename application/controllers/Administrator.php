@@ -262,7 +262,36 @@ class Administrator extends CI_Controller {
 	public function aksi_validasi_perpanjangan()
 	{
 
-		$data['title'] ='Validasi SIP';
+		$data['title'] ='Permohonan Perpanjangan SIP';
+		$admin = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id_admin = $admin['id'];
+		$nama_admin = $admin['name'];
+		$validator_sebelumnya = $this->input->post('validator_sebelumnya');
+		$id_sip = $this->uri->segment(3);
+		$id_nakes = $this->uri->segment(4);
+		$status_validasi = $this->input->post('status_validasi');
+		$nomor_sip = $this->input->post('nomor_sip');
+		$catatan = $this->input->post('catatan');
+		$keterangan = $this->input->post('keterangan');
+		$tanggal_validasi= date("d-m-Y");
+		$status_sip = $this->input->post('status_sip');
+		$title_validasi = $this->input->post('title_validasi');
+		$data = array(
+			'id_admin'=>$id_admin,
+			'id_sip'=>$id_sip,
+			'status_validasi' => $status_validasi,
+			'keterangan'=>$keterangan,
+			'tanggal_validasi'=>$tanggal_validasi,
+		);
+		$this->model_administrator->validasi_perpanjangan($data,$id_sip,$status_sip,$nomor_sip,$catatan,$validator_sebelumnya,$title_validasi,$nama_admin);
+
+
+	}
+
+	public function aksi_revisi_perpanjangan()
+	{
+
+		$data['title'] ='Permohonan Perpanjangan SIP';
 		$admin = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$id_admin = $admin['id'];
 		$nama_admin = $admin['name'];
@@ -281,7 +310,7 @@ class Administrator extends CI_Controller {
 			'keterangan'=>$keterangan,
 			'tanggal_validasi'=>$tanggal_validasi,
 		);
-		$this->model_administrator->validasi_perpanjangan($data,$id_sip,$status_sip,$validator_sebelumnya,$title_validasi,$nama_admin);
+		$this->model_administrator->revisi_perpanjangan($data,$id_sip,$status_sip,$validator_sebelumnya,$title_validasi,$nama_admin);
 
 
 	}

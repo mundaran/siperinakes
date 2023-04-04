@@ -143,6 +143,16 @@ class Nakes extends CI_Controller {
 		$this->load->view('template_view/dashboard_footer');
 	}
 
+	public function form_revisi_perpanjangan()
+	{
+		$data['title'] ='List Perpanjangan';
+		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$this->load->view('template_view/dashboard_header');
+		$this->load->view('template_view/menubar',$data);
+		$this->load->view('nakes/nakes_form_revisi_perpanjangan',$data);
+		$this->load->view('template_view/dashboard_footer');
+	}
+
 	//batas-tampilan dan aksi//
 
 	public function aksi_upload_berkas()
@@ -405,7 +415,7 @@ class Nakes extends CI_Controller {
 		$no_str_baru = $this->input->post('no_str_baru');
 		$masa_berlaku_str = $this->input->post('masa_berlaku_str');
 
-		$file_name_sip_lama = 'sip-lama'.$id_sip.'-'.$id_user.'-'.$date;
+		$file_name_sip_lama = 'sip-lama-'.$id_sip.'-'.$id_user.'-'.$date;
 		$config['upload_path']          = './document/foto_sip_lama';
 		$config['allowed_types']        = 'pdf';
 		$config['file_name']            = $file_name_sip_lama;
@@ -421,15 +431,15 @@ class Nakes extends CI_Controller {
     		 $this->session->set_flashdata('message',$error['error']);
 			 redirect('nakes/form_perpanjangan_sip/'.$id_user);
 		} else {
-			$file_name_str_baru = 'str-'.$id_user.'-'.$id_sip;
+			$file_name_str_baru = 'str-'.$id_user.'-'.$id_sip.'-'.$date;
 			$config['upload_path']          = './document/str';
 			$config['allowed_types']        = 'pdf';
 			$config['file_name']            = $file_name_str_baru;
-			$config['overwrite'] = true;
+			$config['overwrite'] = false;
 			$config['max_size']             = 1000;
 			$config['max_width']            = 1024;
 			$config['max_height']           = 768;
-			$foto_sip_lama = $this->upload->data();
+			$foto_sip_baru = $this->upload->data();
 			$this->load->library('upload', $config);
 	 		$this->upload->initialize($config);
 			if ( !$this->upload->do_upload('foto_str_baru')){
@@ -438,7 +448,24 @@ class Nakes extends CI_Controller {
 				 $this->session->set_flashdata('message',$error['error']);
 				 redirect('nakes/form_perpanjangan_sip/'.$id_user);
 			} else {
-				$str_up = $this->upload->data();
+				$file_name_rop_baru = 'rop-'.$id_user.'-'.$id_sip.'-'.$date;
+				$config['upload_path']          = './document/rop';
+				$config['allowed_types']        = 'pdf';
+				$config['file_name']            = $file_name_str_baru;
+				$config['overwrite'] = false;
+				$config['max_size']             = 1000;
+				$config['max_width']            = 1024;
+				$config['max_height']           = 768;
+				$foto_rop_baru = $this->upload->data();
+				$this->load->library('upload', $config);
+		 		$this->upload->initialize($config);
+				if ( !$this->upload->do_upload('foto_rop_baru')){
+				 	 $this->session->set_flashdata('message', 'Upload-gagal' );
+				 	 $error = array('error' => $this->upload->display_errors());
+					 $this->session->set_flashdata('message',$error['error']);
+					 redirect('nakes/form_perpanjangan_sip/'.$id_user);
+			}else{
+				$rop_up = $this->upload->data();
 				$status = 'undone';
 
 				$insert_data =  [
@@ -447,25 +474,29 @@ class Nakes extends CI_Controller {
 					'id_user'  => $id_user,
 					'sip_lama' => $file_name_sip_lama, 
 					'str_baru' => $file_name_str_baru,
+					'rop_baru' => $file_name_rop_baru,
 					'status'   => $status,
 					'tanggal'  => $date,
 				];
 
 				$insert = $query= $this->db->insert('riwayat_perpanjangan', $insert_data);
 
-				if ($insert) {
-					$update_data =[
-						'no_str' => $no_str_baru,
-						'masa_berlaku_str' => $masa_berlaku_str,
-						'foto_str' => $file_name_str_baru,
-						'status' => 5,
+					if ($insert) {
+						$update_data =[
+							'no_str' => $no_str_baru,
+							'masa_berlaku_str' => $masa_berlaku_str,
+							'foto_str' => $file_name_str_baru,
+							'rekomendasi_org_p'=>$file_name_rop_baru,
+							'status' => 5,
 
-					];
-					$this->model_nakes->update_sip_diperpanjang($update_data,$id_sip);
-				} else{
-					$this->session->set_flashdata('message', 'Gagal Perpanjangan');
-					redirect('nakes/form_perpanjangan_sip/'.$id_user);
+						];
+						$this->model_nakes->update_sip_diperpanjang($update_data,$id_sip);
+					} else{
+						$this->session->set_flashdata('message', 'Gagal Perpanjangan');
+						redirect('nakes/form_perpanjangan_sip/'.$id_user);
+					}
 				}
+
 			}
 		}
 	}

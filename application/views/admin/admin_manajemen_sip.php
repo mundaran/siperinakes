@@ -42,6 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               <tr>
                                 <th>Nama Pemohon</th>
                                 <th>Jenis Sip</th>
+                                <th>Nomor Sip</th>
                                 <th>Tanggal Approve</th>
                                 <th>Tanggal Berakhir</th>
                                 <th>Action</th>
@@ -66,6 +67,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$user['name'].'</strong></td>
 
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$data['jenis_sip'].'</strong></td>
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$data['nomor_sip'].'</strong></td>
 
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$validasi['tanggal_validasi'].'</strong></td>
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$data['masa_berlaku_str'].'</strong></td>
