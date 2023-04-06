@@ -70,6 +70,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             
           </div>
 
+          <?php
+          $id_user=$user['id'];
+          $status = 4;
+          $this->db->like('id_user',$id_user); 
+          $this->db->like('status', $status);
+          $this->db->from('data_sip');
+          $a = $this->db->count_all_results();
+          ?>
+
+          <?php
+          $id_user=$user['id'];
+          $status = 7;
+          $this->db->like('id_user',$id_user); 
+          $this->db->like('status', $status);
+          $this->db->from('data_sip');
+          $b = $this->db->count_all_results();
+          ?>
 
           <ul class="menu-inner py-1">
            <?php 
@@ -98,8 +115,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     $subMenu = $this->db->query($querySubMenu)->result_array();
 
                     foreach($subMenu as $sm){
+
                     if($sm['title'] == $title){
-                            echo '<li class="menu-item active">'.
+                            if($sm['badges']==1){
+                              echo '<li class="menu-item active">'.
+                                '<a href="'.base_url($sm['url']).'" class="menu-link">'.
+                                  '<i class="menu-icon '.$sm['icon'].'"></i>
+                                  <div data-i18n="Analytics">'.$sm['title'].'</div>&nbsp &nbsp &nbsp
+                                  <span class="badge badge-center rounded-pill bg-primary">'.$a.'</span>
+                                </a>
+                              </li>';
+                            }elseif($sm['badges']==2){
+                              echo '<li class="menu-item active">'.
+                                '<a href="'.base_url($sm['url']).'" class="menu-link">'.
+                                  '<i class="menu-icon '.$sm['icon'].'"></i>
+                                  <div data-i18n="Analytics">'.$sm['title'].'</div>&nbsp &nbsp 
+                                  <span class="badge badge-center rounded-pill bg-primary">'.$b.'</span>
+                                </a>
+                              </li>';
+                            }elseif(empty($sm['badges'])){
+                              echo '<li class="menu-item active">'.
                                 '<a href="'.base_url($sm['url']).'" class="menu-link">'.
                                   '<i class="menu-icon '.$sm['icon'].'"></i>
                                   <div data-i18n="Analytics">'.$sm['title'].'</div>
@@ -107,13 +142,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               </li>';
                             }
 
+                            }
+
                           else {
-                            echo '<li class="menu-item">'.
+                            if($sm['badges']==1){
+                              echo '<li class="menu-item">'.
+                                '<a href="'.base_url($sm['url']).'" class="menu-link">'.
+                                  '<i class="menu-icon '.$sm['icon'].'"></i>
+                                  <div data-i18n="Analytics">'.$sm['title'].'</div>&nbsp &nbsp &nbsp
+                                  <span class="badge badge-center rounded-pill bg-label-primary">'.$a.'</span>
+                                </a>
+                              </li>';
+                            }elseif($sm['badges']==2){
+                              echo '<li class="menu-item">'.
+                                '<a href="'.base_url($sm['url']).'" class="menu-link">'.
+                                  '<i class="menu-icon '.$sm['icon'].'"></i>
+                                  <div data-i18n="Analytics">'.$sm['title'].'</div>&nbsp &nbsp
+                                  <span class="badge badge-center rounded-pill bg-label-primary">'.$b.'</span>
+                                </a>
+                              </li>';
+                            }elseif(empty($sm['badges'])){
+                              echo '<li class="menu-item">'.
                                 '<a href="'.base_url($sm['url']).'" class="menu-link">'.
                                   '<i class="menu-icon '.$sm['icon'].'"></i>
                                   <div data-i18n="Analytics">'.$sm['title'].'</div>
                                 </a>
                               </li>';
+                            }
                           }
    
                     }

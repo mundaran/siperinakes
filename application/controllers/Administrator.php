@@ -15,10 +15,10 @@ class Administrator extends CI_Controller {
 		$data['title'] ='Dashboard Admin';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		
-		$this->load->view('template_view/dashboard_header');
-		$this->load->view('template_view/menubar',$data);
+		$this->load->view('template_view/admin_template/dashboard_header');
+		$this->load->view('template_view/admin_template/menubar',$data);
 		$this->load->view('admin/admin_dashboard',$data);
-		$this->load->view('template_view/dashboard_footer');
+		$this->load->view('template_view/admin_template/dashboard_footer');
 	}
 
 	public function validasi_sip()
@@ -27,10 +27,10 @@ class Administrator extends CI_Controller {
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$data ['sip'] = $this->model_administrator->load_data_sip();
 
-		$this->load->view('template_view/dashboard_header');
-		$this->load->view('template_view/menubar',$data);
+		$this->load->view('template_view/admin_template/dashboard_header');
+		$this->load->view('template_view/admin_template/menubar',$data);
 		$this->load->view('admin/admin_validasi',$data);
-		$this->load->view('template_view/dashboard_footer');
+		$this->load->view('template_view/admin_template/dashboard_footer');
 	}
 
 	public function form_validasi_sip()
@@ -39,10 +39,10 @@ class Administrator extends CI_Controller {
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$data ['sip'] = $this->model_administrator->load_data_sip();
 
-		$this->load->view('template_view/dashboard_header');
-		$this->load->view('template_view/menubar',$data);
+		$this->load->view('template_view/admin_template/dashboard_header');
+		$this->load->view('template_view/admin_template/menubar',$data);
 		$this->load->view('admin/admin_form_validasi',$data);
-		$this->load->view('template_view/dashboard_footer');
+		$this->load->view('template_view/admin_template/dashboard_footer');
 	}
 
 	public function perpanjangan_sip()
@@ -50,10 +50,10 @@ class Administrator extends CI_Controller {
 		$data['title'] ='Permohonan Perpanjangan SIP';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$data ['sip'] = $this->model_administrator->load_data_perpanjangan_sip();
-		$this->load->view('template_view/dashboard_header');
-		$this->load->view('template_view/menubar',$data);
+		$this->load->view('template_view/admin_template/dashboard_header');
+		$this->load->view('template_view/admin_template/menubar',$data);
 		$this->load->view('admin/admin_perpanjangan_sip',$data);
-		$this->load->view('template_view/dashboard_footer');
+		$this->load->view('template_view/admin_template/dashboard_footer');
 	}
 
 
@@ -63,10 +63,10 @@ class Administrator extends CI_Controller {
 		$data['title'] ='Manajemen SIP';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$data ['data_sip'] = $this->model_administrator->load_manajemen_sip();
-		$this->load->view('template_view/dashboard_header');
-		$this->load->view('template_view/menubar',$data);
+		$this->load->view('template_view/admin_template/dashboard_header');
+		$this->load->view('template_view/admin_template/menubar',$data);
 		$this->load->view('admin/admin_manajemen_sip',$data);
-		$this->load->view('template_view/dashboard_footer');
+		$this->load->view('template_view/admin_template/dashboard_footer');
 	}
 
 	public function detail_sip()
@@ -74,10 +74,10 @@ class Administrator extends CI_Controller {
 		$data['title'] ='Manajemen SIP';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$data['detail_sip']= $this->db->get_where('data_sip', array('id'=>$this->uri->segment(3)))->row_array();
-		$this->load->view('template_view/dashboard_header');
-		$this->load->view('template_view/menubar',$data);
+		$this->load->view('template_view/admin_template/dashboard_header');
+		$this->load->view('template_view/admin_template/menubar',$data);
 		$this->load->view('admin/admin_detail_sip',$data);
-		$this->load->view('template_view/dashboard_footer');
+		$this->load->view('template_view/admin_template/dashboard_footer');
 	}
 
 	public function print_sip()
@@ -103,10 +103,10 @@ class Administrator extends CI_Controller {
 	{
 		$data['title'] ='Permohonan Perpanjangan SIP';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
-		$this->load->view('template_view/dashboard_header');
-		$this->load->view('template_view/menubar',$data);
+		$this->load->view('template_view/admin_template/dashboard_header');
+		$this->load->view('template_view/admin_template/menubar',$data);
 		$this->load->view('admin/admin_form_validasi_perpanjangan',$data);
-		$this->load->view('template_view/dashboard_footer');
+		$this->load->view('template_view/admin_template/dashboard_footer');
 	}
 
 	public function manajemen_user()
@@ -114,10 +114,10 @@ class Administrator extends CI_Controller {
 		$data['title'] ='Manajemen User';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$data ['data_user']=$this->model_administrator->load_manajemen_user();
-		$this->load->view('template_view/dashboard_header');
-		$this->load->view('template_view/menubar',$data);
+		$this->load->view('template_view/admin_template/dashboard_header');
+		$this->load->view('template_view/admin_template/menubar',$data);
 		$this->load->view('admin/admin_manajemen_user',$data);
-		$this->load->view('template_view/dashboard_footer');
+		$this->load->view('template_view/admin_template/dashboard_footer');
 	
 	}
 
@@ -127,10 +127,10 @@ class Administrator extends CI_Controller {
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$data ['data_revisi']=$this->model_administrator->load_list_revisi_sip();
 		$data ['data_revisi_perpanjangan']=$this->model_administrator->load_list_revisi_sip_perpanjangan();
-		$this->load->view('template_view/dashboard_header');
-		$this->load->view('template_view/menubar',$data);
+		$this->load->view('template_view/admin_template/dashboard_header');
+		$this->load->view('template_view/admin_template/menubar',$data);
 		$this->load->view('admin/admin_list_revisi',$data);
-		$this->load->view('template_view/dashboard_footer');
+		$this->load->view('template_view/admin_template/dashboard_footer');
 	
 	}
 
@@ -138,10 +138,10 @@ class Administrator extends CI_Controller {
 	{
 		$data['title'] ='List Revisi';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
-		$this->load->view('template_view/dashboard_header');
-		$this->load->view('template_view/menubar',$data);
+		$this->load->view('template_view/admin_template/dashboard_header');
+		$this->load->view('template_view/admin_template/menubar',$data);
 		$this->load->view('admin/admin_form_validasi_revisi',$data);
-		$this->load->view('template_view/dashboard_footer');
+		$this->load->view('template_view/admin_template/dashboard_footer');
 	}
 
 

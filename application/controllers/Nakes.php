@@ -15,10 +15,10 @@ class Nakes extends CI_Controller {
 		$data['title'] ='Dashboard';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$data ['sip']= $this->model_nakes->load_sip_terdaftar();
-		$this->load->view('template_view/dashboard_header');
-		$this->load->view('template_view/menubar',$data);
+		$this->load->view('template_view/nakes_template/dashboard_header');
+		$this->load->view('template_view/nakes_template/menubar',$data);
 		$this->load->view('nakes/nakes_dashboard',$data);
-		$this->load->view('template_view/dashboard_footer');
+		$this->load->view('template_view/nakes_template/dashboard_footer');
 	}
 
 	public function my_profile()
@@ -26,10 +26,10 @@ class Nakes extends CI_Controller {
 		$data['title'] ='profile';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		
-		$this->load->view('template_view/dashboard_header');
-		$this->load->view('template_view/menubar',$data);
+		$this->load->view('template_view/nakes_template/dashboard_header');
+		$this->load->view('template_view/nakes_template/menubar',$data);
 		$this->load->view('nakes/my_profile',$data);
-		$this->load->view('template_view/dashboard_footer');
+		$this->load->view('template_view/nakes_template/dashboard_footer');
 	}
 
 	public function register_sip()
@@ -37,10 +37,10 @@ class Nakes extends CI_Controller {
 		$data['title'] ='Register SIP';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$data ['sip']= $this->model_nakes->load_data_register_sip();
-		$this->load->view('template_view/dashboard_header');
-		$this->load->view('template_view/menubar',$data);
+		$this->load->view('template_view/nakes_template/dashboard_header');
+		$this->load->view('template_view/nakes_template/menubar',$data);
 		$this->load->view('nakes/nakes_register_sip',$data);
-		$this->load->view('template_view/dashboard_footer');
+		$this->load->view('template_view/nakes_template/dashboard_footer');
 	}
 
 	public function notification()
@@ -48,10 +48,10 @@ class Nakes extends CI_Controller {
 		$data['title'] ='Notification';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		
-		$this->load->view('template_view/dashboard_header');
-		$this->load->view('template_view/menubar',$data);
+		$this->load->view('template_view/nakes_template/dashboard_header');
+		$this->load->view('template_view/nakes_template/menubar',$data);
 		$this->load->view('nakes/nakes_notification',$data);
-		$this->load->view('template_view/dashboard_footer');
+		$this->load->view('template_view/nakes_template/dashboard_footer');
 	}
 
 	public function upload_berkas()
@@ -59,10 +59,10 @@ class Nakes extends CI_Controller {
 		$data['title'] ='Register SIP';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		
-		$this->load->view('template_view/dashboard_header');
-		$this->load->view('template_view/menubar',$data);
+		$this->load->view('template_view/nakes_template/dashboard_header');
+		$this->load->view('template_view/nakes_template/menubar',$data);
 		$this->load->view('nakes/nakes_upload_berkas',$data);
-		$this->load->view('template_view/dashboard_footer');
+		$this->load->view('template_view/nakes_template/dashboard_footer');
 	}
 
 	public function manajemen_sip()
@@ -70,10 +70,10 @@ class Nakes extends CI_Controller {
 		$data['title'] ='Manajemen SIP';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$data ['data_sip'] = $this->model_nakes->load_manajemen();
-		$this->load->view('template_view/dashboard_header');
-		$this->load->view('template_view/menubar',$data);
+		$this->load->view('template_view/nakes_template/dashboard_header');
+		$this->load->view('template_view/nakes_template/menubar',$data);
 		$this->load->view('nakes/nakes_manajemen',$data);
-		$this->load->view('template_view/dashboard_footer');
+		$this->load->view('template_view/nakes_template/dashboard_footer');
 	}
 
 	public function detail_sip()
@@ -81,31 +81,31 @@ class Nakes extends CI_Controller {
 		$data['title'] ='Manajemen SIP';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$data['detail_sip']= $this->db->get_where('data_sip', array('id'=>$this->uri->segment(3)))->row_array();
-		$this->load->view('template_view/dashboard_header');
-		$this->load->view('template_view/menubar',$data);
+		$this->load->view('template_view/nakes_template/dashboard_header');
+		$this->load->view('template_view/nakes_template/menubar',$data);
 		$this->load->view('nakes/nakes_detail_sip',$data);
-		$this->load->view('template_view/dashboard_footer');
+		$this->load->view('template_view/nakes_template/dashboard_footer');
 	}
 
 	public function form_perpanjangan_sip()
 	{
 		$data['title'] ='Manajemen SIP';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
-		$this->load->view('template_view/dashboard_header');
-		$this->load->view('template_view/menubar',$data);
+		$this->load->view('template_view/nakes_template/dashboard_header');
+		$this->load->view('template_view/nakes_template/menubar',$data);
 		$this->load->view('nakes/nakes_form_perpanjangan',$data);
-		$this->load->view('template_view/dashboard_footer');
+		$this->load->view('template_view/nakes_template/dashboard_footer');
 	}
 	
 	public function revisi()
 	{
-		$data['title'] ='Revisi';
+		$data['title'] ='Revisi SIP Baru';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$data ['sip_revisi']  = $this->model_nakes->load_data_revisi();
-		$this->load->view('template_view/dashboard_header');
-		$this->load->view('template_view/menubar',$data);
+		$this->load->view('template_view/nakes_template/dashboard_header');
+		$this->load->view('template_view/nakes_template/menubar',$data);
 		$this->load->view('nakes/nakes_revisi',$data);
-		$this->load->view('template_view/dashboard_footer');
+		$this->load->view('template_view/nakes_template/dashboard_footer');
 	}
 
 	public function form_revisi_sip()
@@ -113,10 +113,10 @@ class Nakes extends CI_Controller {
 		$data['title'] ='Revisi';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$data ['sip_revisi']  = $this->model_nakes->load_data_revisi();
-		$this->load->view('template_view/dashboard_header');
-		$this->load->view('template_view/menubar',$data);
+		$this->load->view('template_view/nakes_template/dashboard_header');
+		$this->load->view('template_view/nakes_template/menubar',$data);
 		$this->load->view('nakes/nakes_form_revisi',$data);
-		$this->load->view('template_view/dashboard_footer');
+		$this->load->view('template_view/nakes_template/dashboard_footer');
 	}
 
 
@@ -125,10 +125,10 @@ class Nakes extends CI_Controller {
 		$data['title'] ='Pencabutan';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		
-		$this->load->view('template_view/dashboard_header');
-		$this->load->view('template_view/menubar',$data);
+		$this->load->view('template_view/nakes_template/dashboard_header');
+		$this->load->view('template_view/nakes_template/menubar',$data);
 		$this->load->view('nakes/nakes_pencabutan',$data);
-		$this->load->view('template_view/dashboard_footer');
+		$this->load->view('template_view/nakes_template/dashboard_footer');
 	}
 
 	public function list_perpanjangan()
@@ -137,20 +137,20 @@ class Nakes extends CI_Controller {
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$data ['perpanjang_sip']= $this->model_nakes->load_list_perpanjangan();
 		
-		$this->load->view('template_view/dashboard_header');
-		$this->load->view('template_view/menubar',$data);
+		$this->load->view('template_view/nakes_template/dashboard_header');
+		$this->load->view('template_view/nakes_template/menubar',$data);
 		$this->load->view('nakes/nakes_list_perpanjangan',$data);
-		$this->load->view('template_view/dashboard_footer');
+		$this->load->view('template_view/nakes_template/dashboard_footer');
 	}
 
 	public function form_revisi_perpanjangan()
 	{
 		$data['title'] ='List Perpanjangan';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
-		$this->load->view('template_view/dashboard_header');
-		$this->load->view('template_view/menubar',$data);
+		$this->load->view('template_view/nakes_template/dashboard_header');
+		$this->load->view('template_view/nakes_template/menubar',$data);
 		$this->load->view('nakes/nakes_form_revisi_perpanjangan',$data);
-		$this->load->view('template_view/dashboard_footer');
+		$this->load->view('template_view/nakes_template/dashboard_footer');
 	}
 
 	//batas-tampilan dan aksi//

@@ -110,9 +110,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               />
                             </div>
                           </div>
-                          <span class="fw-semibold d-block mb-1">Daftar Perpanjangan SIP</span>
-                          <h3 class="card-title mb-1">0</h3>
-                          <small class="text-success fw-semibold"> Perpanjangan Sedang Ditinjau </small>
+                          <span class="fw-semibold d-block mb-1">Revisi Perpanjangan SIP</span>
+                          <?php 
+                          $id_user=$user['id'];
+                          $this->db->like('id_user',$id_user);
+                          $this->db->like('status',7);
+                          $this->db->from('data_sip');
+                          ?>
+                          <h3 class="card-title mb-1"><?php echo $this->db->count_all_results();?></h3>
+                          <small class="text-success fw-semibold"> Perpanjangan Perlu Revisi </small>
                         </div>
                       </div>
                       </a>

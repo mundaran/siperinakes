@@ -35,7 +35,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="d-flex align-items-end row">
                       <div class="col-sm-12">
                         <div class="card-body">
-                          <form action="<?php echo base_url();?>nakes/aksi_perpanjangan/<?php echo $this->uri->segment(3)?>" method="POST" enctype="multipart/form-data"> 
                             <div class="mb-3">
                               <label class="form-label" for="basic-icon-default-company">Nomor STR Baru</label>
                               <div class="input-group input-group-merge">
@@ -43,7 +42,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                   ><i class="bx bx-barcode"></i
                                 ></span>
                                 <input type="text " id="basic-icon-default-company" class="form-control" name="no_str_baru" placeholder=""
-                                  aria-describedby="basic-icon-default-company2" required />
+                                  aria-describedby="basic-icon-default-company2" value="<?php echo $datasip['no_str'];?>" />
+                                  <button type="submit" class="btn btn-primary">Update No STR</button>
                               </div>
                             </div>
                             <div class="mb-3">
@@ -53,41 +53,51 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                   ><i class="bx bx-barcode"></i
                                 ></span>
                                 <input type="date" id="basic-icon-default-company" class="form-control" name="masa_berlaku_str" placeholder=""
-                                  aria-describedby="basic-icon-default-company2" required />
+                                  aria-describedby="basic-icon-default-company2" value="<?php echo $datasip['masa_berlaku_str'];?>" />
+                                  <button type="submit" class="btn btn-primary">Update Tgl STR</button>
                               </div>
                             </div>
                             <div class="mb-3">
+                              <form action="<?php echo base_url();?>nakes/aksi_update_str_baru/<?php echo $this->uri->segment(3)?>" method="POST" enctype="multipart/form-data">
                               <label class="form-label" for="basic-icon-default-company">Foto STR Baru</label>
                               <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-company2" class="input-group-text"
                                   ><i class="bx bx-barcode"></i
                                 ></span>
                                 <input type="file" id="basic-icon-default-company" class="form-control" name="foto_str_baru" placeholder=""
-                                  aria-describedby="basic-icon-default-company2" required />
+                                  aria-describedby="basic-icon-default-company2"  />
+                                <button type="submit" class="btn btn-primary">Update Berkas</button>
                               </div>
+                              </form>
                             </div>
                             <div class="mb-3">
+                              <form action="<?php echo base_url();?>nakes/aksi_update_sip_lama/<?php echo $this->uri->segment(3)?>" method="POST" enctype="multipart/form-data">
                               <label class="form-label" for="basic-icon-default-company">Foto SIP Lama</label>
                               <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-company2" class="input-group-text"
                                   ><i class="bx bx-barcode"></i
                                 ></span>
                                 <input type="file" id="basic-icon-default-company" class="form-control" name="foto_sip_lama" placeholder=""
-                                  aria-describedby="basic-icon-default-company2" required />
+                                  aria-describedby="basic-icon-default-company2" />
+                                  <button type="submit" class="btn btn-primary">Update Berkas</button>
                               </div>
+                              </form>
                             </div>
                             <div class="mb-3">
+                              <form action="<?php echo base_url();?>nakes/aksi_update_rop_baru/<?php echo $this->uri->segment(3)?>" method="POST" enctype="multipart/form-data">
                               <label class="form-label" for="basic-icon-default-company">Foto ROP Baru</label>
                               <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-company2" class="input-group-text"
                                   ><i class="bx bx-barcode"></i
                                 ></span>
                                 <input type="file" id="basic-icon-default-company" class="form-control" name="foto_rop_baru" placeholder=""
-                                  aria-describedby="basic-icon-default-company2" required />
+                                  aria-describedby="basic-icon-default-company2" />
+                                  <button type="submit" class="btn btn-primary">Update Berkas</button>
                               </div>
+                              </form>
                             </div>
-                            <button type="submit" class="btn btn-primary"> Simpan dan Lanjutkan </button>
-                          </form>
+                            <a href="<?php echo base_url();?>nakes/selesai_revisi_perpanjangan/<?php echo $this->uri->segment(3);?>" class="btn btn-primary"> Selesai Revisi </a>
+                            <a href="<?php echo base_url();?>nakes/list_perpanjangan" class="btn btn-secondary"> Kembali </a>
                         </div>
                       </div>
                     </div>
