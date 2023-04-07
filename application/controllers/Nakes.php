@@ -725,5 +725,103 @@ class Nakes extends CI_Controller {
 		$this->model_nakes->revisi_selesai($id_sip, $update_status);
 	}
 
+	public function aksi_update_no_str_baru()
+	{
+		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id = $user['id'];
+		$id_sip = $this->uri->segment(3);
+		$no_str_baru=$this->input->post('no_str_baru');
+		$update_no_str = array(
+		'no_str'=>$no_str_baru,
+		);
+		$this->model_nakes->update_no_str_perpanjangan($id_sip,$update_no_str);
+	}
+
+	public function aksi_update_masa_berlaku()
+	{
+		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id = $user['id'];
+		$id_sip = $this->uri->segment(3);
+		$masa_berlaku_str=$this->input->post('masa_berlaku_str');
+		$update_masa_berlaku = array(
+		'masa_berlaku_str'=>$masa_berlaku_str,
+		);
+		$this->model_nakes->update_masa_berlaku_perpanjangan($id_sip,$update_masa_berlaku);
+	}
+
+
+	public function aksi_update_str_perpanjangan(){
+		$user    = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id_user = $user['id'];
+		$id_sip  = $this->uri->segment(3);
+		$date    = date('d-m-y');
+		$file_name_foto_str = 'str-'.$id_user.'-'.$id_sip.'-'.$date.'';
+		$config['upload_path']          = './document/str';
+		$config['allowed_types']        = 'pdf';
+		$config['file_name']            = $file_name_foto_str;
+		$config['overwrite'] = true;
+		$config['max_size']             = 3000;
+		$config['max_width']            = 2000;
+		$config['max_height']           = 2000;
+		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
+		if ( !$this->upload->do_upload('foto_str_baru')){
+			 $this->session->set_flashdata('message', 'Upload-gagal' );
+			 $error = array('error' => $this->upload->display_errors());
+    		 $this->session->set_flashdata('message',$error['error']);
+			 redirect('nakes/form_revisi_perpanjangan/'.$id_sip);
+		} else {
+				$foto_str = $this->upload->data();
+
+				$update_data_sip =  [
+					'foto_str' => $file_name_foto_str,
+				];
+
+				$this->db->where('id',$id_sip);
+				$up_data_sip = $this->db->update('data_sip', $update_data_sip);
+
+				if($up_data_sip){
+
+					$update_data_riwayat =  [
+					'str_baru' => $file_name_foto_str,
+					];
+
+					$up_data_riwayat = $this->model_nakes->update_str_riwayat_perpanjangan($id_sip,$update_data_riwayat);
+
+				}
+			}
+	}
+
+	public function aksi_update_sip_lama_perpanjangan(){
+		$user    = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id_user = $user['id'];
+		$id_sip  = $this->uri->segment(3);
+		$date    = date('d-m-y');
+
+		$file_name_sip_lama = 'sip-lama-'.$id_sip.'-'.$id_user.'-'.$date;
+		$config['upload_path']          = './document/foto_sip_lama';
+		$config['allowed_types']        = 'pdf';
+		$config['file_name']            = $file_name_sip_lama;
+		$config['overwrite'] = false;
+		$config['max_size']             = 3000;
+		$config['max_width']            = 2000;
+		$config['max_height']           = 2000;
+		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
+		if ( !$this->upload->do_upload('foto_sip_lama')){
+			 $this->session->set_flashdata('message', 'Upload-gagal' );
+			 $error = array('error' => $this->upload->display_errors());
+    		 $this->session->set_flashdata('message',$error['error']);
+			 redirect('nakes/form_revisi_perpanjangan/'.$id_sip);
+		} else {
+				$foto_sip_lama = $this->upload->data();
+
+				$update_data_riwayat =  [
+				'sip_lama' => $file_name_sip_lama,
+				];
+
+				$up_data_riwayat = $this->model_nakes->update_sip_lama_perpanjangan($id_sip,$update_data_riwayat);
+			}
+	}
 
 }

@@ -275,5 +275,78 @@ Class Model_nakes extends CI_Model{
 		return $sql->result_array();
 	}
 
+	public function update_no_str_perpanjangan($id_sip,$update_no_str)
+	{
+		$this->db->where('id',$id_sip);
+		$berhasil = $this->db->update('data_sip', $update_no_str);
+		if($berhasil){
+			$this->session->set_flashdata('message','<div class="alert alert-success"><b> Update No STR Berhasil </b></div>');
+			redirect('nakes/form_revisi_perpanjangan/'.$id_sip);
+		}
+		else{
+
+			$this->session->set_flashdata('message','<div class="alert alert-danger"><b> Update GAGAL !!! </b></div>');
+			redirect('nakes/form_revisi_perpanjangan/'.$id_sip);
+		}
+
+			
+	}
+
+	public function update_masa_berlaku_perpanjangan($id_sip,$update_masa_berlaku)
+	{
+		$this->db->where('id',$id_sip);
+		$berhasil = $this->db->update('data_sip', $update_masa_berlaku);
+		if($berhasil){
+			$this->session->set_flashdata('message','<div class="alert alert-success"><b> Update Masa Berlaku Berhasil </b></div>');
+			redirect('nakes/form_revisi_perpanjangan/'.$id_sip);
+		}
+		else{
+
+			$this->session->set_flashdata('message','<div class="alert alert-danger"><b> Update GAGAL !!! </b></div>');
+			redirect('nakes/form_revisi_perpanjangan/'.$id_sip);
+		}
+
+			
+	}
+
+
+	public function update_str_riwayat_perpanjangan($id_sip,$update_data_riwayat)
+	{
+		$status_riw='undone';
+		$this->db->where('id_sip',$id_sip);
+		$this->db->where('status',$status_riw);
+		$berhasil = $this->db->update('riwayat_perpanjangan', $update_data_riwayat);
+		if($berhasil){
+			$this->session->set_flashdata('message','<div class="alert alert-success"><b> Document STR Berhasil Di Upload</b></div>');
+			redirect('nakes/form_revisi_perpanjangan/'.$id_sip);
+		}
+		else{
+
+			$this->session->set_flashdata('message','<div class="alert alert-danger"><b> GAGAL !!! </b></div>');
+			redirect('nakes/form_revisi_perpanjangan/'.$id_sip);
+		}
+
+			
+	}
+
+	public function update_sip_lama_perpanjangan($id_sip,$update_data_riwayat)
+	{
+		$status_riw='undone';
+		$this->db->where('id_sip',$id_sip);
+		$this->db->where('status',$status_riw);
+		$berhasil = $this->db->update('riwayat_perpanjangan', $update_data_riwayat);
+		if($berhasil){
+			$this->session->set_flashdata('message','<div class="alert alert-success"><b> Document SIP LAMA Berhasil Di Upload</b></div>');
+			redirect('nakes/form_revisi_perpanjangan/'.$id_sip);
+		}
+		else{
+
+			$this->session->set_flashdata('message','<div class="alert alert-danger"><b> GAGAL !!! </b></div>');
+			redirect('nakes/form_revisi_perpanjangan/'.$id_sip);
+		}
+
+			
+	}
+
 
 }
