@@ -81,7 +81,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                     <hr class="my-0" />
                     <div class="card-body">
-                      <form id="formAccountSettings" method="POST" action="<?php echo base_url()?>nakes/aksi_edit_profile" >
+                      <form id="formAccountSettings" method="POST" action="<?php echo base_url();?>administrator/aksi_edit_profile" >
                         <div class="row">
                           <div class="mb-3 col-md-6">
                             <label for="firstName" class="form-label">Nama Lengkap ( Sertakan Gelar )</label>
@@ -199,7 +199,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
                         <div class="mt-2">
                           <button type="submit" class="btn btn-primary me-2">Simpan</button>
-                          <a href="<?php echo base_url()?>nakes"  class="btn btn-outline-secondary">Kembali</a>
+                          <a href=""  class="btn btn-outline-secondary">Kembali</a>
                         </div>
                       </form>
                     </div>
@@ -209,7 +209,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <h5 class="card-header">Ubah Password</h5>
                     <div class="card-body">
                     
-                      <form id="formAccountDeactivation" method="POST" action="<?php echo base_url();?>nakes/aksi_ubah_password">
+                      <form id="formAccountDeactivation" method="POST" action="<?php echo base_url();?>administrator/aksi_ubah_password">
 
                          <div class="mb-3 col-md-12">
                           <label class="form-label" for="ubahPassword">Masukan Password Lama Anda</label>
@@ -242,7 +242,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <div class="modal fade" id="modalUploadfoto" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content ">
-            <div class="modal-header">  
+            <div class="modal-header">
               <h5 class="modal-title " id="modalCenterTitle" >Upload Foto (Gunakan Foto 4x6)</h5>
               <button
                 type="button"
@@ -252,7 +252,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               ></button>
             </div>
             <div class="modal-body">
-              <form method="POST" enctype="multipart/form-data" action="<?php echo base_url();?>nakes/upload_foto">
+              <form method="POST" enctype="multipart/form-data" action="<?php echo base_url();?>administrator/upload_foto">
               <div class="row">
                 <div class="col mb-3">
                   <label for="nameWithTitle" class="form-label"></label>

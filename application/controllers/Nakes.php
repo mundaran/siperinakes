@@ -23,7 +23,7 @@ class Nakes extends CI_Controller {
 
 	public function my_profile()
 	{
-		$data['title'] ='profile';
+		$data['title'] ='My Profile';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		
 		$this->load->view('template_view/nakes_template/dashboard_header');
@@ -315,7 +315,7 @@ class Nakes extends CI_Controller {
 		$id_user= $user['id'];
 		$file_name_pas_foto = 'pas-foto-'.$id_user.'';
 		$config['upload_path']          = './document/foto_user';
-		$config['allowed_types']        = 'jpg|jpeg';
+		$config['allowed_types']        = 'jpg';
 		$config['file_name']            = $file_name_pas_foto;
 		$config['overwrite'] = true;
 		$config['max_size']             = 3000;
@@ -451,7 +451,7 @@ class Nakes extends CI_Controller {
 				$file_name_rop_baru = 'rop-'.$id_user.'-'.$id_sip.'-'.$date;
 				$config['upload_path']          = './document/rop';
 				$config['allowed_types']        = 'pdf';
-				$config['file_name']            = $file_name_str_baru;
+				$config['file_name']            = $file_name_rop_baru;
 				$config['overwrite'] = false;
 				$config['max_size']             = 1000;
 				$config['max_width']            = 1024;
@@ -824,4 +824,76 @@ class Nakes extends CI_Controller {
 			}
 	}
 
+	public function aksi_update_rop_perpanjangan(){
+		$user    = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id_user = $user['id'];
+		$id_sip  = $this->uri->segment(3);
+		$date    = date('d-m-y');
+		$file_name_foto_rop = 'rop-'.$id_user.'-'.$id_sip.'-'.$date.'';
+		$config['upload_path']          = './document/rop';
+		$config['allowed_types']        = 'pdf';
+		$config['file_name']            = $file_name_foto_rop;
+		$config['overwrite'] = true;
+		$config['max_size']             = 3000;
+		$config['max_width']            = 2000;
+		$config['max_height']           = 2000;
+		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
+		if ( !$this->upload->do_upload('foto_rop_baru')){
+			 $this->session->set_flashdata('message', 'Upload-gagal' );
+			 $error = array('error' => $this->upload->display_errors());
+    		 $this->session->set_flashdata('message',$error['error']);
+			 redirect('nakes/form_revisi_perpanjangan/'.$id_sip);
+		} else {
+				$foto_rop = $this->upload->data();
+
+				$update_data_sip =  [
+					'rekomendasi_org_p' => $file_name_foto_rop,
+				];
+
+				$this->db->where('id',$id_sip);
+				$up_data_sip = $this->db->update('data_sip', $update_data_sip);
+
+				if($up_data_sip){
+
+					$update_data_riwayat =  [
+					'rop_baru' => $file_name_foto_rop,
+					];
+
+					$up_data_riwayat = $this->model_nakes->update_rop_riwayat_perpanjangan($id_sip,$update_data_riwayat);
+
+				}
+			}
+	}
+
+	public function selesai_revisi_perpanjangan()
+	{
+		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id = $user['id'];
+		$id_sip = $this->uri->segment(3);
+
+		$update_status = array(
+		'status' => 8,
+		);
+		$this->model_nakes->revisi_selesai($id_sip, $update_status);
+	}
+
+
+	public function aksi_ubah_password()
+	{
+		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id = $user['id'];
+		$password_lama = md5($this->input->post('password_lama'));
+		$password_baru = md5($this->input->post('password_baru'));
+		if($user['password']==$password_lama){
+			$data_password = array(
+			'password'=>$password_baru,
+			);
+			$this->model_nakes->update_password($id,$data_password);
+		}  else {
+			$this->session->set_flashdata('message','Ubah Password, Gagal Password Lama Tidak Sesuai !');
+			redirect('nakes/my_profile');
+		}
+		
+	}
 }

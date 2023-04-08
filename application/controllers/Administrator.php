@@ -21,6 +21,17 @@ class Administrator extends CI_Controller {
 		$this->load->view('template_view/admin_template/dashboard_footer');
 	}
 
+	public function my_profile()
+	{
+		$data['title'] ='My Profile';
+		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		
+		$this->load->view('template_view/admin_template/dashboard_header');
+		$this->load->view('template_view/admin_template/menubar',$data);
+		$this->load->view('admin/admin_my_profile',$data);
+		$this->load->view('template_view/admin_template/dashboard_footer');
+	}
+
 	public function validasi_sip()
 	{
 		$data['title'] ='Validasi SIP';
@@ -144,13 +155,100 @@ class Administrator extends CI_Controller {
 		$this->load->view('template_view/admin_template/dashboard_footer');
 	}
 
-
+	public function form_validasi_revisi_perpanjangan()
+	{
+		$data['title'] ='List Revisi';
+		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$this->load->view('template_view/admin_template/dashboard_header');
+		$this->load->view('template_view/admin_template/menubar',$data);
+		$this->load->view('admin/admin_form_validasi_revisi_perpanjangan',$data);
+		$this->load->view('template_view/admin_template/dashboard_footer');
+	}
 
 
 
 //batas view dan aksi
 
+	public function aksi_edit_profile()
+	{
+		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id = $user['id'];
+		$nama = $this->input->post('nama_lengkap');
+		$nik = $this->input->post('nik');
+		$email = $this->input->post('email');
+		$no_hp = $this->input->post('no_hp');
+		$tempat_lahir = $this->input->post('tempat_lahir');
+		$tanggal_lahir = $this->input->post('tanggal_lahir');
+		$alamat = $this->input->post('alamat');
+		$provinsi = $this->input->post('provinsi');
+		$kota_kabupaten = $this->input->post('kota_kabupaten');
+		$kecamatan = $this->input->post('kecamatan');
+		$kelurahan = $this->input->post('kelurahan');
 
+
+		$data = array(
+		'name' => $nama,
+		'nik' => $nik,
+		'email' => $email,
+		'no_hp' => $no_hp,
+		'tempat_lahir' => $tempat_lahir,
+		'tanggal_lahir' => $tanggal_lahir,
+		'alamat' => $alamat,
+		'provinsi' => $provinsi,
+		'kota_kabupaten' => $kota_kabupaten,
+		'kecamatan' => $kecamatan,
+		'kelurahan' => $kelurahan,
+		);
+		$this->model_admin->edit_profile($id, $data);
+	}
+
+
+	public function upload_foto(){
+		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id_user= $user['id'];
+		$file_name_pas_foto = 'pas-foto-'.$id_user.'';
+		$config['upload_path']          = './document/foto_user';
+		$config['allowed_types']        = 'jpg';
+		$config['file_name']            = $file_name_pas_foto;
+		$config['overwrite'] = true;
+		$config['max_size']             = 3000;
+		$config['max_width']            = 2000;
+		$config['max_height']           = 2000;
+		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
+		if ( !$this->upload->do_upload('foto_user')){
+			 $this->session->set_flashdata('message', 'Upload-gagal' );
+			 $error = array('error' => $this->upload->display_errors());
+    		 $this->session->set_flashdata('message',$error['error']);
+			 redirect('administrator/my_profile');
+		} else {
+				$foto_profile = $this->upload->data();
+
+				$update_data =  [
+					'pict' => $file_name_pas_foto,
+				];
+
+				$this->model_administrator->upload_foto($id_user,$update_data);
+			}
+	}
+
+	public function aksi_ubah_password()
+	{
+		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id = $user['id'];
+		$password_lama = md5($this->input->post('password_lama'));
+		$password_baru = md5($this->input->post('password_baru'));
+		if($user['password']==$password_lama){
+			$data_password = array(
+			'password'=>$password_baru,
+			);
+			$this->model_administrator->update_password($id,$data_password);
+		}  else {
+			$this->session->set_flashdata('message','Ubah Password, Gagal Password Lama Tidak Sesuai !');
+			redirect('administrator/my_profile');
+		}
+		
+	}
 
 	public function aksi_approval_validasi_sip()
 	{
@@ -311,6 +409,35 @@ class Administrator extends CI_Controller {
 			'tanggal_validasi'=>$tanggal_validasi,
 		);
 		$this->model_administrator->revisi_perpanjangan($data,$id_sip,$status_sip,$validator_sebelumnya,$title_validasi,$nama_admin);
+
+
+	}
+
+	public function aksi_validasi_revisi_perpanjangan()
+	{
+
+		$data['title'] ='Permohonan Perpanjangan SIP';
+		$admin = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id_admin = $admin['id'];
+		$nama_admin = $admin['name'];
+		$validator_sebelumnya = $this->input->post('validator_sebelumnya');
+		$id_sip = $this->uri->segment(3);
+		$id_nakes = $this->uri->segment(4);
+		$status_validasi = $this->input->post('status_validasi');
+		$nomor_sip = $this->input->post('nomor_sip');
+		$catatan = $this->input->post('catatan');
+		$keterangan = $this->input->post('keterangan');
+		$tanggal_validasi= date("d-m-Y");
+		$status_sip = $this->input->post('status_sip');
+		$title_validasi = $this->input->post('title_validasi');
+		$data = array(
+			'id_admin'=>$id_admin,
+			'id_sip'=>$id_sip,
+			'status_validasi' => $status_validasi,
+			'keterangan'=>$keterangan,
+			'tanggal_validasi'=>$tanggal_validasi,
+		);
+		$this->model_administrator->validasi_revisi_perpanjangan($data,$id_sip,$status_sip,$nomor_sip,$catatan,$validator_sebelumnya,$title_validasi,$nama_admin);
 
 
 	}

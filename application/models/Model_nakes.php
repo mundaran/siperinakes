@@ -37,6 +37,25 @@ Class Model_nakes extends CI_Model{
 	    }
 	}
 
+	public function update_password($id,$data_password)
+	{
+		$this->db->where('id', $id);
+	    $berhasil = $this->db->update('user', $data_password);
+	    if($berhasil)
+	    {	
+	    	$this->session->unset_userdata('username');
+			$this->session->unset_userdata('role_id');
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b>Password Berhasil Ubah ! Silahkan Login Kembali</b></div>');
+			redirect('auth');
+	    }
+	    else
+	    {
+	    	
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b> Password Gagal Di Ubah !  </b></div>');
+			redirect('nakes/my_profile');
+	    }
+	}
+
 	public function load_manajemen()
 	{
 		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
@@ -271,7 +290,7 @@ Class Model_nakes extends CI_Model{
 	{
 		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$user_id = $user['id'];
-		$sql = $this->db->query("SELECT * FROM data_sip WHERE id_user = $user_id AND status=5 OR id_user = $user_id AND status=7");
+		$sql = $this->db->query("SELECT * FROM data_sip WHERE id_user = $user_id AND status=5 OR id_user = $user_id AND status=7 OR id_user = $user_id AND status=8");
 		return $sql->result_array();
 	}
 
@@ -343,6 +362,42 @@ Class Model_nakes extends CI_Model{
 
 			$this->session->set_flashdata('message','<div class="alert alert-danger"><b> GAGAL !!! </b></div>');
 			redirect('nakes/form_revisi_perpanjangan/'.$id_sip);
+		}
+
+			
+	}
+
+	public function update_rop_riwayat_perpanjangan($id_sip,$update_data_riwayat)
+	{
+		$status_riw='undone';
+		$this->db->where('id_sip',$id_sip);
+		$this->db->where('status',$status_riw);
+		$berhasil = $this->db->update('riwayat_perpanjangan', $update_data_riwayat);
+		if($berhasil){
+			$this->session->set_flashdata('message','<div class="alert alert-success"><b> Document ROP Berhasil Di Upload</b></div>');
+			redirect('nakes/form_revisi_perpanjangan/'.$id_sip);
+		}
+		else{
+
+			$this->session->set_flashdata('message','<div class="alert alert-danger"><b> GAGAL !!! </b></div>');
+			redirect('nakes/form_revisi_perpanjangan/'.$id_sip);
+		}
+
+			
+	}
+
+	public function revisi_perpanjangan_selesai($id_sip,$update_status)
+	{
+		$this->db->where('id',$id_sip);
+		$berhasil = $this->db->update('data_sip', $update_status);
+		if($berhasil){
+			$this->session->set_flashdata('message','<div class="alert alert-success"><b> Revisi Selesai Data Anda Sedang Ditinjau</b></div>');
+			redirect('nakes/list_perpanjangan');
+		}
+		else{
+
+			$this->session->set_flashdata('message','<div class="alert alert-danger"><b> permohonan GAGAL !!! </b></div>');
+			redirect('nakes/list_perpanjangan');
 		}
 
 			

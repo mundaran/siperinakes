@@ -100,7 +100,7 @@
                                     <tr>
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>Hari/Jam</strong></td>
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>:</strong></td>
-                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong><?php echo $detail_sip['hari_awal_praktek']?> s/d <?php echo $detail_sip['hari_akhir_praktek'];?> , <?php echo $detail_sip['jam_buka']?> s/d <?php echo $detail_sip['jam_tutup'];?></strong></td>
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong><?php echo $detail_sip['hari_awal_praktek']?></strong></td>
                                     </tr>
 
                             </tbody>

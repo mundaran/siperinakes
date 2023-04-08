@@ -88,11 +88,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               </form>
                             </div>
                             <div class="mb-3">
-                              <form action="<?php echo base_url();?>nakes/aksi_update_rop_baru/<?php echo $this->uri->segment(3)?>" method="POST" enctype="multipart/form-data">
+                              <form action="<?php echo base_url();?>nakes/aksi_update_rop_perpanjangan/<?php echo $this->uri->segment(3)?>" method="POST" enctype="multipart/form-data">
                               <label class="form-label" for="basic-icon-default-company">Foto ROP Baru</label>
                               <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-company2" class="input-group-text"
-                                  ><i class="bx bx-barcode"></i
+                                  ><i class="bx bx-barcode"></i>
                                 ></span>
                                 <input type="file" id="basic-icon-default-company" class="form-control" name="foto_rop_baru" placeholder=""
                                   aria-describedby="basic-icon-default-company2" required />

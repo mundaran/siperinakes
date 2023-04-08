@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2023 at 11:30 AM
+-- Generation Time: Apr 08, 2023 at 07:23 PM
 -- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.11
+-- PHP Version: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -62,7 +62,7 @@ CREATE TABLE `data_sip` (
 --
 
 INSERT INTO `data_sip` (`id`, `id_user`, `nomor_sip`, `jenis_sip`, `alamat_praktek`, `tempat_praktek`, `no_str`, `masa_berlaku_str`, `no_rekomendasi_op`, `jenis_praktek`, `hari_awal_praktek`, `hari_akhir_praktek`, `jam_buka`, `jam_tutup`, `status`, `tanggal_daftar`, `catatan`, `tanggal_berlaku`, `tanggal_berakhir`, `pas_foto`, `foto_ktp`, `foto_str`, `rekomendasi_org_p`, `rekomendasi_tmpt_p`, `ijazah`, `surat_sehat`, `pernyataan`) VALUES
-('1', 2, '124/11/DINKES/drg/XI/2023', 'Dokter', 'Trucuk rt 4 rw 5', 'Klinik As Zahra', '111111111', '2023-12-31', '1231242354324', 'Dokter Gigi', 'Senin', 'Jumat', '11:55:00', '16:48:00', '7', '12-03-2023', '', '0000-00-00', '0000-00-00', 'pas-foto-43-1', 'ktp-43-1', 'str-2-1-07-04-23', 'rop-2-1-04-04-23', 'rtp-43-1', 'ijazah-43-1', 'surat-sehat-43-1', 'surat-pernyataan-43-1'),
+('1', 2, '125/11/DINKES/drg/XII/2023', 'Dokter', 'Trucuk rt 4 rw 5', 'Klinik As Zahra', '111111111', '2023-12-31', '1231242354324', 'Dokter Gigi', 'Senin(09:30-13-30), Selasa(13:00-16:00)', 'Jumat', '11:55:00', '16:48:00', '3', '12-03-2023', '', '0000-00-00', '0000-00-00', 'pas-foto-43-1', 'ktp-43-1', 'str-2-1-07-04-23', 'rop-2-1-08-04-23', 'rtp-43-1', 'ijazah-43-1', 'surat-sehat-43-1', 'surat-pernyataan-43-1'),
 ('10', 45, '', 'Dokter', 'DOKTER ANGKA NO 09', 'Klinik MEDICA', '12345645646fghdf', '2023-04-29', '1231eadzfswer23', 'Dokter Spesialis', 'Senin(09:30-13-30), Selasa(13:00-16:00)', '', '00:00:00', '00:00:00', '2', '31-03-2023', '-', '0000-00-00', '0000-00-00', 'pas-foto-45-10', 'ktp-45-10', 'str-45-10', 'rop-45-10', 'rtp-45-10', 'ijazah-45-10', 'surat-sehat-45-10', 'surat-pernyataan-45-10'),
 ('6', 2, '123/11/DINKES/drg/XI/2023', 'Dokter', 'Kedungadem', 'Klinik Amir', '111111111', '2023-03-23', '413241234wer', 'Dokter Gigi', 'Senin', 'Jumat', '21:27:00', '01:22:00', '3', '12-03-2023', 'test', '0000-00-00', '0000-00-00', 'pas-foto-2-6', 'ktp-2-6', 'str-2-6', 'rop-2-6', 'rtp-2-6', 'ijazah-2-6', 'surat-sehat-2-6', 'surat-pernyataan-2-6'),
 ('8', 45, '232/90/DINKES/Apt/XII/2023', 'Apoteker', 'DOKTER ANGKA NO 09', 'Klinik Medica', '222233332', '2023-03-30', '312342134234', 'Apoteker', 'Selasa', 'Sabtu', '14:02:00', '16:59:00', '3', '30-03-2023', '- Tugas 1 Di RS Muhamadiyah BOJONGEORO', '0000-00-00', '0000-00-00', 'pas-foto-45-8', 'ktp-45-8', 'str-45-8', 'rop-45-8', 'rtp-45-8', 'ijazah-45-8', 'surat-pernyataan-45-8', 'surat-pernyataan-45-8'),
@@ -7684,7 +7684,7 @@ INSERT INTO `riwayat_perpanjangan` (`id`, `id_sip`, `id_user`, `sip_lama`, `str_
 (3, '7', 2, 'sip-lama7-2-28-03-23', 'str-2-7', '', '', 'Bagus', 'done', '28-03-23'),
 (4, '4', 2, 'sip-lama4-2-28-03-23', 'str-2-4', '', 'Bagus', 'Bagus', 'done', '28-03-23'),
 (5, '9', 45, 'sip-lama9-45-30-03-23', 'str-45-9', '', 'Bagus', 'Bagus', 'done', '30-03-23'),
-(6, '1', 2, 'sip-lama-1-2-07-04-23', 'str-2-1-07-04-23', 'rop-2-1-04-04-23', 'Bagus', 'Bagus', 'undone', '04-04-23');
+(6, '1', 2, 'sip-lama-1-2-07-04-23', 'str-2-1-07-04-23', 'rop-2-1-08-04-23', 'Bagus', 'Bagus', 'done', '04-04-23');
 
 -- --------------------------------------------------------
 
@@ -7731,11 +7731,11 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `username`, `email`, `no_hp`, `password`, `role_id`, `aktifasi`, `pict`, `nik`, `gelar`, `tempat_lahir`, `tanggal_lahir`, `alamat`, `provinsi`, `kota_kabupaten`, `kecamatan`, `kelurahan`) VALUES
-(1, 'Bagus', 'bagusmundaran@gmail.com', 'bagusmundaran@gmail.com', '0', '81dc9bdb52d04dc20036dbd8313ed055', 11, 0, '', '0', '', '', '0000-00-00', '', '', '', '', ''),
-(2, 'Dr. Arafiki Indra Saputra', 'arafiki@gmail.com', 'arafiki@gmail.com', '08997665672', '81dc9bdb52d04dc20036dbd8313ed055', 21, 0, 'pas-foto-2', '3303220100022343', 'Sp.A', 'Bojonegoro', '1996-12-12', 'Trucuk rt4, rw5', 'Jawa Timur', 'Kabupaten Bojonegoro', 'Trucuk', 'Trucuk'),
+(1, 'Bagus', 'bagusmundaran@gmail.com', 'bagusmundaran@gmail.com', '0', '827ccb0eea8a706c4c34a16891f84e7b', 11, 0, 'pas-foto-1', '0', '', '', '0000-00-00', '', '', '', '', ''),
+(2, 'Dr. Arafiki Indra Saputra', 'arafiki@gmail.com', 'arafiki@gmail.com', '08997665672', '827ccb0eea8a706c4c34a16891f84e7b', 21, 0, 'pas-foto-2', '3303220100022343', 'Sp.A', 'Bojonegoro', '1996-12-12', 'Trucuk rt4, rw5', 'Jawa Timur', 'Kabupaten Bojonegoro', 'Trucuk', 'Trucuk'),
 (43, 'Mundaran', 'baguzmundaran@gmail.com', 'baguzmundaran@gmail.com', '0', '81dc9bdb52d04dc20036dbd8313ed055', 21, 0, '', '330322010002', '', '', '0000-00-00', '', '', '', '', ''),
 (44, 'Bagus Mundaran', 'mundaran@gmail.com', 'mundaran@gmail.com', '', '81dc9bdb52d04dc20036dbd8313ed055', 21, 0, 'pas-foto-44', '', '', '', '0000-00-00', '', '', '', '', ''),
-(45, 'Perimadona', 'siperidemo@gmail.com', 'siperidemo@gmail.com', '0897978977787', '827ccb0eea8a706c4c34a16891f84e7b', 21, 0, 'pas-foto-45', '3123143243523453', '', 'bekasi', '2023-03-30', 'trucuk rt4 rw5', 'Jawa Timur', 'Kabupaten Bojonegoro', 'Trucuk', 'Trucuk');
+(45, 'Perimadona', 'siperidemo@gmail.com', 'siperidemo@gmail.com', '0897978977787', '827ccb0eea8a706c4c34a16891f84e7b', 21, 0, '', '3123143243523453', '', 'bekasi', '2023-03-30', 'trucuk rt4 rw5', 'Jawa Timur', 'Kabupaten Bojonegoro', 'Trucuk', 'Trucuk');
 
 -- --------------------------------------------------------
 
@@ -7827,8 +7827,9 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (9, 11, 'Manajemen SIP', 'administrator/manajemen_sip', 'tf-icons bx bx-book', 1, ''),
 (10, 11, 'List Revisi', 'administrator/list_revisi_sip', 'tf-icons bx bx-note', 1, '3'),
 (11, 21, 'My Profile', 'nakes/my_profile', 'tf-icons bx bx-user', 1, ''),
-(12, 11, 'Manajemen User', 'administrator/manajemen_user', 'tf-icons bx bx-user', 1, ''),
-(13, 11, 'Manajemen Artikel', 'administrator/manajemen_artikel', 'tf-icons bx bx-book', 1, '');
+(12, 11, 'Manajemen User', 'administrator/manajemen_user', 'tf-icons bx bxs-user-account', 1, ''),
+(13, 11, 'Manajemen Artikel', 'administrator/manajemen_artikel', 'tf-icons bx bx-book', 1, ''),
+(14, 11, 'My Profile', 'administrator/my_profile', 'tf-icons bx bx-user', 1, '');
 
 -- --------------------------------------------------------
 
@@ -7852,7 +7853,7 @@ CREATE TABLE `validasi_sip` (
 
 INSERT INTO `validasi_sip` (`id`, `id_admin`, `id_nakes`, `id_sip`, `status_validasi`, `keterangan`, `tanggal_validasi`) VALUES
 (13, 1, 45, 8, '2', 'MASA BERLAKU STR HABIS, SILAHKAN UPDATE STR BARU', '31-03-2023'),
-(14, 1, 2, 1, '2', 'STR BARU TIDAK ADA/MUNCUL MOHO UPLOAD ULANG', '04-04-2023'),
+(14, 1, 2, 1, '1', 'valid', '08-04-2023'),
 (15, 1, 2, 6, '1', 'valid', '30-03-2023'),
 (16, 1, 45, 9, '1', 'valid', '30-03-2023');
 

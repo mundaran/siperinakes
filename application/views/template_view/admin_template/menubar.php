@@ -86,6 +86,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <?php
           $status = 6;
           $this->db->like('status', $status);
+          $this->db->or_like('status','8');
           $this->db->from('data_sip');
           $c = $this->db->count_all_results();
           ?>
@@ -280,7 +281,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="<?php echo base_url()?>nakes/my_profile">
+                      <a class="dropdown-item" href="<?php echo base_url()?>admin/my_profile">
                         <i class="bx bx-user me-2"></i>
                         <span class="align-middle">My Profile</span>
                       </a>

@@ -128,14 +128,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
 
               </div>
-
+<!--
               <div class="row">
                 <div class="col-12 col-lg-12 col-md-12 order-1 ">
                 <div class="card">
                 <h5 class="card-header"></h5>
                 <div class="card-body mb-5">
                   <div class="row">
-                    <!-- Custom content with heading -->
                     <div class="col-lg-12 mb-5 mb-xl-0">
                       <small class="text-light fw-semibold">Andik Mengajukan Sip Baru</small>
                       <p>
@@ -143,12 +142,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       </p>                      
                     </div>
                    
-                    <!--/ Custom content with heading -->
                   </div>
                 </div>
                 </div>
                 </div>
-              </div>
+              </div> 
+
+-->
 
 
 

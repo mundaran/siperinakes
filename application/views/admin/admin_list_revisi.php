@@ -147,7 +147,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                   if($sip_perp['status']==7){
                                     $status_perp ='Sedang Direvisi';
                                   } elseif($sip_perp['status']==8){
-                                    $status_perp ='<a href="" class="btn btn-sm btn-danger">Validasi</a>';
+                                    $status_perp ='<a href="'.base_url().'administrator/form_validasi_revisi_perpanjangan/'.$sip_perp['id'].'" class="btn btn-sm btn-danger">Validasi</a>';
                                   }
 
                                   $id_nakes_perp = $sip_perp['id_user'];
