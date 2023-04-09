@@ -37,6 +37,15 @@ Class Model_nakes extends CI_Model{
 	    }
 	}
 
+
+	public function load_list_pencabutan()
+	{
+		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$user_id = $user['id'];
+		$sql = $this->db->query("SELECT * FROM data_sip WHERE id_user = $user_id AND status=9 OR id_user = $user_id AND status=10 ");
+		return $sql->result_array();
+	}
+
 	public function update_password($id,$data_password)
 	{
 		$this->db->where('id', $id);

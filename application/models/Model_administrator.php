@@ -41,6 +41,17 @@ Class Model_administrator extends CI_Model{
 		return $sql->result_array();
 	}
 
+	public function load_list_pencabutan()
+	{
+		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$user_id = $user['id'];
+		$sql = $this->db->query("SELECT * FROM data_sip WHERE  status=9 OR status=10 ");
+		return $sql->result_array();
+	}
+
+
+
+
 	public function edit_profile($id, $data)
 	{
 		$this->db->where('id', $id);
