@@ -91,6 +91,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           $c = $this->db->count_all_results();
           ?>
 
+          <?php
+          $status = 9;
+          $this->db->like('status', $status);
+          $this->db->from('data_sip');
+          $d = $this->db->count_all_results();
+          ?>
+
           <ul class="menu-inner py-1">
            <?php 
             $role_id = $this->session->userdata('role_id');
@@ -143,6 +150,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                   <span class="badge badge-center rounded-pill bg-primary">'.$c.'</span>
                                 </a>
                               </li>';
+                            }elseif($sm['badges']==4){
+                              echo '<li class="menu-item active">'.
+                                '<a href="'.base_url($sm['url']).'" class="menu-link">'.
+                                  '<i class="menu-icon '.$sm['icon'].'"></i>
+                                  <div data-i18n="Analytics">'.$sm['title'].'</div>&nbsp &nbsp 
+                                  <span class="badge badge-center rounded-pill bg-primary">'.$d.'</span>
+                                </a>
+                              </li>';
                             }elseif(empty($sm['badges'])){
                               echo '<li class="menu-item active">'.
                                 '<a href="'.base_url($sm['url']).'" class="menu-link">'.
@@ -176,6 +191,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                   '<i class="menu-icon '.$sm['icon'].'"></i>
                                   <div data-i18n="Analytics">'.$sm['title'].'</div>&nbsp &nbsp
                                   <span class="badge badge-center rounded-pill bg-label-primary">'.$c.'</span>
+                                </a>
+                              </li>';
+                            }elseif($sm['badges']==4){
+                              echo '<li class="menu-item">'.
+                                '<a href="'.base_url($sm['url']).'" class="menu-link">'.
+                                  '<i class="menu-icon '.$sm['icon'].'"></i>
+                                  <div data-i18n="Analytics">'.$sm['title'].'</div>&nbsp &nbsp
+                                  <span class="badge badge-center rounded-pill bg-label-primary">'.$d.'</span>
                                 </a>
                               </li>';
                             }elseif(empty($sm['badges'])){
@@ -222,7 +245,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                 <!-- Place this tag where you want the button to render. -->
                 <li class="nav-item lh-1 me-3">
-                 <?php echo $user['name']?>
+                 <ul><b style="font-size: 17px;"><?php echo $user['name']?></b></ul>
+                 <ul style="font-size: 12px;">Administrator</ul>
                 </li>
 
                 <!-- User -->

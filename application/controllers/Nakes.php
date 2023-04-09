@@ -896,4 +896,41 @@ class Nakes extends CI_Controller {
 		}
 		
 	}
+
+	public function aksi_cabut_sip()
+	{
+		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id = $user['id'];
+		$pemohon=$user['name'];
+		$tanggal_cabut=date('d-m-y');
+		$id_sip = $this->uri->segment(3);
+
+		$file_name_surat_cabut = 'spc-'.strtr($pemohon, ". ", "--").'-'.$id_sip;'';
+		$config['upload_path']          = './document/surat_cabut';
+		$config['allowed_types']        = 'pdf';
+		$config['file_name']            = $file_name_surat_cabut;
+		$config['overwrite'] = false;
+		$config['max_size']             = 3000;
+		$config['max_width']            = 2000;
+		$config['max_height']           = 2000;
+		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
+		if ( !$this->upload->do_upload('surat_cabut')){
+			 $this->session->set_flashdata('message', 'Upload-gagal' );
+			 $error = array('error' => $this->upload->display_errors());
+    		 $this->session->set_flashdata('message','<div class="alert alert-danger col-lg-6"><b>'.$error['error'].$file_name_surat_cabut.'</b></div>');
+			 redirect('nakes/manajemen_sip');
+		} else {
+				$foto_surat_cabut = $this->upload->data();
+
+				$update_data =  [
+					'status'=>9,
+					'surat_cabut' => $file_name_surat_cabut,
+				];
+
+				$this->model_nakes->permohonan_pencabutan($id_sip,$update_data);
+			}
+	}
+
+
 }

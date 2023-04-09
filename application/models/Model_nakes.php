@@ -403,5 +403,22 @@ Class Model_nakes extends CI_Model{
 			
 	}
 
+	public function permohonan_pencabutan($id_sip,$update_data)
+	{
+		$this->db->where('id',$id_sip);
+		$berhasil = $this->db->update('data_sip', $update_data);
+		if($berhasil){
+			$this->session->set_flashdata('message','<div class="alert alert-success"><b> Permohonan Anda Berhasil, Silahkan Ke kantor Dinas Kesehatan Untuk Mengembalikan dan Validasi Pencabutan SIP</b></div>');
+			redirect('nakes/manajemen_sip');
+		}
+		else{
+
+			$this->session->set_flashdata('message','<div class="alert alert-danger"><b> permohonan GAGAL !!! </b></div>');
+			redirect('nakes/manajemen_sip');
+		}
+
+			
+	}
+
 
 }
