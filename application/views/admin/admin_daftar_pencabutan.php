@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="d-flex align-items-end row">
                       <div class="col-sm-7">
                         <div class="card-body">
-                          <h5 class="card-title text-danger">List Pencabutan SIP Anda</h5>
+                          <h5 class="card-title text-danger">List Pencabutan SIP</h5>
                         </div>
                       </div>
                       <div class="col-sm-5 text-center text-sm-left">

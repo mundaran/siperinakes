@@ -164,7 +164,7 @@ class Administrator extends CI_Controller {
 		$this->load->view('template_view/admin_template/dashboard_footer');
 	}
 
-public function daftar_pencabutan()
+	public function daftar_pencabutan()
 	{
 		$data['title'] ='Daftar Pencabutan';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
@@ -174,6 +174,20 @@ public function daftar_pencabutan()
 		$this->load->view('admin/admin_daftar_pencabutan',$data);
 		$this->load->view('template_view/admin_template/dashboard_footer');
 	}
+
+	public function form_pencabutan()
+	{
+		$data['title'] ='Daftar Pencabutan';
+		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$data ['cabut_sip']= $this->model_administrator->load_list_pencabutan();
+		$this->load->view('template_view/admin_template/dashboard_header');
+		$this->load->view('template_view/admin_template/menubar',$data);
+		$this->load->view('admin/admin_form_pencabutan',$data);
+		$this->load->view('template_view/admin_template/dashboard_footer');
+	}
+
+
+
 
 //batas view dan aksi
 
