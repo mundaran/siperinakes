@@ -21,13 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                       <form method="POST" enctype="multipart/form-data" action="<?php echo base_url();?>nakes/aksi_upload_berkas" >
                         <input type="hidden" name="id_sip" value="<?php echo $this->uri->segment(3); ?>">
-                        <div class="mb-3">
-                          <span id="basic-icon-address">
-                              <i class="bx bxs-user-pin"></i>
-                          </span>
-                          <label for="formFile" class="form-label">Pas Foto</label>
-                          <input class="form-control" type="file" id="formFile" name="pasfoto" />
-                        </div>
+                      
                         <div class="mb-3">
                           <span id="basic-icon-address">
                               <i class="bx bxs-id-card"></i>

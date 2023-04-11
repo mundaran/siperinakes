@@ -51,6 +51,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </thead>
                             <tbody class="">
                               <?php foreach ($sip_revisi as $sip) {
+                                if($sip['status']==4){
+                                  $status = '<a href="'.base_url().'nakes/form_revisi_sip/'.$sip['id'].'" class="btn btn-sm btn-danger"><span class="tf-icons bx bx-note"></span>&nbsp; Revisi</a>';
+                                }elseif($sip['status']==6){
+                                  $status='Sedang Ditinjau';
+                                }
 
                                   $id_validasi= $sip['id'];
                                   $data_list = $this->db->query("SELECT * FROM validasi_sip WHERE id_sip = $id_validasi ");
@@ -66,7 +71,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$validasi['tanggal_validasi'].'</strong></td>
 
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$validasi['keterangan'].'</strong></td>
-                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong><a href="'.base_url().'nakes/form_revisi_sip/'.$sip['id'].'" class="btn btn-sm btn-danger"><span class="tf-icons bx bx-note"></span>&nbsp; Revisi</a></strong></td>
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$status.'</strong></td>
 
                                     
                                   </tr>

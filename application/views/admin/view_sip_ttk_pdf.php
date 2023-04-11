@@ -65,8 +65,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <tr>
         <td align="center">
           <p>
-            <h3><b>SURAT IZIN PRAKTIK <?php echo strtoupper($detail_sip['jenis_sip']);?> (SIPA) </b></h3>
-            <text style="font-size: 15px;">No :<?php echo $detal_sip['nomor_sip'];?></text>
+            <h3><b>SURAT IZIN PRAKTIK <?php echo strtoupper($detail_sip['jenis_sip']);?> (SIPTKK) </b></h3>
+            <text style="font-size: 15px;">No :<?php echo $detail_sip['nomor_sip'];?></text>
           </p>
         </td>
       </tr>
@@ -151,7 +151,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <tr>
         <td align="left">Hari/Jam</td>
         <td >:</td>
-        <td ><?php echo $detail_sip ['hari_awal_praktek'];?>-<?php echo $detail_sip ['hari_akhir_praktek'];?>&nbsp;/&nbsp;<?php echo $detail_sip ['jam_buka'];?>-<?php echo $detail_sip ['jam_tutup'];?></td>
+        <td ><?php echo $detail_sip ['hari_awal_praktek'];?></td>
       </tr>
   </table>
 
@@ -162,7 +162,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <p style="font-size: 16px; line-height:1;">1. Penyelenggaraan pekerjaan/praktik kefarmasian disarana kefarmasian harus selalau mengikuti paradigma pelayanan kefarmasian dan perkembangan ilmu pengetahuan dan teknologi serta peraturan perundang-undangan yang berlaku.</p>
         <p style="font-size: 16px; line-height:1;">2. Surat Izin ini batal demi hukum apabila bertentangan dengan ayat 1 diatas dan pekerjaan kefarmasian dilakukan tidak sesuai dengan yang tercantum dalam surat izin.</p>
         <p style="font-size: 16px; line-height:1;">Catatan :</p>
-        <p><?php echo $detal_sip['catatan'];?></p>
+        <p><?php echo $detail_sip['catatan'];?></p>
       </td>
     </tr>
   </table>

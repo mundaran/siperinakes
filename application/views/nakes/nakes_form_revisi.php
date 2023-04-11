@@ -33,15 +33,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="d-flex align-items-end row">
                       <div class="col-sm-12">
                         <div class="card-body">
+                          <form method="POST" action="<?php echo base_url();?>nakes/aksi_revisi_data_sip/<?php echo $this->uri->segment(3);?>">
                           <h5>Data Pemohon</h5>
                           <div class="mb-3">
                           <label class="form-label" for="basic-icon-default-company">Jenis SIP</label>
-                          <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-company2" class="input-group-text"
-                              ><i class="bx bx-note"></i
-                            ></span>
-                            <input type="text" id="basic-icon-default-company" class="form-control" name="no_str" value="&nbsp;&nbsp;<?php echo $datasip['jenis_sip']?>" placeholder=""
-                              aria-describedby="basic-icon-default-company2"  />
+                          <div class="input-group">
+                            <label class="input-group-text" for="inputGroupSelect01">Options</label>
+                            <select class="form-select" id="inputGroupSelect01" name="jenis_sip"  >
+                              <option value="<?php echo $datasip['jenis_sip'];?>" selected><?php echo $datasip['jenis_sip'];?></option>
+
+                              <?php $mastersip = $this->db->get_where('master_sip', array('id'))->result_array();?>
+                              <?php foreach($mastersip as $jenis_sip):?>
+                                <option value="<?php echo $jenis_sip['jenis_sip'];?>"><?php echo $jenis_sip['jenis_sip'];?></option>
+                              <?php endforeach;?>
+
+                            </select>
                           </div>
                         </div>
                         <div class="mb-3">
@@ -50,7 +56,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <span id="basic-icon-default-company2" class="input-group-text"
                               ><i class="bx bx-barcode"></i
                             ></span>
-                            <input type="text" id="basic-icon-default-company" class="form-control" name="no_str" value="&nbsp;&nbsp;<?php echo $datasip['no_str']?>" placeholder=""
+                            <input type="text" id="basic-icon-default-company" class="form-control" name="no_str" value="<?php echo $datasip['no_str']?>" placeholder=""
+                              aria-describedby="basic-icon-default-company2"  />
+                          </div>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label" for="basic-icon-default-company">Nomor ROP</label>
+                          <div class="input-group input-group-merge">
+                            <span id="basic-icon-default-company2" class="input-group-text"
+                              ><i class="bx bx-barcode"></i
+                            ></span>
+                            <input type="text" id="basic-icon-default-company" class="form-control" name="no_rekomendasi_op" value="<?php echo $datasip['no_rekomendasi_op']?>" placeholder=""
                               aria-describedby="basic-icon-default-company2"  />
                           </div>
                         </div>
@@ -69,7 +85,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <span id="basic-icon-address" class="input-group-text">
                               <i class="bx bx-buildings"></i>
                             </span>
-                            <input type="text" aria-label="Last name" class="form-control" name="tempat_praktek" value="&nbsp;&nbsp;<?php echo $datasip['tempat_praktek']?>" placeholder="Klinik"  />
+                            <input type="text" aria-label="Last name" class="form-control" name="tempat_praktek" value="<?php echo $datasip['tempat_praktek']?>" placeholder="Klinik"  />
                           </div>
                         </div>
                         <div class="mb-3">
@@ -78,7 +94,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <span id="basic-icon-address" class="input-group-text">
                               <i class="bx bxs-building-house" type="solid"></i>
                             </span>
-                            <input type="text" name="alamat_praktek" class="form-control" placeholder="" value="&nbsp;&nbsp;<?php echo $datasip['alamat_praktek']?>"  />
+                            <input type="text" name="alamat_praktek" class="form-control" placeholder="" value="<?php echo $datasip['alamat_praktek']?>"  />
                           </div>
                         </div>
                         <div class="mb-3">
@@ -87,7 +103,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <span id="basic-icon-address" class="input-group-text"
                               ><i class="bx bx-user-pin"></i
                             ></span>
-                            <input type="text" name="jenis_praktek" class="form-control" placeholder="" value="&nbsp;&nbsp;<?php echo $datasip['jenis_praktek']?>"  />
+                            <input type="text" name="jenis_praktek" class="form-control" placeholder="" value="<?php echo $datasip['jenis_praktek']?>"  />
                           </div>
                         </div>
                         <div class="mb-3">
@@ -96,19 +112,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                              <span id="basic-icon-address" class="input-group-text"
                               ><i class="bx bx-calendar"></i
                             ></span>
-                            <input type="text" name="jenis_praktek" class="form-control" placeholder="" value="&nbsp;&nbsp;<?php echo $datasip['hari_awal_praktek']?>"  />
-                            <span id="basic-icon-address" class="input-group-text">s/d</span>
-                            <input type="text" name="jenis_praktek" class="form-control" placeholder="" value="&nbsp;&nbsp;<?php echo $datasip['hari_akhir_praktek']?>"  />
+                            <input type="text" name="hari_jam_praktek" class="form-control" placeholder="" value="<?php echo $datasip['hari_awal_praktek']?>"  />
                           </div>
                         </div>
-                        <div class="mb-3">
-                          <label class="form-label" for="basic-icon-address">Jam Praktek</label>
-                          <div class="input-group input-group-merge">
-                            <input type="text" name="jam_buka" class="form-control"  value="&nbsp;&nbsp;<?php echo $datasip['jam_buka']?>" />
-                            <span id="basic-icon-address" class="input-group-text">s/d</span>
-                            <input type="text" name="jam_tutup" class="form-control" value="&nbsp;&nbsp;<?php echo $datasip['jam_tutup']?>" />
-                          </div>
+                        <div class="mb-3" align="center" >
+                         <button type="submit" class="btn btn-danger col-lg-2">Update Data</button>
                         </div>
+
+                        </form>
 
                         </div>
                       </div>
@@ -224,7 +235,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                           <BR>
                           <div class="mb-3" align="center">
-                            <button type="button" class="btn btn-danger col-lg-3" data-bs-toggle="modal" data-bs-target="#modalRevisiSelesai">Selesai Revisi</button>
+                            <button type="button" class="btn btn-warning col-lg-3" data-bs-toggle="modal" data-bs-target="#modalRevisiSelesai">Selesai Revisi</button>
                             
                             <a href="<?php echo base_url();?>nakes/revisi" class="btn btn-secondary col-lg-3" >Kembali</a>
 

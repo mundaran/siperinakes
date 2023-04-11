@@ -178,20 +178,7 @@ class Nakes extends CI_Controller {
 		$id_user = $user['id'];
 		$id_sip = $this->input->post('id_sip');
 
-		$file_name_pas_foto = 'pas-foto-'.$id_user.'-'.$id_sip;
-		$config['upload_path']          = './document/pas_foto';
-		$config['allowed_types']        = 'pdf';
-		$config['file_name']            = $file_name_pas_foto;
-		$config['overwrite'] = false;
-		$config['max_size']             = 1000;
-		$config['max_width']            = 1024;
-		$config['max_height']           = 768;
-		$this->load->library('upload', $config);
-		$this->upload->initialize($config);
-		if ( !$this->upload->do_upload('pasfoto')){
-			 $this->session->set_flashdata('message', 'pasfoto-gagal' );
-			 redirect('nakes/upload_berkas');
-		} else {
+		 
 			$file_name_ktp = 'ktp-'.$id_user.'-'.$id_sip;
 			$config['upload_path']          = './document/foto_ktp';
 			$config['allowed_types']        = 'pdf';
@@ -200,7 +187,6 @@ class Nakes extends CI_Controller {
 			$config['max_size']             = 1000;
 			$config['max_width']            = 1024;
 			$config['max_height']           = 768;
-			$pas_foto_up = $this->upload->data();
 			$this->load->library('upload', $config);
 	 		$this->upload->initialize($config);
 			if ( !$this->upload->do_upload('ktp')){
@@ -319,7 +305,6 @@ class Nakes extends CI_Controller {
 					}
 				}
 
-			}
 
 
 		}
@@ -727,6 +712,34 @@ class Nakes extends CI_Controller {
 
 				$this->model_nakes->update_foto_surat_pernyataan($id_sip,$update_data);
 			}
+	}
+
+
+	public function aksi_revisi_data_sip()
+	{
+		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id = $user['id'];
+		$id_sip = $this->uri->segment(3);
+		$jenis_sip = $this->input->post('jenis_sip');
+		$no_str = $this->input->post('no_str');
+		$no_rekomendasi_op = $this->input->post('no_rekomendasi_op');
+		$masa_berlaku_str = $this->input->post('masa_berlaku_str');
+		$tempat_praktek = $this->input->post('tempat_praktek');
+		$alamat_praktek = $this->input->post('alamat_praktek');
+		$jenis_praktek = $this->input->post('jenis_praktek');
+		$hari_awal = $this->input->post('hari_jam_praktek');
+
+		$data = array(
+		'jenis_sip' => $jenis_sip,
+		'no_str' => $no_str,
+		'no_rekomendasi_op'=> $no_rekomendasi_op,
+		'masa_berlaku_str' => $masa_berlaku_str,
+		'tempat_praktek' => $tempat_praktek,
+		'alamat_praktek' => $alamat_praktek,
+		'jenis_praktek' => $jenis_praktek,
+		'hari_awal_praktek' => $hari_awal,
+		);
+		$this->model_nakes->revisi_data_sip($data,$id_sip);
 	}
 
 	public function revisi_selesai()

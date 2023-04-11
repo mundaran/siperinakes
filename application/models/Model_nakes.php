@@ -77,7 +77,7 @@ Class Model_nakes extends CI_Model{
 	{
 		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$user_id = $user['id'];
-		$sql = $this->db->query("SELECT * FROM data_sip WHERE id_user = $user_id AND status=4");
+		$sql = $this->db->query("SELECT * FROM data_sip WHERE id_user = $user_id AND status=4 OR id_user = $user_id AND status=6");
 		return $sql->result_array();
 	}
 
@@ -92,7 +92,23 @@ Class Model_nakes extends CI_Model{
 	    else
 	    {
 			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b> Gagal Pengajuan  </b></div>');
-			redirect('auth/register_sip');
+			redirect('nakes/upload_berkas/'.$id_new_sip);
+	    }
+	}
+
+	public function revisi_data_sip($data,$id_sip)
+	{
+		$this->db->where('id',$id_sip);
+		$query= $this->db->update('data_sip', $data);
+	    if($query)
+	    {	
+			$this->session->set_flashdata('message','<div class="alert alert-info" role="alert"><b> Berhasil Update Cek Note Lainnya, Jika Tidak Ada Silahkan Klik Selesai Revisi</b></div>');
+			redirect('nakes/form_revisi_sip/'.$id_sip);
+	    }
+	    else
+	    {
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b> Gagal Pengajuan  </b></div>');
+			redirect('nakes/form_revisi_sip/'.$id_sip);
 	    }
 	}
 

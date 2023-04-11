@@ -80,6 +80,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                         </div>
                         <div class="mb-3">
+                          <label class="form-label" for="basic-icon-default-company">Nomor ROP</label>
+                          <div class="input-group input-group-merge">
+                            <span id="basic-icon-default-company2" class="input-group-text"
+                              ><i class="bx bx-barcode"></i
+                            ></span>
+                            <input type="text" id="basic-icon-default-company" class="form-control" name="no_str" value="&nbsp;&nbsp;<?php echo $datasip['no_rekomendasi_op']?>" placeholder=""
+                              aria-describedby="basic-icon-default-company2" disabled />
+                          </div>
+                        </div>
+                        <div class="mb-3">
                           <label class="form-label" for="basic-icon-default-email" >Masa Berlaku STR</label>
                           <div class="input-group">
                             <span id="basic-icon-default-company2" class="input-group-text"
@@ -122,6 +132,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               ><i class="bx bx-calendar"></i
                             ></span>
                             <input type="text" name="jenis_praktek" class="form-control" placeholder="" value="&nbsp;&nbsp;<?php echo $datasip['hari_awal_praktek']?>" disabled />
+                          </div>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label" for="basic-icon-address">Catatan</label>
+                          <div class="input-group input-group-merge">
+                             <span id="basic-icon-address" class="input-group-text"
+                              ><i class="bx bx-calendar"></i
+                            ></span>
+                            <input type="text" name="jenis_praktek" class="form-control" placeholder="" value="&nbsp;&nbsp;<?php echo $datasip['catatan']?>" disabled />
                           </div>
                         </div>
                         <button

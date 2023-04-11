@@ -142,7 +142,7 @@
                                 data-bs-parent="#accordionExample"
                               >
                                 <div class="accordion-body text-center">
-                                  <?php if(empty($detail_sip['pas_foto'])){
+                                  <?php if(empty($datauser['pict'])){
                                     echo "data belum disi";
                                   }
 

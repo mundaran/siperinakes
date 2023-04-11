@@ -175,10 +175,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 data-bs-toggle="list"
                                 href="#list-profile">Syarat Perpanjang</a>
                               <a class="list-group-item list-group-item-action"
-                                id="list-messages-list"
-                                data-bs-toggle="list"
-                                href="#list-messages">Syarat Perubahan</a>
-                              <a class="list-group-item list-group-item-action"
                                 id="list-settings-list"
                                 data-bs-toggle="list"
                                 href="#list-settings">Syarat Pencabutan</a>
@@ -203,21 +199,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <p>Foto Rekomendasi Organisasi Profesi</p>
                                 <p>Foto Rekomendasi Tempat Praktek</p>
                               </div>
-                              <div class="tab-pane fade" id="list-messages">
-                                Ice cream dessert candy sugar plum croissant cupcake tart pie apple pie. Pastry
-                                chocolate chupa chups tiramisu. Tiramisu cookie oat cake. Pudding brownie bonbon. Pie
-                                carrot cake chocolate macaroon. Halvah jelly jelly beans cake macaroon jelly-o. Danish
-                                pastry dessert gingerbread powder halvah. Muffin bonbon fruitcake dragée sweet sesame
-                                snaps oat cake marshmallow cheesecake. Cupcake donut sweet bonbon cheesecake soufflé
-                                chocolate bar.
-                              </div>
                               <div class="tab-pane fade" id="list-settings">
-                                Marzipan cake oat cake. Marshmallow pie chocolate. Liquorice oat cake donut halvah
-                                jelly-o. Jelly-o muffin macaroon cake gingerbread candy cupcake. Cake lollipop lollipop
-                                jelly brownie cake topping chocolate. Pie oat cake jelly. Lemon drops halvah jelly
-                                cookie bonbon cake cupcake ice cream. Donut tart bonbon sweet roll soufflé gummies
-                                biscuit. Wafer toffee topping jelly beans icing pie apple pie toffee pudding. Tiramisu
-                                powder macaroon tiramisu cake halvah.
+                                Siapkan Surat Permohonan Cabut SIP
                               </div>
                             </div>
                           </div>

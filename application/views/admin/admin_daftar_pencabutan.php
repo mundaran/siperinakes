@@ -16,6 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="d-flex align-items-end row">
                       <div class="col-sm-7">
                         <div class="card-body">
+                          <?php echo $this->session->flashdata('message');?>
                           <h5 class="card-title text-danger">List Pencabutan SIP</h5>
                         </div>
                       </div>
@@ -43,6 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <th>Nomor SIP</th>
                                 <th>Nama Pemohon</th>
                                 <th>Status</th>
+                                <th>Tanggal Cabut</th>
                               </tr>
                               
                             </thead>
@@ -60,6 +62,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                   $data_nakes = $this->db->query("SELECT * FROM user WHERE id = $id_nakes ");
                                   $nakes=$data_nakes->row_array();
 
+                                  $id_sip = $sip_cabut['id'];
+                                  $data_val = $this->db->query("SELECT * FROM validasi_sip WHERE id_sip = $id_sip ");
+                                  $valid=$data_val->row_array();
+
                                   echo '
 
                                     <tr>
@@ -72,7 +78,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <td>
                                       '.$status_perp.'
                                     </td>
-
+                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$valid['tanggal_cabut'].'</strong></td>
                                     
                                   </tr>
 

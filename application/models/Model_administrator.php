@@ -332,9 +332,10 @@ Class Model_administrator extends CI_Model{
 	    }
 	}
 
-	public function approval_cabut_sip($data,$id_sip,$status_sip,$nomor_sip,$catatan,$title_validasi)
+	public function approval_cabut_sip($data,$id_sip,$status_sip,$title_validasi)
 	{
-		$query= $this->db->insert('validasi_sip', $data);
+		$this->db->where('id_sip',$id_sip);
+		$query= $this->db->update('validasi_sip', $data);
 	    if($query)
 	    {	
 	    	$status = $status_sip ;
@@ -342,13 +343,11 @@ Class Model_administrator extends CI_Model{
 	    	$note = $catatan;
 	    	$update_status = array( 
 	    		'status'=>$status,
-	    		'nomor_sip'=>$nomor_sip,
-	    		'catatan'=>$catatan
 	    					);
 			$this->db->where('id',$id_sip);
 			$berhasil = $this->db->update('data_sip', $update_status);
 
-			$this->session->set_flashdata('message',$title_validasi);
+			$this->session->set_flashdata('message', $title_validasi);
 			redirect('administrator/daftar_pencabutan');
 	    }
 	    else
@@ -357,5 +356,6 @@ Class Model_administrator extends CI_Model{
 			redirect('adminsitrator/daftar_pencabutan');
 	    }
 	}
+	
 	
 }

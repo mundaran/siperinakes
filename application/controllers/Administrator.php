@@ -467,23 +467,20 @@ class Administrator extends CI_Controller {
 		$admin = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$id_admin = $admin['id'];
 		$id_sip = $this->uri->segment(3);
-		$id_nakes = $this->uri->segment(4);
 		$status_validasi = $this->input->post('status_validasi');
 		$keterangan = $this->input->post('keterangan');
 		$nomor_sip = $this->input->post('nomor_sip');
 		$catatan = $this->input->post('catatan');
-		$tanggal_validasi= date("d-m-Y");
+		$tanggal_cabut= date("d-m-Y");
 		$status_sip = $this->input->post('status_sip');
 		$title_validasi = $this->input->post('title_validasi');
 		$data = array(
 			'id_admin'=>$id_admin,
-			'id_nakes'=>$id_nakes,
-			'id_sip'=>$id_sip,
 			'status_validasi' => $status_validasi,
 			'keterangan'=>$keterangan,
-			'tanggal_validasi'=>$tanggal_validasi,
+			'tanggal_cabut'=>$tanggal_cabut,
 		);
-		$this->model_administrator->approval_cabut_sip($data,$id_sip,$status_sip,$nomor_sip,$catatan,$title_validasi);
+		$this->model_administrator->approval_cabut_sip($data,$id_sip,$status_sip,$title_validasi);
 	}
 
 	public function aksi_hapus_user()

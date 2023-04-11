@@ -162,7 +162,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <tr>
         <td align="left">Hari/Jam</td>
         <td >:</td>
-        <td ><?php echo $detail_sip ['hari_awal_praktek'];?>-<?php echo $detail_sip ['hari_akhir_praktek'];?>&nbsp;/&nbsp;<?php echo $detail_sip ['jam_buka'];?>-<?php echo $detail_sip ['jam_tutup'];?></td>
+        <td ><?php echo $detail_sip ['hari_awal_praktek'];?></td>
       </tr>
   </table>
   <br>
