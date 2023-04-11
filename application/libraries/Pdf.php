@@ -4,6 +4,7 @@
  *
  * Generate PDF's from HTML in CodeIgniter
  */
+
 use Dompdf\Dompdf;
 class Pdf extends Dompdf{
     /**

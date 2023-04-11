@@ -57,7 +57,7 @@
                       placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                       aria-describedby="password"
                     />
-                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                    <span class="input-group-text cursor-pointer" onclick="myFunction()"><i class="bx bx-hide"></i></span>
                   </div>
                 </div>
                 <div class="mb-3 form-password-toggle">
@@ -68,13 +68,13 @@
                     <input
                       required
                       type="password"
-                      id="password"
+                      id="password1"
                       class="form-control"
                       name="confirm"
                       placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                       aria-describedby="konfirmasi password"
                     />
-                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                    <span class="input-group-text cursor-pointer" onclick="myFunction2()"><i class="bx bx-hide"></i></span>
                   </div>
                 </div>
                 <div class="mb-3">
@@ -93,3 +93,22 @@
         </div>
       </div>
     </div>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+
+        function myFunction2() {
+            var x = document.getElementById("password1");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>

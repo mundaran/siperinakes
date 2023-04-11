@@ -34,6 +34,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           <p class="mb-4">
                             PEMOHON : <?php echo $datauser['name'];?>
                           </p>
+                          <p>Surat Permohonan Cabut SIP</p>
+                          <p>Nomor SIP : <?php echo $datasip['nomor_sip'];?></p>
 
                         </div>
                       </div>
@@ -53,10 +55,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="row">
                        <div class="col-sm-6">
                         <div class="card-body">
-                          <p>Surat Permohonan Cabut SIP</p>
-                          <p>Nomor : <?php echo $datasip['nomor_sip'];?></p>
-                         <?php if(empty($datasip['foto_ktp'])){
-                            echo "data belum disi";
+                          
+                         <?php if(empty($datasip['surat_cabut'])){
+                            echo "Data Belum Diisi";
                           }
 
                           else{
@@ -158,7 +159,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content ">
                               <div class="modal-header">
-                                <h5 class="modal-title " id="modalCenterTitle" >Konfirmasi Approval</h5>
+                                <h5 class="modal-title " id="modalCenterTitle" >Konfirmasi Cabut SIP</h5>
                                 <button
                                   type="button"
                                   class="btn-close"
@@ -170,23 +171,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <div class="row">
                                   <div class="col mb-3 align-center">
                                     <div class="card-body text-center">
-                                    <p class="card-text" ><font size="5">Anda yakin untuk approval ?</font></p>
-                                    <p>Pastikan data sudah sesuai yaa...</p>
+                                    <p class="card-text text-danger" ><font size="5">Yakin Ingin Mencabut SIP ?</font></p>
+                                    <p>Nomor SIP : <?php echo $datasip['nomor_sip'];?></p>
                                     <br>
                                     <br>
-                                    <form method="POST" action="<?php echo base_url();?>administrator/aksi_approval_validasi_sip/<?php echo $this->uri->segment(3);?>/<?php echo $datasip['id_user'];?>">
-                                      <input type="hidden" value="1" name="status_validasi">
-                                      <input type="hidden" value="valid" name="keterangan">
-                                      <input type="hidden" name="status_sip" value="3">
-                                      <input type="text" class="form-control" name="nomor_sip" placeholder="Masukan Nomor SIP Baru">
-                                      <br>
-                                      <input type="text" class="form-control" name="catatan" placeholder="Masukan Catatan Jika Ada">
-                                      <input type="hidden" name="title_validasi" value='<div class="alert alert-success" role="alert"><b> Data Telah Di Approve </b></div>'>
+                                    <form method="POST" action="<?php echo base_url();?>administrator/aksi_approval_cabut_sip/<?php echo $this->uri->segment(3);?>/<?php echo $datasip['id_user'];?>">
+                                      <input type="hidden" value="3" name="status_validasi">
+                                      <input type="hidden" value="Dicabut" name="keterangan">
+                                      <input type="hidden" name="status_sip" value="10">
+                                      <input type="hidden" name="title_validasi" value='<div class="alert alert-success" role="alert"><b> Data Telah Dicabut</b></div>'>
                                       <BR>
                                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                                       Close
                                     </button>
-                                    <button type="submit" class="btn btn-primary">Approve</button>
+                                    <button type="submit" class="btn btn-danger">Cabut</button>
                                     </form>
                                   </div>
                                   </div>

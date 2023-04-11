@@ -216,8 +216,10 @@
                               />
                             </div>
                           </div>
-                          <span class="fw-semibold d-block mb-1">SIP Terdaftar </span>
+                          <span class="fw-semibold d-block mb-1">SIP Dokter Aktif </span>
                             <?php 
+                            $jenis ='Dokter';
+                            $this->db->like('jenis_sip',$jenis);
                             $this->db->like('status',3);
                             $this->db->from('data_sip');
                             ?>
@@ -242,10 +244,11 @@
                               />
                             </div>
                           </div>
-                          <span class="fw-semibold d-block mb-1">SIPA Terdafatar</span>
-                          <?php 
+                          <span class="fw-semibold d-block mb-1">SIPA Aktif</span>
+                            <?php 
                             $jenis ='Apoteker';
                             $this->db->like('jenis_sip',$jenis);
+                            $this->db->like('status',3);
                             $this->db->from('data_sip');
                             ?>
                           <h3 class="card-title mb-1"><?php echo $this->db->count_all_results();?></h3>
@@ -265,8 +268,13 @@
                               />
                             </div>
                           </div>
-                          <span class="fw-semibold d-block mb-1">SIP Kedaluarsa </span>
-                          <h3 class="card-title text-nowrap mb-1">0</h3>
+                          <?php 
+                          $status=10;
+                          $this->db->like('status',$status);
+                          $this->db->from('data_sip');
+                          ?>
+                          <span class="fw-semibold d-block mb-1">SIP Pencabutan </span>
+                           <h3 class="card-title mb-1"><?php echo $this->db->count_all_results();?></h3>
                           <small class="text-success fw-semibold"><i class=""></i> SIP </small>
                         </div>
                       </div>

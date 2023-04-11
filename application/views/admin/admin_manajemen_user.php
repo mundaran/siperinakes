@@ -80,7 +80,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                           <i class="bx bx-dots-vertical-rounded"></i>
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end">
-                                          <li><a class="dropdown-item" href="'.base_url().'administrator/detail_sip/'.$nakes['id'].'" >Nonaktifkan</a></li>
+                                          <li><a class="dropdown-item" href="'.base_url().'administrator/nonaktifkan_user/'.$nakes['id'].'" onClick="return confirm(Apakah Anda Ingin Keluar?)">Nonaktifkan</a></li>
                                           <li><a class="dropdown-item" href="javascript:void(0);">Reset Password</a></li>
                                           <li><a class="dropdown-item" href="javascript:void(0);">Hapus Akun</a></li>
                                         </ul>

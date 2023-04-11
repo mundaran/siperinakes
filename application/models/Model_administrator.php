@@ -331,5 +331,31 @@ Class Model_administrator extends CI_Model{
 			redirect('adminsitrator/form_validasi_revisi_perpanjangan/'.$id_sip);
 	    }
 	}
+
+	public function approval_cabut_sip($data,$id_sip,$status_sip,$nomor_sip,$catatan,$title_validasi)
+	{
+		$query= $this->db->insert('validasi_sip', $data);
+	    if($query)
+	    {	
+	    	$status = $status_sip ;
+	    	$no_sip = $nomor_sip;
+	    	$note = $catatan;
+	    	$update_status = array( 
+	    		'status'=>$status,
+	    		'nomor_sip'=>$nomor_sip,
+	    		'catatan'=>$catatan
+	    					);
+			$this->db->where('id',$id_sip);
+			$berhasil = $this->db->update('data_sip', $update_status);
+
+			$this->session->set_flashdata('message',$title_validasi);
+			redirect('administrator/daftar_pencabutan');
+	    }
+	    else
+	    {
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b> Gagal Cabut  </b></div>');
+			redirect('adminsitrator/daftar_pencabutan');
+	    }
+	}
 	
 }
