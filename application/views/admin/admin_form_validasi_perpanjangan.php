@@ -118,6 +118,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <input type="text" name="jenis_praktek" class="form-control" placeholder="" value="&nbsp;&nbsp;<?php echo $datasip['hari_awal_praktek']?>" disabled />
                           </div>
                         </div>
+                        <div class="mb-3">
+                          <label class="form-label" for="basic-icon-address">Catatan</label>
+                          <div class="input-group input-group-merge">
+                             <span id="basic-icon-address" class="input-group-text"
+                              ><i class="bx bx-calendar"></i
+                            ></span>
+                            <input type="text" name="catatan" class="form-control" placeholder="" value="&nbsp;&nbsp;<?php echo $datasip['catatan']?>" disabled />
+                          </div>
+                        </div>
                         <button
                           type="button"
                           class="btn btn-lg btn-primary"
@@ -531,12 +540,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             ?>
 
                             <div class="card accordion-item">
-                              <h2 class="accordion-header" id="headingEight">
+                              <h2 class="accordion-header" id="headingNine">
                                 <button
                                   type="button"
                                   class="accordion-button collapsed"
                                   data-bs-toggle="collapse"
-                                  data-bs-target="#accordionEight"
+                                  data-bs-target="#accordionNine"
                                   aria-expanded="false"
                                   aria-controls="accordionEight"
                                 >
@@ -544,9 +553,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </button>
                               </h2>
                               <div
-                                id="accordionEight"
+                                id="accordionNine"
                                 class="accordion-collapse collapse"
-                                aria-labelledby="headingEight"
+                                aria-labelledby="headingNine"
                                 data-bs-parent="#accordionExample"
                               >
                                 <div class="accordion-body">

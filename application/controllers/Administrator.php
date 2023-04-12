@@ -31,6 +31,19 @@ class Administrator extends CI_Controller {
 		$this->load->view('template_view/admin_template/dashboard_footer');
 	}
 
+	public function edit_user()
+	{
+		$data['title'] ='manajemen_user';
+		$id_nakes =$this->uri->segment(3);
+		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$data ['nakes'] = $sql = $this->db->query("SELECT * FROM user WHERE id=$id_nakes ")->row_array();;
+		
+		$this->load->view('template_view/admin_template/dashboard_header');
+		$this->load->view('template_view/admin_template/menubar',$data);
+		$this->load->view('admin/admin_edit_user',$data);
+		$this->load->view('template_view/admin_template/dashboard_footer');
+	}
+
 	public function validasi_sip()
 	{
 		$data['title'] ='Validasi SIP';
@@ -76,6 +89,18 @@ class Administrator extends CI_Controller {
 		$this->load->view('template_view/admin_template/dashboard_header');
 		$this->load->view('template_view/admin_template/menubar',$data);
 		$this->load->view('admin/admin_manajemen_sip',$data);
+		$this->load->view('template_view/admin_template/dashboard_footer');
+	}
+
+	public function form_perpanjang_sip()
+	{
+		$data['title'] ='Manajemen SIP';
+		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$data ['sip'] = $this->model_administrator->load_data_sip();
+
+		$this->load->view('template_view/admin_template/dashboard_header');
+		$this->load->view('template_view/admin_template/menubar',$data);
+		$this->load->view('admin/admin_form_perpanjang',$data);
 		$this->load->view('template_view/admin_template/dashboard_footer');
 	}
 
@@ -483,6 +508,138 @@ class Administrator extends CI_Controller {
 		$this->model_administrator->approval_cabut_sip($data,$id_sip,$status_sip,$title_validasi);
 	}
 
+
+	public function aksi_perpanjangan(){
+		$user    = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id_admin= $user['id'];
+		$id_sip  = $this->uri->segment(3);
+		$id_nakes= $this->uri->segment(4);
+		$date    = date('d-m-y');
+		$no_str_baru = $this->input->post('no_str_baru');
+		$masa_berlaku_str = $this->input->post('masa_berlaku_str');
+
+		$file_name_sip_lama = 'sip-lama-'.$id_sip.'-'.$id_nakes.'-'.$date;
+		$config['upload_path']          = './document/foto_sip_lama';
+		$config['allowed_types']        = 'pdf';
+		$config['file_name']            = $file_name_sip_lama;
+		$config['overwrite'] = false;
+		$config['max_size']             = 3000;
+		$config['max_width']            = 2000;
+		$config['max_height']           = 2000;
+		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
+		if ( !$this->upload->do_upload('foto_sip_lama')){
+			 $this->session->set_flashdata('message', 'Upload-gagal' );
+			 $error = array('error' => $this->upload->display_errors());
+    		 $this->session->set_flashdata('message',$error['error']);
+			 redirect('administrator/form_perpanjang_sip/'.$id_sip.'/'.$id_nakes);
+		} else {
+			$file_name_str_baru = 'str-'.$id_nakes.'-'.$id_sip.'-'.$date;
+			$config['upload_path']          = './document/str';
+			$config['allowed_types']        = 'pdf';
+			$config['file_name']            = $file_name_str_baru;
+			$config['overwrite'] = false;
+			$config['max_size']             = 1000;
+			$config['max_width']            = 1024;
+			$config['max_height']           = 768;
+			$foto_sip_baru = $this->upload->data();
+			$this->load->library('upload', $config);
+	 		$this->upload->initialize($config);
+			if ( !$this->upload->do_upload('foto_str_baru')){
+			 	 $this->session->set_flashdata('message', 'Upload-gagal' );
+			 	 $error = array('error' => $this->upload->display_errors());
+				 $this->session->set_flashdata('message',$error['error']);
+				 redirect('administrator/form_perpanjang_sip/'.$id_sip.'/'.$id_nakes);
+			} else {
+				$file_name_rop_baru = 'rop-'.$id_nakes.'-'.$id_sip.'-'.$date;
+				$config['upload_path']          = './document/rop';
+				$config['allowed_types']        = 'pdf';
+				$config['file_name']            = $file_name_rop_baru;
+				$config['overwrite'] = false;
+				$config['max_size']             = 1000;
+				$config['max_width']            = 1024;
+				$config['max_height']           = 768;
+				$foto_rop_baru = $this->upload->data();
+				$this->load->library('upload', $config);
+		 		$this->upload->initialize($config);
+				if ( !$this->upload->do_upload('foto_rop_baru')){
+				 	 $this->session->set_flashdata('message', 'Upload-gagal' );
+				 	 $error = array('error' => $this->upload->display_errors());
+					 $this->session->set_flashdata('message',$error['error']);
+					 redirect('administrator/form_perpanjang_sip/'.$id_sip.'/'.$id_nakes);
+			}else{
+				$rop_up = $this->upload->data();
+				$status = 'undone';
+
+				$insert_data =  [
+
+					'id_sip'   => $id_sip,
+					'id_user'  => $id_nakes,
+					'sip_lama' => $file_name_sip_lama, 
+					'str_baru' => $file_name_str_baru,
+					'rop_baru' => $file_name_rop_baru,
+					'status'   => $status,
+					'tanggal'  => $date,
+				];
+
+				$insert = $query= $this->db->insert('riwayat_perpanjangan', $insert_data);
+
+					if ($insert) {
+						$update_data =[
+							'no_str' => $no_str_baru,
+							'masa_berlaku_str' => $masa_berlaku_str,
+							'foto_str' => $file_name_str_baru,
+							'rekomendasi_org_p'=>$file_name_rop_baru,
+							'status' => 5,
+
+						];
+						$this->model_administrator->update_sip_diperpanjang($update_data,$id_sip);
+					} else{
+						$this->session->set_flashdata('message', 'Gagal Perpanjangan');
+						redirect('administrator/form_perpanjangan_sip/'.$id_nakes.'/'.$id_nakes);
+					}
+				}
+
+			}
+		}
+	}
+
+	public function aksi_cabut_sip()
+	{
+		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id = $user['id'];
+		$pemohon=$user['name'];
+		$tanggal_cabut=date('d-m-y');
+		$id_sip = $this->uri->segment(3);
+
+		$file_name_surat_cabut = 'spc-'.strtr($pemohon, ". ", "--").'-'.$id_sip;'';
+		$config['upload_path']          = './document/surat_cabut';
+		$config['allowed_types']        = 'pdf';
+		$config['file_name']            = $file_name_surat_cabut;
+		$config['overwrite'] = false;
+		$config['max_size']             = 3000;
+		$config['max_width']            = 2000;
+		$config['max_height']           = 2000;
+		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
+		if ( !$this->upload->do_upload('surat_cabut')){
+			 $this->session->set_flashdata('message', 'Upload-gagal' );
+			 $error = array('error' => $this->upload->display_errors());
+    		 $this->session->set_flashdata('message','<div class="alert alert-danger col-lg-6"><b>'.$error['error'].$file_name_surat_cabut.'</b></div>');
+			 redirect('administrator/manajemen_sip');
+		} else {
+				$foto_surat_cabut = $this->upload->data();
+
+				$update_data =  [
+					'status'=>9,
+					'surat_cabut' => $file_name_surat_cabut,
+				];
+
+				$this->model_administrator->permohonan_pencabutan($id_sip,$update_data);
+			}
+	}
+
+
 	public function aksi_hapus_user()
 	{
 		$data['title'] ='Daftar Pencabutan';
@@ -494,4 +651,7 @@ class Administrator extends CI_Controller {
 		$data['title'] ='Manajemen User';
 		$admin = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 	}
+
+
+
 }

@@ -18,6 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           <p class="mb-4">
                            Daftar SIP Approved
                           </p>
+                           <?php echo $this->session->flashdata('message');?>
                         </div>
                       </div>
                       <div class="col-sm-5 text-center text-sm-left">
@@ -84,8 +85,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end">
                                           <li><a class="dropdown-item" href="'.base_url().'administrator/detail_sip/'.$data['id'].'" >Detail SIP</a></li>
-                                          <li><a class="dropdown-item" href="javascript:void(0);">Perpanjang</a></li>
-                                          <li><a class="dropdown-item" href="javascript:void(0);">Cabut SIP</a></li>
+                                          <li><a class="dropdown-item" href="'.base_url().'administrator/form_perpanjang_sip/'.$data['id'].'/'.$user['id'].'">Perpanjang</a></li>
+                                          <li><a class="dropdown-item" data-bs-toggle="modal" href="#modalCabut'.$data['id'].'">Cabut SIP</a></li>
                                         </ul>
                                       </div>
 
@@ -93,6 +94,40 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                                     
                                   </tr>
+
+                                  <div class="modal fade" id="modalCabut'.$data['id'].'" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                      <div class="modal-content ">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title " id="modalCenterTitle" >Perhatian !!</h5>
+                                          <button
+                                            type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"
+                                          ></button>
+                                        </div>
+                                        <div class="modal-body"> 
+                                          <div class="row">
+                                            <div class="col mb-3 align-center">
+                                              <div class="card-body text-center">
+                                              <p class="card-text text-danger" ><font size="5">Yakin Ingin Cabut SIP ?</font></p>
+                                              <p><b>Dengan Nomor : '.$data['nomor_sip'].'</b></p>
+                                              <br>
+                                              <label>Silahkan Upload Surat Permohonan Cabut SIP</label>
+                                              <form action="'.base_url().'administrator/aksi_cabut_sip/'.$data['id'].'" method="POST" enctype="multipart/form-data">
+                                                <input type="file" class="form-control" name="surat_cabut" required>
+                                                <br>
+                                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-danger">OK</button>
+                                              </form>
+                                            </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
 
 
 

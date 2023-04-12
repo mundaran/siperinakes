@@ -356,6 +356,40 @@ Class Model_administrator extends CI_Model{
 			redirect('adminsitrator/daftar_pencabutan');
 	    }
 	}
+
+	public function update_sip_diperpanjang($update_data,$id_sip)
+	{
+		$this->db->where('id',$id_sip);
+		$berhasil = $this->db->update('data_sip', $update_data);
+		if($berhasil){
+			$this->session->set_flashdata('message','<div class="alert alert-primary"><b> Permohonan Perpanjangan Berhasil Silahkan Validasi Di Menu Permohonan Perpanjangan</b></div>');
+			redirect('administrator/manajemen_sip');
+		}
+		else{
+
+			$this->session->set_flashdata('message','<div class="alert alert-danger"><b> Permohonan GAGAL !!! </b></div>');
+			redirect('administrator/manajemen_sip');
+		}
+
+			
+	}
+
+	public function permohonan_pencabutan($id_sip,$update_data)
+	{
+		$this->db->where('id',$id_sip);
+		$berhasil = $this->db->update('data_sip', $update_data);
+		if($berhasil){
+			$this->session->set_flashdata('message','<div class="alert alert-success"><b> Permohonan Cabut Berhasil, Silahkan Ke Menu Pencabutan Untuk Pengembalian SIP dan Validasi Pencabutan SIP</b></div>');
+			redirect('administrator/manajemen_sip');
+		}
+		else{
+
+			$this->session->set_flashdata('message','<div class="alert alert-danger"><b> Pencabutan GAGAL !!! </b></div>');
+			redirect('administrator/manajemen_sip');
+		}
+
+			
+	}
 	
 	
 }

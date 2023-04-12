@@ -8,21 +8,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <!-- Content -->
                
            <div class="container-xxl flex-grow-1 container-p-y">
-              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Setting /</span>Account</h4>
 
               <div class="row">
                 <div class="col-md-12">
-                  <ul class="nav nav-pills flex-column flex-md-row mb-3">
-                    <li class="nav-item">
-                      <a class="nav-link active" href="<?php echo base_url(); ?>nakes/my_profile"><i class="bx bx-user me-1"></i>Account</a>
-                    </li>
-                  </ul>
                   <div class="card mb-4">
-                    <h5 class="card-header">Profile Details<span><?php echo $this->session->flashdata('message');?></span></h5>
+                    <h4 class="card-header text-primary"><b>Edit Akun Nakes</b><span></span></h4>
+                    <?php echo $this->session->flashdata('message');?>
                     <!-- Account -->
                     <div class="card-body">
                       <div class="d-flex align-items-start align-items-sm-center gap-4">
-                        <?php if(empty($user['pict'])){
+                        <?php if(empty($nakes['pict'])){
                          echo '<img
                           src="'.base_url().'template/assets/img/avatars/user1.png"
                           alt="user-avatar"
@@ -50,7 +45,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       }
                       else{
                         echo'<img
-                          src="'.base_url().'document/foto_user/'.$user['pict'].'.jpg"
+                          src="'.base_url().'document/foto_user/'.$nakes['pict'].'.jpg"
                           alt="user-avatar"
                           class="d-block rounded"
                           height="100"
@@ -90,13 +85,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               type="text"
                               id="nama_lengkap"
                               name="nama_lengkap"
-                              value="<?php echo $user['name'];?>"
+                              value="<?php echo $nakes['name'];?>"
                               autofocus
                             />
                           </div>
                           <div class="mb-3 col-md-6">
                             <label for="nik" class="form-label">NIK</label>
-                            <input class="form-control" type="text" name="nik" id="nik" maxlength="16" minlength="16" value="<?php echo $user['nik'];?>" />
+                            <input class="form-control" type="text" name="nik" id="nik" maxlength="16" minlength="16" value="<?php echo $nakes['nik'];?>" />
                           </div>
                           <div class="mb-3 col-md-6">
                             <label for="email" class="form-label">E-mail</label>
@@ -105,8 +100,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               type="text"
                               id="email"
                               name="email"
-                              value="<?php echo $user['email'];?>"
-                              placeholder="john.doe@example.com"
+                              value="<?php echo $nakes['email'];?>"
                             />
                           </div>
                           <div class="mb-3 col-md-6">
@@ -116,7 +110,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               class="form-control"
                               id="no_hp"
                               name="no_hp"
-                              value="<?php echo $user['no_hp'];?>"
+                              value="<?php echo $nakes['no_hp'];?>"
                             />
                           </div>
                           <div class="mb-3 col-md-6">
@@ -127,22 +121,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 id="tmpat_lahir"
                                 name="tempat_lahir"
                                 class="form-control"
-                                value="<?php echo $user['tempat_lahir'];?>"
+                                value="<?php echo $nakes['tempat_lahir'];?>"
                               />
                             </div>
                           </div>
                           <div class="mb-3 col-md-6">
                             <label for="address" class="form-label">Tanggal Lahir</label>
-                            <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="<?php echo $user['tanggal_lahir'];?>" />
+                            <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="<?php echo $nakes['tanggal_lahir'];?>" />
                           </div>
                           <div class="mb-3 col-md-6">
                             <label for="state" class="form-label">Alamat</label>
-                            <input class="form-control" type="text" id="alamat" name="alamat" value="<?php echo $user['alamat'];?>"/>
+                            <input class="form-control" type="text" id="alamat" name="alamat" value="<?php echo $nakes['alamat'];?>"/>
                           </div>
                           <div class="mb-3 col-md-6">
                             <label for="zipCode" class="form-label">Provinsi</label>
                             <select id="country" name="provinsi" class="select2 form-select">
-                              <option value="<?php echo $user['provinsi'];?>"><?php echo $user['provinsi'];?></option>
+                              <option value="<?php echo $nakes['provinsi'];?>"><?php echo $nakes['provinsi'];?></option>
 
                               <?php //untuk menampilkan no
                               $provinsi = $this->db->get_where('master_provinsi', array('id'))->result_array();
@@ -157,7 +151,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           <div class="mb-3 col-md-6">
                             <label class="form-label" for="country">Kabupaten</label>
                             <select id="country" name="kota_kabupaten" class="select2 form-select">
-                              <option value="<?php echo $user['kota_kabupaten'];?>"><?php echo $user['kota_kabupaten'];?></option>
+                              <option value="<?php echo $nakes['kota_kabupaten'];?>"><?php echo $nakes['kota_kabupaten'];?></option>
                               
 
                               <?php //untuk menampilkan no
@@ -173,7 +167,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           <div class="mb-3 col-md-6">
                             <label for="language" class="form-label">Kecamatan</label>
                             <select id="kecamatan" class="select2 form-select" name="kecamatan">
-                              <option value="<?php echo $user['kecamatan'];?>"><?php echo $user['kecamatan'];?></option>
+                              <option value="<?php echo $nakes['kecamatan'];?>"><?php echo $nakes['kecamatan'];?></option>
                               <?php //untuk menampilkan no
                               $kecamatan = $this->db->get_where('master_kecamatan', array('id'))->result_array();
                               foreach( $kecamatan as $kec ):
@@ -186,7 +180,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           <div class="mb-3 col-md-12">
                             <label for="kelurahan" class="form-label">Keluarahan</label>
                             <select id="kelurahan" name="kelurahan" class="select2 form-select">
-                              <option value="<?php echo $user['kelurahan'];?>"><?php echo $user['kelurahan'];?></option>
+                              <option value="<?php echo $nakes['kelurahan'];?>"><?php echo $nakes['kelurahan'];?></option>
                               <?php //untuk menampilkan no
                               $kelurahan = $this->db->get_where('master_kelurahan', array('id'))->result_array();
                               foreach( $kelurahan as $kel ):
@@ -252,7 +246,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               ></button>
             </div>
             <div class="modal-body">
-              <form method="POST" enctype="multipart/form-data" action="<?php echo base_url();?>administrator/upload_foto">
+              <form method="POST" enctype="multipart/form-data" action="<?php echo base_url();?>administrator/edit_foto_nakes/<?php echo $nakes['id'];?>">
               <div class="row">
                 <div class="col mb-3">
                   <label for="nameWithTitle" class="form-label"></label>

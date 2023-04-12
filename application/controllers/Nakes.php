@@ -430,7 +430,7 @@ class Nakes extends CI_Controller {
 			 $this->session->set_flashdata('message', 'Upload-gagal' );
 			 $error = array('error' => $this->upload->display_errors());
     		 $this->session->set_flashdata('message',$error['error']);
-			 redirect('nakes/form_perpanjangan_sip/'.$id_user);
+			 redirect('nakes/form_perpanjangan_sip/'.$id_sip);
 		} else {
 			$file_name_str_baru = 'str-'.$id_user.'-'.$id_sip.'-'.$date;
 			$config['upload_path']          = './document/str';
@@ -447,7 +447,7 @@ class Nakes extends CI_Controller {
 			 	 $this->session->set_flashdata('message', 'Upload-gagal' );
 			 	 $error = array('error' => $this->upload->display_errors());
 				 $this->session->set_flashdata('message',$error['error']);
-				 redirect('nakes/form_perpanjangan_sip/'.$id_user);
+				 redirect('nakes/form_perpanjangan_sip/'.$id_sip);
 			} else {
 				$file_name_rop_baru = 'rop-'.$id_user.'-'.$id_sip.'-'.$date;
 				$config['upload_path']          = './document/rop';
@@ -464,7 +464,7 @@ class Nakes extends CI_Controller {
 				 	 $this->session->set_flashdata('message', 'Upload-gagal' );
 				 	 $error = array('error' => $this->upload->display_errors());
 					 $this->session->set_flashdata('message',$error['error']);
-					 redirect('nakes/form_perpanjangan_sip/'.$id_user);
+					 redirect('nakes/form_perpanjangan_sip/'.$id_sip);
 			}else{
 				$rop_up = $this->upload->data();
 				$status = 'undone';
@@ -494,7 +494,7 @@ class Nakes extends CI_Controller {
 						$this->model_nakes->update_sip_diperpanjang($update_data,$id_sip);
 					} else{
 						$this->session->set_flashdata('message', 'Gagal Perpanjangan');
-						redirect('nakes/form_perpanjangan_sip/'.$id_user);
+						redirect('nakes/form_perpanjangan_sip/'.$id_sip);
 					}
 				}
 
@@ -957,7 +957,7 @@ class Nakes extends CI_Controller {
 					'surat_cabut' => $file_name_surat_cabut,
 				];
 
-				$this->model_nakes->permohonan_pencabutan($id_sip,$update_data);
+				$this->model_administrator->permohonan_pencabutan($id_sip,$update_data);
 			}
 	}
 

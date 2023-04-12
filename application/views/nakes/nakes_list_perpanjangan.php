@@ -52,12 +52,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               <?php foreach ($perpanjang_sip as $sip) {
 
                                   $id_list= $sip['id'];
-                                  $data_list = $this->db->query("SELECT * FROM riwayat_perpanjangan WHERE id_sip = $id_list ");
+                                  $data_list = $this->db->query("SELECT * FROM riwayat_perpanjangan WHERE id_sip = $id_list AND status='undone'");
                                   $list= $data_list->row_array();
-                                  if($sip['status']==8){
+                                  if($sip['status']==5){
                                     $status_perp ='Sedang Ditinjau';
                                   } elseif($sip['status']==7){
                                     $status_perp ='<a href="'.base_url().'nakes/form_revisi_perpanjangan/'.$sip['id'].'" class="btn btn-sm btn-danger">REVISI PERPANJANGAN</a>';
+                                  }elseif($sip['status']==8){
+                                    $status_perp ='Revisi Sedang Ditinjau';
                                   }
 
                                   echo '
