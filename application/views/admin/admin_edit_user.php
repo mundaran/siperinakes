@@ -12,10 +12,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <div class="row">
                 <div class="col-md-12">
                   <div class="card mb-4">
-                    <h4 class="card-header text-primary"><b>Edit Akun Nakes</b><span></span></h4>
-                    <?php echo $this->session->flashdata('message');?>
+                    <h4 class="card-header text-primary"><b>Edit Akun User</b></h4>
+                    
                     <!-- Account -->
                     <div class="card-body">
+                      <?php echo $this->session->flashdata('message');?>
                       <div class="d-flex align-items-start align-items-sm-center gap-4">
                         <?php if(empty($nakes['pict'])){
                          echo '<img
@@ -67,16 +68,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       }
                       ?>
                         
-                      
-
-                      
-
                         </div>
                       </div>
                     </div>
                     <hr class="my-0" />
                     <div class="card-body">
-                      <form id="formAccountSettings" method="POST" action="<?php echo base_url();?>administrator/aksi_edit_profile" >
+                      <form id="formAccountSettings" method="POST" action="<?php echo base_url();?>administrator/aksi_edit_profile_user/<?php echo $this->uri->segment(3);?>" >
                         <div class="row">
                           <div class="mb-3 col-md-6">
                             <label for="firstName" class="form-label">Nama Lengkap ( Sertakan Gelar )</label>
@@ -193,37 +190,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
                         <div class="mt-2">
                           <button type="submit" class="btn btn-primary me-2">Simpan</button>
-                          <a href=""  class="btn btn-outline-secondary">Kembali</a>
+                          <a href="<?php echo base_url();?>administrator/manajemen_user"  class="btn btn-outline-secondary">Kembali</a>
                         </div>
                       </form>
                     </div>
                     <!-- /Account -->
                   </div>
                   <div class="card">
-                    <h5 class="card-header">Ubah Password</h5>
+                    <h5 class="card-header">Ganti Password User</h5>
                     <div class="card-body">
-                    
-                      <form id="formAccountDeactivation" method="POST" action="<?php echo base_url();?>administrator/aksi_ubah_password">
-
-                         <div class="mb-3 col-md-12">
-                          <label class="form-label" for="ubahPassword">Masukan Password Lama Anda</label>
-                            <input
-                              type="text"
-                              id="ubahPassword"
-                              name="password_lama"
-                              class="form-control"
-                            />
-                         </div>
-                          <div class="mb-3 col-md-12">
-                          <label class="form-label" for="ubahPassword">Masukan Password Baru Anda</label>
-                            <input
-                              type="text"
-                              id="ubahPassword"
-                              name="password_baru"
-                              class="form-control"
-                            />
-                         </div>
-                        <button type="submit" class="btn btn-danger deactivate-account">Ubah Paassword</button>
+                      <form id="formAccountDeactivation" method="POST" action="<?php echo base_url();?>administrator/aksi_ganti_password_user/<?php echo $this->uri->segment(3);?>">
+                         <div class="input-group input-group-merge">
+                          <input
+                            type="password"
+                            id="password"
+                            class="form-control"
+                            name="password_baru"
+                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                            aria-describedby="password"
+                          />
+                          <span class="input-group-text cursor-pointer"  onclick="myFunction()" ><i class="bx bx-hide"></i></span>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-danger deactivate-account">Ganti Password</button>
                       </form>
                     </div>
                   </div>
@@ -235,6 +224,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- Modal Upload Foto -->
       <div class="modal fade" id="modalUploadfoto" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
+          <form method="POST" enctype="multipart/form-data" action="<?php echo base_url();?>administrator/aksi_edit_foto_nakes/<?php echo $nakes['id'];?>">
           <div class="modal-content ">
             <div class="modal-header">
               <h5 class="modal-title " id="modalCenterTitle" >Upload Foto (Gunakan Foto 4x6)</h5>
@@ -246,7 +236,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               ></button>
             </div>
             <div class="modal-body">
-              <form method="POST" enctype="multipart/form-data" action="<?php echo base_url();?>administrator/edit_foto_nakes/<?php echo $nakes['id'];?>">
               <div class="row">
                 <div class="col mb-3">
                   <label for="nameWithTitle" class="form-label"></label>
@@ -259,8 +248,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 Close
               </button>
               <button type="submit" class="btn btn-primary">Save changes</button>
-            </form>
             </div>
           </div>
+          </form>
         </div>
       </div>
+ <script>
+        function myFunction() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>

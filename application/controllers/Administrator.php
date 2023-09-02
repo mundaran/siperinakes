@@ -149,6 +149,7 @@ class Administrator extends CI_Controller {
 		$data['title'] ='Manajemen User';
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$data ['data_user']=$this->model_administrator->load_manajemen_user();
+		$data ['data_user_nonaktif']=$this->model_administrator->load_manajemen_user_nonaktif();
 		$this->load->view('template_view/admin_template/dashboard_header');
 		$this->load->view('template_view/admin_template/menubar',$data);
 		$this->load->view('admin/admin_manajemen_user',$data);
@@ -246,7 +247,61 @@ class Administrator extends CI_Controller {
 		'kecamatan' => $kecamatan,
 		'kelurahan' => $kelurahan,
 		);
-		$this->model_admin->edit_profile($id, $data);
+		$this->model_administrator->edit_profile($id, $data);
+	}
+
+	public function aksi_edit_profile_user()
+	{
+		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id = $user['id'];
+		$id_nakes = $this->uri->segment(3);
+		$nama = $this->input->post('nama_lengkap');
+		$nik = $this->input->post('nik');
+		$email = $this->input->post('email');
+		$no_hp = $this->input->post('no_hp');
+		$tempat_lahir = $this->input->post('tempat_lahir');
+		$tanggal_lahir = $this->input->post('tanggal_lahir');
+		$alamat = $this->input->post('alamat');
+		$provinsi = $this->input->post('provinsi');
+		$kota_kabupaten = $this->input->post('kota_kabupaten');
+		$kecamatan = $this->input->post('kecamatan');
+		$kelurahan = $this->input->post('kelurahan');
+
+
+		$data = array(
+		'name' => $nama,
+		'nik' => $nik,
+		'email' => $email,
+		'no_hp' => $no_hp,
+		'tempat_lahir' => $tempat_lahir,
+		'tanggal_lahir' => $tanggal_lahir,
+		'alamat' => $alamat,
+		'provinsi' => $provinsi,
+		'kota_kabupaten' => $kota_kabupaten,
+		'kecamatan' => $kecamatan,
+		'kelurahan' => $kelurahan,
+		);
+		$this->model_administrator->edit_profile_nakes($id_nakes, $data);
+	}
+
+	public function aksi_tambah_user()
+	{
+		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id = $user['id'];
+		$nama = $this->input->post('nama_lengkap');
+		$password = md5($this->input->post('password'));
+		$email = $this->input->post('email');
+		$role_id = $this->input->post('role_id');
+
+
+		$data = array(
+		'name'     => $nama,
+		'email'    => $email,
+		'password' => $password,
+		'role_id'  => $role_id,
+		'aktifasi' => 0
+		);
+		$this->model_administrator->tambah_user($data);
 	}
 
 
@@ -279,6 +334,36 @@ class Administrator extends CI_Controller {
 			}
 	}
 
+	public function aksi_edit_foto_nakes(){
+		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id_user= $user['id'];
+		$id_nakes = $this->uri->segment(3);
+		$file_name_pas_foto = 'pas-foto-'.$id_nakes.'';
+		$config['upload_path']          = './document/foto_user';
+		$config['allowed_types']        = 'jpg';
+		$config['file_name']            = $file_name_pas_foto;
+		$config['overwrite'] = true;
+		$config['max_size']             = 3000;
+		$config['max_width']            = 2000;
+		$config['max_height']           = 2000;
+		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
+		if ( !$this->upload->do_upload('foto_user')){
+			 $this->session->set_flashdata('message', 'Upload-gagal' );
+			 $error = array('error' => $this->upload->display_errors());
+    		 $this->session->set_flashdata('message',$error['error']);
+			 redirect('administrator/edit_user/'.$id_nakes);
+		} else {
+				$foto_profile = $this->upload->data();
+
+				$update_data =  [
+					'pict' => $file_name_pas_foto,
+				];
+
+				$this->model_administrator->edit_foto_nakes($id_nakes,$update_data);
+			}
+	}
+
 	public function aksi_ubah_password()
 	{
 		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
@@ -295,6 +380,18 @@ class Administrator extends CI_Controller {
 			redirect('administrator/my_profile');
 		}
 		
+	}
+
+	public function aksi_ganti_password_user()
+	{
+		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id = $user['id'];
+		$id_nakes = $this->uri->segment(3);
+		$password_baru = md5($this->input->post('password_baru'));
+		$data_password = array(
+			'password'=>$password_baru,
+			);
+			$this->model_administrator->update_password_nakes($id_nakes,$data_password);
 	}
 
 	public function aksi_approval_validasi_sip()
@@ -646,10 +743,28 @@ class Administrator extends CI_Controller {
 		$admin = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 	}
 
-	public function aksi_nonaktif_user()
+	public function aksi_nonaktifkan_user()
 	{
-		$data['title'] ='Manajemen User';
-		$admin = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id = $user['id'];
+		$id_nakes = $this->uri->segment(3);
+
+		$datanakes = array(
+		'aktifasi'     => 1,
+		);
+		$this->model_administrator->nonaktifkan_user($id_nakes,$datanakes);
+	}
+
+	public function aksi_aktifkan_user()
+	{
+		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$id = $user['id'];
+		$id_nakes = $this->uri->segment(3);
+
+		$datanakes = array(
+		'aktifasi'     => 0,
+		);
+		$this->model_administrator->aktifkan_user($id_nakes,$datanakes);
 	}
 
 

@@ -37,7 +37,13 @@ Class Model_administrator extends CI_Model{
 
 	public function load_manajemen_user()
 	{
-		$sql = $this->db->query("SELECT * FROM user WHERE id");
+		$sql = $this->db->query("SELECT * FROM user WHERE id AND aktifasi=0");
+		return $sql->result_array();
+	}
+
+	public function load_manajemen_user_nonaktif()
+	{
+		$sql = $this->db->query("SELECT * FROM user WHERE id AND aktifasi=1");
 		return $sql->result_array();
 	}
 
@@ -50,6 +56,20 @@ Class Model_administrator extends CI_Model{
 	}
 
 
+	public function tambah_user($data)
+	{
+		$query= $this->db->insert('user', $data);
+	    if($query)
+	    {	
+	    	$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b> Tambah User Berhasil </b></div>');
+			redirect('administrator/manajemen_user');
+	    }
+	    else
+	    {
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b> Gagal Validasi  </b></div>');
+			redirect('administrator/manajemen_user');
+	    }
+	}
 
 
 	public function edit_profile($id, $data)
@@ -66,6 +86,23 @@ Class Model_administrator extends CI_Model{
 	    	
 			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b>Data Gagal Di Ubah !  </b></div>');
 			redirect('administrator/my_profile');
+	    }
+	}
+
+	public function edit_profile_nakes($id_nakes, $data)
+	{
+		$this->db->where('id', $id_nakes);
+	    $berhasil = $this->db->update('user', $data);
+	    if($berhasil)
+	    {	
+			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"><b>Data Berhasil Di Ubah ! </b></div>');
+			redirect('administrator/edit_user/'.$id_nakes);
+	    }
+	    else
+	    {
+	    	
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b>Data Gagal Di Ubah !  </b></div>');
+			redirect('administrator/edit_user/'.$id_nakes);
 	    }
 	}
 
@@ -87,6 +124,24 @@ Class Model_administrator extends CI_Model{
 			
 	}
 
+	public function edit_foto_nakes($id_nakes,$update_data)
+	{
+		
+		$this->db->where('id',$id_nakes);
+		$berhasil = $this->db->update('user', $update_data);
+		if($berhasil){
+			$this->session->set_flashdata('message','<div class="alert alert-success"><b> Foto Berhasil Di Upload</b></div>');
+			redirect('administrator/edit_user/'.$id_nakes);
+		}
+		else{
+
+			$this->session->set_flashdata('message','<div class="alert alert-danger"><b> GAGAL !!! </b></div>');
+			redirect('administrator/edit_user/'.$id_nakes);
+		}
+
+			
+	}
+
 	public function update_password($id,$data_password)
 	{
 		$this->db->where('id', $id);
@@ -103,6 +158,55 @@ Class Model_administrator extends CI_Model{
 	    	
 			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b> Password Gagal Di Ubah !  </b></div>');
 			redirect('administrator/my_profile');
+	    }
+	}
+
+	public function update_password_nakes($id_nakes,$data_password)
+	{
+		$this->db->where('id', $id_nakes);
+	    $berhasil = $this->db->update('user', $data_password);
+	    if($berhasil)
+	    {	
+			$this->session->set_flashdata('message','<div class="alert alert-primary" role="alert"><b>Password Berhasil Ubah. </b></div>');
+			redirect('administrator/edit_user/'.$id_nakes);
+	    }
+	    else
+	    {
+	    	
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b> Password Gagal Di Ubah !  </b></div>');
+			redirect('administrator/edit_user/'.$id_nakes);
+	    }
+	}
+
+	public function nonaktifkan_user($id_nakes,$datanakes)
+	{
+		$this->db->where('id', $id_nakes);
+	    $berhasil_nonak = $this->db->update('user', $datanakes);
+	    if($berhasil_nonak)
+	    {	
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b> Data User Nonaktifkan ! </b></div>');
+			redirect('administrator/manajemen_user');
+	    }
+	    else
+	    {
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b> Data User Gagal Nonaktifkan ! </b></div>');
+			redirect('administrator/manajemen_user');
+	    }
+	}
+
+	public function aktifkan_user($id_nakes,$datanakes)
+	{
+		$this->db->where('id', $id_nakes);
+	    $berhasil_ak = $this->db->update('user', $datanakes);
+	    if($berhasil_ak)
+	    {	
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b> User Diaktifkan ! </b></div>');
+			redirect('administrator/manajemen_user');
+	    }
+	    else
+	    {
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b> Data User Gagal Diaktifkan ! </b></div>');
+			redirect('administrator/manajemen_user');
 	    }
 	}
 
