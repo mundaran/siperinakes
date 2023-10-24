@@ -376,7 +376,7 @@ class Administrator extends CI_Controller {
 			);
 			$this->model_administrator->update_password($id,$data_password);
 		}  else {
-			$this->session->set_flashdata('message','Ubah Password, Gagal Password Lama Tidak Sesuai !');
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b> Password Gagal Di Ubah ! , Password Lama Tidak Sesuai  </b></div>');
 			redirect('administrator/my_profile');
 		}
 		
@@ -596,6 +596,7 @@ class Administrator extends CI_Controller {
 		$tanggal_cabut= date("d-m-Y");
 		$status_sip = $this->input->post('status_sip');
 		$title_validasi = $this->input->post('title_validasi');
+		$catatan = 'dicabut';
 		$data = array(
 			'id_admin'=>$id_admin,
 			'status_validasi' => $status_validasi,

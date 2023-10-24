@@ -85,7 +85,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                  
                     <div class="col-lg-3 col-md-12 col-6 mb-4">
-                      <a href="" class="card">
+                      <a href="<?php echo base_url();?>administrator/daftar_pencabutan" class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">

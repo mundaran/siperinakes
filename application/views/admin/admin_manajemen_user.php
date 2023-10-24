@@ -53,7 +53,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <th>Email</th>
                                 <th>No Telp</th>
                                 <th>NIK</th>
-                                <th>Status</th>
+                                <th>User Role</th>
                                 <th>Action</th>
                               </tr>
                               
@@ -92,7 +92,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <ul class="dropdown-menu dropdown-menu-end">
                                           <li><a class="dropdown-item" href="'.base_url().'administrator/edit_user/'.$nakes['id'].'">Edit</a></li>
                                           <li><a class="dropdown-item" data-bs-toggle="modal" href="#modalNonaktifkan'.$nakes['id'].'">Nonaktifkan</a></li>
-                                          <li><a class="dropdown-item" href="javascript:void(0);">Hapus Akun</a></li>
                                         </ul>
                                       </div>
 
@@ -163,10 +162,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                            Daftar Pengguna SIPERI
                           </p>
                           <div class="btn-group" role="group" aria-label="First group">
-                          <button type="button" class="btn btn-outline-primary"  data-bs-toggle="modal"
-                          data-bs-target="#modalAddUser">
-                            <i class="tf-icons bx bx-user-plus"></i><span>Tambah User</span>
-                          </button>
                         </div>
                         </div>
                         

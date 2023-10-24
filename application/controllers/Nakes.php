@@ -957,7 +957,7 @@ class Nakes extends CI_Controller {
 					'surat_cabut' => $file_name_surat_cabut,
 				];
 
-				$this->model_administrator->permohonan_pencabutan($id_sip,$update_data);
+				$this->model_nakes->permohonan_pencabutan($id_sip,$update_data);
 			}
 	}
 

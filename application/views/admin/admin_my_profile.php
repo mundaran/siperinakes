@@ -18,7 +18,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </li>
                   </ul>
                   <div class="card mb-4">
-                    <h5 class="card-header">Profile Details<span><?php echo $this->session->flashdata('message');?></span></h5>
+                    <h5 class="card-header">Profile Details</span>
+                      <span><?php echo $this->session->flashdata('message');?>
+                    </h5>
                     <!-- Account -->
                     <div class="card-body">
                       <div class="d-flex align-items-start align-items-sm-center gap-4">
@@ -212,21 +214,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       <form id="formAccountDeactivation" method="POST" action="<?php echo base_url();?>administrator/aksi_ubah_password">
 
                          <div class="mb-3 col-md-12">
-                          <label class="form-label" for="ubahPassword">Masukan Password Lama Anda</label>
+                          <label class="form-label" for="ubahPassword" >Masukan Password Lama Anda</label>
                             <input
                               type="text"
                               id="ubahPassword"
                               name="password_lama"
                               class="form-control"
+                              required
                             />
                          </div>
                           <div class="mb-3 col-md-12">
-                          <label class="form-label" for="ubahPassword">Masukan Password Baru Anda</label>
+                          <label class="form-label" for="ubahPassword" >Masukan Password Baru Anda</label>
                             <input
                               type="text"
                               id="ubahPassword"
                               name="password_baru"
                               class="form-control"
+                              required
                             />
                          </div>
                         <button type="submit" class="btn btn-danger deactivate-account">Ubah Paassword</button>

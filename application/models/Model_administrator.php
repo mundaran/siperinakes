@@ -156,7 +156,7 @@ Class Model_administrator extends CI_Model{
 	    else
 	    {
 	    	
-			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b> Password Gagal Di Ubah !  </b></div>');
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b> Password Gagal Di Ubah ! Password Lama Tidak Sesuai </b></div>');
 			redirect('administrator/my_profile');
 	    }
 	}

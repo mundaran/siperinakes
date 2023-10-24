@@ -54,7 +54,7 @@ class Auth extends CI_Controller {
 
 		if($user){
 			if($password == $user['password']){
-				if($user['aktifasi'] == '0'){
+				if($user['aktifasi'] == '1'){
 					$data = array(
 							'username'=>$user['username'],
 							'role_id'=>$user['role_id']
@@ -72,7 +72,7 @@ class Auth extends CI_Controller {
 				}
 
 				else{
-						$this->session->set_flashdata('message','<div class="alert bg-orange"><b> Akun Belum Melakukan Aktifasi! </b></div>');
+						$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b> Akun Belum Melakukan Verifikasi! Silahkan Buka Email Anda Dan Verifikasi Akun Anda </b></div>');
 						redirect('auth');
 					}
 
@@ -134,12 +134,36 @@ class Auth extends CI_Controller {
 							'role_id'=>21
 						);
 
-						$query= $this->db->insert('user',$data);
+						
 
-					$this->session->set_flashdata('message','<div class="alert alert-info" role="alert"><b>Pendaftaran Berhasil, Silahkan Login</b></div>');
-					redirect('auth');
-					 
-					}
+						  $query= $this->db->insert('user',$data);
+						  $config['protocol'] = 'smtp';  
+					      $config['smtp_host'] = 'ssl://smtp.gmail.com'; 
+					      $config['smtp_port'] = '465'; 
+					      $config['smtp_user'] = 'promosisuryaagung@gmail.com';  
+					      $config['smtp_pass'] = 'wsvrguzwroncziyg'; 
+					      $config['mailtype'] = 'html';  
+					      $config['charset'] = 'iso-8859-1';  
+					      $config['wordwrap'] = TRUE;  
+					      $config['newline'] = "\r\n"; 
+					      $this->email->initialize($config);  
+					      $url = base_url()."auth/confirm/".$usernameemail;  
+					      $this->email->from('promosisuryaagung@gmail.com', 'SIPATAS Dinas Kesehatan Bojonegoro');  
+					      $this->email->to($usernameemail);   
+					      $this->email->subject('Silahkan Verifikasikan Email Anda');  
+					      $message = "<html><head><head></head><body><p>Hi,".$name."</p><p>Terimakasih telah bergabung bersama kami</p><p>Silahkan klik tautan dibawah ini untuk aktivasi/verifikasi email anda</p>".$url."<br/><p>Sincerely,</p><p>Dinas Kesehatan Bojonegoro</p></body></html>";  
+					     	$this->email->message($message);
+					     	$emailsent= $this->email->send();
+							if($emailsent){
+							$this->session->set_flashdata('message','<div class="alert alert-info" role="alert"><b>Pendaftaran Berhasil, Silahkan Login</b></div>');
+							redirect('auth');
+							}
+						else{
+							show_error($this->email->print_debugger());
+						}
+
+						 
+						}
 
 					else{
 					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b>Konfirmasi Password Tidak Sesuai </b></div>');
@@ -160,11 +184,11 @@ class Auth extends CI_Controller {
 			$this->db->where('email', $email);
 			$berhasil = $this->db->update('user', $data);
 			if($berhasil){
-				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b>Akun Anda Telah Di Verifikasi </b></div>');
+				$this->session->set_flashdata('message','<div class="alert alert-info" role="alert"><b>Akun Anda Telah Di Verifikasi </b></div>');
 				redirect ('auth');
 			}
 			else{
-				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b>Confirmasi Gagal </b></div>');
+				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b>Maaf Confirmasi Gagal Silahkan Hubungi Administrator</b></div>');
 				redirect ('auth');
 			}
 		}			

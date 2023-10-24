@@ -208,6 +208,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             name="password_baru"
                             placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                             aria-describedby="password"
+                            required
                           />
                           <span class="input-group-text cursor-pointer"  onclick="myFunction()" ><i class="bx bx-hide"></i></span>
                         </div>
