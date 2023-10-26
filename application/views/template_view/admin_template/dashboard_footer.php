@@ -7,7 +7,7 @@
                   <script>
                     document.write(new Date().getFullYear());
                   </script>
-                  , Dinas Kesehatan Bojonegoro
+                  , SIPATAS Dinas Kesehatan Bojonegoro
                 </div>
                 <div>
                   

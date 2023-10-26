@@ -115,7 +115,6 @@ Class Model_nakes extends CI_Model{
 
 	public function upload_berkas_sip($id_user,$id_sip,$update_data)
 	{
-		$status == 1;
 		$this->db->where('id',$id_sip);
 		$this->db->where('id_user',$id_user);
 		$berhasil = $this->db->update('data_sip', $update_data);

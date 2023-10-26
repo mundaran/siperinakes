@@ -210,11 +210,16 @@ Class Model_administrator extends CI_Model{
 	    }
 	}
 
-	public function approval_validasi_sip($data,$id_sip,$status_sip,$nomor_sip,$catatan,$title_validasi)
+	public function approval_validasi_sip($data,$id_sip,$status_sip,$nomor_sip,$catatan,$title_validasi,$id_nakes)
 	{
 		$query= $this->db->insert('validasi_sip', $data);
 	    if($query)
 	    {	
+	    	$id_pemohon =$id_nakes;
+	    	$user = $this->db->get_where('user', array('id'=> $id_pemohon))->row_array();
+	    	$email = $user['email'];
+	    	$name = $user['name'];
+
 	    	$status = $status_sip ;
 	    	$no_sip = $nomor_sip;
 	    	$note = $catatan;
@@ -226,22 +231,51 @@ Class Model_administrator extends CI_Model{
 			$this->db->where('id',$id_sip);
 			$berhasil = $this->db->update('data_sip', $update_status);
 
-			$this->session->set_flashdata('message',$title_validasi);
-			redirect('administrator/validasi_sip');
-	    }
-	    else
-	    {
-			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b> Gagal Validasi  </b></div>');
-			redirect('adminsitrator/form_validasi_sip/'.$id_sip);
-	    }
+			  $config['protocol'] = 'smtp';  
+		      $config['smtp_host'] = 'ssl://smtp.gmail.com'; 
+		      $config['smtp_port'] = '465'; 
+		      $config['smtp_user'] = 'cs.sipatas@gmail.com';  
+		      $config['smtp_pass'] = 'sowovrydqhrcyyrz'; 
+		      $config['mailtype'] = 'html';  
+		      $config['charset'] = 'iso-8859-1';  
+		      $config['wordwrap'] = TRUE;  
+		      $config['newline'] = "\r\n"; 
+		      $this->email->initialize($config);  
+		      $url = base_url()."auth";  
+		      $this->email->from('cs.sipatas@gmail.com', 'Notifikasi SIPATAS Dinas Kesehatan Bojonegoro');  
+		      $this->email->to($email);   
+		      $this->email->subject('SELAMAT SIP Anda Disetujui');  
+		      $message = "<html><head><head></head><body><p>Hi,".$name."</p><p>SIP Anda Telah Disetujui</p><p>Silahkan Cetak Kedinas Kesehatan Bojonegoro </p><br/>Cek Status SIP Anda di ".$url."<br/><p>Sincerely,</p><p>Dinas Kesehatan Bojonegoro</p></body></html>";  
+		     	$this->email->message($message);
+		     	$emailsent= $this->email->send();
+				if($emailsent){
+				$this->session->set_flashdata('message',$title_validasi);
+				redirect('administrator/validasi_sip');
+				}
+				else{
+					show_error($this->email->print_debugger());
+				}
+
+		    }
+		    else
+		    {
+				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b> Gagal Validasi Hubungi Administrator </b></div>');
+				redirect('adminsitrator/form_validasi_sip/'.$id_sip);
+		    }
 	}
 
-	public function approval_revisi_sip_baru($data,$id_sip,$status_sip,$nomor_sip,$catatan,$title_validasi)
+	public function approval_revisi_sip_baru($data,$id_sip,$status_sip,$nomor_sip,$catatan,$title_validasi,$id_nakes)
 	{
 		$this->db->where('id_sip',$id_sip);
 		$query= $this->db->update('validasi_sip', $data);
 	    if($query)
 	    {	
+	    	$id_pemohon =$id_nakes;
+	    	$user = $this->db->get_where('user', array('id'=> $id_pemohon))->row_array();
+	    	$email = $user['email'];
+	    	$name = $user['name'];
+
+
 	    	$status = $status_sip ;
 	    	$no_sip = $nomor_sip;
 	    	$note = $catatan;
@@ -253,8 +287,31 @@ Class Model_administrator extends CI_Model{
 			$this->db->where('id',$id_sip);
 			$berhasil = $this->db->update('data_sip', $update_status);
 
-			$this->session->set_flashdata('message',$title_validasi);
-			redirect('administrator/list_revisi_sip');
+			$config['protocol'] = 'smtp';  
+		      $config['smtp_host'] = 'ssl://smtp.gmail.com'; 
+		      $config['smtp_port'] = '465'; 
+		      $config['smtp_user'] = 'cs.sipatas@gmail.com';  
+		      $config['smtp_pass'] = 'sowovrydqhrcyyrz'; 
+		      $config['mailtype'] = 'html';  
+		      $config['charset'] = 'iso-8859-1';  
+		      $config['wordwrap'] = TRUE;  
+		      $config['newline'] = "\r\n"; 
+		      $this->email->initialize($config);  
+		      $url = base_url()."auth";  
+		      $this->email->from('cs.sipatas@gmail.com', 'Notifikasi SIPATAS Dinas Kesehatan Bojonegoro');  
+		      $this->email->to($email);   
+		      $this->email->subject('SELAMAT SIP Anda Disetujui');  
+		      $message = "<html><head><head></head><body><p>Hi,".$name."</p><p>SIP Anda Telah Disetujui</p><p>Silahkan Cetak Kedinas Kesehatan Bojonegoro </p><br/>Cek Status SIP Anda di ".$url."<br/><p>Sincerely,</p><p>Dinas Kesehatan Bojonegoro</p></body></html>";  
+		     	$this->email->message($message);
+		     	$emailsent= $this->email->send();
+				if($emailsent){
+				$this->session->set_flashdata('message',$title_validasi);
+				redirect('administrator/list_revisi_sip');
+				}
+				else{
+					show_error($this->email->print_debugger());
+				}
+
 	    }
 	    else
 	    {
@@ -264,8 +321,15 @@ Class Model_administrator extends CI_Model{
 	}
 
 
-	public function revisi_validasi_sip($data,$id_sip,$status_sip,$title_validasi)
+	public function revisi_validasi_sip($data,$id_sip,$status_sip,$title_validasi,$id_nakes)
 	{
+
+		$id_pemohon =$id_nakes;
+    	$user = $this->db->get_where('user', array('id'=> $id_pemohon))->row_array();
+    	$email = $user['email'];
+    	$name = $user['name'];
+
+
 		$query= $this->db->insert('validasi_sip', $data);
 	    if($query)
 	    {	
@@ -274,8 +338,31 @@ Class Model_administrator extends CI_Model{
 			$this->db->where('id',$id_sip);
 			$berhasil = $this->db->update('data_sip', $update_status);
 
-			$this->session->set_flashdata('message',$title_validasi);
-			redirect('administrator/validasi_sip');
+			$config['protocol'] = 'smtp';  
+		      $config['smtp_host'] = 'ssl://smtp.gmail.com'; 
+		      $config['smtp_port'] = '465'; 
+		      $config['smtp_user'] = 'cs.sipatas@gmail.com';  
+		      $config['smtp_pass'] = 'sowovrydqhrcyyrz'; 
+		      $config['mailtype'] = 'html';  
+		      $config['charset'] = 'iso-8859-1';  
+		      $config['wordwrap'] = TRUE;  
+		      $config['newline'] = "\r\n"; 
+		      $this->email->initialize($config);  
+		      $url = base_url()."auth";  
+		      $this->email->from('cs.sipatas@gmail.com', 'Notifikasi SIPATAS Dinas Kesehatan Bojonegoro');  
+		      $this->email->to($email);   
+		      $this->email->subject('REVISI SIP');  
+		      $message = "<html><head><head></head><body><p>Hi,".$name."</p><p>Mohon REVISI data SIP Anda </p><br/>Cek Status REVISI SIP Anda di ".$url."<br/><p>Sincerely,</p><p>Dinas Kesehatan Bojonegoro</p></body></html>";  
+		     	$this->email->message($message);
+		     	$emailsent= $this->email->send();
+				if($emailsent){
+				$this->session->set_flashdata('message',$title_validasi);
+				redirect('administrator/validasi_sip');
+				}
+				else{
+					show_error($this->email->print_debugger());
+				}
+
 	    }
 	    else
 	    {
@@ -284,8 +371,15 @@ Class Model_administrator extends CI_Model{
 	    }
 	}
 
-	public function revisi_revisi_sip_baru($data,$id_sip,$status_sip,$title_validasi)
+	public function revisi_revisi_sip_baru($data,$id_sip,$status_sip,$title_validasi,$id_nakes)
 	{
+		$id_pemohon =$id_nakes;
+    	$user = $this->db->get_where('user', array('id'=> $id_pemohon))->row_array();
+    	$email = $user['email'];
+    	$name = $user['name'];
+
+
+
 		$this->db->where('id_sip',$id_sip);
 		$query= $this->db->update('validasi_sip', $data);
 	    if($query)
@@ -295,8 +389,32 @@ Class Model_administrator extends CI_Model{
 			$this->db->where('id',$id_sip);
 			$berhasil = $this->db->update('data_sip', $update_status);
 
-			$this->session->set_flashdata('message',$title_validasi);
-			redirect('administrator/list_revisi_sip');
+			  $config['protocol'] = 'smtp';  
+		      $config['smtp_host'] = 'ssl://smtp.gmail.com'; 
+		      $config['smtp_port'] = '465'; 
+		      $config['smtp_user'] = 'cs.sipatas@gmail.com';  
+		      $config['smtp_pass'] = 'sowovrydqhrcyyrz'; 
+		      $config['mailtype'] = 'html';  
+		      $config['charset'] = 'iso-8859-1';  
+		      $config['wordwrap'] = TRUE;  
+		      $config['newline'] = "\r\n"; 
+		      $this->email->initialize($config);  
+		      $url = base_url()."auth";  
+		      $this->email->from('cs.sipatas@gmail.com', 'Notifikasi SIPATAS Dinas Kesehatan Bojonegoro');  
+		      $this->email->to($email);   
+		      $this->email->subject('REVISI SIP');  
+		      $message = "<html><head><head></head><body><p>Hi,".$name."</p><p>Mohon REVISI data SIP Anda </p><br/>Cek Status REVISI SIP Anda di ".$url."<br/><p>Sincerely,</p><p>Dinas Kesehatan Bojonegoro</p></body></html>";  
+		     	$this->email->message($message);
+		     	$emailsent= $this->email->send();
+				if($emailsent){
+				$this->session->set_flashdata('message',$title_validasi);
+				redirect('administrator/list_revisi_sip');
+				}
+				else{
+					show_error($this->email->print_debugger());
+				}
+
+
 	    }
 	    else
 	    {
@@ -306,8 +424,15 @@ Class Model_administrator extends CI_Model{
 	}
 
 
-	public function validasi_perpanjangan($data,$id_sip,$status_sip,$nomor_sip,$catatan,$validator_sebelumnya,$title_validasi,$nama_admin)
+	public function validasi_perpanjangan($data,$id_sip,$status_sip,$nomor_sip,$catatan,$validator_sebelumnya,$title_validasi,$nama_admin,$id_nakes)
 	{
+
+
+		$id_pemohon =$id_nakes;
+    	$user = $this->db->get_where('user', array('id'=> $id_pemohon))->row_array();
+    	$email = $user['email'];
+    	$name = $user['name'];
+
 		$this->db->where('id_sip',$id_sip);
 		$update_validasi= $this->db->update('validasi_sip', $data);
 
@@ -336,8 +461,33 @@ Class Model_administrator extends CI_Model{
 				);
 				$this->db->where($where);
 				$up_riwayat = $this->db->update('riwayat_perpanjangan', $data_riwayat);
-				$this->session->set_flashdata('message',$title_validasi);
-				redirect('administrator/perpanjangan_sip');
+
+				$config['protocol'] = 'smtp';  
+			      $config['smtp_host'] = 'ssl://smtp.gmail.com'; 
+			      $config['smtp_port'] = '465'; 
+			      $config['smtp_user'] = 'cs.sipatas@gmail.com';  
+			      $config['smtp_pass'] = 'sowovrydqhrcyyrz'; 
+			      $config['mailtype'] = 'html';  
+			      $config['charset'] = 'iso-8859-1';  
+			      $config['wordwrap'] = TRUE;  
+			      $config['newline'] = "\r\n"; 
+			      $this->email->initialize($config);  
+			      $url = base_url()."auth";  
+			      $this->email->from('cs.sipatas@gmail.com', 'Notifikasi SIPATAS Dinas Kesehatan Bojonegoro');  
+			      $this->email->to($email);   
+			      $this->email->subject('SELAMAT PERPANJANGAN DISETUJUI');  
+			      $message = "<html><head><head></head><body><p>Hi,".$name."</p><p>PERPANJANGAN SIP Anda Telah Disetujui</p><p>Silahkan Cetak Kedinas Kesehatan Bojonegoro </p><br/>Cek Status SIP Anda di ".$url."<br/><p>Sincerely,</p><p>Dinas Kesehatan Bojonegoro</p></body></html>";  
+			     	$this->email->message($message);
+			     	$emailsent= $this->email->send();
+					if($emailsent){
+					$this->session->set_flashdata('message',$title_validasi);
+					redirect('administrator/perpanjangan_sip');
+					}
+					else{
+						show_error($this->email->print_debugger());
+					}
+
+				
 			} else{
 				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b> Gagal Validasi  </b></div>');
 				redirect('administrator/perpanjangan_sip');
@@ -350,8 +500,14 @@ Class Model_administrator extends CI_Model{
 	    }
 	}
 
-	public function revisi_perpanjangan($data,$id_sip,$status_sip,$validator_sebelumnya,$title_validasi,$nama_admin)
+	public function revisi_perpanjangan($data,$id_sip,$status_sip,$validator_sebelumnya,$title_validasi,$nama_admin,$id_nakes)
 	{
+
+		$id_pemohon =$id_nakes;
+    	$user = $this->db->get_where('user', array('id'=> $id_pemohon))->row_array();
+    	$email = $user['email'];
+    	$name = $user['name'];
+
 		$this->db->where('id_sip',$id_sip);
 		$update_validasi= $this->db->update('validasi_sip', $data);
 
@@ -378,9 +534,35 @@ Class Model_administrator extends CI_Model{
 				);
 				$this->db->where($where);
 				$up_riwayat = $this->db->update('riwayat_perpanjangan', $data_riwayat);
+
+				$config['protocol'] = 'smtp';  
+		      $config['smtp_host'] = 'ssl://smtp.gmail.com'; 
+		      $config['smtp_port'] = '465'; 
+		      $config['smtp_user'] = 'cs.sipatas@gmail.com';  
+		      $config['smtp_pass'] = 'sowovrydqhrcyyrz'; 
+		      $config['mailtype'] = 'html';  
+		      $config['charset'] = 'iso-8859-1';  
+		      $config['wordwrap'] = TRUE;  
+		      $config['newline'] = "\r\n"; 
+		      $this->email->initialize($config);  
+		      $url = base_url()."auth";  
+		      $this->email->from('cs.sipatas@gmail.com', 'Notifikasi SIPATAS Dinas Kesehatan Bojonegoro');  
+		      $this->email->to($email);   
+		      $this->email->subject('REVISI PERPANJANGAN SIP');  
+		      $message = "<html><head><head></head><body><p>Hi,".$name."</p><p>Mohon REVISI data SIP Anda </p><br/>Cek Status REVISI PERPANJANGAN SIP Anda di ".$url."<br/><p>Sincerely,</p><p>Dinas Kesehatan Bojonegoro</p></body></html>";  
+		     	$this->email->message($message);
+		     	$emailsent= $this->email->send();
+				if($emailsent){
 				$this->session->set_flashdata('message',$title_validasi);
 				redirect('administrator/perpanjangan_sip');
-			} else{
+				}
+				else{
+					show_error($this->email->print_debugger());
+				}
+
+				
+			} 
+			else{
 				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b> Gagal Validasi  </b></div>');
 				redirect('administrator/perpanjangan_sip');
 			}
@@ -392,8 +574,14 @@ Class Model_administrator extends CI_Model{
 	    }
 	}
 
-	public function validasi_revisi_perpanjangan($data,$id_sip,$status_sip,$nomor_sip,$catatan,$validator_sebelumnya,$title_validasi,$nama_admin)
+	public function validasi_revisi_perpanjangan($data,$id_sip,$status_sip,$nomor_sip,$catatan,$validator_sebelumnya,$title_validasi,$nama_admin,$id_nakes)
 	{
+
+		$id_pemohon =$id_nakes;
+    	$user = $this->db->get_where('user', array('id'=> $id_pemohon))->row_array();
+    	$email = $user['email'];
+    	$name = $user['name'];
+
 		$this->db->where('id_sip',$id_sip);
 		$update_validasi= $this->db->update('validasi_sip', $data);
 
@@ -422,8 +610,33 @@ Class Model_administrator extends CI_Model{
 				);
 				$this->db->where($where);
 				$up_riwayat = $this->db->update('riwayat_perpanjangan', $data_riwayat);
-				$this->session->set_flashdata('message',$title_validasi);
-				redirect('administrator/list_revisi_sip');
+
+				$config['protocol'] = 'smtp';  
+			      $config['smtp_host'] = 'ssl://smtp.gmail.com'; 
+			      $config['smtp_port'] = '465'; 
+			      $config['smtp_user'] = 'cs.sipatas@gmail.com';  
+			      $config['smtp_pass'] = 'sowovrydqhrcyyrz'; 
+			      $config['mailtype'] = 'html';  
+			      $config['charset'] = 'iso-8859-1';  
+			      $config['wordwrap'] = TRUE;  
+			      $config['newline'] = "\r\n"; 
+			      $this->email->initialize($config);  
+			      $url = base_url()."auth";  
+			      $this->email->from('cs.sipatas@gmail.com', 'Notifikasi SIPATAS Dinas Kesehatan Bojonegoro');  
+			      $this->email->to($email);   
+			      $this->email->subject('SELAMAT PERPANJANGAN DISETUJUI');  
+			      $message = "<html><head><head></head><body><p>Hi,".$name."</p><p>PERPANJANGAN SIP Anda Telah Disetujui</p><p>Silahkan Cetak Kedinas Kesehatan Bojonegoro </p><br/>Cek Status SIP Anda di ".$url."<br/><p>Sincerely,</p><p>Dinas Kesehatan Bojonegoro</p></body></html>";  
+			     	$this->email->message($message);
+			     	$emailsent= $this->email->send();
+					if($emailsent){
+					$this->session->set_flashdata('message',$title_validasi);
+					redirect('administrator/list_revisi_sip');
+					}
+					else{
+						show_error($this->email->print_debugger());
+					}
+
+
 			} else{
 				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b> Gagal Validasi  </b></div>');
 				redirect('administrator/form_validasi_revisi_perpanjangan/'.$id_sip);
@@ -436,8 +649,15 @@ Class Model_administrator extends CI_Model{
 	    }
 	}
 
-	public function approval_cabut_sip($data,$id_sip,$status_sip,$title_validasi)
+	public function approval_cabut_sip($data,$id_sip,$status_sip,$title_validasi,$id_nakes)
 	{
+
+		$id_pemohon =$id_nakes;
+    	$user = $this->db->get_where('user', array('id'=> $id_pemohon))->row_array();
+    	$email = $user['email'];
+    	$name = $user['name'];
+
+
 		$this->db->where('id_sip',$id_sip);
 		$query= $this->db->update('validasi_sip', $data);
 	    if($query)
@@ -451,8 +671,32 @@ Class Model_administrator extends CI_Model{
 			$this->db->where('id',$id_sip);
 			$berhasil = $this->db->update('data_sip', $update_status);
 
-			$this->session->set_flashdata('message', $title_validasi);
-			redirect('administrator/daftar_pencabutan');
+			      $config['protocol'] = 'smtp';  
+			      $config['smtp_host'] = 'ssl://smtp.gmail.com'; 
+			      $config['smtp_port'] = '465'; 
+			      $config['smtp_user'] = 'cs.sipatas@gmail.com';  
+			      $config['smtp_pass'] = 'sowovrydqhrcyyrz'; 
+			      $config['mailtype'] = 'html';  
+			      $config['charset'] = 'iso-8859-1';  
+			      $config['wordwrap'] = TRUE;  
+			      $config['newline'] = "\r\n"; 
+			      $this->email->initialize($config);  
+			      $url = base_url()."auth";  
+			      $this->email->from('cs.sipatas@gmail.com', 'Notifikasi SIPATAS Dinas Kesehatan Bojonegoro');  
+			      $this->email->to($email);   
+			      $this->email->subject('SIP DICABUT');  
+			      $message = "<html><head><head></head><body><p>Hi,".$name."</p><p>Permohonan CABUT SIP Telah Selesai</p><p>Terimakasih Sudah Menggunakan SIPATAS Unruk Layanan Perizinanan Praktik Anda. </p><br/>Cek Status SIP Anda di ".$url."<br/><p>Sincerely,</p><p>Dinas Kesehatan Bojonegoro</p></body></html>";  
+			     	$this->email->message($message);
+			     	$emailsent= $this->email->send();
+					if($emailsent){
+					$this->session->set_flashdata('message', $title_validasi);
+					redirect('administrator/daftar_pencabutan');
+					}
+					else{
+						show_error($this->email->print_debugger());
+					}
+
+			
 	    }
 	    else
 	    {

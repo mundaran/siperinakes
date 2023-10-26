@@ -17,7 +17,7 @@
               <div class="navbar-nav align-items-center">
                 <div class="nav-item d-flex align-items-center">
                   <img src="template/assets/img/favicon/icon_bjn.png" alt class="w-px-30 h-auto" />
-                  <span class="app-brand-text demo menu-text fw-bolder ms-2">Siperi</span>
+                  <span class="app-brand-text demo menu-text fw-bolder ms-2">SIPATAS</span>
                 </div>
               </div>
               <!-- /Search -->

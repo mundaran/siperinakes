@@ -58,7 +58,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   </g>
                 </svg>
               </span>
-              <span class="app-brand-text demo menu-text fw-bolder ms-2">Siperi</span>
+              <span class="app-brand-text demo menu-text fw-bolder ms-2">SIPATAS</span>
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">

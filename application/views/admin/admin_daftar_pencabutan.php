@@ -53,7 +53,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                                   
                                   if($sip_cabut['status']==9){
-                                    $status_perp ='<a href="'.base_url().'administrator/form_pencabutan/'.$sip_cabut['id'].'" class="btn btn-sm btn-danger"><span class="tf-icons bx bx-note"></span>&nbsp; Konfirmasi Cabut</a>';
+                                    $status_perp ='<a href="'.base_url().'administrator/form_pencabutan/'.$sip_cabut['id'].'/'.$sip_cabut['id_user'].'" class="btn btn-sm btn-danger"><span class="tf-icons bx bx-note"></span>&nbsp; Konfirmasi Cabut</a>';
                                   } elseif($sip_cabut['status']==10){
                                     $status_perp ='SIP Dicabut';
                                   }

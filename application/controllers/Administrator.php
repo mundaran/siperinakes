@@ -213,7 +213,17 @@ class Administrator extends CI_Controller {
 	}
 
 
-
+	public function manajemen_artikel()
+	{
+		$data['title'] ='Manajemen Artikel';
+		$id_nakes =$this->uri->segment(3);
+		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		
+		$this->load->view('template_view/admin_template/dashboard_header');
+		$this->load->view('template_view/admin_template/menubar',$data);
+		$this->load->view('admin/admin_manajemen_artikel',$data);
+		$this->load->view('template_view/admin_template/dashboard_footer');
+	}
 
 //batas view dan aksi
 
@@ -416,7 +426,7 @@ class Administrator extends CI_Controller {
 			'keterangan'=>$keterangan,
 			'tanggal_validasi'=>$tanggal_validasi,
 		);
-		$this->model_administrator->approval_validasi_sip($data,$id_sip,$status_sip,$nomor_sip,$catatan,$title_validasi);
+		$this->model_administrator->approval_validasi_sip($data,$id_sip,$status_sip,$nomor_sip,$catatan,$title_validasi,$id_nakes);
 	}
 
 	public function aksi_revisi_validasi_sip()
@@ -439,7 +449,7 @@ class Administrator extends CI_Controller {
 			'keterangan'=>$keterangan,
 			'tanggal_validasi'=>$tanggal_validasi,
 		);
-		$this->model_administrator->revisi_validasi_sip($data,$id_sip,$status_sip,$title_validasi);
+		$this->model_administrator->revisi_validasi_sip($data,$id_sip,$status_sip,$title_validasi,$id_nakes);
 
 	}
 
@@ -466,7 +476,7 @@ class Administrator extends CI_Controller {
 			'keterangan'=>$keterangan,
 			'tanggal_validasi'=>$tanggal_validasi,
 		);
-		$this->model_administrator->approval_revisi_sip_baru($data,$id_sip,$status_sip,$nomor_sip,$catatan,$title_validasi);
+		$this->model_administrator->approval_revisi_sip_baru($data,$id_sip,$status_sip,$nomor_sip,$catatan,$title_validasi,$id_nakes);
 
 
 	}
@@ -492,7 +502,7 @@ class Administrator extends CI_Controller {
 			'keterangan'=>$keterangan,
 			'tanggal_validasi'=>$tanggal_validasi,
 		);
-		$this->model_administrator->revisi_revisi_sip_baru($data,$id_sip,$status_sip,$title_validasi);
+		$this->model_administrator->revisi_revisi_sip_baru($data,$id_sip,$status_sip,$title_validasi,$id_nakes);
 
 
 	}
@@ -522,7 +532,7 @@ class Administrator extends CI_Controller {
 			'keterangan'=>$keterangan,
 			'tanggal_validasi'=>$tanggal_validasi,
 		);
-		$this->model_administrator->validasi_perpanjangan($data,$id_sip,$status_sip,$nomor_sip,$catatan,$validator_sebelumnya,$title_validasi,$nama_admin);
+		$this->model_administrator->validasi_perpanjangan($data,$id_sip,$status_sip,$nomor_sip,$catatan,$validator_sebelumnya,$title_validasi,$nama_admin,$id_nakes);
 
 
 	}
@@ -549,7 +559,7 @@ class Administrator extends CI_Controller {
 			'keterangan'=>$keterangan,
 			'tanggal_validasi'=>$tanggal_validasi,
 		);
-		$this->model_administrator->revisi_perpanjangan($data,$id_sip,$status_sip,$validator_sebelumnya,$title_validasi,$nama_admin);
+		$this->model_administrator->revisi_perpanjangan($data,$id_sip,$status_sip,$validator_sebelumnya,$title_validasi,$nama_admin,$id_nakes);
 
 
 	}
@@ -578,7 +588,7 @@ class Administrator extends CI_Controller {
 			'keterangan'=>$keterangan,
 			'tanggal_validasi'=>$tanggal_validasi,
 		);
-		$this->model_administrator->validasi_revisi_perpanjangan($data,$id_sip,$status_sip,$nomor_sip,$catatan,$validator_sebelumnya,$title_validasi,$nama_admin);
+		$this->model_administrator->validasi_revisi_perpanjangan($data,$id_sip,$status_sip,$nomor_sip,$catatan,$validator_sebelumnya,$title_validasi,$nama_admin,$id_nakes);
 
 
 	}
@@ -589,6 +599,7 @@ class Administrator extends CI_Controller {
 		$admin = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$id_admin = $admin['id'];
 		$id_sip = $this->uri->segment(3);
+		$id_nakes = $this->uri->segment(4);
 		$status_validasi = $this->input->post('status_validasi');
 		$keterangan = $this->input->post('keterangan');
 		$nomor_sip = $this->input->post('nomor_sip');
@@ -603,7 +614,7 @@ class Administrator extends CI_Controller {
 			'keterangan'=>$keterangan,
 			'tanggal_cabut'=>$tanggal_cabut,
 		);
-		$this->model_administrator->approval_cabut_sip($data,$id_sip,$status_sip,$title_validasi);
+		$this->model_administrator->approval_cabut_sip($data,$id_sip,$status_sip,$title_validasi,$id_nakes);
 	}
 
 
@@ -709,7 +720,7 @@ class Administrator extends CI_Controller {
 		$pemohon=$user['name'];
 		$tanggal_cabut=date('d-m-y');
 		$id_sip = $this->uri->segment(3);
-
+		$id_nakes = $this->uri->segment(4);
 		$file_name_surat_cabut = 'spc-'.strtr($pemohon, ". ", "--").'-'.$id_sip;'';
 		$config['upload_path']          = './document/surat_cabut';
 		$config['allowed_types']        = 'pdf';
@@ -733,7 +744,7 @@ class Administrator extends CI_Controller {
 					'surat_cabut' => $file_name_surat_cabut,
 				];
 
-				$this->model_administrator->permohonan_pencabutan($id_sip,$update_data);
+				$this->model_administrator->permohonan_pencabutan($id_sip,$update_data,$id_nakes);
 			}
 	}
 

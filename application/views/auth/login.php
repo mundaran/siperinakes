@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   <span class="app-brand-logo demo">
                     <img src="template/assets/img/favicon/icon_bjn.png" alt class="w-px-40 h-auto rounded-circle" />
                   </span>
-                  <span class="app-brand-text demo text-body fw-bolder">Siperi Nasehat</span>
+                  <span class="app-brand-text demo text-body fw-bolder">SIPATAS</span>
                 </a>
               </div>
               <!-- /Logo -->
@@ -37,7 +37,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="mb-3 form-password-toggle">
                   <div class="d-flex justify-content-between">
                     <label class="form-label" for="password">Password</label>
-                    <a href="auth/lupa_password">
+                    <a data-bs-toggle="modal" href="#modallupaPassword">
                       <small>Lupa Password?</small>
                     </a>
                   </div>
@@ -51,12 +51,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       aria-describedby="password"
                     />
                     <span class="input-group-text cursor-pointer"  onclick="myFunction()" ><i class="bx bx-hide"></i></span>
-                  </div>
-                </div>
-                <div class="mb-3">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="remember-me" />
-                    <label class="form-check-label" for="remember-me"> Simpan Password </label>
                   </div>
                 </div>
                 <div class="mb-3">
@@ -75,6 +69,42 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
       </div>
     </div>
+
+    <!-- modal lupa passsword -->
+      <div class="modal fade" id="modallupaPassword" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel2">Reset Password</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <form method="POST" action="<?php echo base_url();?>auth/reset_password">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col mb-3">
+                   <label class="form-label" for="emailSmall">Email</label>
+                  <input type="text" class="form-control" id="emailSmall" name="email" placeholder="Masukan Email Anda" />
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                Close
+              </button>
+              <button type="submit" class="btn btn-primary">Reset</button>
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+
+
+
 
     <script>
         function myFunction() {

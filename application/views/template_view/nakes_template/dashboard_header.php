@@ -18,7 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Siperi Nasehat</title>
+    <title>Sipatas</title>
 
     <meta name="description" content="" />
 

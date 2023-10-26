@@ -140,15 +140,15 @@ class Auth extends CI_Controller {
 						  $config['protocol'] = 'smtp';  
 					      $config['smtp_host'] = 'ssl://smtp.gmail.com'; 
 					      $config['smtp_port'] = '465'; 
-					      $config['smtp_user'] = 'promosisuryaagung@gmail.com';  
-					      $config['smtp_pass'] = 'wsvrguzwroncziyg'; 
+					      $config['smtp_user'] = 'cs.sipatas@gmail.com';  
+					      $config['smtp_pass'] = 'sowovrydqhrcyyrz'; 
 					      $config['mailtype'] = 'html';  
 					      $config['charset'] = 'iso-8859-1';  
 					      $config['wordwrap'] = TRUE;  
 					      $config['newline'] = "\r\n"; 
 					      $this->email->initialize($config);  
 					      $url = base_url()."auth/confirm/".$usernameemail;  
-					      $this->email->from('promosisuryaagung@gmail.com', 'SIPATAS Dinas Kesehatan Bojonegoro');  
+					      $this->email->from('cs.sipatas@gmail.com', 'SIPATAS Dinas Kesehatan Bojonegoro');  
 					      $this->email->to($usernameemail);   
 					      $this->email->subject('Silahkan Verifikasikan Email Anda');  
 					      $message = "<html><head><head></head><body><p>Hi,".$name."</p><p>Terimakasih telah bergabung bersama kami</p><p>Silahkan klik tautan dibawah ini untuk aktivasi/verifikasi email anda</p>".$url."<br/><p>Sincerely,</p><p>Dinas Kesehatan Bojonegoro</p></body></html>";  
@@ -158,9 +158,9 @@ class Auth extends CI_Controller {
 							$this->session->set_flashdata('message','<div class="alert alert-info" role="alert"><b>Pendaftaran Berhasil, Silahkan Login</b></div>');
 							redirect('auth');
 							}
-						else{
+							else{
 							show_error($this->email->print_debugger());
-						}
+							}
 
 						 
 						}
@@ -191,7 +191,108 @@ class Auth extends CI_Controller {
 				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b>Maaf Confirmasi Gagal Silahkan Hubungi Administrator</b></div>');
 				redirect ('auth');
 			}
-		}			
+		}
+
+
+		public function reset_password(){
+			$email=$this->input->post('email');
+			$cek_email = $this->db->query("SELECT * FROM user WHERE email ='$email' ");
+			$row = $cek_email->num_rows();
+			if($row==0){
+				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b>Email anda tidak terdaftar </b></div>');
+				redirect('auth');
+			}
+			else{
+				$user = $this->db->get_where('user', array('email'=> $email))->row_array();
+				$id_user = $user['id'];
+				$name = $user['name'];
+				if($email == $user['email']){
+
+					  $config['protocol'] = 'smtp';  
+				      $config['smtp_host'] = 'ssl://smtp.gmail.com'; 
+				      $config['smtp_port'] = '465'; 
+				      $config['smtp_user'] = 'cs.sipatas@gmail.com';  
+				      $config['smtp_pass'] = 'sowovrydqhrcyyrz'; 
+				      $config['mailtype'] = 'html';  
+				      $config['charset'] = 'iso-8859-1';  
+				      $config['wordwrap'] = TRUE;  
+				      $config['newline'] = "\r\n"; 
+				      $this->email->initialize($config);  
+				      $url = base_url()."auth/ubah_password/".$email.'/'.$id_user;  
+				      $this->email->from('cs.sipatas@gmail.com', 'Reset SIPATAS Dinas Kesehatan Bojonegoro');  
+				      $this->email->to($email);   
+				      $this->email->subject('Silahkan Verifikasikan Email Anda');  
+				      $message = "<html><head><head></head><body><p>Hi,".$name."</p><p>Reset Password Berhasil</p><p>Silahkan klik tautan dibawah ini untuk merubah password baru anda</p>".$url."<br/><p>Sincerely,</p><p>Dinas Kesehatan Bojonegoro</p></body></html>";  
+				     	$this->email->message($message);
+				     	$emailsent= $this->email->send();
+						if($emailsent){
+						$this->session->set_flashdata('message','<div class="alert alert-info" role="alert"><b>Reset Password Berhasil Silahkan Cek email Anda</b></div>');
+						redirect('auth');
+						}
+					else{
+						show_error($this->email->print_debugger());
+					}
+
+				}
+
+			}
+
+		}
+
+		public function ubah_password(){
+			$this->load->view('template_view/auth_header');
+			$this->load->view('auth/form_ubah_password');
+			$this->load->view('template_view/auth_footer');
+		}
+
+		public function aksi_ubah_password(){
+
+			$email=$this->uri->segment(3);
+			$id_user=$this->uri->segment(4);
+			$password = md5($this->input->post('new_password')); 
+			$confirm = md5($this->input->post('confirm_new_password'));
+
+			if($password==$confirm){
+				$user = $this->db->get_where('user', array('email'=> $email))->row_array();
+
+				if($email == $user['email']){
+					if($id_user == $user['id']){
+						$data = array(
+							'password'=>$password
+						);
+						$this->db->where('email', $email);
+						$update_password = $this->db->update('user', $data);
+						if($update_password){
+							$this->session->set_flashdata('message','<div class="alert alert-info" role="alert"><b>Password berhasil di ubah </b></div>');
+							redirect('auth');
+						}
+						else{
+							$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b>Maaf Password Gagal diubah Silahkan Hubungi Administrator </b></div>');
+						redirect('auth/ubah_password/'.$email.'/'.$id_user);
+						}
+					
+					}
+
+					else{
+						$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b>Maaf Password Gagal diubah Silahkan Hubungi Administrator </b></div>');
+						redirect('auth/ubah_password/'.$email.'/'.$id_user);
+						}
+				}
+				else{
+					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b>Maaf Password Gagal diubah Silahkan Hubungi Administrator</b></div>');
+					redirect ('auth/ubah_password/'.$email.'/'.$id_user);
+				}
+			}
+
+			else{
+				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b>Maaf Password Gagal diubah Konfirmasi Password Tidak Sesuai</b></div>');
+					redirect ('auth/ubah_password/'.$email.'/'.$id_user);
+			}
+
+
+			
+		}
+
 
 	public function logout()
 		{

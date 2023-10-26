@@ -190,7 +190,7 @@ class Nakes extends CI_Controller {
 			$this->load->library('upload', $config);
 	 		$this->upload->initialize($config);
 			if ( !$this->upload->do_upload('ktp')){
-				 $this->session->set_flashdata('message', 'ktp-gagal' );
+				 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"><b> Gagal Upload KTP  </b></div>' );
 				 redirect('nakes/upload_berkas');
 			} else {
 				$file_name_str= 'str-'.$id_user.'-'.$id_sip;
@@ -205,7 +205,7 @@ class Nakes extends CI_Controller {
 				$this->load->library('upload', $config);
 		 		$this->upload->initialize($config);
 				if ( !$this->upload->do_upload('str')){
-					 $this->session->set_flashdata('message', 'str-gagal' );
+					 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"><b> Gagal Upload STR  </b></div>' );
 					 redirect('nakes/upload_berkas');
 				} else {
 					$file_name_rop = 'rop-'.$id_user.'-'.$id_sip;
@@ -220,7 +220,7 @@ class Nakes extends CI_Controller {
 					$this->load->library('upload', $config);
 			 		$this->upload->initialize($config);
 					if ( !$this->upload->do_upload('rop')){
-						 $this->session->set_flashdata('message', 'rop-gagal' );
+						 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"><b> Gagal Upload ROP  </b></div>' );
 						 redirect('nakes/upload_berkas');
 					} else {
 						$file_name_rtp = 'rtp-'.$id_user.'-'.$id_sip;
@@ -235,7 +235,7 @@ class Nakes extends CI_Controller {
 						$this->load->library('upload', $config);
 				 		$this->upload->initialize($config);
 						if ( !$this->upload->do_upload('rtp')){
-							 $this->session->set_flashdata('message', 'rtp-gagal' );
+							 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"><b> Gagal Upload RTP  </b></div>' );
 							 redirect('nakes/upload_berkas');
 						} else {
 							$file_name_ijazah = 'ijazah-'.$id_user.'-'.$id_sip;
@@ -250,7 +250,7 @@ class Nakes extends CI_Controller {
 							$this->load->library('upload', $config);
 					 		$this->upload->initialize($config);
 							if ( !$this->upload->do_upload('ijazah')){
-								 $this->session->set_flashdata('message', 'ijazah-gagal' );
+								 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"><b> Gagal Upload IJAZAH  </b></div>' );
 								 redirect('nakes/upload_berkas');
 							} else {
 								$file_name_surat_sehat = 'surat-sehat-'.$id_user.'-'.$id_sip;
@@ -265,7 +265,7 @@ class Nakes extends CI_Controller {
 								$this->load->library('upload', $config);
 						 		$this->upload->initialize($config);
 								if ( !$this->upload->do_upload('surat_sehat')){
-									 $this->session->set_flashdata('message', 'surat_sehat-gagal' );
+									 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"><b> Gagal Upload Surat Sehat  </b></div>' );
 									 redirect('nakes/upload_berkas');
 								} else {
 									$file_name_surat_pernyataan = 'surat-pernyataan-'.$id_user.'-'.$id_sip;
@@ -280,7 +280,7 @@ class Nakes extends CI_Controller {
 									$this->load->library('upload', $config);
 							 		$this->upload->initialize($config);
 									if ( !$this->upload->do_upload('pernyataan')){
-										 $this->session->set_flashdata('message', 'pernyataan-gagal' );
+										 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"><b> Gagal Upload Surat Pernyataan  </b></div>' );
 										 redirect('nakes/upload_berkas');
 									} else {
 										$surat_pernyataan_up = $this->upload->data();

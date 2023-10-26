@@ -11,12 +11,12 @@
                   <span class="app-brand-logo demo">
                     <img src="<?php echo base_url()?>template/assets/img/favicon/icon_bjn.png" alt class="w-px-40 h-auto rounded-circle" />
                   </span>
-                  <span class="app-brand-text demo text-body fw-bolder">Siperi Nasehat</span>
+                  <span class="app-brand-text demo text-body fw-bolder">SIPATAS</span>
                 </a>
               </div>
               <!-- /Logo -->
               <h4 class="mb-2">REGISTRASI</h4>
-              <p class="mb-4">Ayok Bergabung Bersama Siperi</p>
+              <p class="mb-4">Ayok Bergabung Bersama SIPATAS</p>
               <form id="daftar" class="mb-3" action="<?php echo base_url();?>auth/aksi_register_user" method="POST">
               <?php echo $this->session->flashdata('message');?>
                 <div class="mb-3">
