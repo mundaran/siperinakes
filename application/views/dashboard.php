@@ -16,8 +16,7 @@
               <!-- Search -->
               <div class="navbar-nav align-items-center">
                 <div class="nav-item d-flex align-items-center">
-                  <img src="template/assets/img/favicon/icon_bjn.png" alt class="w-px-30 h-auto" />
-                  <span class="app-brand-text demo menu-text fw-bolder ms-2">SIPATAS</span>
+                  <span class="demo menu-text fw-bolder ms-2">DINKES BOJONEGORO</span>
                 </div>
               </div>
               <!-- /Search -->
@@ -91,90 +90,11 @@
                   <div class="card">
                     <div class="d-flex align-items-end row">
                       <div class="col-sm-12">
-                        <div class="card-body">
-
-                        <div id="carouselExample-cf"class="carousel carousel-dark slide carousel-fade"
-                        data-bs-ride="carousel">
-
-                        <ol class="carousel-indicators">
-                          <li data-bs-target="#carouselExample-cf" data-bs-slide-to="0" class="active"></li>
-                          <li data-bs-target="#carouselExample-cf" data-bs-slide-to="1"></li>
-                          <li data-bs-target="#carouselExample-cf" data-bs-slide-to="2"></li>
-                        </ol>
-                        <div class="carousel-inner">
-                          <div class="carousel-item active">
-
-                            <div class="col-sm-5 text-center text-sm-left">
-                              <div class="card-body pb-0 px-0 px-md-4">
-                                <img
-                                  src="template/assets/img/illustrations/ai1.png"
-                                  height="140"
-                                  alt="View Badge User"
-                                  data-app-dark-img="illustrations/ai1.png"
-                                  data-app-light-img="illustrations/ai1.png"
-                                />
-                                <ul></ul>
-                              </div>
-                            </div>
-
-                            <img class="d-block w-100" src="template/assets/img/elements/bg_4.jpg" alt="First slide" />
-                            <div class="carousel-caption  ">
-                              <h7>Memudahakan Tenaga Kesahatan Dalam Memperoleh SIP</h7>
-                            </div>
-                          </div>
-
-                          <div class="carousel-item">
-
-                            <div class="col-sm-5 text-center text-sm-left">
-                              <div class="card-body pb-0 px-0 px-md-4">
-                                <img
-                                  src="template/assets/img/illustrations/ai2.png"
-                                  height="140"
-                                  alt="View Badge User"
-                                  data-app-dark-img="illustrations/ai2.png"
-                                  data-app-light-img="illustrations/ai2.png"
-                                />
-                                <ul></ul>
-                              </div>
-                            </div>
-
-                            <img class="d-block w-100" src="template/assets/img/elements/bg_5.jpg" alt="Second slide" />
-                            <div class="carousel-caption ">
-                              <h7>Praktik Jadi Lebih Aman Dan Nyaman</h7>
-                            </div>
-                          </div>
-
-                          <div class="carousel-item">
-
-                            <div class="col-sm-5 text-center text-sm-left">
-                              <div class="card-body pb-0 px-0 px-md-4">
-                                <img
-                                  src="template/assets/img/illustrations/ai3.png"
-                                  height="140"
-                                  alt="View Badge User"
-                                  data-app-dark-img="illustrations/ai3.png"
-                                  data-app-light-img="illustrations/ai3.png"
-                                />
-                                <ul></ul>
-                              </div>
-                            </div>
-
-                            <img class="d-block w-100" src="template/assets/img/elements/bg_6.jpg" alt="Third slide" />
-                            <div class="carousel-caption ">
-                              <h7>Perpanjang Berkas dan Perijinan Praktek Jadi Lebih Mudah dan Efisien</h7>
-                            </div>
-                          </div>
+                        <div class="card-body" align="center">
+                          <img src="template/assets/img/favicon/icon_bjn.png" alt class="w-px-150 h-auto mb-1" />
+                          <span class="fw-semibold d-block mb-1" style="font-size: 60px;">SIPATAS</span>
+                           <span class="fw-semibold d-block mb-1"> ( Sistem Perijinan Praktek Tenaga Kesehatan ) </span> 
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExample-cf" role="button" data-bs-slide="prev">
-                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                          <span class="visually-hidden">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExample-cf" role="button" data-bs-slide="next">
-                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                          <span class="visually-hidden">Next</span>
-                        </a>
-                      </div>
-                  </div>
                 </div>
              </div>
             </div>

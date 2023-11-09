@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+date_default_timezone_set('Asia/Jakarta');
 ?><!DOCTYPE html>
 
 <!-- beautify ignore:start -->
@@ -50,15 +51,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <!-- Page CSS -->
 
-
-    
-
     <!-- Helpers -->
     <script src="<?php echo base_url();?>template/assets/vendor/js/helpers.js"></script>
 
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="<?php echo base_url();?>template/assets/js/config.js"></script>
+    
   </head>
 
   <body>

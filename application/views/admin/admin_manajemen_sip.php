@@ -143,7 +143,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </table>
                         </div>
 
-                      
+                        <a class="btn btn-success fw-bolder" data-bs-toggle="modal" href="#ModalExport" > Export Excel </a>
                         </div>
                       </div>
                     </div>
@@ -153,10 +153,53 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </div>
 
 
-
-
-
   </div>
+  </div>
+</div>
+
+<!-- Modal Export Excel SIP -->
+<div class="modal fade" id="ModalExport" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalCenterTitle">Export To Excel</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-2">
+          <div class="col mb-0">
+            <label for="emailWithTitle" class="form-label">Email</label>
+            <input
+              
+              data-provide="datepicker"
+              data-date-format="yyyy-mm-dd"
+              id="emailWithTitle"
+              class="form-control"
+            />
+          </div>
+          <div class="col mb-0">
+            <label for="dobWithTitle" class="form-label">DOB</label>
+            <input
+              type="text"
+              id="dobWithTitle"
+              class="form-control"
+              placeholder="DD / MM / YY"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
   </div>
 </div>
     

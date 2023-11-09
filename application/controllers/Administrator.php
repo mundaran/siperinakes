@@ -8,6 +8,7 @@ class Administrator extends CI_Controller {
 			parent::__construct();
 			cek_login_siperi();
 			$this->load->model('model_administrator');
+			date_default_timezone_set('Asia/Jakarta');
 		}
 
 	public function index()
@@ -415,7 +416,7 @@ class Administrator extends CI_Controller {
 		$keterangan = $this->input->post('keterangan');
 		$nomor_sip = $this->input->post('nomor_sip');
 		$catatan = $this->input->post('catatan');
-		$tanggal_validasi= date("d-m-Y");
+		$tanggal_validasi= date("y-m-d");
 		$status_sip = $this->input->post('status_sip');
 		$title_validasi = $this->input->post('title_validasi');
 		$data = array(

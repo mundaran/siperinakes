@@ -64,13 +64,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                         </div>
                         <div class="mb-3">
+                          <label class="form-label" for="basic-icon-default-company">Nomor Ijazah</label>
+                          <div class="input-group input-group-merge">
+                            <span id="basic-icon-default-company2" class="input-group-text"
+                              ><i class="bx bx-barcode"></i
+                            ></span>
+                            <input type="text" id="copyIJZ" class="form-control" name="no_ijazah" value="&nbsp;&nbsp;<?php echo $datasip['no_ijazah']?>" placeholder=""
+                              aria-describedby="basic-icon-default-company2" readonly />
+                              <button class="btn btn-outline-primary" type="button" id="buttonIJZ"><i class="bx bx-paste"></i
+                            ></button>
+                            <a class="btn btn-outline-primary" href="" id="button-addon2">Cek IJZH</a>
+                          </div>
+                        </div>
+                        <div class="mb-3">
                           <label class="form-label" for="basic-icon-default-company">Nomor STR</label>
                           <div class="input-group input-group-merge">
                             <span id="basic-icon-default-company2" class="input-group-text"
                               ><i class="bx bx-barcode"></i
                             ></span>
-                            <input type="text" id="basic-icon-default-company" class="form-control" name="no_str" value="&nbsp;&nbsp;<?php echo $datasip['no_str']?>" placeholder=""
-                              aria-describedby="basic-icon-default-company2" disabled />
+                            <input type="text" id="copySTR" class="form-control" name="no_str" value="&nbsp;&nbsp;<?php echo $datasip['no_str']?>" placeholder=""
+                              aria-describedby="basic-icon-default-company2" readonly />
+                            <button class="btn btn-outline-primary" type="button" id="buttonSTR"><i class="bx bx-paste"></i
+                            ></button>
+                            <a class="btn btn-outline-primary" href="Https://kki.go.id/cekdokter/form" target="_blank" rel="follow" type="button" >Cek STR</a>
                           </div>
                         </div>
                         <div class="mb-3">
@@ -139,6 +155,40 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             function goBack() {
                                 window.history.back();
                             }
+                        </script>
+
+                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+                        <script>
+                            const buttonIJZ = document.getElementById('buttonIJZ')
+                            const copyIJZ = document.getElementById('copyIJZ')
+                            
+                            buttonIJZ.onclick = () => {
+                                copyIJZ.select();    // Selects the text inside the input
+                                document.execCommand('copy');    // Simply copies the selected text to clipboard 
+                                 Swal.fire({         //displays a pop up with sweetalert
+                                    icon: 'success',
+                                    title: 'No ijazah Berhasil Di Copy',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                            }
+
+                            const buttonSTR = document.getElementById('buttonSTR')
+                            const copySTR = document.getElementById('copySTR')
+                            
+                            buttonSTR.onclick = () => {
+                                copySTR.select();    // Selects the text inside the input
+                                document.execCommand('copy');    // Simply copies the selected text to clipboard 
+                                 Swal.fire({         //displays a pop up with sweetalert
+                                    icon: 'success',
+                                    title: 'No STR Berhasil Di Copy',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                            }
+
+
+
                         </script>
 
 

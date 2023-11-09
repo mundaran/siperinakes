@@ -58,6 +58,12 @@
     } );
     </script>
 
+    <script type="text/javascript">
+       $(function() {
+               $("#datepicker").datepicker({ dateFormat: "yy-mm-dd" }).val()
+       });
+   </script>
+
     <script src="<?php echo base_url();?>template/assets/vendor/js/menu.js"></script>
     <!-- endbuild -->
     

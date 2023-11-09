@@ -8,6 +8,7 @@ class Nakes extends CI_Controller {
 			parent::__construct();
 			cek_login_siperi();
 			$this->load->model('model_nakes');
+			date_default_timezone_set('Asia/Jakarta');
 		}
 
 	public function index()
@@ -375,13 +376,53 @@ class Nakes extends CI_Controller {
 
 	public function aksi_register_sip()
 	{
+
 		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$id = $user['id'];
 		$id_new_sip = $this->input->post('id_sip_new');
 		$jenis_sip = $this->input->post('jenis_sip');
+		$no_ijazah = $this->input->post('no_ijazah');
 		$no_str = $this->input->post('no_str');
 		$no_rekomendasi_op = $this->input->post('no_rekomendasi_op');
-		$masa_berlaku_str = $this->input->post('masa_berlaku_str');
+
+		$masa_berlaku_form = $this->input->post('masa_berlaku_form');
+		$masa_berlaku_1 = $this->input->post('masa_berlaku_1');
+		$masa_berlaku_2 = $this->input->post('masa_berlaku_2');
+		$tanggal_sekarang = date('Y-m-d');
+
+		if($masa_berlaku_form=='seumurForm'){
+			$masa_berlaku_str = $masa_berlaku_1;
+		}  
+		else{
+			if($masa_berlaku_form=='terbatasForm'){
+
+					if($masa_berlaku_2==0){
+						$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"><b> Gagal Masa Berlaku Tidak Boleh Kosong  </b></div>' );
+					redirect('nakes/register_sip');
+					}
+
+					else{
+					
+						if($masa_berlaku_2==$tanggal_sekarang){
+						$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"><b> Gagal Masa Berlaku Tidak Boleh Tanggal Sekarang  </b></div>' );
+						redirect('nakes/register_sip');
+						}
+
+						else{
+							$masa_berlaku_str = $masa_berlaku_2;
+						}
+				}
+
+			}
+			else{
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"><b> Gagal Form Tidak Sesuai  </b></div>' );
+				redirect('nakes/register_sip');
+			}
+		}
+
+
+
+
 		$tempat_praktek = $this->input->post('tempat_praktek');
 		$alamat_praktek = $this->input->post('alamat_praktek');
 		$jenis_praktek = $this->input->post('jenis_praktek');
@@ -394,6 +435,7 @@ class Nakes extends CI_Controller {
 		'id' => $id_new_sip,
 		'id_user' => $id,
 		'jenis_sip' => $jenis_sip,
+		'no_ijazah' => $no_ijazah,
 		'no_str' => $no_str,
 		'no_rekomendasi_op'=> $no_rekomendasi_op,
 		'masa_berlaku_str' => $masa_berlaku_str,

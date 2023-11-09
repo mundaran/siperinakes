@@ -28,13 +28,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           $id=sprintf("%03s", $idSip);
                         ?>
                         <input type="hidden" name="id_sip_new" value="<?php echo $id;?>">
-                        <input type="hidden" name="tanggal_daftar" value="<?php echo date("d-m-Y"); ?>">
+                        <input type="hidden" name="tanggal_daftar" value="<?php echo date("y-m-d"); ?>">
                         <div class="mb-3">  
                           <label class="form-label" for="basic-icon-default-fullname">Jenis SIP</label>
                           <div class="input-group">
                             <label class="input-group-text" for="inputGroupSelect01">Options</label>
-                            <select class="form-select" id="inputGroupSelect01" name="jenis_sip"  >
-                              <option selected>Choose...</option>
+                            <select class="form-select" id="inputGroupSelect01" name="jenis_sip" required >
+                              <option selected value="">Choose...</option>
 
                               <?php $mastersip = $this->db->get_where('master_sip', array('id'))->result_array();?>
                               <?php foreach($mastersip as $jenis_sip):?>
@@ -42,6 +42,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               <?php endforeach;?>
 
                             </select>
+                          </div>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label" for="basic-icon-default-company">Nomor Ijazah</label>
+                          <div class="input-group input-group-merge">
+                            <span id="basic-icon-default-company2" class="input-group-text"
+                              ><i class="bx bx-barcode"></i
+                            ></span>
+                            <input type="text" id="basic-icon-default-company" class="form-control" name="no_ijazah" placeholder=""
+                              aria-describedby="basic-icon-default-company2" required />
                           </div>
                         </div>
                         <div class="mb-3">
@@ -64,12 +74,57 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               aria-describedby="basic-icon-default-company2" required />
                           </div>
                         </div>
+
                         <div class="mb-3">
                           <label class="form-label" for="basic-icon-default-email" >Masa Berlaku STR</label>
-                          <div class="input-group">
-                            <input type="date" aria-label="First" name="masa_berlaku_str" class="form-control"/>
-                          </div>
+                            <div class="input-group">
+                             <select id="formSelector" name="masa_berlaku_form" class="form-control" required>
+                                <option value="">Pilih</option>
+                                <option value="seumurForm">Seumur Hidup</option>
+                                <option value="terbatasForm">Terbatas</option>
+                            </select>
+                            </div>
+                            <br>
+                            <div id="seumurForm" style="display:none;">
+                                <input class="form-control" type="text" name="masa_berlaku_1" value="Seumur Hidup" disabled>
+                            </div>
+                            <div id="terbatasForm" style="display:none;">
+                                <input class="form-control" type="date" id="datepicker" name="masa_berlaku_2" />
+                            </div>
                         </div>
+
+                        <script>
+                        var formSelector = document.getElementById("formSelector");
+                        var seumurForm = document.getElementById("seumurForm");
+                        var terbatasForm = document.getElementById("terbatasForm");
+
+                        formSelector.addEventListener("change", function (event) {
+                            seumurForm.style.display = "none";
+                            terbatasForm.style.display = "none";
+
+                            switch (formSelector.value) {
+                                case "seumurForm":
+                                    seumurForm.style.display = "block";
+
+                                    break;
+                                case "terbatasForm":
+                                    terbatasForm.style.display = "block";
+                                    break;
+                            }
+                        });
+
+
+                        </script>
+
+                        <script type="text/javascript">
+                            $(function() {
+                              $("#datepicker").datepicker({
+                                dateFormat: 'yy/mm/dd'
+                                  
+                              });
+                            });
+                       </script>
+
                         <div class="mb-3">
                           <label class="form-label" for="basic-icon-address">Tempat Praktek</label>
                           <div class="input-group input-group-merge">
