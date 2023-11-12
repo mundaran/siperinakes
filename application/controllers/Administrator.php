@@ -52,7 +52,7 @@ class Administrator extends CI_Controller {
 		$data ['sip'] = $this->model_administrator->load_data_sip();
 
 		$this->load->view('template_view/admin_template/dashboard_header');
-		$this->load->view('template_view/admin_template/menubar',$data);
+		$this->load->view('template_view/admin_template/menubar',$data); 
 		$this->load->view('admin/admin_validasi',$data);
 		$this->load->view('template_view/admin_template/dashboard_footer');
 	}
@@ -219,10 +219,20 @@ class Administrator extends CI_Controller {
 		$data['title'] ='Manajemen Artikel';
 		$id_nakes =$this->uri->segment(3);
 		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
-		
 		$this->load->view('template_view/admin_template/dashboard_header');
 		$this->load->view('template_view/admin_template/menubar',$data);
 		$this->load->view('admin/admin_manajemen_artikel',$data);
+		$this->load->view('template_view/admin_template/dashboard_footer');
+	}
+
+	public function progres_sip()
+	{
+		$data['title'] ='Progres SIP';
+		$data ['user'] = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+		$data ['data_sip']= $this->model_administrator->load_progres_sip();
+		$this->load->view('template_view/admin_template/dashboard_header');
+		$this->load->view('template_view/admin_template/menubar',$data);
+		$this->load->view('admin/admin_daftar_progres',$data);
 		$this->load->view('template_view/admin_template/dashboard_footer');
 	}
 
@@ -439,7 +449,7 @@ class Administrator extends CI_Controller {
 		$id_nakes = $this->uri->segment(4);
 		$status_validasi = $this->input->post('status_validasi');
 		$keterangan = $this->input->post('keterangan');
-		$tanggal_validasi= date("d-m-Y");
+		$tanggal_validasi= date("Y-m-d");
 		$status_sip = $this->input->post('status_sip');
 		$title_validasi = $this->input->post('title_validasi');
 		$data = array(
@@ -466,7 +476,7 @@ class Administrator extends CI_Controller {
 		$keterangan = $this->input->post('keterangan');
 		$nomor_sip = $this->input->post('nomor_sip');
 		$catatan = $this->input->post('catatan');
-		$tanggal_validasi= date("d-m-Y");
+		$tanggal_validasi= date("Y-m-d");
 		$status_sip = $this->input->post('status_sip');
 		$title_validasi = $this->input->post('title_validasi');
 		$data = array(
@@ -492,7 +502,7 @@ class Administrator extends CI_Controller {
 		$id_nakes = $this->uri->segment(4);
 		$status_validasi = $this->input->post('status_validasi');
 		$keterangan = $this->input->post('keterangan');
-		$tanggal_validasi= date("d-m-Y");
+		$tanggal_validasi= date("Y-m-d");
 		$status_sip = $this->input->post('status_sip');
 		$title_validasi = $this->input->post('title_validasi');
 		$data = array(
@@ -523,7 +533,7 @@ class Administrator extends CI_Controller {
 		$nomor_sip = $this->input->post('nomor_sip');
 		$catatan = $this->input->post('catatan');
 		$keterangan = $this->input->post('keterangan');
-		$tanggal_validasi= date("d-m-Y");
+		$tanggal_validasi= date("Y-m-d");
 		$status_sip = $this->input->post('status_sip');
 		$title_validasi = $this->input->post('title_validasi');
 		$data = array(
@@ -550,7 +560,7 @@ class Administrator extends CI_Controller {
 		$id_nakes = $this->uri->segment(4);
 		$status_validasi = $this->input->post('status_validasi');
 		$keterangan = $this->input->post('keterangan');
-		$tanggal_validasi= date("d-m-Y");
+		$tanggal_validasi= date("Y-m-d");
 		$status_sip = $this->input->post('status_sip');
 		$title_validasi = $this->input->post('title_validasi');
 		$data = array(
@@ -579,7 +589,7 @@ class Administrator extends CI_Controller {
 		$nomor_sip = $this->input->post('nomor_sip');
 		$catatan = $this->input->post('catatan');
 		$keterangan = $this->input->post('keterangan');
-		$tanggal_validasi= date("d-m-Y");
+		$tanggal_validasi= date("Y-m-d");
 		$status_sip = $this->input->post('status_sip');
 		$title_validasi = $this->input->post('title_validasi');
 		$data = array(
@@ -605,7 +615,7 @@ class Administrator extends CI_Controller {
 		$keterangan = $this->input->post('keterangan');
 		$nomor_sip = $this->input->post('nomor_sip');
 		$catatan = $this->input->post('catatan');
-		$tanggal_cabut= date("d-m-Y");
+		$tanggal_cabut= date("Y-m-d");
 		$status_sip = $this->input->post('status_sip');
 		$title_validasi = $this->input->post('title_validasi');
 		$catatan = 'dicabut';
@@ -624,7 +634,7 @@ class Administrator extends CI_Controller {
 		$id_admin= $user['id'];
 		$id_sip  = $this->uri->segment(3);
 		$id_nakes= $this->uri->segment(4);
-		$date    = date('d-m-y');
+		$date    = date('Y-m-d');
 		$no_str_baru = $this->input->post('no_str_baru');
 		$masa_berlaku_str = $this->input->post('masa_berlaku_str');
 
@@ -719,7 +729,7 @@ class Administrator extends CI_Controller {
 		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$id = $user['id'];
 		$pemohon=$user['name'];
-		$tanggal_cabut=date('d-m-y');
+		$tanggal_cabut=date('Y-m-d');
 		$id_sip = $this->uri->segment(3);
 		$id_nakes = $this->uri->segment(4);
 		$file_name_surat_cabut = 'spc-'.strtr($pemohon, ". ", "--").'-'.$id_sip;'';
@@ -763,7 +773,7 @@ class Administrator extends CI_Controller {
 		$id_nakes = $this->uri->segment(3);
 
 		$datanakes = array(
-		'aktifasi'     => 1,
+		'aktifasi'     => 0,
 		);
 		$this->model_administrator->nonaktifkan_user($id_nakes,$datanakes);
 	}
@@ -775,7 +785,7 @@ class Administrator extends CI_Controller {
 		$id_nakes = $this->uri->segment(3);
 
 		$datanakes = array(
-		'aktifasi'     => 0,
+		'aktifasi'     => 1,
 		);
 		$this->model_administrator->aktifkan_user($id_nakes,$datanakes);
 	}

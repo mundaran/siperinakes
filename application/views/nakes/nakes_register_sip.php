@@ -202,7 +202,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               }
 
                               else{ if($dataSip['status']==3){
-                                echo '<span class="badge bg-label-info me-1"> <a href="'.base_url().'nakes/manajemen_sip" > Approved (Lihat) </a> </span>';
+                                echo '<span class="badge bg-label-warning me-1"> Konfirmasi Kabag </span>';
                                 }
 
                                 else{ if($dataSip['status']==4){

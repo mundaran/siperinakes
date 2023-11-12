@@ -63,8 +63,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <?php foreach ($data_user as $nakes) {
                                   if ($nakes['role_id']==11) {
                                     $status='Admin';
-                                  } else {
-                                    $status='Pemohon';
+                                  } elseif($nakes['role_id']==21) {
+                                    $status='Nakes';
+                                  } elseif($nakes['role_id']==31) {
+                                    $status='Kabag';
+                                  } elseif($nakes['role_id']==41) {
+                                    $status='Sekdin';
+                                  } elseif($nakes['role_id']==51) {
+                                    $status='Kadin';
                                   }
 
                                   echo '
@@ -201,8 +207,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <?php foreach ($data_user_nonaktif as $nakes_non) {
                                   if ($nakes_non['role_id']==11) {
                                     $status_non='Admin';
-                                  } else {
-                                    $status_non='Pemohon';
+                                  } elseif($nakes_non['role_id']==21) {
+                                    $status_non='Nakes';
+                                  } elseif($nakes_non['role_id']==31){
+                                    $status_non='Kabag';
+                                  } elseif($nakes_non['role_id']==41){
+                                    $status_non='Sekdin';
+                                  } elseif($nakes_non['role_id']==51){
+                                    $status_non='Kadin';
                                   }
 
                                   echo '

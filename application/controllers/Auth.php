@@ -69,6 +69,10 @@ class Auth extends CI_Controller {
 						elseif($user['role_id']==21){
 						redirect('nakes');
 						}
+
+						elseif($user['role_id']==31){
+						redirect('kabag');
+						}
 					
 				}
 

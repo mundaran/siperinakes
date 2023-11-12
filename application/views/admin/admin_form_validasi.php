@@ -140,7 +140,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           data-bs-toggle="modal"
                           data-bs-target="#modalApprove"
                         >
-                        Approve
+                        Konfirmasi Kabag
                         </button>
 
                         <button
@@ -199,7 +199,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content ">
                               <div class="modal-header">
-                                <h5 class="modal-title " id="modalCenterTitle" >Konfirmasi Approval</h5>
+                                <h5 class="modal-title " id="modalCenterTitle" >Konfirmasi Berkas</h5>
                                 <button
                                   type="button"
                                   class="btn-close"
@@ -227,7 +227,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                                       Close
                                     </button>
-                                    <button type="submit" class="btn btn-primary">Approve</button>
+                                    <button type="submit" class="btn btn-primary">Konfirmasi Kabag</button>
                                     </form>
                                   </div>
                                   </div>

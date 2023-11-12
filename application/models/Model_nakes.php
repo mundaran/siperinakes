@@ -8,7 +8,7 @@ Class Model_nakes extends CI_Model{
 	{
 		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$user_id = $user['id'];
-		$sql = $this->db->query("SELECT * FROM data_sip WHERE id_user = $user_id AND status=1 OR id_user = $user_id AND status=2 OR id_user = $user_id AND status=4");
+		$sql = $this->db->query("SELECT * FROM data_sip WHERE id_user = $user_id AND status=1 OR id_user = $user_id AND status=2 OR id_user = $user_id AND status=3 OR id_user = $user_id AND status=4 ");
 		return $sql->result_array();
 	}
 

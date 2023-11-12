@@ -37,13 +37,13 @@ Class Model_administrator extends CI_Model{
 
 	public function load_manajemen_user()
 	{
-		$sql = $this->db->query("SELECT * FROM user WHERE id AND aktifasi=0");
+		$sql = $this->db->query("SELECT * FROM user WHERE id AND aktifasi=1");
 		return $sql->result_array();
 	}
 
 	public function load_manajemen_user_nonaktif()
 	{
-		$sql = $this->db->query("SELECT * FROM user WHERE id AND aktifasi=1");
+		$sql = $this->db->query("SELECT * FROM user WHERE id AND aktifasi=0");
 		return $sql->result_array();
 	}
 
@@ -55,6 +55,12 @@ Class Model_administrator extends CI_Model{
 		return $sql->result_array();
 	}
 
+
+	public function load_progres_sip()
+	{
+		$sql = $this->db->query("SELECT * FROM data_sip WHERE status=3");
+		return $sql->result_array();
+	}
 
 	public function tambah_user($data)
 	{
@@ -200,12 +206,12 @@ Class Model_administrator extends CI_Model{
 	    $berhasil_ak = $this->db->update('user', $datanakes);
 	    if($berhasil_ak)
 	    {	
-			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b> User Diaktifkan ! </b></div>');
+			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"><b> User Diaktifkan ! </b></div>');
 			redirect('administrator/manajemen_user');
 	    }
 	    else
 	    {
-			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b> Data User Gagal Diaktifkan ! </b></div>');
+			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"><b> Data User Gagal Diaktifkan ! </b></div>');
 			redirect('administrator/manajemen_user');
 	    }
 	}
@@ -230,31 +236,6 @@ Class Model_administrator extends CI_Model{
 	    					);
 			$this->db->where('id',$id_sip);
 			$berhasil = $this->db->update('data_sip', $update_status);
-
-			  $config['protocol'] = 'smtp';  
-		      $config['smtp_host'] = 'ssl://smtp.gmail.com'; 
-		      $config['smtp_port'] = '465'; 
-		      $config['smtp_user'] = 'cs.sipatas@gmail.com';  
-		      $config['smtp_pass'] = 'sowovrydqhrcyyrz'; 
-		      $config['mailtype'] = 'html';  
-		      $config['charset'] = 'iso-8859-1';  
-		      $config['wordwrap'] = TRUE;  
-		      $config['newline'] = "\r\n"; 
-		      $this->email->initialize($config);  
-		      $url = base_url()."auth";  
-		      $this->email->from('cs.sipatas@gmail.com', 'Notifikasi SIPATAS Dinas Kesehatan Bojonegoro');  
-		      $this->email->to($email);   
-		      $this->email->subject('SELAMAT SIP Anda Disetujui');  
-		      $message = "<html><head><head></head><body><p>Hi,".$name."</p><p>SIP Anda Telah Disetujui</p><p>Silahkan Cetak Kedinas Kesehatan Bojonegoro </p><br/>Cek Status SIP Anda di ".$url."<br/><p>Sincerely,</p><p>Dinas Kesehatan Bojonegoro</p></body></html>";  
-		     	$this->email->message($message);
-		     	$emailsent= $this->email->send();
-				if($emailsent){
-				$this->session->set_flashdata('message',$title_validasi);
-				redirect('administrator/validasi_sip');
-				}
-				else{
-					show_error($this->email->print_debugger());
-				}
 
 		    }
 		    else

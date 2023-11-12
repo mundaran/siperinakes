@@ -454,7 +454,7 @@ class Nakes extends CI_Controller {
 		$user    = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$id_user = $user['id'];
 		$id_sip  = $this->uri->segment(3);
-		$date    = date('d-m-y');
+		$date    = date('Y-m-d');
 		$no_str_baru = $this->input->post('no_str_baru');
 		$masa_berlaku_str = $this->input->post('masa_berlaku_str');
 
@@ -825,7 +825,7 @@ class Nakes extends CI_Controller {
 		$user    = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$id_user = $user['id'];
 		$id_sip  = $this->uri->segment(3);
-		$date    = date('d-m-y');
+		$date    = date('Y-m-d');
 		$file_name_foto_str = 'str-'.$id_user.'-'.$id_sip.'-'.$date.'';
 		$config['upload_path']          = './document/str';
 		$config['allowed_types']        = 'pdf';
@@ -867,7 +867,7 @@ class Nakes extends CI_Controller {
 		$user    = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$id_user = $user['id'];
 		$id_sip  = $this->uri->segment(3);
-		$date    = date('d-m-y');
+		$date    = date('Y-m-d');
 
 		$file_name_sip_lama = 'sip-lama-'.$id_sip.'-'.$id_user.'-'.$date;
 		$config['upload_path']          = './document/foto_sip_lama';
@@ -899,7 +899,7 @@ class Nakes extends CI_Controller {
 		$user    = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$id_user = $user['id'];
 		$id_sip  = $this->uri->segment(3);
-		$date    = date('d-m-y');
+		$date    = date('Y-m-d');
 		$file_name_foto_rop = 'rop-'.$id_user.'-'.$id_sip.'-'.$date.'';
 		$config['upload_path']          = './document/rop';
 		$config['allowed_types']        = 'pdf';
@@ -973,7 +973,7 @@ class Nakes extends CI_Controller {
 		$user = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
 		$id = $user['id'];
 		$pemohon=$user['name'];
-		$tanggal_cabut=date('d-m-y');
+		$tanggal_cabut=date('Y-m-d');
 		$id_sip = $this->uri->segment(3);
 
 		$file_name_surat_cabut = 'spc-'.strtr($pemohon, ". ", "--").'-'.$id_sip;'';

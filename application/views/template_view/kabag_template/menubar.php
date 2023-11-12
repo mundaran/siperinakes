@@ -246,7 +246,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <!-- Place this tag where you want the button to render. -->
                 <li class="nav-item lh-1 me-3">
                  <ul><b style="font-size: 17px;"><?php echo $user['name']?></b></ul>
-                 <ul style="font-size: 12px;">Administrator</ul>
+                 <ul style="font-size: 12px;">Kabag</ul>
                 </li>
 
                 <!-- User -->
@@ -288,8 +288,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <span class="fw-semibold d-block"><?php echo $user['name'];?></span>
 
                             <?php
-                            if($user['role_id']==11){
-                              echo'<small class="text-muted">Administrator</small>';
+                            if($user['role_id']==31){
+                              echo'<small class="text-muted">Kabag</small>';
                             }
                             else{
                               echo'<small class="text-muted">None</small>';

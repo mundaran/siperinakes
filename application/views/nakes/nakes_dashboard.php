@@ -86,7 +86,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <?php 
                             $id_user=$user['id'];
                             $this->db->like('id_user',$id_user);
-                            $this->db->like('status',3);
+                            $this->db->like('status',0);
                             $this->db->from('data_sip');
                             ?>
                           <h3 class="card-title text-nowrap mb-1"><?php echo $this->db->count_all_results();?></h3>
