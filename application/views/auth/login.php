@@ -11,14 +11,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="card-body">
               <!-- Logo -->
               <div class="app-brand justify-content-center">
-                <a href="dashboard" class="app-brand-link gap-2">
+                <a href="" class="app-brand-link gap-2">
                   <span class="app-brand-logo demo">
-                    <img src="template/assets/img/favicon/icon_bjn.png" alt class="w-px-40 h-auto rounded-circle" />
+                    <img src="template/assets/img/favicon/icon_bjn.png" alt class="w-px-100 h-auto" />
                   </span>
-                  <span class="app-brand-text demo text-body fw-bolder">SIPATAS</span>
                 </a>
               </div>
+              <div class="app-brand justify-content-center">
+                <span class="text-body fw-bolder"><h3>SIPATAS</h3></span>
+              </div>
               <!-- /Logo -->
+              
               <h4 class="mb-2">Selamat Datang</h4>
               <p class="mb-4">Silahkan Login Menggunakan Akun Anda</p>
               <?php echo $this->session->flashdata('message');?>

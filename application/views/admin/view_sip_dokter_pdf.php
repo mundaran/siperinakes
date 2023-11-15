@@ -56,7 +56,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <p>
           <text style="font-size:28px;">PEMERINTAH KABUPATEN BOJONEGORO</text>
           <h1>DINAS KESEHATAN</h1>
-          <text style="font-size: 20px;">Area Perkantoran Pemerintah Kabupaten Bojonegoro - Jl.Dr.Cipto </text>
+          <text style="font-size: 20px;">Area Kantor Pemerintah Kabupaten Bojonegoro Jalan Dr. Cipto 
+Telp. (0353) 881350 Fax. 886695 Kode Pos 62116
+BOJONEGORO
+ </text>
           </p>
         </td>
       </tr>
@@ -76,7 +79,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <tr>
         <td align="justify">
           <p>
-            <text style="font-size: 16px; line-height:1.5; ">Berdasarkan Peraturan Menteri Kesehatan Republik Indonesia Nomor : 2052/Menkes/Per/X2011 tentang Izin Praktek dan Pelaksanaan Praktek Kedokteran, yang bertanda tangan di bawah ini, Kepala Dinas Kesehatan Kabupaten Bojonegoro memberikan izin Praktek Kepada :</text>
+            <text style="font-size: 16px; line-height:1.5; ">Berdasarkan Undang-Undang Republik Indonesia Nomor 17 Tahun 2023 Tentang Kesehatan, yang bertanda tangan di bawah ini, Kepala Dinas Kesehatan Kabupaten Bojonegoro memberikan Izin Praktik Dokter kepada :</text>
           </p>
         </td>
       </tr>
@@ -84,8 +87,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
   <?php 
   $id_user = $detail_sip['id_user'];
+  $id_sip = $detail_sip['id'];
   $datapemohon = $this->db->query("SELECT * FROM user WHERE id = $id_user ");
   $datauser= $datapemohon->row_array();
+
+  $datavalidasi=$this->db->query("SELECT * FROM validasi_sip WHERE id_sip= $id_sip ");
+  $datavalid=$datavalidasi->row_array();
+  $tgl_db = $datavalid['tgl_validasi_kadin'];
+  $tgl = new DateTime($tgl_db);
+  $date_plus = $tgl->modify("+5 years");
+  
+
+
+  if($detail_sip['masa_berlaku_str']=='Seumur Hidup'){
+    $masa_berlaku_sip = $date_plus->format('d-m-Y');
+    $masa_berlaku_str='Seumur Hidup';
+  }  else {
+      $tgl_str =$detail_sip['masa_berlaku_str'];
+      $new_tgl_str = new DateTime($tgl_str);
+      $masa_berlaku_sip=$new_tgl_str->format('d-m-Y');
+      $masa_berlaku_str=$new_tgl_str->format('d-m-Y');
+  } 
+
   ?>
 
   <table border="0" cellspacing="0" cellpadding="0" width="90%" height="100%">
@@ -132,7 +155,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <tr>
         <td align="left">Nomor STR</td>
         <td >:</td>
-        <td ><?php echo $detail_sip ['no_str'];?> Berlaku s/d <?php echo $detail_sip['masa_berlaku_str'];?></td>
+        <td ><?php echo $detail_sip ['no_str'];?> Berlaku s/d <?php echo $masa_berlaku_str;?></td>
       </tr>
       <tr>
         <td>&nbsp;</td>
@@ -164,6 +187,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <td >:</td>
         <td ><?php echo $detail_sip ['hari_awal_praktek'];?></td>
       </tr>
+      <tr>
+        <td align="left">Masa Berlaku</td>
+        <td >:</td>
+        <td ><?php echo $masa_berlaku_sip; ?></td>
+      </tr>
   </table>
   <br>
   <br>
@@ -183,7 +211,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <td align="right" valign ="top"><img src="<?php echo $base64?>" width="144" height="211"></td>
         <td align="left" valign ="top" >
           <p>&nbsp;Ditetapkan di : Bojonegoro</p>
-          <p>&nbsp;Pada Tanggal : <?php echo date('d-m-Y');?></p>
+          <p>&nbsp;Pada Tanggal : <?php echo $datavalid['tgl_validasi_kadin'];?></p>
           <br>
           <p>&nbsp;KEPALA DINAS KESEHATAN</p>
           <p>&nbsp;KABUPATEN BOJONEGORO</p>

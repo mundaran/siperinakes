@@ -21,15 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             $datavalidasi = $this->db->query("SELECT * FROM data_sip WHERE id =$id ");
                             $datasip = $datavalidasi->row_array();
                           ?>
-                          <h5 class="card-title text-danger">Form Validasi REVISI Perpanjangan SIP🎉</h5>
-                          <p>
-                            <?php
-                            $id_sip = $datasip['id'];
-                            $note_revisi = $this->db->query("SELECT * FROM validasi_sip WHERE id_sip = $id_sip ");
-                            $note = $note_revisi->row_array();
-                           ?>
-                           <div class="alert alert-danger col-lg-12" role="alert"> Note Revisi : <?php echo $note['keterangan']; ?> <p>( Mohon di Cek Kembali Sebelum Approval )<p></div>
-                          </p>
+                          <h5 class="card-title text-primary">Form Validasi SIP🎉</h5>
                           <p class="mb-4">
                             SIP : <?php echo $datasip['jenis_sip'];?>
                           </p>
@@ -72,13 +64,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                         </div>
                         <div class="mb-3">
+                          <label class="form-label" for="basic-icon-default-company">Nomor Ijazah</label>
+                          <div class="input-group input-group-merge">
+                            <span id="basic-icon-default-company2" class="input-group-text"
+                              ><i class="bx bx-barcode"></i
+                            ></span>
+                            <input type="text" id="copyIJZ" class="form-control" name="no_ijazah" value="&nbsp;&nbsp;<?php echo $datasip['no_ijazah']?>" placeholder=""
+                              aria-describedby="basic-icon-default-company2" readonly />
+                              <button class="btn btn-outline-primary" type="button" id="buttonIJZ"><i class="bx bx-paste"></i
+                            ></button>
+                            <a class="btn btn-outline-primary" href="" id="button-addon2">Cek IJZH</a>
+                          </div>
+                        </div>
+                        <div class="mb-3">
                           <label class="form-label" for="basic-icon-default-company">Nomor STR</label>
                           <div class="input-group input-group-merge">
                             <span id="basic-icon-default-company2" class="input-group-text"
                               ><i class="bx bx-barcode"></i
                             ></span>
-                            <input type="text" id="basic-icon-default-company" class="form-control" name="no_str" value="&nbsp;&nbsp;<?php echo $datasip['no_str']?>" placeholder=""
-                              aria-describedby="basic-icon-default-company2" disabled />
+                            <input type="text" id="copySTR" class="form-control" name="no_str" value="&nbsp;&nbsp;<?php echo $datasip['no_str']?>" placeholder=""
+                              aria-describedby="basic-icon-default-company2" readonly />
+                            <button class="btn btn-outline-primary" type="button" id="buttonSTR"><i class="bx bx-paste"></i
+                            ></button>
+                            <a class="btn btn-outline-primary" href="Https://kki.go.id/cekdokter/form" target="_blank" rel="follow" type="button" >Cek STR</a>
                           </div>
                         </div>
                         <div class="mb-3">
@@ -87,7 +95,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <span id="basic-icon-default-company2" class="input-group-text"
                               ><i class="bx bx-calendar"></i
                             ></span>
-                            <input type="date" aria-label="First" name="masa_berlaku_str" value="<?php echo $datasip['masa_berlaku_str']?>" class="form-control" disabled/>
+                            <input type="text" aria-label="First" name="masa_berlaku_str" value="<?php echo $datasip['masa_berlaku_str']?>" class="form-control" disabled/>
                           </div>
                         </div>
                         <div class="mb-3">
@@ -132,15 +140,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           data-bs-toggle="modal"
                           data-bs-target="#modalApprove"
                         >
-                        Approve
-                        </button>
-
-                        <button
-                          type="button"
-                          class="btn btn-lg btn-danger"
-                          data-bs-toggle="modal"
-                          data-bs-target="#modalRevisi"
-                        >Revisi
+                        Konfirmasi Kadin
                         </button>
                         <button  onclick="goBack()" class="btn btn-lg btn-secondary" >Kembali</button>
                         <script>
@@ -149,13 +149,40 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             }
                         </script>
 
-                        <div class="row">
-                          <div class="col-lg-12">
-                            <div class="card-body">
+                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+                        <script>
+                            const buttonIJZ = document.getElementById('buttonIJZ')
+                            const copyIJZ = document.getElementById('copyIJZ')
                             
-                            </div>
-                          </div>
-                        </div>
+                            buttonIJZ.onclick = () => {
+                                copyIJZ.select();    // Selects the text inside the input
+                                document.execCommand('copy');    // Simply copies the selected text to clipboard 
+                                 Swal.fire({         //displays a pop up with sweetalert
+                                    icon: 'success',
+                                    title: 'No ijazah Berhasil Di Copy',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                            }
+
+                            const buttonSTR = document.getElementById('buttonSTR')
+                            const copySTR = document.getElementById('copySTR')
+                            
+                            buttonSTR.onclick = () => {
+                                copySTR.select();    // Selects the text inside the input
+                                document.execCommand('copy');    // Simply copies the selected text to clipboard 
+                                 Swal.fire({         //displays a pop up with sweetalert
+                                    icon: 'success',
+                                    title: 'No STR Berhasil Di Copy',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                            }
+
+
+
+                        </script>
+
 
 
 
@@ -164,7 +191,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content ">
                               <div class="modal-header">
-                                <h5 class="modal-title " id="modalCenterTitle" >Konfirmasi Approval</h5>
+                                <h5 class="modal-title " id="modalCenterTitle" >Konfirmasi Berkas</h5>
                                 <button
                                   type="button"
                                   class="btn-close"
@@ -180,29 +207,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <p>Pastikan data sudah sesuai yaa...</p>
                                     <br>
                                     <br>
-                                    <form method="POST" action="<?php echo base_url();?>administrator/aksi_validasi_revisi_perpanjangan/<?php echo $this->uri->segment(3);?>/<?php echo $datasip['id_user'];?>">
-                                      <?php 
-                                        $id = $datasip['id'];
-                                        $validatorData = $this->db->query("SELECT * FROM validasi_sip WHERE id_sip= $id ");
-                                        $validator = $validatorData->row_array();
-
-                                        $id_validator = $validator['id_admin'];
-                                        $data_admin = $this->db->query("SELECT * FROM user WHERE id =$id_validator");
-                                        $admin = $data_admin->row_array();
-                                      ?>
-                                      <input type="hidden" name="validator_sebelumnya" value="<?php echo $admin['name']?>">
+                                    <form method="POST" action="<?php echo base_url();?>sekdin/aksi_konfirmasi_kadin/<?php echo $this->uri->segment(3);?>/<?php echo $datasip['id_user'];?>">
                                       <input type="hidden" value="1" name="status_validasi">
-                                      <input type="hidden" value="valid" name="keterangan">
-                                      <input type="hidden" name="status_sip" value="11">
-                                      <input type="text" class="form-control" name="nomor_sip" placeholder="Masukan Nomor SIP Baru">
+                                      <input type="hidden" value="validasi sekdin" name="keterangan">
+                                      <input type="hidden" value="valid" name="validasi_sekdin">
+                                      <input type="hidden" name="status_sip" value="14">
+                                      <input type="text" class="form-control" name="nomor_sip" value="<?php echo $datasip['nomor_sip'] ?>">
                                       <br>
-                                      <input type="text" class="form-control" name="catatan" placeholder="Masukan Catatan Jika Ada">
-                                    <input type="hidden" name="title_validasi" value='<div class="alert alert-success" role="alert"><b> Data Telah Di Approve </b></div>'>
-                                    <br>
+                                      <input type="text" class="form-control" name="catatan" value="<?php echo $datasip['catatan'] ?>">
+                                      <input type="hidden" name="title_validasi" value='<div class="alert alert-success" role="alert"><b> Data Telah Di Approve </b></div>'>
+                                      <BR>
                                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                                       Close
                                     </button>
-                                    <button type="submit" class="btn btn-primary">Approve</button>
+                                    <button type="submit" class="btn btn-primary">Konfirmasi Kadin</button>
                                     </form>
                                   </div>
                                   </div>
@@ -217,7 +235,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content ">
                               <div class="modal-header">
-                                <h5 class="modal-title " id="modalCenterTitle" >Konfirmasi Revisi Perpanjangan</h5>
+                                <h5 class="modal-title " id="modalCenterTitle" >Konfirmasi Revisi</h5>
                                 <button
                                   type="button"
                                   class="btn-close"
@@ -226,22 +244,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 ></button>
                               </div>
                               <div class="modal-body">
-                                <form method="POST" action="<?php echo base_url();?>administrator/aksi_revisi_perpanjangan/<?php echo $this->uri->segment(3);?>/<?php echo $datasip['id_user'];?>">
-                                  <?php 
-                                    $id = $datasip['id'];
-                                    $validatorData = $this->db->query("SELECT * FROM validasi_sip WHERE id_sip= $id ");
-                                    $validator = $validatorData->row_array();
-
-                                    $id_validator = $validator['id_admin'];
-                                    $data_admin = $this->db->query("SELECT * FROM user WHERE id =$id_validator");
-                                    $admin = $data_admin->row_array();
-                                  ?>
+                                <form method="POST" action="<?php echo base_url();?>administrator/aksi_revisi_validasi_sip/<?php echo $this->uri->segment(3);?>/<?php echo $datasip['id_user'];?>">
                                 <div class="row">
                                   <div class="col mb-3">
                                     <label for="nameWithTitle" class="form-label">Keterangan</label>
-                                    <input type="hidden" name="validator_sebelumnya" value="<?php echo $admin['name']?>">
                                     <input type="hidden" value="2" name="status_validasi">
-                                    <input type="hidden" name="status_sip" value="7">
+                                    <input type="hidden" name="status_sip" value="4">
                                     <input type="hidden" name="title_validasi" value='<div class="alert alert-info" role="alert"><b> Permohonan Revisi Selesai </b></div>'>
                                     <input
                                       type="text"
@@ -295,7 +303,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               >
                                 <div class="accordion-body">
                                   <?php if(empty($datauser['pict'])){
-                                    echo "foto belum disi";
+                                    echo "data belum disi";
                                   }
 
                                   else{
@@ -532,45 +540,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                                   else{
                                     echo '<embed src="'.base_url().'document/surat_pernyataan/'.$datasip['pernyataan'].'.pdf" width="550" height="500"> </embed>';
-                                  }
-
-                                  ?>
-                                </div>
-                              </div>
-                            </div>
-
-                            <?php 
-                              $id_sip= $datasip['id'];
-                              $data_riwayat = $this->db->query("SELECT * FROM riwayat_perpanjangan WHERE id_sip = $id_sip AND status='undone' ");
-                              $riwayat = $data_riwayat->row_array();
-                            ?>
-
-                            <div class="card accordion-item">
-                              <h2 class="accordion-header" id="headingEight">
-                                <button
-                                  type="button"
-                                  class="accordion-button collapsed"
-                                  data-bs-toggle="collapse"
-                                  data-bs-target="#accordionEight"
-                                  aria-expanded="false"
-                                  aria-controls="accordionEight"
-                                >
-                                  SIP Lama
-                                </button>
-                              </h2>
-                              <div
-                                id="accordionEight"
-                                class="accordion-collapse collapse"
-                                aria-labelledby="headingEight"
-                                data-bs-parent="#accordionExample"
-                              >
-                                <div class="accordion-body">
-                                  <?php if(empty($riwayat['sip_lama'])){
-                                    echo "data belum disi";
-                                  }
-
-                                  else{
-                                    echo '<embed src="'.base_url().'document/foto_sip_lama/'.$riwayat['sip_lama'].'.pdf" width="550" height="500"> </embed>';
                                   }
 
                                   ?>

@@ -56,10 +56,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <p>
           <text style="font-size:28px;">PEMERINTAH KABUPATEN BOJONEGORO</text>
           <h1>DINAS KESEHATAN</h1>
-          <text style="font-size: 20px;">Area Kantor Pemerintah Kabupaten Bojonegoro Jalan Dr. Cipto 
-Telp. (0353) 881350 Fax. 886695 Kode Pos 62116
-BOJONEGORO
- </text>
+          <text style="font-size: 20px;">Area Perkantoran Pemerintah Kabupaten Bojonegoro - Jl.Dr.Cipto </text>
           </p>
         </td>
       </tr>
@@ -143,7 +140,7 @@ BOJONEGORO
       <tr>
         <td align="left">Nomor STRTTK</td>
         <td >:</td>
-        <td ><?php echo $detail_sip ['no_str'];?> Berlaku s/d <?php echo $masa_berlaku_str;?></td>
+        <td ><?php echo $detail_sip ['no_str'];?> Berlaku s/d <?php echo $detail_sip['masa_berlaku_str'];?></td>
       </tr>
       <tr>
         <td>&nbsp;</td>

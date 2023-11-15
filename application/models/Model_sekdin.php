@@ -1,18 +1,18 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-Class Model_kabag extends CI_Model{
+Class Model_sekdin extends CI_Model{
 
 
 	public function load_data_sip()
 	{
-		$sql = $this->db->query("SELECT * FROM data_sip WHERE status=11");
+		$sql = $this->db->query("SELECT * FROM data_sip WHERE status=12");
 		return $sql->result_array();
 	}
 
 	public function load_progres_sip()
 	{
-		$sql = $this->db->query("SELECT * FROM data_sip WHERE status=2 OR status=12 OR status=14");
+		$sql = $this->db->query("SELECT * FROM data_sip WHERE status=2 OR status=11 OR status=14");
 		return $sql->result_array();
 	}
 
@@ -23,7 +23,7 @@ Class Model_kabag extends CI_Model{
 	}
 
 
-	public function konfirmasi_sekdin($data,$id_sip,$status_sip,$nomor_sip,$catatan,$title_validasi,$id_nakes)
+	public function konfirmasi_kadin($data,$id_sip,$status_sip,$nomor_sip,$catatan,$title_validasi,$id_nakes)
 	{
 		$this->db->where('id_sip',$id_sip);
 		$query= $this->db->update('validasi_sip', $data);
@@ -45,14 +45,14 @@ Class Model_kabag extends CI_Model{
 	    					);
 			$this->db->where('id',$id_sip);
 			$berhasil = $this->db->update('data_sip', $update_status);
-			$this->session->set_flashdata('message','<div class="alert alert-info" role="alert"><b> Berhasil Validasi, Berkas sedang Proses Sekdin  </b></div>');
-			redirect('kabag/form_validasi_sip/'.$id_sip);
+			$this->session->set_flashdata('message','<div class="alert alert-info" role="alert"><b> Berhasil Validasi, Berkas sedang Proses Kadin  </b></div>');
+			redirect('sekdin/form_validasi_sip/'.$id_sip);
 
 	    }
 	    else
 	    {
 			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b> Gagal Validasi  </b></div>');
-			redirect('kabag/form_validasi_sip/'.$id_sip);
+			redirect('sekdin/form_validasi_sip/'.$id_sip);
 	    }
 	}
 }

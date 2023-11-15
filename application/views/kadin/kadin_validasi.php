@@ -14,7 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="d-flex align-items-end row">
                       <div class="col-sm-7">
                         <div class="card-body">
-                          <h5 class="card-title text-primary">PENGAJUAN SIP BARU ( VALIDASI KABAG )🎉</h5>
+                          <h5 class="card-title text-primary">PENGAJUAN SIP BARU ( VALIDASI SEKDIN )🎉</h5>
                           <p class="mb-4">
                            Siapkan Kopimu Dan Mulai Validasi.
                           </p>
@@ -62,7 +62,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$dataSip['jenis_sip'].'</strong></td>
 
-                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong><a href="'.base_url().'kabag/form_validasi_sip/'.$dataSip['id'].'" class="btn btn-sm btn-primary"><span class="tf-icons bx bx-note"></span>&nbsp; Validasi</a></strong></td>
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong><a href="'.base_url().'kadin/form_validasi_sip/'.$dataSip['id'].'" class="btn btn-sm btn-primary"><span class="tf-icons bx bx-note"></span>&nbsp; Validasi</a></strong></td>
 
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$dataSip['tanggal_daftar'].'</strong></td>
                                   </tr>

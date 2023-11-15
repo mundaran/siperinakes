@@ -38,7 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
               <div class="row">
                     <div class="col-lg-3 col-md-12 col-6 mb-4">
-                      <a href="<?php echo base_url();?>kabag/validasi_sip_kabag" class="card">
+                      <a href="<?php echo base_url();?>sekdin/validasi_sip_kabag" class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
@@ -49,19 +49,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               />
                             </div>
                           </div>
-                          <span class="fw-semibold d-block mb-1">Perlu Ditinjau Anda</span>
+                          <span class="fw-semibold d-block mb-1">Ditinjau Kabag</span>
                             <?php 
                             $status = 11;
                             $this->db->like('status', $status);
                             $this->db->from('data_sip');
                             ?>
                           <h3 class="card-title mb-2"><?php echo $this->db->count_all_results();?></h3>
-                          <small class="text-secondary fw-semibold"> Perlu Ditinjau </small>
+                          <small class="text-secondary fw-semibold"> Sedang Di Tinjau Kabag </small>
                         </div>
                       </a>
                     </div>
                     <div class="col-lg-3 col-md-12 col-6 mb-4">
-                      <a href="<?php echo base_url();?>kabag/progres_sip" class="card">
+                      <a href="<?php echo base_url();?>sekdin/validasi_sip_sekdin" class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
@@ -72,20 +72,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               />
                             </div>
                           </div>
-                          <span class="fw-semibold d-block mb-1">Proses Sekdin</span>
+                          <span class="fw-semibold d-block mb-1">Perlu Anda Tinjau</span>
                             <?php 
                             $status = 12;
                             $this->db->like('status', $status);
                             $this->db->from('data_sip');
                             ?>
                           <h3 class="card-title text-nowrap mb-1"><?php echo $this->db->count_all_results();?></h3>
-                          <small class="text-secondary fw-semibold"><i class=""></i> Sedang Ditinjau Oleh Sekdin</small>
+                          <small class="text-secondary fw-semibold"><i class=""></i> Mohon Cek Validasi</small>
                         </div>
                       </a>
                     </div>
                  
                     <div class="col-lg-3 col-md-12 col-6 mb-4">
-                      <a href="<?php echo base_url();?>kabag/progres_sip" class="card">
+                      <a href="<?php echo base_url();?>sekdin/progres_sip" class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
@@ -109,25 +109,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
 
                     <div class="col-lg-3 col-md-12 col-6 mb-4">
-                      <a href="<?php echo base_url();?>kabag/progres_sip" class="card">
+                      <a href="<?php echo base_url();?>sekdin/manajemen_sip" class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
                               <img
-                                src="template/assets/img/icons/unicons/cc-primary.png"
-                                alt="chart success"
+                                src="template/assets/img/icons/unicons/cc-success.png"
+                                alt="Credit Card"
                                 class="rounded"
                               />
                             </div>
                           </div>
-                          <span class="fw-semibold d-block mb-1">Di Terbitkan</span>
+                          <span class="fw-semibold d-block mb-1">SIP Diterbitkan </span>
                           <?php 
-                            $status =3;
-                            $this->db->like('status', $status);
+                            $status1=3;
+                            $this->db->like('status', $status1);
                             $this->db->from('data_sip');
                             ?>
-                          <h3 class="card-title mb-2"><?php echo $this->db->count_all_results();?></h3>
-                          <small class="text-secondary fw-semibold"> Sedang Ditinjau Oleh Kepala Dinas </small>
+                          <h3 class="card-title text-nowrap mb-1"><?php echo $this->db->count_all_results();?></h3>
+                          <small class="text-secondary fw-semibold"><i class=""></i> Telah Diterbitkan Oleh Kadin </small>
                         </div>
                       </a>
                     </div>

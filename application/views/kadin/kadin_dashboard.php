@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="card-body">
                           <h5 class="card-title text-primary">Selamat Datang <?php echo $user['name']?> 🎉</h5>
                           <p class="mb-4">
-                            Selamat datang di dashboard Kabag
+                            Selamat Datang di Dashboard Kepala Dinas
                           </p>
                         </div>
                       </div>
@@ -38,30 +38,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
               <div class="row">
                     <div class="col-lg-3 col-md-12 col-6 mb-4">
-                      <a href="<?php echo base_url();?>kabag/validasi_sip_kabag" class="card">
+                      <a href="<?php echo base_url();?>sekdin/validasi_sip_kabag" class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
                               <img
-                                src="template/assets/img/icons/unicons/user1.png"
+                                src="template/assets/img/icons/unicons/chart.png"
                                 alt="chart success"
                                 class="rounded"
                               />
                             </div>
                           </div>
-                          <span class="fw-semibold d-block mb-1">Perlu Ditinjau Anda</span>
+                          <span class="fw-semibold d-block mb-1">Ditinjau Staff Admin</span>
                             <?php 
-                            $status = 11;
-                            $this->db->like('status', $status);
-                            $this->db->from('data_sip');
+                            $query = $this->db->query("SELECT * FROM data_sip WHERE status = 2");  
+                            $admin = $query->num_rows();
                             ?>
-                          <h3 class="card-title mb-2"><?php echo $this->db->count_all_results();?></h3>
-                          <small class="text-secondary fw-semibold"> Perlu Ditinjau </small>
+                          <h3 class="card-title mb-2"><?php echo $admin; ?></h3>
+                          <small class="text-secondary fw-semibold"> Sedang Di Tinjau Admin </small>
                         </div>
                       </a>
                     </div>
                     <div class="col-lg-3 col-md-12 col-6 mb-4">
-                      <a href="<?php echo base_url();?>kabag/progres_sip" class="card">
+                      <a href="" class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
@@ -72,20 +71,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               />
                             </div>
                           </div>
-                          <span class="fw-semibold d-block mb-1">Proses Sekdin</span>
+                          <span class="fw-semibold d-block mb-1">Ditinjau Kabag</span>
                             <?php 
-                            $status = 12;
-                            $this->db->like('status', $status);
-                            $this->db->from('data_sip');
+                            $query_kabag = $this->db->query("SELECT * FROM data_sip WHERE status = 11");  
+                            $kabag = $query_kabag->num_rows();
                             ?>
-                          <h3 class="card-title text-nowrap mb-1"><?php echo $this->db->count_all_results();?></h3>
-                          <small class="text-secondary fw-semibold"><i class=""></i> Sedang Ditinjau Oleh Sekdin</small>
+                          <h3 class="card-title text-nowrap mb-1"><?php echo $kabag;?></h3>
+                          <small class="text-secondary fw-semibold"><i class=""></i> Proses Validasi Kabag</small>
                         </div>
                       </a>
                     </div>
                  
                     <div class="col-lg-3 col-md-12 col-6 mb-4">
-                      <a href="<?php echo base_url();?>kabag/progres_sip" class="card">
+                      <a href="" class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
@@ -96,38 +94,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               />
                             </div>
                           </div>
-                          <span class="fw-semibold d-block mb-1">Proses Kepala Dinas</span>
-                          <?php 
-                            $status = 14;
-                            $this->db->like('status', $status);
-                            $this->db->from('data_sip');
+                          <span class="fw-semibold d-block mb-1">Ditinjau Sekdin</span>
+                            <?php 
+                            $query_sekdin = $this->db->query("SELECT * FROM data_sip WHERE status = 12");  
+                            $sekdin = $query_sekdin->num_rows();
                             ?>
-                          <h3 class="card-title mb-2"><?php echo $this->db->count_all_results();?></h3>
-                          <small class="text-secondary fw-semibold"> Sedang Ditinjau Oleh Kepala Dinas </small>
+                          <h3 class="card-title mb-2"><?php echo $sekdin;?></h3>
+                          <small class="text-secondary fw-semibold"> Proses Validasi Sekdin </small>
                         </div>
                       </a>
                     </div>
 
                     <div class="col-lg-3 col-md-12 col-6 mb-4">
-                      <a href="<?php echo base_url();?>kabag/progres_sip" class="card">
+                      <a href="" class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
                               <img
-                                src="template/assets/img/icons/unicons/cc-primary.png"
-                                alt="chart success"
+                                src="template/assets/img/icons/unicons/cc-success.png"
+                                alt="Credit Card"
                                 class="rounded"
                               />
                             </div>
                           </div>
-                          <span class="fw-semibold d-block mb-1">Di Terbitkan</span>
-                          <?php 
-                            $status =3;
-                            $this->db->like('status', $status);
-                            $this->db->from('data_sip');
+                          <span class="fw-semibold d-block mb-1">Perlu Diterbitkan </span>
+                            <?php 
+                            $query_kadin = $this->db->query("SELECT * FROM data_sip WHERE status = 14");  
+                            $kadin = $query_kadin->num_rows();
                             ?>
-                          <h3 class="card-title mb-2"><?php echo $this->db->count_all_results();?></h3>
-                          <small class="text-secondary fw-semibold"> Sedang Ditinjau Oleh Kepala Dinas </small>
+                          <h3 class="card-title text-nowrap mb-1"><?php echo $kadin;?></h3>
+                          <small class="text-secondary fw-semibold"><i class=""></i> Untuk Diterbitkan </small>
                         </div>
                       </a>
                     </div>

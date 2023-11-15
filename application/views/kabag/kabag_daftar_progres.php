@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="card-body">
                           <h5 class="card-title text-info"><?php echo $title;?>🎉</h5>
                           <p class="mb-4">
-                           Daftar SIP Approved
+                           Daftar Progres SIP
                           </p>
                            <?php echo $this->session->flashdata('message');?>
                         </div>
@@ -45,15 +45,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <th>Jenis Sip</th>
                                 <th>Nomor Sip</th>
                                 <th>Status Sip</th>
-                                <th>Tanggal Approve</th>
+                                <th>Tanggal Konfirmasi</th>
                                 <th>Tanggal Berakhir</th>
-                                <th>Action</th>
                               </tr>
                               
                             </thead>
                             <tbody class="">
 
-                                <?php foreach ($data_sip as $data) {
+                                <?php foreach ($sip as $data) {
 
                                   $id_user= $data['id_user'];
                                   $dataUser = $this->db->query("SELECT * FROM user WHERE id = $id_user ");
@@ -63,8 +62,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                   $dataValidasi = $this->db->query("SELECT * FROM validasi_sip WHERE id_sip = $id_sip ");
                                   $validasi= $dataValidasi->row_array();
 
-                                  if($data['status']==3){
-                                    $status = 'Aproved';
+                                  if($data['status']==2){
+                                    $status = 'Validasi Admin';
+                                    $alert = 'warning';
+                                  }
+                                  elseif($data['status']==12){
+                                    $status= 'Validasi Sekdin';
+                                    $alert = 'info';
+                                  }
+                                  elseif($data['status']==14){
+                                    $status= 'Validasi Kadin';
+                                    $alert = 'success';
                                   }
 
                                   echo '  
@@ -75,30 +83,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$data['jenis_sip'].'</strong></td>
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$data['nomor_sip'].'</strong></td>
 
-                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$status.'</strong></td>
+                                    <td><span class="badge bg-label-'.$alert.' me-1">'.$status.' </span></td>
 
-                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$validasi['tanggal_validasi'].'</strong></td>
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$validasi['tgl_validasi_kabag'].'</strong></td>
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$data['masa_berlaku_str'].'</strong></td>
-
-                                    <td>
-                                      <div class="btn-group">
-                                        <button
-                                          type="button"
-                                          class="btn btn-info btn-icon rounded-pill dropdown-toggle hide-arrow"
-                                          data-bs-toggle="dropdown"
-                                          aria-expanded="false"
-                                        >
-                                          <i class="bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <ul class="dropdown-menu dropdown-menu-end">
-                                          <li><a class="dropdown-item" href="'.base_url().'administrator/detail_sip/'.$data['id'].'" >Detail SIP</a></li>
-                                          <li><a class="dropdown-item" href="'.base_url().'administrator/form_perpanjang_sip/'.$data['id'].'/'.$user['id'].'">Perpanjang</a></li>
-                                          <li><a class="dropdown-item" data-bs-toggle="modal" href="#modalCabut'.$data['id'].'">Cabut SIP</a></li>
-                                        </ul>
-                                      </div>
-
-                                      </td>
-
                                     
                                   </tr>
 

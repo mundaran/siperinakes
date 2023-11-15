@@ -133,7 +133,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           data-bs-toggle="modal"
                           data-bs-target="#modalApprove"
                         >
-                        Approve
+                        Konfirmasi Kabag
                         </button>
 
                         <button
@@ -158,7 +158,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content ">
                               <div class="modal-header">
-                                <h5 class="modal-title " id="modalCenterTitle" >Konfirmasi Approval</h5>
+                                <h5 class="modal-title " id="modalCenterTitle" >Konfirmasi Kabag</h5>
                                 <button
                                   type="button"
                                   class="btn-close"
@@ -187,7 +187,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                       <input type="hidden" name="validator_sebelumnya" value="<?php echo $admin['name']?>">
                                       <input type="hidden" value="1" name="status_validasi">
                                       <input type="hidden" value="valid" name="keterangan">
-                                      <input type="hidden" name="status_sip" value="3">
+                                      <input type="hidden" name="status_sip" value="11">
                                       <input type="text" class="form-control" name="nomor_sip" placeholder="Masukan Nomor SIP Baru">
                                       <br>
                                       <input type="text" class="form-control" name="catatan" placeholder="Masukan Catatan Jika Ada">
@@ -196,7 +196,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                                       Close
                                     </button>
-                                    <button type="submit" class="btn btn-primary">Approve</button>
+                                    <button type="submit" class="btn btn-primary">Konfirmasi Kabag</button>
                                     </form>
                                   </div>
                                   </div>

@@ -62,7 +62,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                   $dataValidasi = $this->db->query("SELECT * FROM validasi_sip WHERE id_sip = $id_sip ");
                                   $validasi= $dataValidasi->row_array();
 
-                                  if($data['status']==3){
+                                  if($data['status']==11){
                                     $status = 'Konfirmasi Kabag';
                                   }
 

@@ -218,7 +218,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <form method="POST" action="<?php echo base_url();?>administrator/aksi_approval_validasi_sip/<?php echo $this->uri->segment(3);?>/<?php echo $datasip['id_user'];?>">
                                       <input type="hidden" value="1" name="status_validasi">
                                       <input type="hidden" value="valid" name="keterangan">
-                                      <input type="hidden" name="status_sip" value="3">
+                                      <input type="hidden" name="status_sip" value="11">
                                       <input type="text" class="form-control" name="nomor_sip" placeholder="Masukan Nomor SIP Baru">
                                       <br>
                                       <input type="text" class="form-control" name="catatan" placeholder="Masukan Catatan Jika Ada">

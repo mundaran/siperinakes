@@ -56,10 +56,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <p>
           <text style="font-size:28px;">PEMERINTAH KABUPATEN BOJONEGORO</text>
           <h1>DINAS KESEHATAN</h1>
-          <text style="font-size: 20px;">Area Kantor Pemerintah Kabupaten Bojonegoro Jalan Dr. Cipto 
-Telp. (0353) 881350 Fax. 886695 Kode Pos 62116
-BOJONEGORO
- </text>
+          <text style="font-size: 20px;">Area Perkantoran Pemerintah Kabupaten Bojonegoro - Jl.Dr.Cipto </text>
           </p>
         </td>
       </tr>
@@ -68,7 +65,7 @@ BOJONEGORO
       <tr>
         <td align="center">
           <p>
-            <h3><b>SURAT IZIN PRAKTIK TENAGA TEKNIS KEFARMASIAN <?php echo strtoupper($detail_sip['jenis_sip']);?> (SIPTKK) </b></h3>
+            <h3><b>SURAT IZIN PRAKTIK <?php echo strtoupper($detail_sip['jenis_sip']);?> (SIPA) </b></h3>
             <text style="font-size: 15px;">No :<?php echo $detail_sip['nomor_sip'];?></text>
           </p>
         </td>
@@ -79,14 +76,14 @@ BOJONEGORO
       <tr>
         <td align="justify">
           <p>
-            <text style="font-size: 16px; line-height:1.5; ">Berdasarkan Undang-Undang Republik Indonesia Nomor 17 Tahun 2023 Tentang Kesehatan, yang bertanda tangan di bawah ini, Kepala Dinas Kesehatan Kabupaten Bojonegoro memberikan Izin Praktik Tenaga Teknis Kefarmasian Kepada  :</text>
+            <text style="font-size: 16px; line-height:1.5; ">Berdasarkan Undang-Undang Republik Indonesia Nomor 17 Tahun 2023 Tentang Kesehatan, yang bertanda tangan di bawah ini, Kepala Dinas Kesehatan Kabupaten Bojonegoro memberikan Izin Praktik Apoteker kepada :</text>
           </p>
         </td>
       </tr>
   </table>
 
   <?php 
- $id_user = $detail_sip['id_user'];
+  $id_user = $detail_sip['id_user'];
   $id_sip = $detail_sip['id'];
   $datapemohon = $this->db->query("SELECT * FROM user WHERE id = $id_user ");
   $datauser= $datapemohon->row_array();
@@ -108,6 +105,9 @@ BOJONEGORO
       $masa_berlaku_sip=$new_tgl_str->format('d-m-Y');
       $masa_berlaku_str=$new_tgl_str->format('d-m-Y');
   }
+
+
+
   ?>
 
   <table border="0" cellspacing="0" cellpadding="0" width="90%" height="100%">
@@ -141,7 +141,7 @@ BOJONEGORO
         <td>&nbsp;</td>
       </tr>
       <tr>
-        <td align="left">Nomor STRTTK</td>
+        <td align="left">Nomor STRA</td>
         <td >:</td>
         <td ><?php echo $detail_sip ['no_str'];?> Berlaku s/d <?php echo $masa_berlaku_str;?></td>
       </tr>

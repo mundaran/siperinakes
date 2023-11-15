@@ -58,7 +58,7 @@ Class Model_administrator extends CI_Model{
 
 	public function load_progres_sip()
 	{
-		$sql = $this->db->query("SELECT * FROM data_sip WHERE status=3");
+		$sql = $this->db->query("SELECT * FROM data_sip WHERE status=11");
 		return $sql->result_array();
 	}
 
@@ -268,7 +268,7 @@ Class Model_administrator extends CI_Model{
 			$this->db->where('id',$id_sip);
 			$berhasil = $this->db->update('data_sip', $update_status);
 
-			$config['protocol'] = 'smtp';  
+			  $config['protocol'] = 'smtp';  
 		      $config['smtp_host'] = 'ssl://smtp.gmail.com'; 
 		      $config['smtp_port'] = '465'; 
 		      $config['smtp_user'] = 'cs.sipatas@gmail.com';  

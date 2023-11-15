@@ -201,7 +201,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 echo '<span class="badge bg-label-success me-1"> <a > Ditinjau </a> </span>';
                               }
 
-                              else{ if($dataSip['status']==3){
+                              else{ if($dataSip['status']==11){
                                 echo '<span class="badge bg-label-warning me-1"> Konfirmasi Kabag </span>';
                                 }
 

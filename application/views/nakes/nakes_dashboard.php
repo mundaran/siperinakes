@@ -54,14 +54,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </div>
                           </div>
                           <span class="fw-semibold d-block mb-1">Daftar SIP Baru</span>
-                            <?php
-                            $id_user=$user['id'];
-                            $status = 2;
-                            $this->db->like('id_user',$id_user); 
-                            $this->db->like('status', $status);
-                            $this->db->from('data_sip');
+                            <?php 
+                            $id_user = $user['id'];
+                            $query = $this->db->query("SELECT * FROM data_sip WHERE id_user=$id_user AND status = 2 OR id_user=$id_user AND status = 11 OR id_user=$id_user AND status = 12 OR id_user=$id_user AND status = 14  ");  
+                            $sip_ditinjau = $query->num_rows();
                             ?>
-                          <h3 class="card-title mb-1"><?php echo $this->db->count_all_results();?></h3>
+                          <h3 class="card-title mb-1"><?php echo $sip_ditinjau;?></h3>
                           <small class="text-success fw-semibold"> SIP Baru Sedang Ditinjau </small>
                         </div>
                       </div>
@@ -84,12 +82,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                           <span class="fw-semibold d-block mb-1">SIP Terdaftar </span>
                             <?php 
-                            $id_user=$user['id'];
-                            $this->db->like('id_user',$id_user);
-                            $this->db->like('status',0);
-                            $this->db->from('data_sip');
+                            $id_user = $user['id'];
+                            $query_terdaftar = $this->db->query("SELECT * FROM data_sip WHERE id_user=$id_user AND status = 3  ");  
+                            $sip_terdaftar = $query_terdaftar->num_rows();
                             ?>
-                          <h3 class="card-title text-nowrap mb-1"><?php echo $this->db->count_all_results();?></h3>
+                          <h3 class="card-title text-nowrap mb-1"><?php echo $sip_terdaftar;?></h3>
                           <small class="text-success fw-semibold"><i class=""></i> SIP Telah Terdaftar </small>
                         </div>
                       </div>
@@ -110,14 +107,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               />
                             </div>
                           </div>
-                          <span class="fw-semibold d-block mb-1">Revisi Perpanjangan SIP</span>
-                          <?php 
-                          $id_user=$user['id'];
-                          $this->db->like('id_user',$id_user);
-                          $this->db->like('status',7);
-                          $this->db->from('data_sip');
-                          ?>
-                          <h3 class="card-title mb-1"><?php echo $this->db->count_all_results();?></h3>
+                          <span class="fw-semibold d-block mb-1">Revisi SIP Baru</span>
+                            <?php 
+                            $id_user = $user['id'];
+                            $query_revisi = $this->db->query("SELECT * FROM data_sip WHERE id_user=$id_user AND status = 4  ");  
+                            $sip_revisi = $query_revisi->num_rows();
+                            ?>
+                          <h3 class="card-title mb-1"><?php echo $sip_revisi?></h3>
                           <small class="text-success fw-semibold"> Perpanjangan Perlu Revisi </small>
                         </div>
                       </div>
@@ -138,14 +134,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                               />
                             </div>
                           </div>
-                          <span class="fw-semibold d-block mb-1">SIP Revisi </span>
+                          <span class="fw-semibold d-block mb-1">Revisi SIP Perpanjangan </span>
                           <?php 
-                            $id_user=$user['id'];
-                            $this->db->like('id_user',$id_user);
-                            $this->db->like('status',4);
-                            $this->db->from('data_sip');
+                            $id_user = $user['id'];
+                            $query_revisi_perpanjangan = $this->db->query("SELECT * FROM data_sip WHERE id_user=$id_user AND status = 7  ");  
+                            $sip_revisi_perpanjangan = $query_revisi_perpanjangan->num_rows();
                             ?>
-                          <h3 class="card-title text-nowrap mb-1"><?php echo $this->db->count_all_results();?></h3>
+                          <h3 class="card-title text-nowrap mb-1"><?php echo $sip_revisi_perpanjangan;?></h3>
                           <small class="text-success fw-semibold"><i class=""></i> SIP </small>
                         </div>
                       </div>
