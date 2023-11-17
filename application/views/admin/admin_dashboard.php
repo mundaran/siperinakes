@@ -43,7 +43,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
                               <img
-                                src="template/assets/img/icons/unicons/user1.png"
+                                src="template/assets/img/icons/unicons/wallet-info.png"
                                 alt="chart success"
                                 class="rounded"
                               />
@@ -51,11 +51,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                           <span class="fw-semibold d-block mb-1">Pengajuan Baru</span>
                             <?php 
-                            $status = 2;
-                            $this->db->like('status', $status);
-                            $this->db->from('data_sip');
+                            $query_admin = $this->db->query("SELECT * FROM data_sip WHERE status = 2");  
+                            $admin = $query_admin->num_rows();
                             ?>
-                          <h3 class="card-title mb-2"><?php echo $this->db->count_all_results();?></h3>
+                          <h3 class="card-title mb-2"><?php echo $admin;?></h3>
                           <small class="text-secondary fw-semibold"> Perlu Di Tinjau </small>
                         </div>
                       </a>
@@ -74,11 +73,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                           <span class="fw-semibold d-block mb-1">Perpanjangan Baru </span>
                             <?php 
-                            $status = 5;
-                            $this->db->like('status', $status);
-                            $this->db->from('data_sip');
+                            $query_perpanjangan = $this->db->query("SELECT * FROM data_sip WHERE status = 5");  
+                            $perpanjangan = $query_perpanjangan->num_rows();
                             ?>
-                          <h3 class="card-title text-nowrap mb-1"><?php echo $this->db->count_all_results();?></h3>
+                          <h3 class="card-title text-nowrap mb-1"><?php echo $perpanjangan;?></h3>
                           <small class="text-secondary fw-semibold"><i class=""></i> Perlu Konfirmasi </small>
                         </div>
                       </a>
@@ -97,7 +95,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </div>
                           </div>
                           <span class="fw-semibold d-block mb-1">Pencabutan</span>
-                          <h3 class="card-title mb-2">0</h3>
+                            <?php 
+                            $query_cabut = $this->db->query("SELECT * FROM data_sip WHERE status = 9");  
+                            $cabut = $query_cabut->num_rows();
+                            ?>
+                          <h3 class="card-title mb-2"><?php echo $cabut;?></h3>
                           <small class="text-secondary fw-semibold"> Perlu Tindakan </small>
                         </div>
                       </a>
@@ -116,13 +118,81 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </div>
                           </div>
                           <span class="fw-semibold d-block mb-1">SIP Revisi </span>
-                          <?php 
-                            $status = 4;
-                            $this->db->like('status', $status);
-                            $this->db->from('data_sip');
+                          <?php   
+                            $query_revisi = $this->db->query("SELECT * FROM data_sip WHERE status = 4 OR status= 7 ");  
+                            $revisi = $query_revisi->num_rows();
                             ?>
-                          <h3 class="card-title text-nowrap mb-1"><?php echo $this->db->count_all_results();?></h3>
+                          <h3 class="card-title text-nowrap mb-1"><?php echo $revisi;?></h3>
                           <small class="text-secondary fw-semibold"><i class=""></i> Sedang Di Revisi </small>
+                        </div>
+                      </a>
+                    </div>
+
+                    <div class="col-lg-3 col-md-12 col-6 mb-4">
+                      <a href="<?php echo base_url();?>administrator/progres_sip" class="card">
+                        <div class="card-body">
+                          <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                              <img
+                                src="template/assets/img/icons/unicons/chart-success.png"
+                                alt="chart success"
+                                class="rounded"
+                              />
+                            </div>
+                          </div>
+                          <span class="fw-semibold d-block mb-1">Proses Kabag</span>
+                            <?php 
+                            $query_kabag = $this->db->query("SELECT * FROM data_sip WHERE status = 11");  
+                            $kabag = $query_kabag->num_rows();
+                            ?>
+                          <h3 class="card-title mb-2"><?php echo $kabag;?></h3>
+                          <small class="text-secondary fw-semibold"> Di Tinjau Kabag</small>
+                        </div>
+                      </a>
+                    </div>
+
+                    <div class="col-lg-3 col-md-12 col-6 mb-4">
+                      <a href="<?php echo base_url();?>administrator/progres_sip" class="card">
+                        <div class="card-body">
+                          <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                              <img
+                                src="template/assets/img/icons/unicons/wallet.png"
+                                alt="chart success"
+                                class="rounded"
+                              />
+                            </div>
+                          </div>
+                          <span class="fw-semibold d-block mb-1">Proses Sekdin</span>
+                            <?php 
+                            $query_sekdin = $this->db->query("SELECT * FROM data_sip WHERE status = 12");  
+                            $sekdin = $query_sekdin->num_rows();
+                            ?>
+                          <h3 class="card-title mb-2"><?php echo $sekdin;?></h3>
+                          <small class="text-secondary fw-semibold"> Di Tinjau Kabag</small>
+                        </div>
+                      </a>
+                    </div>
+
+                    <div class="col-lg-3 col-md-12 col-6 mb-4">
+                      <a href="<?php echo base_url();?>administrator/progres_sip" class="card">
+                        <div class="card-body">
+                          <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                              <img
+                                src="template/assets/img/icons/unicons/chart-success.png"
+                                alt="chart success"
+                                class="rounded"
+                              />
+                            </div>
+                          </div>
+                          <span class="fw-semibold d-block mb-1">Proses Kadin</span>
+                            <?php 
+                            $query_kadin = $this->db->query("SELECT * FROM data_sip WHERE status = 14");  
+                            $kadin = $query_kadin->num_rows();
+                            ?>
+                          <h3 class="card-title mb-2"><?php echo $kadin;?></h3>
+                          <small class="text-secondary fw-semibold"> Di Tinjau Kabag</small>
                         </div>
                       </a>
                     </div>

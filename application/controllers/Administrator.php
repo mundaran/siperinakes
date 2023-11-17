@@ -236,7 +236,32 @@ class Administrator extends CI_Controller {
 		$this->load->view('template_view/admin_template/dashboard_footer');
 	}
 
+
+
+
 //batas view dan aksi
+
+	public function export_excel()
+	{
+		$data ['title'] ='EXPORT DATA TO EXCEL';
+		$data ['user']  = $this->db->get_where('user', array('username' => $this->session->userdata('username')))->row_array();
+
+		$tanggal_awal = $this->input->post('tanggal_awal');
+		$tgl = new DateTime($tanggal_awal);
+        $new_tgl_awal = $tgl->format('Y-m-d');
+
+		$tanggal_akhir = $this->input->post('tanggal_akhir');
+		$tgl_akhir = new DateTime($tanggal_akhir);
+        $new_tgl_akhir = $tgl_akhir->format('Y-m-d');
+
+        $data_validasi= $this->db->query("SELECT * FROM validasi_sip WHERE status_validasi=1 AND tgl_validasi_kadin BETWEEN '$new_tgl_awal' AND '$new_tgl_akhir' ORDER BY tgl_validasi_kadin ASC ");
+		$data['data_validasi']= $data_validasi->result_array();
+
+		$data['dari_tgl'] = $new_tgl_awal;
+		$data['sampai_tgl'] = $new_tgl_awal;
+
+		$this->load->view('admin/admin_export_excel_manajemen',$data);
+	}
 
 	public function aksi_edit_profile()
 	{

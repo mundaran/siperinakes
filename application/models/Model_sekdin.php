@@ -23,6 +23,61 @@ Class Model_sekdin extends CI_Model{
 	}
 
 
+	public function edit_profile($id, $data)
+	{
+		$this->db->where('id', $id);
+	    $berhasil = $this->db->update('user', $data);
+	    if($berhasil)
+	    {	
+			$this->session->set_flashdata('message','<div class="alert alert-info" role="alert"><b>Data Berhasil Di Ubah ! </b></div>');
+			redirect('sekdin/my_profile');
+	    }
+	    else
+	    {
+	    	
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b>Data Gagal Di Ubah !  </b></div>');
+			redirect('sekin/my_profile');
+	    }
+	}
+
+	public function upload_foto($id_user,$update_data)
+	{
+		
+		$this->db->where('id',$id_user);
+		$berhasil = $this->db->update('user', $update_data);
+		if($berhasil){
+			$this->session->set_flashdata('message','<div class="alert alert-success"><b> Foto Berhasil Di Upload</b></div>');
+			redirect('sekdin/my_profile');
+		}
+		else{
+
+			$this->session->set_flashdata('message','<div class="alert alert-danger"><b> GAGAL !!! </b></div>');
+			redirect('sekdin/my_profile');
+		}
+
+			
+	}
+
+	public function update_password($id,$data_password)
+	{
+		$this->db->where('id', $id);
+	    $berhasil = $this->db->update('user', $data_password);
+	    if($berhasil)
+	    {	
+	    	$this->session->unset_userdata('username');
+			$this->session->unset_userdata('role_id');
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b>Password Berhasil Ubah ! Silahkan Login Kembali</b></div>');
+			redirect('auth');
+	    }
+	    else
+	    {
+	    	
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b> Password Gagal Di Ubah ! Password Lama Tidak Sesuai </b></div>');
+			redirect('sekdin/my_profile');
+	    }
+	}
+
+
 	public function konfirmasi_kadin($data,$id_sip,$status_sip,$nomor_sip,$catatan,$title_validasi,$id_nakes)
 	{
 		$this->db->where('id_sip',$id_sip);

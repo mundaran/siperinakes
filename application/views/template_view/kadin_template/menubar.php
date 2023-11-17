@@ -72,7 +72,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <?php
           $query_kadin = $this->db->query("SELECT * FROM data_sip WHERE status = 14");  
           $kadin = $query_kadin->num_rows();
-          
           ?>
 
           <?php

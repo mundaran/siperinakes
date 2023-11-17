@@ -349,6 +349,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <select id="country" name="role_id" class="select2 form-select">
               <option value="21">Nakes</option>
               <option value="11">Admin</option>
+              <option value="31">Kabag</option>
+              <option value="41">Sekdin</option>
+              <option value="51">Kadin</option>
             </select>
           </div>
         </div>

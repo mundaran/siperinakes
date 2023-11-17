@@ -137,8 +137,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </tbody>
                           </table>
                         </div>
-
-                        <a class="btn btn-success fw-bolder" data-bs-toggle="modal" href="#ModalExport" > Export Excel </a>
                         </div>
                       </div>
                     </div>

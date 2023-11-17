@@ -51,11 +51,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                           <span class="fw-semibold d-block mb-1">Ditinjau Kabag</span>
                             <?php 
-                            $status = 11;
-                            $this->db->like('status', $status);
-                            $this->db->from('data_sip');
+                            $query = $this->db->query("SELECT * FROM data_sip WHERE status = 11");  
+                            $kabag = $query->num_rows();
                             ?>
-                          <h3 class="card-title mb-2"><?php echo $this->db->count_all_results();?></h3>
+                          <h3 class="card-title mb-2"><?php echo $kabag;?></h3>
                           <small class="text-secondary fw-semibold"> Sedang Di Tinjau Kabag </small>
                         </div>
                       </a>
@@ -74,11 +73,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                           <span class="fw-semibold d-block mb-1">Perlu Anda Tinjau</span>
                             <?php 
-                            $status = 12;
-                            $this->db->like('status', $status);
-                            $this->db->from('data_sip');
+                            $query_sekdin = $this->db->query("SELECT * FROM data_sip WHERE status = 12");  
+                            $sekdin = $query_sekdin->num_rows();
                             ?>
-                          <h3 class="card-title text-nowrap mb-1"><?php echo $this->db->count_all_results();?></h3>
+                          <h3 class="card-title text-nowrap mb-1"><?php echo $sekdin;?></h3>
                           <small class="text-secondary fw-semibold"><i class=""></i> Mohon Cek Validasi</small>
                         </div>
                       </a>
@@ -98,11 +96,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                           <span class="fw-semibold d-block mb-1">Proses Kepala Dinas</span>
                           <?php 
-                            $status = 14;
-                            $this->db->like('status', $status);
-                            $this->db->from('data_sip');
+                            $query_kadin = $this->db->query("SELECT * FROM data_sip WHERE status = 14");  
+                            $kadin = $query_kadin->num_rows();
                             ?>
-                          <h3 class="card-title mb-2"><?php echo $this->db->count_all_results();?></h3>
+                          <h3 class="card-title mb-2"><?php echo $kadin;?></h3>
                           <small class="text-secondary fw-semibold"> Sedang Ditinjau Oleh Kepala Dinas </small>
                         </div>
                       </a>
@@ -122,11 +119,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                           <span class="fw-semibold d-block mb-1">SIP Diterbitkan </span>
                           <?php 
-                            $status1=3;
-                            $this->db->like('status', $status1);
-                            $this->db->from('data_sip');
+                            $query_terbit = $this->db->query("SELECT * FROM data_sip WHERE status = 3");  
+                            $terbit = $query_terbit->num_rows();
                             ?>
-                          <h3 class="card-title text-nowrap mb-1"><?php echo $this->db->count_all_results();?></h3>
+                          <h3 class="card-title text-nowrap mb-1"><?php echo $terbit;?></h3>
                           <small class="text-secondary fw-semibold"><i class=""></i> Telah Diterbitkan Oleh Kadin </small>
                         </div>
                       </a>

@@ -70,32 +70,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             
           </div>
           <?php
-          $status = 2;
-          $this->db->like('status', $status);
-          $this->db->from('data_sip');
-          $a = $this->db->count_all_results();
+          $query_a = $this->db->query("SELECT * FROM data_sip WHERE status = 2");  
+          $a = $query_a->num_rows();
           ?>
 
           <?php
-          $status = 5;
-          $this->db->like('status', $status);
-          $this->db->from('data_sip');
-          $b = $this->db->count_all_results();
+          $query_b = $this->db->query("SELECT * FROM data_sip WHERE status = 5");  
+          $b = $query_b->num_rows();
           ?>
 
           <?php
-          $status = 6;
-          $this->db->like('status', $status);
-          $this->db->or_like('status','8');
-          $this->db->from('data_sip');
-          $c = $this->db->count_all_results();
+          $query_c = $this->db->query("SELECT * FROM data_sip WHERE status = 6 OR status=8");  
+          $c = $query_c->num_rows();
           ?>
 
           <?php
-          $status = 9;
-          $this->db->like('status', $status);
-          $this->db->from('data_sip');
-          $d = $this->db->count_all_results();
+          $query_d = $this->db->query("SELECT * FROM data_sip WHERE status = 9");  
+          $d = $query_d->num_rows();
           ?>
 
           <ul class="menu-inner py-1">

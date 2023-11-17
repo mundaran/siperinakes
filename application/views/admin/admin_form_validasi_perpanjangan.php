@@ -185,7 +185,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         $admin = $data_admin->row_array();
                                       ?>
                                       <input type="hidden" name="validator_sebelumnya" value="<?php echo $admin['name']?>">
-                                      <input type="hidden" value="1" name="status_validasi">
+                                      <input type="hidden" value="0" name="status_validasi">
                                       <input type="hidden" value="valid" name="keterangan">
                                       <input type="hidden" name="status_sip" value="11">
                                       <input type="text" class="form-control" name="nomor_sip" placeholder="Masukan Nomor SIP Baru">

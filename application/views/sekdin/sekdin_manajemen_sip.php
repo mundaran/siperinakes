@@ -63,6 +63,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                   $dataValidasi = $this->db->query("SELECT * FROM validasi_sip WHERE id_sip = $id_sip ");
                                   $validasi= $dataValidasi->row_array();
 
+
+                                  $tgl_db = $validasi['tgl_validasi_kadin'];
+                                  $tgl = new DateTime($tgl_db);
+                                  $tgl_validasi = $tgl->format('d-m-Y');
+                                  $date_plus = $tgl->modify("+5 years");
+
+                                  if($data['masa_berlaku_str']=='Seumur Hidup'){
+                                    $masa_berlaku_sip = $date_plus->format('d-m-Y');
+                                    $masa_berlaku_str='Seumur Hidup';
+                                  }  else {
+                                      $tgl_str =$data['masa_berlaku_str'];
+                                      $new_tgl_str = new DateTime($tgl_str);
+                                      $masa_berlaku_sip=$new_tgl_str->format('d-m-Y');
+                                      $masa_berlaku_str=$new_tgl_str->format('d-m-Y');
+                                  }
+
                                   if($data['status']==3){
                                     $status = 'Aproved';
                                   }
@@ -77,8 +93,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$status.'</strong></td>
 
-                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$validasi['tgl_validasi_kadin'].'</strong></td>
-                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$data['masa_berlaku_str'].'</strong></td>
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$tgl_validasi.'</strong></td>
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>'.$masa_berlaku_sip.'</strong></td>
 
                                     <td>
                                       <div class="btn-group">
@@ -156,6 +172,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div class="modal fade" id="ModalExport" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
+      <form method="POST" action="<?php echo base_url();?>sekdin/export_excel" enctype="multipart/form-data">
       <div class="modal-header">
         <h5 class="modal-title" id="modalCenterTitle">Export To Excel</h5>
         <button
@@ -168,22 +185,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <div class="modal-body">
         <div class="row g-2">
           <div class="col mb-0">
-            <label for="emailWithTitle" class="form-label">Email</label>
+            <label for="emailWithTitle" class="form-label">Dari Tanggal</label>
             <input
-              
+              type="date"
               data-provide="datepicker"
               data-date-format="yyyy-mm-dd"
               id="emailWithTitle"
               class="form-control"
+              name="tanggal_awal"
             />
           </div>
           <div class="col mb-0">
-            <label for="dobWithTitle" class="form-label">DOB</label>
+            <label for="dobWithTitle" class="form-label">Sampai Tanggal</label>
             <input
-              type="text"
+              type="date"
               id="dobWithTitle"
               class="form-control"
               placeholder="DD / MM / YY"
+              name="tanggal_akhir"
             />
           </div>
         </div>
@@ -192,8 +211,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
           Close
         </button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-primary">Export</button>
       </div>
+    </form>
+
     </div>
   </div>
 </div>
